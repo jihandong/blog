@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ArchLinux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
+<meta name="keywords" content="ArchLinux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArchLinux下的软件安装">
+<meta property="og:url" content="https://dracit7.github.io/blog/2018/07/11/ArchLinux下的软件安装/index.html">
+<meta property="og:site_name" content="Gensokyo">
+<meta property="og:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-03T04:17:06.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArchLinux下的软件安装">
+<meta name="twitter:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dracit7.github.io/blog/2018/07/11/ArchLinux下的软件安装/">
+
+
+
+
+
+  <title>ArchLinux下的软件安装 | Gensokyo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gensokyo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Youkai's Mountain</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/07/11/ArchLinux下的软件安装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ArchLinux下的软件安装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T09:39:48+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Archlinux/" itemprop="url" rel="index">
+                    <span itemprop="name">Archlinux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/07/11/ArchLinux下的软件安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/11/ArchLinux下的软件安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Archlinux下的软件安装方式总结"><a href="#Archlinux下的软件安装方式总结" class="headerlink" title="Archlinux下的软件安装方式总结"></a>Archlinux下的软件安装方式总结</h2><p>虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。</p>
+<h3 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h3><p><code>pacman</code>是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。</p>
+<h4 id="找到需要的软件包"><a href="#找到需要的软件包" class="headerlink" title="找到需要的软件包"></a>找到需要的软件包</h4><p>有些时候我们会发现有的软件依赖的二进制文件并没有被安装，导致软件无法运行。想要查找一个二进制文件所在的pacman软件包，可以使用<code>pkgfile</code>工具。使用方法是<code>pkgfile &lt;文件名&gt;</code>。它会输出这个文件所在的软件包名。</p>
+<h4 id="pacman的使用方式"><a href="#pacman的使用方式" class="headerlink" title="pacman的使用方式"></a>pacman的使用方式</h4><ul>
+<li>常用参数<ul>
+<li><code>-S</code> 后面跟软件包名，与镜像源同步，一般使用这个参数安装新的软件包或升级旧的软件包。</li>
+<li><code>-U</code> 后面跟一个文件名，通过下载到本地的安装包安装软件</li>
+<li><code>-R</code> 后面跟软件包名，卸载这个软件并删除软件包</li>
+<li><code>-Syu</code> 俗称 <em>滚Arch</em> ，进行全面的系统更新</li>
+</ul>
+</li>
+</ul>
+<h4 id="定制pacman下载工具"><a href="#定制pacman下载工具" class="headerlink" title="定制pacman下载工具"></a>定制pacman下载工具</h4><p><code>pacman</code>的配置文件是<code>/etc/pacman.conf</code>。在这个文件中我们可以对<code>pacman</code>的行为进行自定义。</p>
+<ul>
+<li>常用的自定义项<ul>
+<li>改变<code>pacman</code>的镜像源：修改<code>/etc/pacman.d/mirrorlist</code>文件内容</li>
+<li>改变<code>pacman</code>使用的下载工具：修改<code>XferCommand</code>变量的值<ul>
+<li><code>/usr/bin/curl -C - -f %u &gt; %o</code> pacman默认使用<code>curl</code>作为下载工具</li>
+<li><code>/usr/bin/wget --passive-ftp -c -O %o %u</code> <code>wget</code>是一款非常优秀的单线程下载工具，功能比<code>curl</code>更为强大</li>
+<li><code>/usr/bin/axel -o %o %u</code> <code>axel</code>是一款多线程下载工具，速度比前两者要快，推荐设置它为<code>pacman</code>的默认工具。</li>
+<li><strong>注意</strong>：<code>wget</code>和<code>axel</code>需要提前用pacman安装。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="yaourt-yay"><a href="#yaourt-yay" class="headerlink" title="yaourt/yay"></a>yaourt/yay</h3><p>官方支持的软件毕竟是有限的，很多我们需要的第三方软件并没有官方提供的支持。在这种时候，Archlinux丰富而强大的aur社区就体现出其威力了——我们可以很方便地从aur社区下载别人制作好的应用软件包或二进制文件，还可以将自己制作的软件包发布在这个社区上(关于发布方式的细节不在这里讨论)。</p>
+<p>从aur社区下载软件包所需要的工具是<code>yaourt</code>(现在yaourt已经停止更新了，取而代之的是<code>yay</code>)。使用<code>pacman</code>可以安装<code>yaourt</code>，使用<code>yaourt</code>可以安装<code>yay</code>。</p>
+<h4 id="yaourt-yay的使用方式"><a href="#yaourt-yay的使用方式" class="headerlink" title="yaourt/yay的使用方式"></a>yaourt/yay的使用方式</h4><p>与<code>pacman</code>类似，yaourt可以用<code>-S</code>参数来下载并安装软件包。如果不加参数，yaourt会在aur库中搜索所有名字与给出的名字相近的软件包或二进制文件，并以表的形式列出，供用户选择。下载到的二进制文件会默认保存在当前目录中。</p>
+<h4 id="定制yaourt-yay下载工具"><a href="#定制yaourt-yay下载工具" class="headerlink" title="定制yaourt/yay下载工具"></a>定制yaourt/yay下载工具</h4><p><code>yaourt</code>和<code>yay</code>的配置文件都是<code>/etc/makepkg.conf</code>。</p>
+<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
+<h3 id="通过下载好的软件包安装"><a href="#通过下载好的软件包安装" class="headerlink" title="通过下载好的软件包安装"></a>通过下载好的软件包安装</h3><p>如果一个软件既无法通过<code>pacman</code>下载又无法通过aur库得到，那就只能手动安装了。首先我们要通过各种渠道获取软件的安装包(<code>GitHub</code>/<code>wget</code>/软件官网/其他)，随后的操作要视软件包而定。</p>
+<h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
+<h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
+<h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/ArchLinux/" rel="tag"># ArchLinux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/11/22/Overview/" rel="next" title="Overview">
+                <i class="fa fa-chevron-left"></i> Overview
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/11/04/在archlinux上单机搭建kubernetes/" rel="prev" title="在archlinux上单机搭建kubernetes">
+                在archlinux上单机搭建kubernetes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/lyrica.png" alt="Drac Zhang">
+            
+              <p class="site-author-name" itemprop="name">Drac Zhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dracit7" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Archlinux下的软件安装方式总结"><span class="nav-number">1.</span> <span class="nav-text">Archlinux下的软件安装方式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pacman"><span class="nav-number">1.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#找到需要的软件包"><span class="nav-number">1.1.1.</span> <span class="nav-text">找到需要的软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pacman的使用方式"><span class="nav-number">1.1.2.</span> <span class="nav-text">pacman的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制pacman下载工具"><span class="nav-number">1.1.3.</span> <span class="nav-text">定制pacman下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yaourt-yay"><span class="nav-number">1.2.</span> <span class="nav-text">yaourt/yay</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yaourt-yay的使用方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">yaourt/yay的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制yaourt-yay下载工具"><span class="nav-number">1.2.2.</span> <span class="nav-text">定制yaourt/yay下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过下载好的软件包安装"><span class="nav-number">1.3.</span> <span class="nav-text">通过下载好的软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件是单文件-二进制文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">软件是单文件(二进制文件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件包中有安装脚本"><span class="nav-number">1.3.2.</span> <span class="nav-text">软件包中有安装脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他情况"><span class="nav-number">1.3.3.</span> <span class="nav-text">其他情况</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Drac Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Drac_zhang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dracit7.github.io/blog/2018/07/11/ArchLinux下的软件安装/';
+          this.page.identifier = '2018/07/11/ArchLinux下的软件安装/';
+          this.page.title = 'ArchLinux下的软件安装';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Drac_zhang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
