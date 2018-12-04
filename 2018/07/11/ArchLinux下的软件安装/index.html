@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-03T04:17:06.073Z">
+<meta property="og:updated_time" content="2018-12-04T03:09:32.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux下的软件安装">
 <meta name="twitter:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
@@ -403,7 +403,7 @@
 <p>从aur社区下载软件包所需要的工具是<code>yaourt</code>(现在yaourt已经停止更新了，取而代之的是<code>yay</code>)。使用<code>pacman</code>可以安装<code>yaourt</code>，使用<code>yaourt</code>可以安装<code>yay</code>。</p>
 <h4 id="yaourt-yay的使用方式"><a href="#yaourt-yay的使用方式" class="headerlink" title="yaourt/yay的使用方式"></a>yaourt/yay的使用方式</h4><p>与<code>pacman</code>类似，yaourt可以用<code>-S</code>参数来下载并安装软件包。如果不加参数，yaourt会在aur库中搜索所有名字与给出的名字相近的软件包或二进制文件，并以表的形式列出，供用户选择。下载到的二进制文件会默认保存在当前目录中。</p>
 <h4 id="定制yaourt-yay下载工具"><a href="#定制yaourt-yay下载工具" class="headerlink" title="定制yaourt/yay下载工具"></a>定制yaourt/yay下载工具</h4><p><code>yaourt</code>和<code>yay</code>的配置文件都是<code>/etc/makepkg.conf</code>。</p>
-<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
+<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;http::/usr/bin/wget --passive-ftp -c -O %o %u&#39;,&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
 <h3 id="通过下载好的软件包安装"><a href="#通过下载好的软件包安装" class="headerlink" title="通过下载好的软件包安装"></a>通过下载好的软件包安装</h3><p>如果一个软件既无法通过<code>pacman</code>下载又无法通过aur库得到，那就只能手动安装了。首先我们要通过各种渠道获取软件的安装包(<code>GitHub</code>/<code>wget</code>/软件官网/其他)，随后的操作要视软件包而定。</p>
 <h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
 <h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
