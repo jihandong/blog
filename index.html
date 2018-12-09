@@ -259,183 +259,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/12/09/VPS-ShadowSocks实现科学上网/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/12/09/VPS-ShadowSocks实现科学上网/" itemprop="url">VPS+ShadowSocks实现科学上网</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T22:08:52+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/12/09/VPS-ShadowSocks实现科学上网/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/VPS-ShadowSocks实现科学上网/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用VPS和ss搭建属于自己的梯子"><a href="#使用VPS和ss搭建属于自己的梯子" class="headerlink" title="使用VPS和ss搭建属于自己的梯子"></a>使用VPS和ss搭建属于自己的梯子</h2><p>如果说购买VPN是把身家性命都托付给服务提供商的话，用VPS自己搭建梯子可谓把命运捏在了自己的手中。就算这一台服务器被封禁了，我们也可以用十几分钟轻松地搭好另一台，从而继续科学上网。为了加快搭建一台服务器的速度，我决定在服务器上放一个傻瓜式教程，以便有意外时能按部就班快速搭好一架梯子。</p>
-<h3 id="购买VPS服务器"><a href="#购买VPS服务器" class="headerlink" title="购买VPS服务器"></a>购买VPS服务器</h3><p>VPS的提供商有不少，很多人用的是Vultr，不过这里拿<a href="https://cloud.digitalocean.com" target="_blank" rel="noopener">DigitalOcean</a>做例子。学生党可以在GitHub上申请一个Student Pack，能白嫖一台能使用接近一年的服务器。</p>
-<p>用申请了Student Pack的邮箱登录DigitalOcean，创建新的Droplet。配置选最低的即可，系统最好选择<code>Centos 7.x</code>，机房位置个人建议新加坡，速度比较快也不容易被爆破。在创建的时候如果能添加一个sshkey的话之后配置起来会方便很多，不过不添加也无所谓。</p>
-<h4 id="添加sshkey的方法"><a href="#添加sshkey的方法" class="headerlink" title="添加sshkey的方法"></a>添加sshkey的方法</h4><p>在主机上直接使用<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;YourComment&gt;&quot;</code>生成sshkey，将保存位置下的<code>id_rsa.pub</code>文件内容粘贴到点击<code>New SSH key</code>后弹出的框内，并输入一个喜欢的名字即可。</p>
-<p>这里必须保持保存位置是<code>~/.ssh/</code>目录本身，否则使用ssh远程登录的时候会出现<code>Permission Denied</code></p>
-<h3 id="配置VPS服务器"><a href="#配置VPS服务器" class="headerlink" title="配置VPS服务器"></a>配置VPS服务器</h3><p>点击创建按钮之后稍等片刻，进度条满之后一台主机就创建完成了。使用<code>ssh root@&lt;主机的IP地址&gt;</code>远程登入到VPS系统中，此时假定使用的是<code>Centos 7.x</code>发行版：</p>
-<p>先后执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools</span><br><span class="line">easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
-<p>安装完成之后编辑<code>/etc/shadowsocks.json</code>文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;0.0.0.0&quot;,</span><br><span class="line">  &quot;port_password&quot;:&#123;</span><br><span class="line">    &quot;&lt;YourPort&gt;&quot;:&quot;&lt;PortPasswd&gt;&quot;,</span><br><span class="line">    &quot;&lt;AnotherPort&gt;&quot;:&quot;&lt;AnotherPasswd&gt;&quot;</span><br><span class="line">    # ...</span><br><span class="line">  &#125;,   # 连接端口和密码设置</span><br><span class="line">  &quot;timeout&quot;:300,  # 超时设置</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;   # 加密方式设置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>随后执行<code>ssserver -c /etc/shadowsocks.json -d start</code>启动ss服务端即可。</p>
-<h3 id="配置ss客户端"><a href="#配置ss客户端" class="headerlink" title="配置ss客户端"></a>配置ss客户端</h3><p>根据自己的系统发行版安装shadowsocks即可。配置文件和服务端类似：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;&lt;VPS的IP地址&gt;&quot;,</span><br><span class="line">  &quot;server_port&quot;:&lt;在VPS上设置的端口&gt;,</span><br><span class="line">  &quot;local_address&quot;:&quot;127.0.0.1&quot;,</span><br><span class="line">  &quot;local_port&quot;:&lt;对本地开放的代理端口&gt;,</span><br><span class="line">  &quot;password&quot;:&quot;&lt;和VPS端口对应的密码&gt;&quot;,</span><br><span class="line">  &quot;timeout&quot;:300,</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;  # 加密方式应与服务端保持一致</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>执行<code>sslocal -c &lt;配置文件绝对路径&gt;</code>打开ss客户端。</p>
-<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>如果是Google/Firefox浏览器的话，直接按照安装<code>SwitchyOmega</code>插件即可科学上网。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -897,6 +720,183 @@
 <h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
 <h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
 <h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/19/VPS-ShadowSocks实现科学上网/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/01/19/VPS-ShadowSocks实现科学上网/" itemprop="url">VPS+ShadowSocks实现科学上网</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-19T22:08:52+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/19/VPS-ShadowSocks实现科学上网/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/19/VPS-ShadowSocks实现科学上网/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用VPS和ss搭建属于自己的梯子"><a href="#使用VPS和ss搭建属于自己的梯子" class="headerlink" title="使用VPS和ss搭建属于自己的梯子"></a>使用VPS和ss搭建属于自己的梯子</h2><p>如果说购买VPN是把身家性命都托付给服务提供商的话，用VPS自己搭建梯子可谓把命运捏在了自己的手中。就算这一台服务器被封禁了，我们也可以用十几分钟轻松地搭好另一台，从而继续科学上网。为了加快搭建一台服务器的速度，我决定在服务器上放一个傻瓜式教程，以便有意外时能按部就班快速搭好一架梯子。</p>
+<h3 id="购买VPS服务器"><a href="#购买VPS服务器" class="headerlink" title="购买VPS服务器"></a>购买VPS服务器</h3><p>VPS的提供商有不少，很多人用的是Vultr，不过这里拿<a href="https://cloud.digitalocean.com" target="_blank" rel="noopener">DigitalOcean</a>做例子。学生党可以在GitHub上申请一个Student Pack，能白嫖一台能使用接近一年的服务器。</p>
+<p>用申请了Student Pack的邮箱登录DigitalOcean，创建新的Droplet。配置选最低的即可，系统最好选择<code>Centos 7.x</code>，机房位置个人建议新加坡，速度比较快也不容易被爆破。在创建的时候如果能添加一个sshkey的话之后配置起来会方便很多，不过不添加也无所谓。</p>
+<h4 id="添加sshkey的方法"><a href="#添加sshkey的方法" class="headerlink" title="添加sshkey的方法"></a>添加sshkey的方法</h4><p>在主机上直接使用<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;YourComment&gt;&quot;</code>生成sshkey，将保存位置下的<code>id_rsa.pub</code>文件内容粘贴到点击<code>New SSH key</code>后弹出的框内，并输入一个喜欢的名字即可。</p>
+<p>这里必须保持保存位置是<code>~/.ssh/</code>目录本身，否则使用ssh远程登录的时候会出现<code>Permission Denied</code></p>
+<h3 id="配置VPS服务器"><a href="#配置VPS服务器" class="headerlink" title="配置VPS服务器"></a>配置VPS服务器</h3><p>点击创建按钮之后稍等片刻，进度条满之后一台主机就创建完成了。使用<code>ssh root@&lt;主机的IP地址&gt;</code>远程登入到VPS系统中，此时假定使用的是<code>Centos 7.x</code>发行版：</p>
+<p>先后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install python-setuptools</span><br><span class="line">easy_install pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<p>安装完成之后编辑<code>/etc/shadowsocks.json</code>文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;0.0.0.0&quot;,</span><br><span class="line">  &quot;port_password&quot;:&#123;</span><br><span class="line">    &quot;&lt;YourPort&gt;&quot;:&quot;&lt;PortPasswd&gt;&quot;,</span><br><span class="line">    &quot;&lt;AnotherPort&gt;&quot;:&quot;&lt;AnotherPasswd&gt;&quot;</span><br><span class="line">    # ...</span><br><span class="line">  &#125;,   # 连接端口和密码设置</span><br><span class="line">  &quot;timeout&quot;:300,  # 超时设置</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;   # 加密方式设置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>随后执行<code>ssserver -c /etc/shadowsocks.json -d start</code>启动ss服务端即可。</p>
+<h3 id="配置ss客户端"><a href="#配置ss客户端" class="headerlink" title="配置ss客户端"></a>配置ss客户端</h3><p>根据自己的系统发行版安装shadowsocks即可。配置文件和服务端类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;&lt;VPS的IP地址&gt;&quot;,</span><br><span class="line">  &quot;server_port&quot;:&lt;在VPS上设置的端口&gt;,</span><br><span class="line">  &quot;local_address&quot;:&quot;127.0.0.1&quot;,</span><br><span class="line">  &quot;local_port&quot;:&lt;对本地开放的代理端口&gt;,</span><br><span class="line">  &quot;password&quot;:&quot;&lt;和VPS端口对应的密码&gt;&quot;,</span><br><span class="line">  &quot;timeout&quot;:300,</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;  # 加密方式应与服务端保持一致</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>sslocal -c &lt;配置文件绝对路径&gt;</code>打开ss客户端。</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>如果是Google/Firefox浏览器的话，直接按照教程安装<code>SwitchyOmega</code>插件即可科学上网。</p>
 
           
         
