@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Archlinux,">
+  <meta name="keywords" content="HouseKeeping,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境安装前在Windows下要做的准备为Arch的安装腾出空间按win+x组合键后选择磁盘管理，可以浏览目前的磁盘使用状况。通过右键某个分卷-压缩卷的方式可以释放一个分区中未被使用的部分，成为“未使用”的磁盘。 如果在试图压缩卷的时候报错“磁盘剩余的空间不足”，就格式化这个空磁盘，再重新尝试。 关闭Windows的快速启动为了">
-<meta name="keywords" content="Archlinux">
+<meta name="keywords" content="HouseKeeping">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境">
 <meta property="og:url" content="https://dracit7.github.io/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/index.html">
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境安装前在Windows下要做的准备为Arch的安装腾出空间按win+x组合键后选择磁盘管理，可以浏览目前的磁盘使用状况。通过右键某个分卷-压缩卷的方式可以释放一个分区中未被使用的部分，成为“未使用”的磁盘。 如果在试图压缩卷的时候报错“磁盘剩余的空间不足”，就格式化这个空磁盘，再重新尝试。 关闭Windows的快速启动为了">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-03T04:59:11.749Z">
+<meta property="og:updated_time" content="2018-12-09T14:31:57.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境">
 <meta name="twitter:description" content="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境安装前在Windows下要做的准备为Arch的安装腾出空间按win+x组合键后选择磁盘管理，可以浏览目前的磁盘使用状况。通过右键某个分卷-压缩卷的方式可以释放一个分区中未被使用的部分，成为“未使用”的磁盘。 如果在试图压缩卷的时候报错“磁盘剩余的空间不足”，就格式化这个空磁盘，再重新尝试。 关闭Windows的快速启动为了">
@@ -465,7 +465,7 @@
 <h4 id="界面风格设置"><a href="#界面风格设置" class="headerlink" title="界面风格设置"></a>界面风格设置</h4><p>KDE提供了很多强大的特效，这个按照个人爱好设置即可。</p>
 <h3 id="安装必要的应用软件"><a href="#安装必要的应用软件" class="headerlink" title="安装必要的应用软件"></a>安装必要的应用软件</h3><p>像是<code>vim</code>，<code>make</code>，<code>wget</code>这种不可或缺的工具，是一定要事先安装好的。</p>
 <h4 id="代码管理工具-git"><a href="#代码管理工具-git" class="headerlink" title="代码管理工具-git"></a>代码管理工具-git</h4><p><code>git</code>可以直接使用pacman安装。重点在于将git与github上的账户建立联系。</p>
-<p>用pacman安装<code>openssh</code>软件，按照github上的教程生成sshkey并添加即可。</p>
+<p>用pacman安装<code>openssh</code>软件，执行<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;YourComment&gt;&quot;</code>生成一组ssh公私钥，路径选择自己喜欢的路径，密码可以不设置。复制保存位置下的<code>id_rsa.pub</code>文件内容并粘贴到GitHub要求的位置即可。</p>
 <h4 id="包管理工具-yay"><a href="#包管理工具-yay" class="headerlink" title="包管理工具-yay"></a>包管理工具-yay</h4><p>执行<code>git clone https://aur.archlinux.org/yay.git</code>，拉取yay的repo。进入<code>yay</code>的目录后执行<code>makepkg -si</code>命令，开始安装yay。</p>
 <p>中间如果出现依赖软件未安装的问题，就用<code>pacman</code>安装对应的软件即可。</p>
 <p>安装结束之后，顺便修改一下yay和pacman的下载工具。</p>
@@ -521,7 +521,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/Archlinux/" rel="tag"># Archlinux</a>
+            <a href="/blog/tags/HouseKeeping/" rel="tag"># HouseKeeping</a>
           
         </div>
       
@@ -635,7 +635,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -657,7 +657,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

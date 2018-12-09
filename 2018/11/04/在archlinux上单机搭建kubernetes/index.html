@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="kubernetes单机搭建流程由于工作需要，今天试着在archlinux主机上搭建了k8s。网上完全没有针对archlinux系统的配置教程，因此踩了很多坑，现将archlinux下的搭建流程记录如下。 环境配置 docker：k8s中担任container职责的依赖，必须安装 sudo swapoff -a：k8s的运行不支持内存交换，所以要关掉swap分区 ss和privoxy：提供代理环境">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-03T04:17:06.073Z">
+<meta property="og:updated_time" content="2018-12-04T05:26:35.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在archlinux上单机搭建kubernetes">
 <meta name="twitter:description" content="kubernetes单机搭建流程由于工作需要，今天试着在archlinux主机上搭建了k8s。网上完全没有针对archlinux系统的配置教程，因此踩了很多坑，现将archlinux下的搭建流程记录如下。 环境配置 docker：k8s中担任container职责的依赖，必须安装 sudo swapoff -a：k8s的运行不支持内存交换，所以要关掉swap分区 ss和privoxy：提供代理环境">
@@ -377,7 +377,10 @@
 <h5 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h5><ul>
 <li><code>docker</code>：k8s中担任container职责的依赖，必须安装</li>
 <li><code>sudo swapoff -a</code>：k8s的运行不支持内存交换，所以要关掉swap分区</li>
-<li><code>ss</code>和<code>privoxy</code>：提供代理环境(k8s的镜像源多是google，而google相关网站大部分被GFW墙掉了)</li>
+<li><code>ss</code>和<code>privoxy</code>：提供代理环境(k8s的镜像源多是google，而google相关网站大部分被GFW墙掉了)<ul>
+<li><strong>注意：</strong>privoxy的监听端口应配置为8008(kubeadm的默认端口)</li>
+</ul>
+</li>
 </ul>
 <h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><p>手动编译kubernetes对内存要求过高，<del>OOM了3次</del>，只好另寻他途。</p>
 <p>幸运的是，<code>kubeadm</code>,<code>kubectl</code>,<code>kubelet</code>,<code>kubernetes-cni</code>四项依赖的bin文件都有AUR包，可以用<code>yaourt</code>或者<code>yay</code>来下载。在下载时注意选择二进制文件(即<code>&lt;name&gt;-bin</code>)并提前打开privoxy代理映射。</p>
@@ -522,7 +525,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -544,7 +547,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
