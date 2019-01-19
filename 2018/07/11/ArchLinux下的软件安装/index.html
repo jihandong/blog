@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-09T14:11:58.895Z">
+<meta property="og:updated_time" content="2019-01-19T09:56:18.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux下的软件安装">
 <meta name="twitter:description" content="Archlinux下的软件安装方式总结虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。 pacmanpacman是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。 找到需要的软件包有些时候我们会发现">
@@ -408,6 +408,9 @@
 <h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
 <h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
 <h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+<h3 id="downgrade"><a href="#downgrade" class="headerlink" title="downgrade"></a>downgrade</h3><p>和前面几种方式不同，downgrade是一种给软件包<strong>降级</strong>的方式。使用这个工具可以很方便地回滚软件包等级，从而解决一些可能存在的依赖问题。</p>
+<p>执行<code>yay downgrade</code>命令可以直接从aur仓库安装downgrade工具。</p>
+<p>使用downgrade工具需要root权限。使用方式：<code>sudo downgrade &lt;软件包&gt;</code></p>
 
       
     </div>
@@ -604,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Archlinux下的软件安装方式总结"><span class="nav-number">1.</span> <span class="nav-text">Archlinux下的软件安装方式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pacman"><span class="nav-number">1.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#找到需要的软件包"><span class="nav-number">1.1.1.</span> <span class="nav-text">找到需要的软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pacman的使用方式"><span class="nav-number">1.1.2.</span> <span class="nav-text">pacman的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制pacman下载工具"><span class="nav-number">1.1.3.</span> <span class="nav-text">定制pacman下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yaourt-yay"><span class="nav-number">1.2.</span> <span class="nav-text">yaourt/yay</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yaourt-yay的使用方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">yaourt/yay的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制yaourt-yay下载工具"><span class="nav-number">1.2.2.</span> <span class="nav-text">定制yaourt/yay下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过下载好的软件包安装"><span class="nav-number">1.3.</span> <span class="nav-text">通过下载好的软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件是单文件-二进制文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">软件是单文件(二进制文件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件包中有安装脚本"><span class="nav-number">1.3.2.</span> <span class="nav-text">软件包中有安装脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他情况"><span class="nav-number">1.3.3.</span> <span class="nav-text">其他情况</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Archlinux下的软件安装方式总结"><span class="nav-number">1.</span> <span class="nav-text">Archlinux下的软件安装方式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pacman"><span class="nav-number">1.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#找到需要的软件包"><span class="nav-number">1.1.1.</span> <span class="nav-text">找到需要的软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pacman的使用方式"><span class="nav-number">1.1.2.</span> <span class="nav-text">pacman的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制pacman下载工具"><span class="nav-number">1.1.3.</span> <span class="nav-text">定制pacman下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yaourt-yay"><span class="nav-number">1.2.</span> <span class="nav-text">yaourt/yay</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yaourt-yay的使用方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">yaourt/yay的使用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定制yaourt-yay下载工具"><span class="nav-number">1.2.2.</span> <span class="nav-text">定制yaourt/yay下载工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过下载好的软件包安装"><span class="nav-number">1.3.</span> <span class="nav-text">通过下载好的软件包安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件是单文件-二进制文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">软件是单文件(二进制文件)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件包中有安装脚本"><span class="nav-number">1.3.2.</span> <span class="nav-text">软件包中有安装脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他情况"><span class="nav-number">1.3.3.</span> <span class="nav-text">其他情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#downgrade"><span class="nav-number">1.4.</span> <span class="nav-text">downgrade</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -624,7 +627,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -720,6 +720,9 @@
 <h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
 <h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
 <h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+<h3 id="downgrade"><a href="#downgrade" class="headerlink" title="downgrade"></a>downgrade</h3><p>和前面几种方式不同，downgrade是一种给软件包<strong>降级</strong>的方式。使用这个工具可以很方便地回滚软件包等级，从而解决一些可能存在的依赖问题。</p>
+<p>执行<code>yay downgrade</code>命令可以直接从aur仓库安装downgrade工具。</p>
+<p>使用downgrade工具需要root权限。使用方式：<code>sudo downgrade &lt;软件包&gt;</code></p>
 
           
         
@@ -1672,7 +1675,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
