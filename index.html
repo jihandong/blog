@@ -259,6 +259,408 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/02/24/MIT_6.828/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/02/24/MIT_6.828/" itemprop="url">MIT 6.828 Labs 实验记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T20:10:08+08:00">
+                2019-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2019/02/24/MIT_6.828/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/24/MIT_6.828/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MIT-6-828-Labs-实验记录"><a href="#MIT-6-828-Labs-实验记录" class="headerlink" title="MIT 6.828 Labs 实验记录"></a>MIT 6.828 Labs 实验记录</h2><h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><ul>
+<li>6.828自带了一个打分系统，在Lab文件夹下执行<code>make grade</code>即可运行这个系统来检验自己的解答。</li>
+</ul>
+<h3 id="Build-up-the-environment"><a href="#Build-up-the-environment" class="headerlink" title="Build up the environment"></a>Build up the environment</h3><h4 id="Compiler-Toolchain"><a href="#Compiler-Toolchain" class="headerlink" title="Compiler Toolchain"></a>Compiler Toolchain</h4><p>由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。</p>
+<h4 id="QEMU-emulator"><a href="#QEMU-emulator" class="headerlink" title="QEMU emulator"></a>QEMU emulator</h4><p>建议follow一下MIT官网上最新版的6.828课程页面。老的课程页面上的链接可能不可用。此处根据<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html" target="_blank" rel="noopener">Fall 2018的课程页面</a>进行配置。</p>
+<p>由于QEMU的调试系统不完善，课程组准备了改进过的QEMU，使它可以与系统中的GDB调试器绑定，并使用GDB来调试。执行以下步骤安装打好补丁的QEMU:</p>
+<ol>
+<li>执行<code>git clone https://github.com/mit-pdos/6.828-qemu.git qemu</code>拉取源代码</li>
+<li>安装各种依赖。在Archlinux下的安装方式如下：<ul>
+<li>libdtc：<code>yay DTC</code>，任选一项安装。</li>
+<li>python：坑爹的是都8102年了这门课还不支持python3.不过Arch一般自带python2,问题不大</li>
+</ul>
+</li>
+<li>进入源代码文件夹，Configure the source code<ul>
+<li>执行<code>./configure --disable-kvm --disable-werror --python= &lt;pathToPython2&gt;</code></li>
+</ul>
+</li>
+<li>执行<code>make &amp;&amp; make install</code>进行安装</li>
+</ol>
+<p>安装到一半，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">qga/commands-posix.c: 在函数‘dev_major_minor’中:</span><br><span class="line">qga/commands-posix.c:634:21: 警告：implicit declaration of function ‘major’; did you mean ‘_m_por’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devmajor = major(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     _m_por</span><br><span class="line">qga/commands-posix.c:634:21: 警告：对‘major’的嵌套的外部声明 [-Wnested-externs]</span><br><span class="line">qga/commands-posix.c:635:21: 警告：implicit declaration of function ‘minor’; did you mean ‘mknod’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devminor = minor(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     mknod</span><br><span class="line">qga/commands-posix.c:635:21: 警告：对‘minor’的嵌套的外部声明 [-Wnested-externs]</span><br></pre></td></tr></table></figure>
+<p>很显然是有两个函数major和minor在使用之前并未声明。这是两个库函数，在linux下的<code>&lt;sys/sysmacros.h&gt;</code>头文件中有定义，然而MIT给的代码里并没有包含这个头文件。根据报错信息打开<code>qga/commands-posix.c</code>，添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存。</p>
+<p>再次安装，装到一半又报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `stat_to_v9stat&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor&apos;</span><br><span class="line">/usr/bin/ld: /home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev&apos;</span><br><span class="line">collect2: 错误：ld 返回 1</span><br></pre></td></tr></table></figure>
+<p>差不多的理由，还是缺少库函数。也不管重复包含dirty不dirty了，向<code>hw/9pfs/virtio-9p.c</code>中添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存后再次编译。</p>
+<p>因为类似的理由，还需要添加这个头文件的源文件有<code>linux-user/strace.c</code>。</p>
+<h3 id="Lab-1-Booting-a-PC"><a href="#Lab-1-Booting-a-PC" class="headerlink" title="Lab 1 Booting a PC"></a>Lab 1 Booting a PC</h3><p>Lab1的源码可以从<code>https://pdos.csail.mit.edu/6.828/2018/jos.git</code>处clone到。</p>
+<h4 id="Part-1-PC-bootstrap"><a href="#Part-1-PC-bootstrap" class="headerlink" title="Part 1 PC bootstrap"></a>Part 1 PC bootstrap</h4><p>这一部分的目的是让我们熟悉x86汇编语言和PC bootstrap过程，并熟悉QEMU和gdb的操作。</p>
+<p>首先在lab目录下执行<code>make</code>命令来编译内核和启动器。编译完成的内核与启动器位于<code>obj/kern/kernal.img</code>镜像文件中，这个镜像文件是一个用于模拟真实硬盘的虚拟磁盘。</p>
+<p>执行<code>make qemu</code>可以正式在qemu中运行编译好的操作系统，此时命令行终端会创建一个新的窗口，同时在终端中显示与窗口中同样的内容(并接受同样的输入)。方便起见，这里我们用终端进行接下来的操作。</p>
+<p>一开始这个shell只有两条简单的指令：<code>help</code>和<code>kerninfo</code>。后者会打印出目前的内核状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Special kernel symbols:</span><br><span class="line">  _start                  0010000c (phys)</span><br><span class="line">  entry  f010000c (virt)  0010000c (phys)</span><br><span class="line">  etext  f01019df (virt)  001019df (phys)</span><br><span class="line">  edata  f0113060 (virt)  00113060 (phys)</span><br><span class="line">  end    f01136a0 (virt)  001136a0 (phys)</span><br><span class="line">Kernel executable memory footprint: 78KB</span><br></pre></td></tr></table></figure>
+<p>要退出qemu可以打出<code>Ctrl+a x</code>。</p>
+<h5 id="Layout-of-the-physical-address-space"><a href="#Layout-of-the-physical-address-space" class="headerlink" title="Layout of the physical address space"></a>Layout of the physical address space</h5><table>
+<thead>
+<tr>
+<th>—————–</th>
+<th>&lt;- 0xFFFFFFFF(4GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存映射的虚拟地址</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 取决于RAM的数量</td>
+</tr>
+<tr>
+<td>扩展内存</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x00100000 (1MB)</td>
+</tr>
+<tr>
+<td>BIOS所在的ROM</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000F0000 (960KB)</td>
+</tr>
+<tr>
+<td>16位机使用的扩展ROM</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000C0000 (768KB)</td>
+</tr>
+<tr>
+<td>VGA Display</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000A0000 (640KB)</td>
+</tr>
+<tr>
+<td>Low Memory</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x00000000</td>
+</tr>
+</tbody>
+</table>
+<p>对于一开始的16位机来说，它们只能使用一共最下面那1MB的物理存储，而可用的内存只有标识为Low Memory的640KB。VGA区是硬件保留区，用于当作视频播放缓冲区等。</p>
+<p>就算是在Intel突破了“1MB的瓶颈”之后，PC设计师也仍然对于最低的1MB地址空间使用原始的架构，这是为了软件的向后兼容性。这样就在LowMemory和扩展内存之间留下了一个 <strong>空洞</strong> ，为那些16位的软硬件所使用。</p>
+<p>在计算机从32位升级为64位时，BIOS在地址空间的最顶段因为类似的理由留下了第二个空洞。</p>
+<h5 id="The-ROM-BIOS"><a href="#The-ROM-BIOS" class="headerlink" title="The ROM BIOS"></a>The ROM BIOS</h5><p>为了单步调试计算机的启动过程，我们需要两个终端，一个用<code>make qemu-gdb</code>来启动qemu虚拟机，一个用<code>make gdb</code>来将gdb调试环境连接到虚拟机上。</p>
+<p><code>make qemu-gdb</code>会将处理器暂停在即将执行第一条指令之前并等待gdb的连接，这时在另一个终端中使用<code>make gdb</code>就可以通过gdb来调试操作系统内核。</p>
+<p>gdb终端会显示一段结尾如下的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The target architecture is assumed to be i8086</span><br><span class="line">[f000:fff0]    0xffff0: ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+<p>其中的第二行代表着目前将要执行的指令，也就是虚拟机开启过程的第一条指令。</p>
+<p>这条指令的含义是：</p>
+<ul>
+<li><code>0xffff0:</code>：指令位于的虚拟存储系统地址，对应于上面的架构，这个位置是属于BIOS的ROM区域的最上面，也就是BIOS程序的起始位置。</li>
+<li><code>[f000:fff0]</code>：指示当前CS和IP寄存器的值。CS寄存器指示代码所在的数据段，IP则是偏移量。</li>
+<li><code>ljmp</code>：跳转指令，跳转到CS和IP为<code>[f000:e05b]</code>的位置，转换成存储地址就是<code>0xfe05b</code>。<ul>
+<li>CS和IP寄存器与物理地址的转换规则为<code>ADDR = CS&lt;&lt;4 + IP</code>。</li>
+</ul>
+</li>
+</ul>
+<p>保证启动时优先执行BIOS代码是很重要的，因为一开始内存中根本不会有其他可以执行的代码。BIOS会初始化所有启动所需要的重要设备，检查内存和磁盘的挂载情况。最后，就像操作系统课程中所学的那样，它找到磁盘上的boot loader并将控制权转移给它。</p>
+<ul>
+<li>对GDB使用<code>si</code>命令可以继续单步调试之后的汇编代码，观察BIOS所做的工作。</li>
+</ul>
+<h4 id="Part-2-The-boot-loader"><a href="#Part-2-The-boot-loader" class="headerlink" title="Part 2 The boot loader"></a>Part 2 The boot loader</h4><p>众所周知，软盘和硬盘都被分成大小为<code>512字节</code>的段，而这些段是系统级IO的最小单位。如果一个磁盘是启动盘，那么它的第一个段就被称为 <strong>boot sector</strong> ，并被存放boot loader的代码。当BIOS找到一个boot sector后，它就会将其加载到内存中，并将控制权转交给boot loader代码段。</p>
+<p>(对于CD-ROM来说，它的前2M都属于boot sector，因此可以存放更大的启动镜像)</p>
+<p>在6.828文件夹中，boot loader的代码存放于<code>boot/boot.S</code>与<code>boot/main.c</code>中。这些代码主要完成两件事：</p>
+<ol>
+<li>将处理器模式切换到<code>32位保护模式</code>，这样软件才可以访问大于1MB的物理地址空间。这个工作由<code>boot.S</code>完成。除此之外，<code>boot.S</code>还要建立一个程序栈，让C程序得以运行。</li>
+<li>将内核代码从硬盘中加载到内存，并将控制转交给内核代码的入口函数。这个工作由<code>main.c</code>完成。</li>
+</ol>
+<p>阅读<code>main.c</code>的代码可以发现很多 <del>非常dirty的</del> 细节(<del>包括但不限于：使用goto，while(1)代替sleep，写的很乱的函数指针</del>)，如果对于这个过程的细节感兴趣可以直接阅读源码，注释写的很详细明白。</p>
+<p>bootloader的代码会被BIOS加载到<code>0x7c00</code>，这是由<code>boot/Makefrag</code>文件所决定的。修改这个文件中<code>-Ttext</code>参数后面的地址可以让BIOS从其他地址来加载，执行<code>make clean &amp;&amp; make</code>重新编译可以查看这样做会引发什么样的系统错误(事实上系统会停机并进入一个无限循环等待用户的操作)；在GDB调试时可以在这个位置设置断点，以精确地进入bootloader代码段。</p>
+<p><code>obj/boot/boot.asm</code>和<code>obj/kern/kernel.asm</code>分别包含着bootloader和kernel的反汇编结果以及注释，可以用于调试和分析。下面就来分析一下BootLoader的代码逻辑。</p>
+<ul>
+<li>BootLoader代码逻辑研究<ul>
+<li>第一阶段：<strong>初始化</strong><ul>
+<li><strong>宏常量的设定</strong>：<code>.set CR0_PE_ON 0x1</code> 这个常量是控制32位保护模式开关的指标。</li>
+<li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序</li>
+<li><strong>寄存器初始化</strong>：用xor和mov指令将几个关键寄存器清零<ul>
+<li><code>ds</code>：数据段寄存器，存放全局变量区域的头指针</li>
+<li><code>ss</code>：栈段寄存器，存放堆栈段的首地址(<code>esp</code>寄存器存储的是偏移量)</li>
+<li><code>es</code>：扩展段寄存器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第二阶段：<strong>打开32位保护模式</strong><ul>
+<li><strong>开启A20地址线</strong>：在16位模式下，用于寻址的地址总线只有20根，这种情况下大于1MB的地址空间是全部被置为0的。只有开启20～23号四条地址线，才能对1MB以上的地址空间进行寻址，从而进入32位模式。<ul>
+<li>通过一个循环来等待A20设备准备完毕：用<code>in</code>指令从<code>0x64</code>端口接受信息，如果不是代表准备完毕的信息则继续循环。</li>
+<li>向<code>0x64</code>和<code>0x60</code>端口发送信号，打开A20地址线。</li>
+</ul>
+</li>
+<li><strong>建立32位段虚拟内存与物理存储器的映射关系表</strong>：<code>lgdt gdtdesc</code>指令。</li>
+<li><strong>启动32位保护模式</strong>：用<code>CR0_PE_ON</code>与<code>cr0</code>寄存器的值做或运算，打开32位保护模式。<code>cr0</code>到<code>cr3</code>四个寄存器是系统控制寄存器，它们的值直接决定系统的运行状态。<code>cr0</code>控制的是处理器，因此可以通过修改其值来进入其他运行模式。</li>
+<li><strong>跳转到32位代码区的下一条指令</strong>。</li>
+</ul>
+</li>
+<li>第三阶段：修改段寄存器的值为32位区地址，初始化<code>esp</code>寄存器的值，建立C程序栈</li>
+<li>第四阶段：进入<code>main.c</code>的bootmain函数，开始读取内核代码。</li>
+<li>第五阶段：跳转到内核代码区，交还控制权。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="习题解答"><a href="#习题解答" class="headerlink" title="习题解答"></a>习题解答</h5><p>Q: 处理器什么时候开始执行32位代码？哪条指令切换了处理器模式？</p>
+<p>A：<code>0x7c2a:  mov    %eax,%cr0</code>指令切换了处理器模式，从随后的跳转指令开始，处理器开始执行32位代码。</p>
+<p>Q：Bootloader执行的最后一条指令是什么？Kernal执行的第一条指令又是什么?</p>
+<p>A：Bootloader执行的最后一条指令是向内核代码段跳转的指令<code>0x7d71:      call   *0x10018</code>，kernel执行的第一条指令是<code>0x10000c:    movw   $0x1234,0x472</code>。</p>
+<p>Q：Bootloader是如何决定它要读取多少数据的？它从哪里获取的kernal大小信息？</p>
+<p>A：Bootloader首先从内核代码区读取了长度固定的ELF头部，再从头部中获取了这个区域是否为ELF文件、数据段数量、每段的长度、起始地址等信息。</p>
+</blockquote>
+<p>(课程网页在这一部分讲了一大堆ELF头和指针的知识，如果已经学过CSAPP第7章的话完全可以跳过。需要注意的是，6.828所采用的可执行目标文件代码 <strong>并非是位置无关代码</strong> ，因而 <strong>链接器会将程序将加载到的内存位置写在文件中</strong> 。利用这一点，我们可以执行<code>objdump -f &lt;filename&gt;</code>命令，获取程序在内存中的入口位置。)</p>
+<h4 id="Part-3-The-kernel"><a href="#Part-3-The-kernel" class="headerlink" title="Part 3 The kernel"></a>Part 3 The kernel</h4><p>在内核被授予控制权后，它要做如下几件事：</p>
+<h5 id="Virtual-memory-address-mapping"><a href="#Virtual-memory-address-mapping" class="headerlink" title="Virtual memory address mapping"></a>Virtual memory address mapping</h5><p>当我们观察bootloader程序的时候，我们可以发现它的 <strong>链接地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>LMA</code>，linked memory address) 和 <strong>虚拟地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>VMA</code>，virtual memory address) 是完全一致的；然而对于kernel，这两个地址却有着不小的差距。</p>
+<p>操作系统内核常常会在非常高的虚拟地址空间(例如0xf0100000)运行，这是为了把比较低的虚拟地址空间留给用户进程使用。然而大部分机器没有这么多的内存，于是它们将虚拟地址0xf0100000映射到物理地址0x00100000。这样一来虽然内核所在的加载地址很高，它的实际加载地址却是位于RAM区域的最底端，挨着BIOS所在的ROM地址区域。</p>
+<p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。</p>
+<p>kernal被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
+<h5 id="Formatted-printing-to-the-console"><a href="#Formatted-printing-to-the-console" class="headerlink" title="Formatted printing to the console"></a>Formatted printing to the console</h5><p>在完成虚拟地址映射之后，下一步是对终端进行格式化输入输出以创建交互式操作界面。</p>
+<p><code>lib/printfmt.c</code>中提供了输出函数的原型，<code>kern/printf.c</code>和<code>kern/console.c</code>则提供了有关内核输出和交互的函数。</p>
+<blockquote>
+<p><strong>Answer to Exercise 8</strong></p>
+<p>本题要求补全printfmt函数对于<code>%o</code>(8进制输出)的处理机制，只需要仿照下面十六进制的机制即可。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case &apos;o&apos;:</span><br><span class="line">  num = getuint(&amp;ap, lflag);</span><br><span class="line">  base = 8;</span><br><span class="line">  goto number;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>习题解答</strong></p>
+<p>Q：解释printf.c和console.c之间的接口，尤其是console.c中的哪个函数被如何用于printf.c。</p>
+<p>A：console.c向printf.c提供了cputchar函数,它希望在调用printf.c中的输出函数时可以利用cputchar函数来输出每一个字符。printf.c遵守这个约定,以包含cputchar的外壳函数调用printfmt.c中的输出函数,保证了所有输出都按照console.c所规定的标准来输出。</p>
+<p>Q：解释console.c中的这一段代码:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">  int i;</span><br><span class="line">  memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * sizeof(uint16_t));</span><br><span class="line">  for (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">    crt_buf[i] = 0x0700 | &apos; &apos;;</span><br><span class="line">    crt_pos -= CRT_COLS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>A：</p>
+<p>这段代码来自cga_putc函数,这个函数是在CGA显示屏图形卡上打印字符的函数。crt_pos是一个整形全局变量,它的含义是目前光标在屏幕上的位置。阅读<code>console.h</code>的内容可以发现CRT_SIZE被定义为屏幕上能够容纳的字符个数,而CRT_COLS则是屏幕的宽度。</p>
+<p>条件判断是为了确认当前光标的位置是否已经超出了屏幕底端。如果超出了，就把屏幕上第二行到最后一行的内容全部上移一行，并将空出来的位置用<code>0x0700 | &#39; &#39;</code>填满。</p>
+<p>总而言之，这段代码是为了实现屏幕满了之后向上滚动的功能。</p>
+<p>Q：单步调试如下代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x = 1, y = 3, z = 4;</span><br><span class="line">cprintf(&quot;x %d, y %x, z %d\n&quot;, x, y, z);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>在对cprintf的调用中，fmt对应的实参是什么？ap呢？</li>
+<li>列出对<code>cons_putc</code>, <code>va_arg</code>和<code>vcprintf</code>的每一次调用，以及<code>cons_putc</code>的参数,<code>va_arg</code>中ap的指向和<code>vcprintf</code>的参数值。</li>
+</ol>
+<p>A：</p>
+<ol>
+<li>fmt对应的实参是<code>&quot;x %d, y %x, z %d\n&quot;</code>，ap指向带有x，y和z的参数数组。</li>
+<li>甚至不需要单步调试，自己阅读<code>lib/printfmt.c</code>就足够了。</li>
+</ol>
+<p>Q：运行如下代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unsigned int i = 0x00646c72;</span><br><span class="line">cprintf(&quot;H%x Wo%s&quot;, 57616, &amp;i);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解释输出结果。如果这段代码运行在大端序机器上而非小端序机器上，你会如何修改它来得到同样的结果？</p>
+<p>A：输出结果是<code>He110 World</code>。前面的e110是57616在十六进制下的表示(因为使用了<code>%x</code>)，后面的rld是字符串输出的结果。int占4个字节而每个字符占一个字节，因而i所占的内存空间与一个长度为4的字符数组是相同的。这样一来，如果用i的地址去输出字符串，就会从i的地址开始按字符去读取内存中的数据，直到读到0为止。由于运行在小端序机器，0x72排在最前面一个字节，被解析成ASCII码值为0x72的<code>r</code>；接下来0x6c和0x64分别被解释为<code>l</code>和<code>d</code>。最后一个字节是0x00,正好是字符串终结符。</p>
+<p>如果机器是大端序，只需要将i修改为<code>0x726c6400</code>即可，57616不需要改变。</p>
+<p>Q：被<code>cprintf(&quot;x=%d y=%d&quot;, 3);</code>打印出的y值会是多少？为什么？</p>
+<p>A：会是一个随机的整形数。因为cprintf解析到了两个<code>%d</code>符号，但<code>ap</code>的长度只有1,这导致第二个<code>%d</code>读到了一片未赋值的内存地址，其值自然是随机的。</p>
+</blockquote>
+<h5 id="The-Stack"><a href="#The-Stack" class="headerlink" title="The Stack"></a>The Stack</h5><p>(仔细读过CSAPP第三章的话汇编语言和程序栈这一块应该没问题了，就不说了)</p>
+<blockquote>
+<p><strong>Answer to Exercise 9</strong></p>
+<p>Q：确定内核在什么时候初始化程序栈及程序栈的初始位置。内核是如何为栈保存空间的？</p>
+<p>A：<code>f010034: mov $0xf0110000, %esp</code>：这一条指令初始化了栈指针，将程序栈建立于虚拟地址<code>0xf0110000</code>位置。从这个地址开始，程序栈随着程序运行向下增长。</p>
+</blockquote>
+<p><code>ebp</code>指针被称为“基指针”，它的作用是追踪每个函数的栈帧位置。每个被调用的C函数都要进行如下操作：将ebp寄存器的值压栈、将当前esp指针值拷贝到ebp寄存器。在返回之前，这个函数从栈中取出并恢复ebp寄存器的值。通过这种机制，<strong>任何时候ebp寄存器的值都指向正在执行的函数的栈帧头部，而栈帧头部的前一个数据节的值指向该函数调用者的栈帧头部</strong>，于是可以通过ebp链来还原函数调用链。</p>
+<blockquote>
+<p><strong>Answer to Exercise 10</strong></p>
+<p>这个Exercise的目的是让学生熟悉backtrace的操作和C的程序栈结构。在kernel中有一个自我递归的<code>test_backtrace</code>函数,通过对这个函数打上断点可以使用<code>p $ebp</code>获取每次调用的栈帧起始位置.</p>
+<p>第一次调用:栈帧的起始位置为<code>0xf010ffd8</code><br>第二次调用:栈帧的起始位置为<code>0xf010ffb8</code></p>
+<p>可以看出这个函数的每个栈帧大小都是<code>0x20</code>,也就是32个字节，对于32位系统来说是八个数据。</p>
+<p>使用<code>x/xw</code>命令查看从<code>0xf010ffe0</code>开始整个栈帧的结构。(因为32位系统每个数据是四个字节，所以使用<code>x/xw</code>来查看)</p>
+<p><code>x/xw 0xf010ffe0</code>：<code>0x00000005</code> 按照栈帧的结构，这个位置应该是调用者压入栈内的参数。第一次对<code>test_backtrace</code>的调用的确只有一个实参5。</p>
+<p><code>x/xw 0xf010ffdc</code>：<code>0xf01000f4</code> 由于栈帧是向下的，这条指令其实查看的是上一个栈帧的最后一部分，也就是函数的返回地址，经验证的确指向调用者的下一条指令。</p>
+<p><code>x/xw 0xf010ffd8</code>：<code>0xf010fff8</code> 当前函数栈帧的第一部分，保存着上一个函数的基指针值(<code>%ebp</code>的值)，由于上一个函数已经是整个程序栈底部的函数了，这个地址向上就没有数据了，上个函数的基指针指向的是物理内存区的函数。</p>
+<p><code>x/xw 0xf010ffd4</code>：<code>0x000100b4</code> 被调用者保存的<code>%esi</code>寄存器的值 </p>
+<p><code>x/xw 0xf010ffd0</code>：<code>0xf011304c</code> 被调用者保存的<code>%ebx</code>寄存器的值</p>
+<p><code>x/xw 0xf010ffcc</code>：<code>0xf010004a</code> 是<code>test_backtrace</code>中一行代码的地址</p>
+<p><code>x/xw 0xf010ffc8</code>：<code>0x00000000</code> 空的，没有数据</p>
+<p><code>x/xw 0xf010ffc4</code>：<code>0x00000005</code> 局部变量5</p>
+<p><code>x/xw 0xf010ffc0</code>：<code>0x00000004</code> 即将进行下一次递归调用，这是压入的参数4</p>
+<p>再往下就是返回地址，然后就是下一个栈帧。总的来说，<code>test_backtrace</code>函数的栈帧结构就是这样。</p>
+</blockquote>
+<p>完成了对栈帧结构的观察后，就可以利用观察结果去做一下任务了。Exercise 11要求我们实现一个<code>mon_backtrace</code>函数，它记录并打印出栈帧信息。<code>inc/x86.h</code>中提供了<code>read_ebp()</code>函数可以直接返回ebp寄存器的值。</p>
+<p>输出格式规定如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f0109e58  eip f0100a62  args 00000001 f0109e80 f0109e98 f0100ed2 00000031</span><br><span class="line">  ebp f0109ed8  eip f01000d6  args 00000000 00000000 f0100058 f0109f28 00000061</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Answer to Exercise 11</strong></p>
+<p>本题要求是按上面的要求修改<code>kern/monitor.c</code>中的<code>mon_backtrace</code>函数，并将其添加到指令集中。</p>
+<p>对代码的修改如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// 第一处修改</span><br><span class="line">static struct Command commands[] = &#123;</span><br><span class="line">        &#123; &quot;help&quot;, &quot;Display this list of commands&quot;, mon_help &#125;,</span><br><span class="line">        &#123; &quot;kerninfo&quot;, &quot;Display information about the kernel&quot;, mon_kerninfo &#125;,</span><br><span class="line">        &#123; &quot;backtrace&quot;, &quot;Display the structure of the stack&quot;, mon_backtrace &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">// 第二处修改</span><br><span class="line">int</span><br><span class="line">mon_backtrace(int argc, char **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        // Your code here.</span><br><span class="line">        cprintf(&quot;Stack backtrace:\n&quot;);</span><br><span class="line">        int ebp = read_ebp();</span><br><span class="line">        int eip = *(int *)(ebp + 4);</span><br><span class="line">        int args[5];</span><br><span class="line">        for (int i=0;i&lt;5;i++) &#123;</span><br><span class="line">                args[i] = *(int *)(ebp + 4*i + 8);</span><br><span class="line">        &#125;</span><br><span class="line">        cprintf(&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;,ebp,eip,args[0],args[1],args[2],args[3],args[4]);</span><br><span class="line">        while (1) &#123;</span><br><span class="line">                ebp = *(int *)ebp;</span><br><span class="line">                if (!ebp) break;</span><br><span class="line">                int eip = *(int *)(ebp+4);</span><br><span class="line">                int args[5];</span><br><span class="line">                for (int i=0;i&lt;5;i++) &#123;</span><br><span class="line">                        args[i] = *(int *)(ebp + 4*i + 8);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;,ebp,eip,args[0],args[1],args[2],args[3],args[4]);</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Exercise 12要求我们升级这个函数，使其支持如下的输出格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f010ff78  eip f01008ae  args 00000001 f010ff8c 00000000 f0110580 00000000</span><br><span class="line">         kern/monitor.c:143: monitor+106</span><br><span class="line">  ebp f010ffd8  eip f0100193  args 00000000 00001aac 00000660 00000000 00000000</span><br><span class="line">         kern/init.c:49: i386_init+59</span><br><span class="line">  ebp f010fff8  eip f010003d  args 00000000 00000000 0000ffff 10cf9a00 0000ffff</span><br><span class="line">         kern/entry.S:70: &lt;unknown&gt;+0</span><br></pre></td></tr></table></figure>
+<p>为了根据eip找到函数名，行数和文件名等一系列信息，<code>kern/kdebug.c</code>中提供了<code>debuginfo_eip()</code>函数，我们需要完整地实现<code>debuginfo_eip()</code>函数，并在<code>mon_backtrace</code>中调用这个函数来获得信息。</p>
+<blockquote>
+<p><strong>Answer to Exercise 12</strong></p>
+<p>在<code>debuginfo_eip</code>函数中有一些以<code>__STAB_</code>开头的宏常量,它们所代表的是ELF文件中<code>.stab</code>(在CSAPP中是<code>.symtab</code>)区的开头和结尾位置,以及<code>.stabstr</code>(在CSAPP中是<code>.strtab</code>)区的开头和结尾位置,它们是在链接过程中由<code>kernal.ld</code>定义的。</p>
+<p>以下是修改内容：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// kern/monitor.c</span><br><span class="line"></span><br><span class="line">int</span><br><span class="line">mon_backtrace(int argc, char **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        // Your code here.</span><br><span class="line">        struct Eipdebuginfo info;</span><br><span class="line">        cprintf(&quot;Stack backtrace:\n&quot;);</span><br><span class="line">        // Parse the structure of the stack</span><br><span class="line">        int ebp = read_ebp();</span><br><span class="line">        int eip = *(int *)(ebp + 4);</span><br><span class="line">        int args[5];</span><br><span class="line">        for (int i=0;i&lt;5;i++) &#123;</span><br><span class="line">                args[i] = *(int *)(ebp + 4*i + 8);</span><br><span class="line">        &#125;</span><br><span class="line">        // Print some information in restricted format.</span><br><span class="line">        cprintf(&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;,ebp,eip,args[0],args[1],args[2],args[3],args[4]);</span><br><span class="line">        // Exercise 12, get the debuginfo by eip</span><br><span class="line">        debuginfo_eip(eip, &amp;info);</span><br><span class="line">        cprintf(&quot;         %s:%d: &quot;,info.eip_file, info.eip_line);</span><br><span class="line">        // info.eip_fn_name is a non-null-terminated string</span><br><span class="line">        for (int i=0;i&lt;info.eip_fn_namelen;i++) cprintf(&quot;%c&quot;,*(info.eip_fn_name+i));</span><br><span class="line">        cprintf(&quot;+%d\n&quot;,eip - info.eip_fn_addr);</span><br><span class="line">        // Backtracing</span><br><span class="line">        while (1) &#123;</span><br><span class="line">                ebp = *(int *)ebp;</span><br><span class="line">                if (!ebp) break;</span><br><span class="line">                int eip = *(int *)(ebp+4);</span><br><span class="line">                int args[5];</span><br><span class="line">                for (int i=0;i&lt;5;i++) &#123;</span><br><span class="line">                        args[i] = *(int *)(ebp + 4*i + 8);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;,ebp,eip,args[0],args[1],args[2],args[3],args[4]);</span><br><span class="line">                debuginfo_eip(eip, &amp;info);</span><br><span class="line">                cprintf(&quot;         %s:%d: &quot;,info.eip_file, info.eip_line);</span><br><span class="line">                for (int i=0;i&lt;info.eip_fn_namelen;i++) cprintf(&quot;%c&quot;,*(info.eip_fn_name+i));</span><br><span class="line">                cprintf(&quot;+%d\n&quot;,eip - info.eip_fn_addr);</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// kern/kdebug.c</span><br><span class="line"></span><br><span class="line">int</span><br><span class="line">debuginfo_eip(uintptr_t addr, struct Eipdebuginfo *info)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    // Your code here.</span><br><span class="line">    stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line">    if (lline &lt;= rline) info-&gt;eip_line = stabs[lline].n_desc;</span><br><span class="line">    else return -1;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此Lab1结束。运行<code>make grade</code>，<code>50/50</code>大成功。</p>
+<h3 id="Lab2-Memory-Management"><a href="#Lab2-Memory-Management" class="headerlink" title="Lab2 Memory Management"></a>Lab2 Memory Management</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -984,9 +1386,222 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;0.0.0.0&quot;,</span><br><span class="line">  &quot;port_password&quot;:&#123;</span><br><span class="line">    &quot;&lt;YourPort&gt;&quot;:&quot;&lt;PortPasswd&gt;&quot;,</span><br><span class="line">    &quot;&lt;AnotherPort&gt;&quot;:&quot;&lt;AnotherPasswd&gt;&quot;</span><br><span class="line">    # ...</span><br><span class="line">  &#125;,   # 连接端口和密码设置</span><br><span class="line">  &quot;timeout&quot;:300,  # 超时设置</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;   # 加密方式设置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>随后执行<code>ssserver -c /etc/shadowsocks.json -d start</code>启动ss服务端即可。</p>
 <h3 id="配置ss客户端"><a href="#配置ss客户端" class="headerlink" title="配置ss客户端"></a>配置ss客户端</h3><p>根据自己的系统发行版安装shadowsocks即可。配置文件和服务端类似：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;&lt;VPS的IP地址&gt;&quot;,</span><br><span class="line">  &quot;server_port&quot;:&lt;在VPS上设置的端口&gt;,</span><br><span class="line">  &quot;local_address&quot;:&quot;127.0.0.1&quot;,</span><br><span class="line">  &quot;local_port&quot;:&lt;对本地开放的代理端口&gt;,</span><br><span class="line">  &quot;password&quot;:&quot;&lt;和VPS端口对应的密码&gt;&quot;,</span><br><span class="line">  &quot;timeout&quot;:300,</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;  # 加密方式应与服务端保持一致</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>执行<code>sslocal -c &lt;配置文件绝对路径&gt;</code>打开ss客户端。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;:&quot;&lt;VPS的IP地址&gt;&quot;,</span><br><span class="line">  &quot;server_port&quot;:&lt;在VPS上设置的端口&gt;,</span><br><span class="line">  &quot;local_address&quot;:&quot;127.0.0.1&quot;,</span><br><span class="line">  &quot;local_port&quot;:&lt;对本地开放的代理端口&gt;,</span><br><span class="line">  &quot;password&quot;:&quot;&lt;和VPS端口对应的密码&gt;&quot;,</span><br><span class="line">  &quot;timeout&quot;:300,</span><br><span class="line">  &quot;method&quot;:&quot;aes-256-cfb&quot;,  # 加密方式应与服务端保持一致</span><br><span class="line">  &quot;plugin&quot;:&quot;&lt;你所使用的插件，没有则省略这一项&gt;&quot;,</span><br><span class="line">  &quot;plugin_opts&quot;:&quot;&lt;插件的启动参数，没有则省略这一项&gt;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>ss-local -c &lt;配置文件绝对路径&gt;</code>打开ss客户端。</p>
 <h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>如果是Google/Firefox浏览器的话，直接按照教程安装<code>SwitchyOmega</code>插件即可科学上网。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/18/GDB用法总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/01/18/GDB用法总结/" itemprop="url">GDB常见用法总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-18T09:24:31+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/18/GDB用法总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/18/GDB用法总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="GDB常见用法总结"><a href="#GDB常见用法总结" class="headerlink" title="GDB常见用法总结"></a>GDB常见用法总结</h2><p>GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
+<li><code>b &lt;breakpoint&gt;</code> 设置断点<ul>
+<li><code>&lt;breakpoint&gt;</code>可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个<code>*</code>标记。</li>
+</ul>
+</li>
+<li><code>s</code> 让程序单步执行一条C指令，遇到函数调用则进入(需要编译时带-g参数)<ul>
+<li><code>si</code> 让程序单步执行一条asm指令，遇到函数调用则进入(不带-g也可以)</li>
+<li><code>si &lt;N&gt;</code> 让程序执行<code>&lt;N&gt;</code>条asm指令，包括函数内的和函数外的。</li>
+</ul>
+</li>
+<li><code>n</code> 让程序单步执行一条C指令，不进入函数调用<ul>
+<li><code>ni</code> 让程序单步执行一条asm指令，不进入函数调用</li>
+</ul>
+</li>
+<li><code>c</code> 让程序继续运行直到遇到下一个断点。</li>
+<li><code>p</code> 打印目标信息。</li>
+</ul>
+<h3 id="阅读内存系统内容"><a href="#阅读内存系统内容" class="headerlink" title="阅读内存系统内容"></a>阅读内存系统内容</h3><ul>
+<li><code>x/[num][opt][len] &lt;addr&gt;</code><ul>
+<li><code>[num]</code>：将要打印出的连续内存单元的数量</li>
+<li><code>[opt]</code>：打印出数据的格式<ul>
+<li><code>i</code> 指令</li>
+<li><code>x</code> 十六进制数据</li>
+<li><code>d</code> 十进制数据</li>
+<li><code>o</code> 八进制数据</li>
+<li><code>t</code> 二进制数据</li>
+<li><code>c</code> 字符数据</li>
+<li><code>f</code> 浮点数数据</li>
+</ul>
+</li>
+<li><code>[len]</code>：每个内存单元包含的字节数<ul>
+<li><code>b</code>：单字节</li>
+<li><code>h</code>：双字节</li>
+<li><code>w</code>：四字节</li>
+<li><code>g</code>：八字节</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>backtrace</code> 查看程序栈中每个栈帧的信息</li>
+</ul>
+<h3 id="设定输出格式"><a href="#设定输出格式" class="headerlink" title="设定输出格式"></a>设定输出格式</h3><ul>
+<li><code>set print pretty</code> 改善数组和结构体的输出格式</li>
+<li><code>layout asm</code> 改变输出格式为汇编窗口</li>
+</ul>
+<h3 id="info系命令"><a href="#info系命令" class="headerlink" title="info系命令"></a>info系命令</h3><ul>
+<li><code>info registers</code> 打印出寄存器信息</li>
+<li><code>info frame</code> 打印出当前栈帧的详细信息</li>
+<li><code>info local</code> 打印出当前栈帧中的局部变量</li>
+</ul>
 
           
         
@@ -1693,7 +2308,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1704,7 +2319,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1715,7 +2330,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/blog/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
