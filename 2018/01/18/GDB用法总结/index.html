@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。   s 让程序单步执行一条C指令，遇到函数调用则进入(需要">
+<meta name="description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。 delete命令可以删除断点   s 让程序单步执行一条C">
 <meta name="keywords" content="Tools">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GDB常见用法总结">
 <meta property="og:url" content="https://dracit7.github.io/blog/2018/01/18/GDB用法总结/index.html">
 <meta property="og:site_name" content="Gensokyo">
-<meta property="og:description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。   s 让程序单步执行一条C指令，遇到函数调用则进入(需要">
+<meta property="og:description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。 delete命令可以删除断点   s 让程序单步执行一条C">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-28T06:51:45.167Z">
+<meta property="og:updated_time" content="2019-03-14T12:34:12.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GDB常见用法总结">
-<meta name="twitter:description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。   s 让程序单步执行一条C指令，遇到函数调用则进入(需要">
+<meta name="twitter:description" content="GDB常见用法总结GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。 基本操作 b &amp;lt;breakpoint&amp;gt; 设置断点 &amp;lt;breakpoint&amp;gt;可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个*标记。 delete命令可以删除断点   s 让程序单步执行一条C">
 
 
 
@@ -377,6 +377,7 @@
 <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
 <li><code>b &lt;breakpoint&gt;</code> 设置断点<ul>
 <li><code>&lt;breakpoint&gt;</code>可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个<code>*</code>标记。</li>
+<li><code>delete</code>命令可以删除断点</li>
 </ul>
 </li>
 <li><code>s</code> 让程序单步执行一条C指令，遇到函数调用则进入(需要编译时带-g参数)<ul>
@@ -386,6 +387,10 @@
 </li>
 <li><code>n</code> 让程序单步执行一条C指令，不进入函数调用<ul>
 <li><code>ni</code> 让程序单步执行一条asm指令，不进入函数调用</li>
+</ul>
+</li>
+<li><code>r</code> 运行程序<ul>
+<li>在<code>r</code>后面可以添加命令行参数，这样运行程序就相当于在shell中用同样的命令行参数来运行。</li>
 </ul>
 </li>
 <li><code>c</code> 让程序继续运行直到遇到下一个断点。</li>
