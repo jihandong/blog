@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/03/14/Note of CSAPP/">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Drac Zhang">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/03/14/Note of CSAPP/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/" itemprop="url">在ArchLinux下安装和配置LaTex编译环境</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T18:12:47+08:00">
-                2019-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T22:22:37+08:00">
+                2019-03-10
               </time>
             
 
@@ -309,8 +309,1176 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2019/03/14/Note of CSAPP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/14/Note of CSAPP/" itemprop="commentCount"></span>
+                <a href="/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/10/在ArchLinux下安装和配置LaTex编译环境/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="在ArchLinux下安装和配置LaTex编译环境"><a href="#在ArchLinux下安装和配置LaTex编译环境" class="headerlink" title="在ArchLinux下安装和配置LaTex编译环境"></a>在ArchLinux下安装和配置LaTex编译环境</h2><p>之前写文档的时候一直用的是Markdown内置Latex，但这样不如直接编译<code>.tex</code>文件来的灵活，而在安装texlive的时候又遇到了很多坑，因此在这里总结一下安装与配置过程。</p>
+<h3 id="安装xeLatex"><a href="#安装xeLatex" class="headerlink" title="安装xeLatex"></a>安装xeLatex</h3><p>用pacman可以安装texlive的许多组件，它们的统一格式是<code>texlive-</code>后跟一个具体的扩展。要安装基本组件只需要其中的<code>bin</code>，<code>core</code>和<code>lang</code>扩展，有特殊需求可以按照文档去安装其他的扩展。</p>
+<p>这里我是如下安装：</p>
+<p><code>sudo pacman -S texlive-{core,bin,langchinese,latexextra,fontsextra}</code></p>
+<h3 id="扩展包的配置"><a href="#扩展包的配置" class="headerlink" title="扩展包的配置"></a>扩展包的配置</h3><h4 id="配置fontawesome"><a href="#配置fontawesome" class="headerlink" title="配置fontawesome"></a>配置fontawesome</h4><p>Fontawesome组件本身是在fontsextra扩展中的，但是由于扩展名问题无法被正常识别，需要在使用了这个组件的tex文件开头加上一句<code>\defaultfontfeatures{Extension = .otf}</code>。</p>
+<h4 id="中文字体的问题"><a href="#中文字体的问题" class="headerlink" title="中文字体的问题"></a>中文字体的问题</h4><p>如果系统中没有安装<code>poppler-data</code>包，编译出的pdf文件将会无法显示中文。这个包可以直接使用<code>pacman</code>来安装。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/02/24/MIT_6.828/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/02/24/MIT_6.828/" itemprop="url">MIT 6.828 Labs 实验记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T20:10:08+08:00">
+                2019-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2019/02/24/MIT_6.828/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/24/MIT_6.828/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MIT-6-828-Labs-实验记录"><a href="#MIT-6-828-Labs-实验记录" class="headerlink" title="MIT 6.828 Labs 实验记录"></a>MIT 6.828 Labs 实验记录</h2><h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><ul>
+<li>6.828自带了一个打分系统，在Lab文件夹下执行<code>make grade</code>即可运行这个系统来检验自己的解答。</li>
+</ul>
+<h3 id="Build-up-the-environment"><a href="#Build-up-the-environment" class="headerlink" title="Build up the environment"></a>Build up the environment</h3><h4 id="Compiler-Toolchain"><a href="#Compiler-Toolchain" class="headerlink" title="Compiler Toolchain"></a>Compiler Toolchain</h4><p>由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。</p>
+<h4 id="QEMU-emulator"><a href="#QEMU-emulator" class="headerlink" title="QEMU emulator"></a>QEMU emulator</h4><p>建议follow一下MIT官网上最新版的6.828课程页面。老的课程页面上的链接可能不可用。此处根据<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html" target="_blank" rel="noopener">Fall 2018的课程页面</a>进行配置。</p>
+<p>由于QEMU的调试系统不完善，课程组准备了改进过的QEMU，使它可以与系统中的GDB调试器绑定，并使用GDB来调试。执行以下步骤安装打好补丁的QEMU:</p>
+<ol>
+<li>执行<code>git clone https://github.com/mit-pdos/6.828-qemu.git qemu</code>拉取源代码</li>
+<li>安装各种依赖。在Archlinux下的安装方式如下：<ul>
+<li>libdtc：<code>yay DTC</code>，任选一项安装。</li>
+<li>python：坑爹的是都8102年了这门课还不支持python3.不过Arch一般自带python2,问题不大</li>
+</ul>
+</li>
+<li>进入源代码文件夹，Configure the source code<ul>
+<li>执行<code>./configure --disable-kvm --disable-werror --python= &lt;pathToPython2&gt;</code></li>
+</ul>
+</li>
+<li>执行<code>make &amp;&amp; make install</code>进行安装</li>
+</ol>
+<p>安装到一半，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">qga/commands-posix.c: 在函数‘dev_major_minor’中:</span><br><span class="line">qga/commands-posix.c:634:21: 警告：implicit declaration of function ‘major’; did you mean ‘_m_por’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devmajor = major(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     _m_por</span><br><span class="line">qga/commands-posix.c:634:21: 警告：对‘major’的嵌套的外部声明 [-Wnested-externs]</span><br><span class="line">qga/commands-posix.c:635:21: 警告：implicit declaration of function ‘minor’; did you mean ‘mknod’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devminor = minor(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     mknod</span><br><span class="line">qga/commands-posix.c:635:21: 警告：对‘minor’的嵌套的外部声明 [-Wnested-externs]</span><br></pre></td></tr></table></figure>
+<p>很显然是有两个函数major和minor在使用之前并未声明。这是两个库函数，在linux下的<code>&lt;sys/sysmacros.h&gt;</code>头文件中有定义，然而MIT给的代码里并没有包含这个头文件。根据报错信息打开<code>qga/commands-posix.c</code>，添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存。</p>
+<p>再次安装，装到一半又报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `stat_to_v9stat&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor&apos;</span><br><span class="line">/usr/bin/ld: /home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev&apos;</span><br><span class="line">collect2: 错误：ld 返回 1</span><br></pre></td></tr></table></figure>
+<p>差不多的理由，还是缺少库函数。也不管重复包含dirty不dirty了，向<code>hw/9pfs/virtio-9p.c</code>中添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存后再次编译。</p>
+<p>因为类似的理由，还需要添加这个头文件的源文件有<code>linux-user/strace.c</code>。</p>
+<h3 id="Lab-1-Booting-a-PC"><a href="#Lab-1-Booting-a-PC" class="headerlink" title="Lab 1 Booting a PC"></a>Lab 1 Booting a PC</h3><p>Lab1的源码可以从<code>https://pdos.csail.mit.edu/6.828/2018/jos.git</code>处clone到。</p>
+<h4 id="Part-1-PC-bootstrap"><a href="#Part-1-PC-bootstrap" class="headerlink" title="Part 1 PC bootstrap"></a>Part 1 PC bootstrap</h4><p>这一部分的目的是让我们熟悉x86汇编语言和PC bootstrap过程，并熟悉QEMU和gdb的操作。</p>
+<p>首先在lab目录下执行<code>make</code>命令来编译内核和启动器。编译完成的内核与启动器位于<code>obj/kern/kernal.img</code>镜像文件中，这个镜像文件是一个用于模拟真实硬盘的虚拟磁盘。</p>
+<p>执行<code>make qemu</code>可以正式在qemu中运行编译好的操作系统，此时命令行终端会创建一个新的窗口，同时在终端中显示与窗口中同样的内容(并接受同样的输入)。方便起见，这里我们用终端进行接下来的操作。</p>
+<p>一开始这个shell只有两条简单的指令：<code>help</code>和<code>kerninfo</code>。后者会打印出目前的内核状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Special kernel symbols:</span><br><span class="line">  _start                  0010000c (phys)</span><br><span class="line">  entry  f010000c (virt)  0010000c (phys)</span><br><span class="line">  etext  f01019df (virt)  001019df (phys)</span><br><span class="line">  edata  f0113060 (virt)  00113060 (phys)</span><br><span class="line">  end    f01136a0 (virt)  001136a0 (phys)</span><br><span class="line">Kernel executable memory footprint: 78KB</span><br></pre></td></tr></table></figure>
+<p>要退出qemu可以打出<code>Ctrl+a x</code>。</p>
+<h5 id="Layout-of-the-physical-address-space"><a href="#Layout-of-the-physical-address-space" class="headerlink" title="Layout of the physical address space"></a>Layout of the physical address space</h5><table>
+<thead>
+<tr>
+<th>—————–</th>
+<th>&lt;- 0xFFFFFFFF(4GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存映射的虚拟地址</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 取决于RAM的数量</td>
+</tr>
+<tr>
+<td>扩展内存</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x00100000 (1MB)</td>
+</tr>
+<tr>
+<td>BIOS所在的ROM</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000F0000 (960KB)</td>
+</tr>
+<tr>
+<td>16位机使用的扩展ROM</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000C0000 (768KB)</td>
+</tr>
+<tr>
+<td>VGA Display</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x000A0000 (640KB)</td>
+</tr>
+<tr>
+<td>Low Memory</td>
+<td></td>
+</tr>
+<tr>
+<td>—————–</td>
+<td>&lt;- 0x00000000</td>
+</tr>
+</tbody>
+</table>
+<p>对于一开始的16位机来说，它们只能使用一共最下面那1MB的物理存储，而可用的内存只有标识为Low Memory的640KB。VGA区是硬件保留区，用于当作视频播放缓冲区等。</p>
+<p>就算是在Intel突破了“1MB的瓶颈”之后，PC设计师也仍然对于最低的1MB地址空间使用原始的架构，这是为了软件的向后兼容性。这样就在LowMemory和扩展内存之间留下了一个 <strong>空洞</strong> ，为那些16位的软硬件所使用。</p>
+<p>在计算机从32位升级为64位时，BIOS在地址空间的最顶段因为类似的理由留下了第二个空洞。</p>
+<h5 id="The-ROM-BIOS"><a href="#The-ROM-BIOS" class="headerlink" title="The ROM BIOS"></a>The ROM BIOS</h5><p>为了单步调试计算机的启动过程，我们需要两个终端，一个用<code>make qemu-gdb</code>来启动qemu虚拟机，一个用<code>make gdb</code>来将gdb调试环境连接到虚拟机上。</p>
+<p><code>make qemu-gdb</code>会将处理器暂停在即将执行第一条指令之前并等待gdb的连接，这时在另一个终端中使用<code>make gdb</code>就可以通过gdb来调试操作系统内核。</p>
+<p>gdb终端会显示一段结尾如下的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The target architecture is assumed to be i8086</span><br><span class="line">[f000:fff0]    0xffff0: ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+<p>其中的第二行代表着目前将要执行的指令，也就是虚拟机开启过程的第一条指令。</p>
+<p>这条指令的含义是：</p>
+<ul>
+<li><code>0xffff0:</code>：指令位于的虚拟存储系统地址，对应于上面的架构，这个位置是属于BIOS的ROM区域的最上面，也就是BIOS程序的起始位置。</li>
+<li><code>[f000:fff0]</code>：指示当前CS和IP寄存器的值。CS寄存器指示代码所在的数据段，IP则是偏移量。</li>
+<li><code>ljmp</code>：跳转指令，跳转到CS和IP为<code>[f000:e05b]</code>的位置，转换成存储地址就是<code>0xfe05b</code>。<ul>
+<li>CS和IP寄存器与物理地址的转换规则为<code>ADDR = CS&lt;&lt;4 + IP</code>。</li>
+</ul>
+</li>
+</ul>
+<p>保证启动时优先执行BIOS代码是很重要的，因为一开始内存中根本不会有其他可以执行的代码。BIOS会初始化所有启动所需要的重要设备，检查内存和磁盘的挂载情况。最后，就像操作系统课程中所学的那样，它找到磁盘上的boot loader并将控制权转移给它。</p>
+<ul>
+<li>对GDB使用<code>si</code>命令可以继续单步调试之后的汇编代码，观察BIOS所做的工作。</li>
+</ul>
+<h4 id="Part-2-The-boot-loader"><a href="#Part-2-The-boot-loader" class="headerlink" title="Part 2 The boot loader"></a>Part 2 The boot loader</h4><p>众所周知，软盘和硬盘都被分成大小为<code>512字节</code>的段，而这些段是系统级IO的最小单位。如果一个磁盘是启动盘，那么它的第一个段就被称为 <strong>boot sector</strong> ，并被存放boot loader的代码。当BIOS找到一个boot sector后，它就会将其加载到内存中，并将控制权转交给boot loader代码段。</p>
+<p>(对于CD-ROM来说，它的前2M都属于boot sector，因此可以存放更大的启动镜像)</p>
+<p>在6.828文件夹中，boot loader的代码存放于<code>boot/boot.S</code>与<code>boot/main.c</code>中。这些代码主要完成两件事：</p>
+<ol>
+<li>将处理器模式切换到<code>32位保护模式</code>，这样软件才可以访问大于1MB的物理地址空间。这个工作由<code>boot.S</code>完成。除此之外，<code>boot.S</code>还要建立一个程序栈，让C程序得以运行。</li>
+<li>将内核代码从硬盘中加载到内存，并将控制转交给内核代码的入口函数。这个工作由<code>main.c</code>完成。</li>
+</ol>
+<p>阅读<code>main.c</code>的代码可以发现很多 <del>非常dirty的</del> 细节(<del>包括但不限于：使用goto，while(1)代替sleep，写的很乱的函数指针</del>)，如果对于这个过程的细节感兴趣可以直接阅读源码，注释写的很详细明白。</p>
+<p>bootloader的代码会被BIOS加载到<code>0x7c00</code>，这是由<code>boot/Makefrag</code>文件所决定的。修改这个文件中<code>-Ttext</code>参数后面的地址可以让BIOS从其他地址来加载，执行<code>make clean &amp;&amp; make</code>重新编译可以查看这样做会引发什么样的系统错误(事实上系统会停机并进入一个无限循环等待用户的操作)；在GDB调试时可以在这个位置设置断点，以精确地进入bootloader代码段。</p>
+<p><code>obj/boot/boot.asm</code>和<code>obj/kern/kernel.asm</code>分别包含着bootloader和kernel的反汇编结果以及注释，可以用于调试和分析。下面就来分析一下BootLoader的代码逻辑。</p>
+<ul>
+<li>BootLoader代码逻辑研究<ul>
+<li>第一阶段：<strong>初始化</strong><ul>
+<li><strong>宏常量的设定</strong>：<code>.set CR0_PE_ON 0x1</code> 这个常量是控制32位保护模式开关的指标。</li>
+<li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序</li>
+<li><strong>寄存器初始化</strong>：用xor和mov指令将几个关键寄存器清零<ul>
+<li><code>ds</code>：数据段寄存器，存放全局变量区域的头指针</li>
+<li><code>ss</code>：栈段寄存器，存放堆栈段的首地址(<code>esp</code>寄存器存储的是偏移量)</li>
+<li><code>es</code>：扩展段寄存器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第二阶段：<strong>打开32位保护模式</strong><ul>
+<li><strong>开启A20地址线</strong>：在16位模式下，用于寻址的地址总线只有20根，这种情况下大于1MB的地址空间是全部被置为0的。只有开启20～23号四条地址线，才能对1MB以上的地址空间进行寻址，从而进入32位模式。<ul>
+<li>通过一个循环来等待A20设备准备完毕：用<code>in</code>指令从<code>0x64</code>端口接受信息，如果不是代表准备完毕的信息则继续循环。</li>
+<li>向<code>0x64</code>和<code>0x60</code>端口发送信号，打开A20地址线。</li>
+</ul>
+</li>
+<li><strong>建立32位段虚拟内存与物理存储器的映射关系表</strong>：<code>lgdt gdtdesc</code>指令。</li>
+<li><strong>启动32位保护模式</strong>：用<code>CR0_PE_ON</code>与<code>cr0</code>寄存器的值做或运算，打开32位保护模式。<code>cr0</code>到<code>cr3</code>四个寄存器是系统控制寄存器，它们的值直接决定系统的运行状态。<code>cr0</code>控制的是处理器，因此可以通过修改其值来进入其他运行模式。</li>
+<li><strong>跳转到32位代码区的下一条指令</strong>。</li>
+</ul>
+</li>
+<li>第三阶段：修改段寄存器的值为32位区地址，初始化<code>esp</code>寄存器的值，建立C程序栈</li>
+<li>第四阶段：进入<code>main.c</code>的bootmain函数，开始读取内核代码。</li>
+<li>第五阶段：跳转到内核代码区，交还控制权。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="习题解答"><a href="#习题解答" class="headerlink" title="习题解答"></a>习题解答</h5><p>Q: 处理器什么时候开始执行32位代码？哪条指令切换了处理器模式？</p>
+<p>A：<code>0x7c2a:  mov    %eax,%cr0</code>指令切换了处理器模式，从随后的跳转指令开始，处理器开始执行32位代码。</p>
+<p>Q：Bootloader执行的最后一条指令是什么？Kernal执行的第一条指令又是什么?</p>
+<p>A：Bootloader执行的最后一条指令是向内核代码段跳转的指令<code>0x7d71:      call   *0x10018</code>，kernel执行的第一条指令是<code>0x10000c:    movw   $0x1234,0x472</code>。</p>
+<p>Q：Bootloader是如何决定它要读取多少数据的？它从哪里获取的kernal大小信息？</p>
+<p>A：Bootloader首先从内核代码区读取了长度固定的ELF头部，再从头部中获取了这个区域是否为ELF文件、数据段数量、每段的长度、起始地址等信息。</p>
+</blockquote>
+<p>(课程网页在这一部分讲了一大堆ELF头和指针的知识，如果已经学过CSAPP第7章的话完全可以跳过。需要注意的是，6.828所采用的可执行目标文件代码 <strong>并非是位置无关代码</strong> ，因而 <strong>链接器会将程序将加载到的内存位置写在文件中</strong> 。利用这一点，我们可以执行<code>objdump -f &lt;filename&gt;</code>命令，获取程序在内存中的入口位置。)</p>
+<h4 id="Part-3-The-kernel"><a href="#Part-3-The-kernel" class="headerlink" title="Part 3 The kernel"></a>Part 3 The kernel</h4><p>在内核被授予控制权后，它要做如下几件事：</p>
+<h5 id="Virtual-memory-address-mapping"><a href="#Virtual-memory-address-mapping" class="headerlink" title="Virtual memory address mapping"></a>Virtual memory address mapping</h5><p>当我们观察bootloader程序的时候，我们可以发现它的 <strong>链接地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>LMA</code>，linked memory address) 和 <strong>虚拟地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>VMA</code>，virtual memory address) 是完全一致的；然而对于kernel，这两个地址却有着不小的差距。</p>
+<p>操作系统内核常常会在非常高的虚拟地址空间(例如0xf0100000)运行，这是为了把比较低的虚拟地址空间留给用户进程使用。然而大部分机器没有这么多的内存，于是它们将虚拟地址0xf0100000映射到物理地址0x00100000。这样一来虽然内核所在的加载地址很高，它的实际加载地址却是位于RAM区域的最底端，挨着BIOS所在的ROM地址区域。</p>
+<p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。</p>
+<p>kernal被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
+<h5 id="Formatted-printing-to-the-console"><a href="#Formatted-printing-to-the-console" class="headerlink" title="Formatted printing to the console"></a>Formatted printing to the console</h5><p>在完成虚拟地址映射之后，下一步是对终端进行格式化输入输出以创建交互式操作界面。</p>
+<p><code>lib/printfmt.c</code>中提供了输出函数的原型，<code>kern/printf.c</code>和<code>kern/console.c</code>则提供了有关内核输出和交互的函数。</p>
+<blockquote>
+<p><strong>Answer to Exercise 8</strong></p>
+<p>本题要求补全printfmt函数对于<code>%o</code>(8进制输出)的处理机制，只需要仿照下面十六进制的机制即可。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'o'</span>:</span><br><span class="line">  num = getuint(&amp;ap, lflag);</span><br><span class="line">  base = <span class="number">8</span>;</span><br><span class="line">  <span class="keyword">goto</span> number;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>习题解答</strong></p>
+<p>Q：解释printf.c和console.c之间的接口，尤其是console.c中的哪个函数被如何用于printf.c。</p>
+<p>A：console.c向printf.c提供了cputchar函数,它希望在调用printf.c中的输出函数时可以利用cputchar函数来输出每一个字符。printf.c遵守这个约定,以包含cputchar的外壳函数调用printfmt.c中的输出函数,保证了所有输出都按照console.c所规定的标准来输出。</p>
+<p>Q：解释console.c中的这一段代码:</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * <span class="keyword">sizeof</span>(<span class="keyword">uint16_t</span>));</span><br><span class="line">  <span class="keyword">for</span> (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">    crt_buf[i] = <span class="number">0x0700</span> | <span class="string">' '</span>;</span><br><span class="line">    crt_pos -= CRT_COLS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>A：</p>
+<p>这段代码来自cga_putc函数,这个函数是在CGA显示屏图形卡上打印字符的函数。crt_pos是一个整形全局变量,它的含义是目前光标在屏幕上的位置。阅读<code>console.h</code>的内容可以发现CRT_SIZE被定义为屏幕上能够容纳的字符个数,而CRT_COLS则是屏幕的宽度。</p>
+<p>条件判断是为了确认当前光标的位置是否已经超出了屏幕底端。如果超出了，就把屏幕上第二行到最后一行的内容全部上移一行，并将空出来的位置用<code>0x0700 | &#39; &#39;</code>填满。</p>
+<p>总而言之，这段代码是为了实现屏幕满了之后向上滚动的功能。</p>
+<p>Q：单步调试如下代码：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">3</span>, z = <span class="number">4</span>;</span><br><span class="line">cprintf(<span class="string">"x %d, y %x, z %d\n"</span>, x, y, z);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>在对cprintf的调用中，fmt对应的实参是什么？ap呢？</li>
+<li>列出对<code>cons_putc</code>, <code>va_arg</code>和<code>vcprintf</code>的每一次调用，以及<code>cons_putc</code>的参数,<code>va_arg</code>中ap的指向和<code>vcprintf</code>的参数值。</li>
+</ol>
+<p>A：</p>
+<ol>
+<li>fmt对应的实参是<code>&quot;x %d, y %x, z %d\n&quot;</code>，ap指向带有x，y和z的参数数组。</li>
+<li>甚至不需要单步调试，自己阅读<code>lib/printfmt.c</code>就足够了。</li>
+</ol>
+<p>Q：运行如下代码：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0x00646c72</span>;</span><br><span class="line">cprintf(<span class="string">"H%x Wo%s"</span>, <span class="number">57616</span>, &amp;i);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解释输出结果。如果这段代码运行在大端序机器上而非小端序机器上，你会如何修改它来得到同样的结果？</p>
+<p>A：输出结果是<code>He110 World</code>。前面的e110是57616在十六进制下的表示(因为使用了<code>%x</code>)，后面的rld是字符串输出的结果。int占4个字节而每个字符占一个字节，因而i所占的内存空间与一个长度为4的字符数组是相同的。这样一来，如果用i的地址去输出字符串，就会从i的地址开始按字符去读取内存中的数据，直到读到0为止。由于运行在小端序机器，0x72排在最前面一个字节，被解析成ASCII码值为0x72的<code>r</code>；接下来0x6c和0x64分别被解释为<code>l</code>和<code>d</code>。最后一个字节是0x00,正好是字符串终结符。</p>
+<p>如果机器是大端序，只需要将i修改为<code>0x726c6400</code>即可，57616不需要改变。</p>
+<p>Q：被<code>cprintf(&quot;x=%d y=%d&quot;, 3);</code>打印出的y值会是多少？为什么？</p>
+<p>A：会是一个随机的整形数。因为cprintf解析到了两个<code>%d</code>符号，但<code>ap</code>的长度只有1,这导致第二个<code>%d</code>读到了一片未赋值的内存地址，其值自然是随机的。</p>
+</blockquote>
+<h5 id="The-Stack"><a href="#The-Stack" class="headerlink" title="The Stack"></a>The Stack</h5><p>(仔细读过CSAPP第三章的话汇编语言和程序栈这一块应该没问题了，就不说了)</p>
+<blockquote>
+<p><strong>Answer to Exercise 9</strong></p>
+<p>Q：确定内核在什么时候初始化程序栈及程序栈的初始位置。内核是如何为栈保存空间的？</p>
+<p>A：<code>f010034: mov $0xf0110000, %esp</code>：这一条指令初始化了栈指针，将程序栈建立于虚拟地址<code>0xf0110000</code>位置。从这个地址开始，程序栈随着程序运行向下增长。</p>
+</blockquote>
+<p><code>ebp</code>指针被称为“基指针”，它的作用是追踪每个函数的栈帧位置。每个被调用的C函数都要进行如下操作：将ebp寄存器的值压栈、将当前esp指针值拷贝到ebp寄存器。在返回之前，这个函数从栈中取出并恢复ebp寄存器的值。通过这种机制，<strong>任何时候ebp寄存器的值都指向正在执行的函数的栈帧头部，而栈帧头部的前一个数据节的值指向该函数调用者的栈帧头部</strong>，于是可以通过ebp链来还原函数调用链。</p>
+<blockquote>
+<p><strong>Answer to Exercise 10</strong></p>
+<p>这个Exercise的目的是让学生熟悉backtrace的操作和C的程序栈结构。在kernel中有一个自我递归的<code>test_backtrace</code>函数,通过对这个函数打上断点可以使用<code>p $ebp</code>获取每次调用的栈帧起始位置.</p>
+<p>第一次调用:栈帧的起始位置为<code>0xf010ffd8</code><br>第二次调用:栈帧的起始位置为<code>0xf010ffb8</code></p>
+<p>可以看出这个函数的每个栈帧大小都是<code>0x20</code>,也就是32个字节，对于32位系统来说是八个数据。</p>
+<p>使用<code>x/xw</code>命令查看从<code>0xf010ffe0</code>开始整个栈帧的结构。(因为32位系统每个数据是四个字节，所以使用<code>x/xw</code>来查看)</p>
+<p><code>x/xw 0xf010ffe0</code>：<code>0x00000005</code> 按照栈帧的结构，这个位置应该是调用者压入栈内的参数。第一次对<code>test_backtrace</code>的调用的确只有一个实参5。</p>
+<p><code>x/xw 0xf010ffdc</code>：<code>0xf01000f4</code> 由于栈帧是向下的，这条指令其实查看的是上一个栈帧的最后一部分，也就是函数的返回地址，经验证的确指向调用者的下一条指令。</p>
+<p><code>x/xw 0xf010ffd8</code>：<code>0xf010fff8</code> 当前函数栈帧的第一部分，保存着上一个函数的基指针值(<code>%ebp</code>的值)，由于上一个函数已经是整个程序栈底部的函数了，这个地址向上就没有数据了，上个函数的基指针指向的是物理内存区的函数。</p>
+<p><code>x/xw 0xf010ffd4</code>：<code>0x000100b4</code> 被调用者保存的<code>%esi</code>寄存器的值 </p>
+<p><code>x/xw 0xf010ffd0</code>：<code>0xf011304c</code> 被调用者保存的<code>%ebx</code>寄存器的值</p>
+<p><code>x/xw 0xf010ffcc</code>：<code>0xf010004a</code> 是<code>test_backtrace</code>中一行代码的地址</p>
+<p><code>x/xw 0xf010ffc8</code>：<code>0x00000000</code> 空的，没有数据</p>
+<p><code>x/xw 0xf010ffc4</code>：<code>0x00000005</code> 局部变量5</p>
+<p><code>x/xw 0xf010ffc0</code>：<code>0x00000004</code> 即将进行下一次递归调用，这是压入的参数4</p>
+<p>再往下就是返回地址，然后就是下一个栈帧。总的来说，<code>test_backtrace</code>函数的栈帧结构就是这样。</p>
+</blockquote>
+<p>完成了对栈帧结构的观察后，就可以利用观察结果去做一下任务了。Exercise 11要求我们实现一个<code>mon_backtrace</code>函数，它记录并打印出栈帧信息。<code>inc/x86.h</code>中提供了<code>read_ebp()</code>函数可以直接返回ebp寄存器的值。</p>
+<p>输出格式规定如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f0109e58  eip f0100a62  args 00000001 f0109e80 f0109e98 f0100ed2 00000031</span><br><span class="line">  ebp f0109ed8  eip f01000d6  args 00000000 00000000 f0100058 f0109f28 00000061</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Answer to Exercise 11</strong></p>
+<p>本题要求是按上面的要求修改<code>kern/monitor.c</code>中的<code>mon_backtrace</code>函数，并将其添加到指令集中。</p>
+<p>对代码的修改如下：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一处修改</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Command</span> <span class="title">commands</span>[] = &#123;</span></span><br><span class="line">        &#123; <span class="string">"help"</span>, <span class="string">"Display this list of commands"</span>, mon_help &#125;,</span><br><span class="line">        &#123; <span class="string">"kerninfo"</span>, <span class="string">"Display information about the kernel"</span>, mon_kerninfo &#125;,</span><br><span class="line">        &#123; <span class="string">"backtrace"</span>, <span class="string">"Display the structure of the stack"</span>, mon_backtrace &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 第二处修改</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">mon_backtrace(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line">        cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">        <span class="keyword">int</span> ebp = read_ebp();</span><br><span class="line">        <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                ebp = *(<span class="keyword">int</span> *)ebp;</span><br><span class="line">                <span class="keyword">if</span> (!ebp) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp+<span class="number">4</span>);</span><br><span class="line">                <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                        args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Exercise 12要求我们升级这个函数，使其支持如下的输出格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f010ff78  eip f01008ae  args 00000001 f010ff8c 00000000 f0110580 00000000</span><br><span class="line">         kern/monitor.c:143: monitor+106</span><br><span class="line">  ebp f010ffd8  eip f0100193  args 00000000 00001aac 00000660 00000000 00000000</span><br><span class="line">         kern/init.c:49: i386_init+59</span><br><span class="line">  ebp f010fff8  eip f010003d  args 00000000 00000000 0000ffff 10cf9a00 0000ffff</span><br><span class="line">         kern/entry.S:70: &lt;unknown&gt;+0</span><br></pre></td></tr></table></figure>
+<p>为了根据eip找到函数名，行数和文件名等一系列信息，<code>kern/kdebug.c</code>中提供了<code>debuginfo_eip()</code>函数，我们需要完整地实现<code>debuginfo_eip()</code>函数，并在<code>mon_backtrace</code>中调用这个函数来获得信息。</p>
+<blockquote>
+<p><strong>Answer to Exercise 12</strong></p>
+<p>在<code>debuginfo_eip</code>函数中有一些以<code>__STAB_</code>开头的宏常量,它们所代表的是ELF文件中<code>.stab</code>(在CSAPP中是<code>.symtab</code>)区的开头和结尾位置,以及<code>.stabstr</code>(在CSAPP中是<code>.strtab</code>)区的开头和结尾位置,它们是在链接过程中由<code>kernal.ld</code>定义的。</p>
+<p>以下是修改内容：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/monitor.c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">mon_backtrace(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">        cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">        <span class="comment">// Parse the structure of the stack</span></span><br><span class="line">        <span class="keyword">int</span> ebp = read_ebp();</span><br><span class="line">        <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Print some information in restricted format.</span></span><br><span class="line">        cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        <span class="comment">// Exercise 12, get the debuginfo by eip</span></span><br><span class="line">        debuginfo_eip(eip, &amp;info);</span><br><span class="line">        cprintf(<span class="string">"         %s:%d: "</span>,info.eip_file, info.eip_line);</span><br><span class="line">        <span class="comment">// info.eip_fn_name is a non-null-terminated string</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;info.eip_fn_namelen;i++) cprintf(<span class="string">"%c"</span>,*(info.eip_fn_name+i));</span><br><span class="line">        cprintf(<span class="string">"+%d\n"</span>,eip - info.eip_fn_addr);</span><br><span class="line">        <span class="comment">// Backtracing</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                ebp = *(<span class="keyword">int</span> *)ebp;</span><br><span class="line">                <span class="keyword">if</span> (!ebp) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp+<span class="number">4</span>);</span><br><span class="line">                <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                        args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">                debuginfo_eip(eip, &amp;info);</span><br><span class="line">                cprintf(<span class="string">"         %s:%d: "</span>,info.eip_file, info.eip_line);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;info.eip_fn_namelen;i++) cprintf(<span class="string">"%c"</span>,*(info.eip_fn_name+i));</span><br><span class="line">                cprintf(<span class="string">"+%d\n"</span>,eip - info.eip_fn_addr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// kern/kdebug.c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">debuginfo_eip(<span class="keyword">uintptr_t</span> addr, struct Eipdebuginfo *info)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// Your code here.</span></span><br><span class="line">    stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line">    <span class="keyword">if</span> (lline &lt;= rline) info-&gt;eip_line = stabs[lline].n_desc;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此Lab1结束。运行<code>make grade</code>，<code>50/50</code>大成功。</p>
+<h3 id="Lab2-Memory-Management"><a href="#Lab2-Memory-Management" class="headerlink" title="Lab2 Memory Management"></a>Lab2 Memory Management</h3><p>在这个Lab中，我们需要实现操作系统的内存管理系统。内存管理系统包括两个部分：</p>
+<ul>
+<li>物理内存调度：我们要实现一个以4096个字节大小的页为单位的内存分配器，它将空闲的内存分配给内核和用户，并释放使用完的内存。</li>
+<li>虚拟内存映射</li>
+</ul>
+<p>执行<code>git checkout -b lab2 origin/lab2</code>命令切换到lab2分支，执行<code>git merge lab1</code>合并在lab1所做的更改。</p>
+<p>Lab2增加的文件有：</p>
+<ul>
+<li><code>inc/memlayout.h</code>：定义描述虚拟内存空间的布局的函数，定义PageInfo结构体</li>
+<li><code>kern/pmap.c</code>和<code>kern/pmap.h</code>：实现<code>inc/memlayout.h</code>中定义的函数</li>
+<li><code>kern/kclock.c</code>和<code>kern/kclock.h</code>：与CMOS硬件沟通，读取PC的硬件信息</li>
+</ul>
+<p><code>inc/mmu.h</code>同样可能对这个lab有所帮助。</p>
+<h4 id="Part-1-Physical-page-management"><a href="#Part-1-Physical-page-management" class="headerlink" title="Part 1 Physical page management"></a>Part 1 Physical page management</h4><p>在这个部分我们需要实现物理内存管理器。这个函数追踪一个由<code>PageInfo</code>结构体组成的链表(这个链表的节点代表着一页未分配的内存)，并负责物理内存的分配和回收。</p>
+<p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
+<ul>
+<li><code>K</code>和<code>P</code>:带K的标识符往往指<code>kernel</code>,与内核虚拟内存有关；而带P的标识符指<code>physical</code>,与物理存储有关</li>
+<li><code>kva</code>:<code>kernel virtual address</code>的简写</li>
+<li><code>pa</code>:<code>physical address</code>的简写</li>
+<li><code>la</code>:<code>linear address</code>,</li>
+</ul>
+<p>为了实现目标功能的代码，我们需要调用许多定义好的函数或者宏，为了方便查看和使用将所有可能需要使用的函数和宏列举如下：</p>
+<ul>
+<li><code>pmap.h</code>:<ul>
+<li><code>PADDR(addr)</code>:将虚拟地址addr转换为物理地址返回</li>
+<li><code>KADDR(addr)</code>:将物理地址addr转换为虚拟地址返回</li>
+<li><code>page2pa(PageInfo*)</code>:将PageInfo结构体转换为对应Page的物理地址</li>
+<li><code>pa2page(addr)</code>:将物理地址转换为pages数组中的PageInfo</li>
+<li><code>page2kva(PageInfo*)</code>:将PageInfo结构体转换为对应Page的虚拟地址</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/" itemprop="url">用自己建造的DockerImage创建k8s容器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T14:40:37+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
+                    <span itemprop="name">Cluster</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/24/用自己建造的DockerImage创建k8s容器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="用自己建造的DockerImage创建k8s容器"><a href="#用自己建造的DockerImage创建k8s容器" class="headerlink" title="用自己建造的DockerImage创建k8s容器"></a>用自己建造的DockerImage创建k8s容器</h2><p>本篇文章记载了定制k8s容器以满足实验需要的具体方法，以供参考。</p>
+<h3 id="构建需要的DockerFile"><a href="#构建需要的DockerFile" class="headerlink" title="构建需要的DockerFile"></a>构建需要的DockerFile</h3><p>kubernetes的Pod是以docker容器为基础的，因此每个pod在创建时都需要提供一个基础的容器镜像。因此，要定制一个符合我们需求的Pod，就需要先定制容器镜像。</p>
+<p>Docker提供的定制镜像的方式是 <strong>Dockerfile</strong> 。关于Dockerfile的具体写法参见<a href="https://docs.docker.com/v17.09/engine/reference/builder/" target="_blank" rel="noopener">Reference</a></p>
+<p>「示例」这是一个简单的CounterImage的DockerFile：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu                     # 每个DockerFile必须在开头用FROM语句指明其母镜像</span><br><span class="line">COPY counter.sh /etc/           # COPY指令可以将目标文件拷贝到镜像内的目标目录中</span><br><span class="line">RUN chmod +x /etc/counter.sh    # RUN指令让目标镜像执行指定指令</span><br></pre></td></tr></table></figure>
+<h3 id="用DockerFile建造DockerImage"><a href="#用DockerFile建造DockerImage" class="headerlink" title="用DockerFile建造DockerImage"></a>用DockerFile建造DockerImage</h3><p>写好DockerFile之后，执行<code>docker build</code>指令来构建镜像。</p>
+<ul>
+<li>关于<code>docker build</code>的参数问题<ul>
+<li><code>-f &lt;filepath&gt;</code> 指定DokcerFile的位置，默认在当前目录下寻找DockerFile</li>
+<li><code>-t &lt;tag&gt;</code> 为创建的镜像指定tag，tag格式一般是<code>&lt;repo&gt;/&lt;imagename&gt;:&lt;version&gt;</code></li>
+</ul>
+</li>
+</ul>
+<p>执行完毕之后，构建好的DockerImage可以用<code>docker images</code>查看到。</p>
+<h3 id="用kubectl创建pod"><a href="#用kubectl创建pod" class="headerlink" title="用kubectl创建pod"></a>用kubectl创建pod</h3><p>用kubectl构建pod需要用yaml或json文件指定pod的属性。</p>
+<p>「示例」这是用于运行CounterImage实例的Pod配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span> <span class="comment"># 指定k8s版本，一般是v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>      <span class="comment"># 指定要创建的对象的类型，这里是Pod</span></span><br><span class="line"><span class="attr">metadata:</span>      <span class="comment"># 元数据，指定Pod信息</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">testpod</span>   <span class="comment"># 指定Pod的名称</span></span><br><span class="line"><span class="attr">  annotations:</span>    <span class="comment"># 一些必要的注释，可以用于传递信息</span></span><br><span class="line"><span class="attr">spec:</span>          <span class="comment"># 一些其他信息</span></span><br><span class="line"><span class="attr">  containers:</span>     <span class="comment"># 指定Pod使用的基础镜像</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">testcontainer</span>               <span class="comment"># 指定将要创建的容器名称，这个不重要</span></span><br><span class="line"><span class="attr">      image:</span> <span class="string">drac/counter:v1</span>            <span class="comment"># 指定使用的镜像名称，这里使用刚刚创建的镜像名</span></span><br><span class="line"><span class="attr">      imagePullPolicy:</span> <span class="string">"IfNotPresent"</span>   </span><br><span class="line">      <span class="comment"># 由于刚刚的镜像并没有上传到远程仓库中，这里需要指定镜像拉取策略为优先使用本地镜像</span></span><br><span class="line"><span class="attr">      command:</span>                          <span class="comment"># 指定容器要运行的指令</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">"etc/counter.sh"</span></span><br><span class="line"><span class="attr">      ports:</span>                            <span class="comment"># 指定容器对外开放的端口</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">          hostPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">  tolerations:</span>    </span><br><span class="line">  <span class="comment"># 这个属性与node的taints有关，由于master节点默认不能调度pods，这里要设置一些tolerations</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node.kubernetes.io/not-ready"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node-role.kubernetes.io/master"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br></pre></td></tr></table></figure>
+<p>写好配置文件之后，就可以用<code>kubectl create -f &lt;配置文件名&gt;</code>来创建pod了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/04/在archlinux上单机搭建kubernetes/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/11/04/在archlinux上单机搭建kubernetes/" itemprop="url">在archlinux上单机搭建kubernetes</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T21:38:22+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
+                    <span itemprop="name">Cluster</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/04/在archlinux上单机搭建kubernetes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/04/在archlinux上单机搭建kubernetes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="kubernetes单机搭建流程"><a href="#kubernetes单机搭建流程" class="headerlink" title="kubernetes单机搭建流程"></a>kubernetes单机搭建流程</h2><p>由于工作需要，今天试着在archlinux主机上搭建了k8s。网上完全没有针对archlinux系统的配置教程，因此踩了很多坑，现将archlinux下的搭建流程记录如下。</p>
+<h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><h5 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h5><ul>
+<li><code>docker</code>：k8s中担任container职责的依赖，必须安装</li>
+<li><code>sudo swapoff -a</code>：k8s的运行不支持内存交换，所以要关掉swap分区</li>
+<li><code>ss</code>和<code>privoxy</code>：提供代理环境(k8s的镜像源多是google，而google相关网站大部分被GFW墙掉了)<ul>
+<li><strong>注意：</strong>privoxy的监听端口应配置为8008(kubeadm的默认端口)</li>
+</ul>
+</li>
+</ul>
+<h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><p>手动编译kubernetes对内存要求过高，<del>OOM了3次</del>，只好另寻他途。</p>
+<p>幸运的是，<code>kubeadm</code>,<code>kubectl</code>,<code>kubelet</code>,<code>kubernetes-cni</code>四项依赖的bin文件都有AUR包，可以用<code>yaourt</code>或者<code>yay</code>来下载。在下载时注意选择二进制文件(即<code>&lt;name&gt;-bin</code>)并提前打开privoxy代理映射。</p>
+<p>(注意：这几个包的镜像源服务器都不支持axel，所以请将yay的下载工具换为wget)</p>
+<h5 id="初始化集群"><a href="#初始化集群" class="headerlink" title="初始化集群"></a>初始化集群</h5><p>首先要设置docker的代理(这里的代理端口设置与privoxy的设置保持一致)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建conf文件</span></span><br><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="comment"># 在新建的conf文件中加入如下内容</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTP_PROXY=http://127.0.0.1:8008/"</span></span><br><span class="line"><span class="comment"># 创建conf文件</span></span><br><span class="line">sudo vim /etc/systemd/system/docker.service.d/https-proxy.conf</span><br><span class="line"><span class="comment"># 在新建的conf文件中加入如下内容</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTPS_PROXY=http://127.0.0.1:8008/"</span></span><br><span class="line"><span class="comment"># 重启service</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>执行<code>sudo kubeadm init --pod-network-cidr=10.244.0.0/16</code>，根据显示的提示信息补全依赖，启动service后再次执行。</p>
+<p>在init成功后根据显示的提示信息创建config文件。</p>
+<p>执行<code>kubectl get pods --all-namespaces</code>，如果正常显示pods信息则说明正常。</p>
+<p>接下来安装网络模块(这里使用的是<code>flannel</code>，当然其他模块也可以，只是要在init的时候指定相应的<code>pod-network-cidr</code>)，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>安装好flannel模块之后，如果<code>/etc/cni</code>文件夹没有被创建，coredns无法正常创建容器，可以在root身份下执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"cbr0"</span>,<span class="string">"type"</span>:<span class="string">"flannel"</span>,<span class="string">"delegate"</span>: &#123;<span class="string">"isDefaultGateway"</span>: <span class="literal">true</span>&#125;&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>来进行配置。</p>
+<p>这里如果出现问题可以参考<a href="https://blog.csdn.net/qq_34857250/article/details/82562514" target="_blank" rel="noopener">这篇博客</a></p>
+<p>执行<code>watch kubectl get pods --all-namespaces</code>，等待一到两分钟，所有pods状态都为running则说明安装成功。(期间各种crash都是有可能的，耐心等待它自己重启即可)</p>
+<h5 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h5><p>搭建大成功，接下来只要部署具体的service就可以了。</p>
+<h4 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a>常见问题及解决方案</h4><ul>
+<li><p>非root用户使用kubectl时出现错误</p>
+<ul>
+<li><p>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to connect to the server: net/http: TLS handshake timeout</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>状态：暂未解决</p>
+</li>
+<li>折中方案：将config文件放在root目录的<code>.kube</code>目录下，用sudo运行kubectl</li>
+</ul>
+</li>
+<li><p>flannel网络模块安装之后coredns无法正常创建容器</p>
+<ul>
+<li><p>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container &quot;dd087d2655e98a25040f7b041e23dffa59aa52206b921e481ad20781d1de4320&quot; network for pod &quot;coredns-86c58d9df4-gtrt4&quot;: NetworkPlugin cni failed to set up pod &quot;coredns-86c58d9df4-gtrt4_kube-system&quot; network: failed to find plugin &quot;portmap&quot; in path [/opt/cni/bin], failed to clean up sandbox container &quot;dd087d2655e98a25040f7b041e23dffa59aa52206b921e481ad20781d1de4320&quot; network for pod &quot;coredns-86c58d9df4-gtrt4&quot;: NetworkPlugin cni failed to teardown pod &quot;coredns-86c58d9df4-gtrt4_kube-system&quot; network: failed to find plugin &quot;portmap&quot; in path [/opt/cni/bin]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Pod无法正常创建Container，出现netplugin error</p>
+<ul>
+<li><p>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed create pod sandbox: rpc error: code = Unknown desc = failed to set up sandbox container &quot;81e89630eeb39a5c7b24e330082af265d3cd4480c83664316df3bd92fcfaaa91&quot; network for pod &quot;testpod&quot;: NetworkPlugin cni failed to set up pod &quot;testpod_default&quot; network: &quot;cni0&quot; already has an IP address different from 10.244.0.1/24</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方案：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kubeadm reset 过程</span></span><br><span class="line">systemctl stop kubelet</span><br><span class="line">systemctl stop docker</span><br><span class="line">rm -rf /var/lib/cni/</span><br><span class="line">rm -rf /var/lib/kubelet/*</span><br><span class="line">rm -rf /etc/cni/</span><br><span class="line">ifconfig cni0 down</span><br><span class="line">ifconfig flannel.1 down</span><br><span class="line">ifconfig docker0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ip link delete flannel.1</span><br><span class="line">systemctl start kubelet</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># kubeadm init 过程</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/07/11/ArchLinux下的软件安装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/07/11/ArchLinux下的软件安装/" itemprop="url">ArchLinux下的软件安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T09:39:48+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Technical/Archlinux/" itemprop="url" rel="index">
+                    <span itemprop="name">Archlinux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/07/11/ArchLinux下的软件安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/11/ArchLinux下的软件安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Archlinux下的软件安装方式总结"><a href="#Archlinux下的软件安装方式总结" class="headerlink" title="Archlinux下的软件安装方式总结"></a>Archlinux下的软件安装方式总结</h2><p>虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。</p>
+<h3 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h3><p><code>pacman</code>是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。</p>
+<h4 id="找到需要的软件包"><a href="#找到需要的软件包" class="headerlink" title="找到需要的软件包"></a>找到需要的软件包</h4><p>有些时候我们会发现有的软件依赖的二进制文件并没有被安装，导致软件无法运行。想要查找一个二进制文件所在的pacman软件包，可以使用<code>pkgfile</code>工具。使用方法是<code>pkgfile &lt;文件名&gt;</code>。它会输出这个文件所在的软件包名。</p>
+<h4 id="pacman的使用方式"><a href="#pacman的使用方式" class="headerlink" title="pacman的使用方式"></a>pacman的使用方式</h4><ul>
+<li>常用参数<ul>
+<li><code>-S</code> 后面跟软件包名，与镜像源同步，一般使用这个参数安装新的软件包或升级旧的软件包。</li>
+<li><code>-U</code> 后面跟一个文件名，通过下载到本地的安装包安装软件</li>
+<li><code>-R</code> 后面跟软件包名，卸载这个软件并删除软件包</li>
+<li><code>-Syu</code> 俗称 <em>滚Arch</em> ，进行全面的系统更新</li>
+</ul>
+</li>
+</ul>
+<h4 id="定制pacman下载工具"><a href="#定制pacman下载工具" class="headerlink" title="定制pacman下载工具"></a>定制pacman下载工具</h4><p><code>pacman</code>的配置文件是<code>/etc/pacman.conf</code>。在这个文件中我们可以对<code>pacman</code>的行为进行自定义。</p>
+<ul>
+<li>常用的自定义项<ul>
+<li>改变<code>pacman</code>的镜像源：修改<code>/etc/pacman.d/mirrorlist</code>文件内容</li>
+<li>改变<code>pacman</code>使用的下载工具：修改<code>XferCommand</code>变量的值<ul>
+<li><code>/usr/bin/curl -C - -f %u &gt; %o</code> pacman默认使用<code>curl</code>作为下载工具</li>
+<li><code>/usr/bin/wget --passive-ftp -c -O %o %u</code> <code>wget</code>是一款非常优秀的单线程下载工具，功能比<code>curl</code>更为强大</li>
+<li><code>/usr/bin/axel -o %o %u</code> <code>axel</code>是一款多线程下载工具，速度比前两者要快，推荐设置它为<code>pacman</code>的默认工具。</li>
+<li><strong>注意</strong>：<code>wget</code>和<code>axel</code>需要提前用pacman安装。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="yaourt-yay"><a href="#yaourt-yay" class="headerlink" title="yaourt/yay"></a>yaourt/yay</h3><p>官方支持的软件毕竟是有限的，很多我们需要的第三方软件并没有官方提供的支持。在这种时候，Archlinux丰富而强大的aur社区就体现出其威力了——我们可以很方便地从aur社区下载别人制作好的应用软件包或二进制文件，还可以将自己制作的软件包发布在这个社区上(关于发布方式的细节不在这里讨论)。</p>
+<p>从aur社区下载软件包所需要的工具是<code>yaourt</code>(现在yaourt已经停止更新了，取而代之的是<code>yay</code>)。使用<code>pacman</code>可以安装<code>yaourt</code>，使用<code>yaourt</code>可以安装<code>yay</code>。</p>
+<h4 id="yaourt-yay的使用方式"><a href="#yaourt-yay的使用方式" class="headerlink" title="yaourt/yay的使用方式"></a>yaourt/yay的使用方式</h4><p>与<code>pacman</code>类似，yaourt可以用<code>-S</code>参数来下载并安装软件包。如果不加参数，yaourt会在aur库中搜索所有名字与给出的名字相近的软件包或二进制文件，并以表的形式列出，供用户选择。下载到的二进制文件会默认保存在当前目录中。</p>
+<h4 id="定制yaourt-yay下载工具"><a href="#定制yaourt-yay下载工具" class="headerlink" title="定制yaourt/yay下载工具"></a>定制yaourt/yay下载工具</h4><p><code>yaourt</code>和<code>yay</code>的配置文件都是<code>/etc/makepkg.conf</code>。</p>
+<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;http::/usr/bin/wget --passive-ftp -c -O %o %u&#39;,&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
+<h3 id="通过下载好的软件包安装"><a href="#通过下载好的软件包安装" class="headerlink" title="通过下载好的软件包安装"></a>通过下载好的软件包安装</h3><p>如果一个软件既无法通过<code>pacman</code>下载又无法通过aur库得到，那就只能手动安装了。首先我们要通过各种渠道获取软件的安装包(<code>GitHub</code>/<code>wget</code>/软件官网/其他)，随后的操作要视软件包而定。</p>
+<h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
+<h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
+<h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+<h3 id="downgrade"><a href="#downgrade" class="headerlink" title="downgrade"></a>downgrade</h3><p>和前面几种方式不同，downgrade是一种给软件包<strong>降级</strong>的方式。使用这个工具可以很方便地回滚软件包等级，从而解决一些可能存在的依赖问题。</p>
+<p>执行<code>yay downgrade</code>命令可以直接从aur仓库安装downgrade工具。</p>
+<p>使用downgrade工具需要root权限。使用方式：<code>sudo downgrade &lt;软件包&gt;</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/04/12/Note of CSAPP/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/04/12/Note of CSAPP/" itemprop="url">在ArchLinux下安装和配置LaTex编译环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-12T08:22:15+08:00">
+                2018-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/04/12/Note of CSAPP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/12/Note of CSAPP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -350,14 +1518,11 @@
 <li>只由ASCII字符构成的文件为文本文件，其余皆为二进制文件</li>
 <li>系统中所有信息都是由一串bits构成的。<br>区分它们的不同方式在于它们的上下文。</li>
 </ul>
-<ul>
-<li>有关C语言<ol>
+<h2 id="有关C语言"><a href="#有关C语言" class="headerlink" title="有关C语言"></a>有关C语言</h2><ol>
 <li>C语言是贝尔实验室的研究员在1969-1973年间创建的。</li>
 <li>ASCI标准在1989年由美国国家标准学会颁布。</li>
 <li>C语言是为了开发UNIX而设计的，由是，它是系统级编程的首选。但它缺乏对一些抽象的显式实现（如异常，类，对象），因此在应用级编程方面弱于C++与JAVA等语言。</li>
 </ol>
-</li>
-</ul>
 <h2 id="编译系统"><a href="#编译系统" class="headerlink" title="编译系统"></a>编译系统</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello.c -预处理-&gt; hello.i -编译-&gt; hello.s -汇编-&gt; hello.o -链接-&gt; hello</span><br></pre></td></tr></table></figure>
 <ul>
 <li>执行这四个阶段的程序（预处理器，编译器，汇编器，连接器）共同构成了 <strong>编译系统</strong> 。<ul>
@@ -1818,1174 +2983,6 @@ E_icode in {IIRMOVQ,IRRMOVQ} : 0;
 <li><code>pmap</code>：显示进程的内存映射</li>
 <li><code>top/htop</code>：类似于任务管理器</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/" itemprop="url">在ArchLinux下安装和配置LaTex编译环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T22:22:37+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/10/在ArchLinux下安装和配置LaTex编译环境/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="在ArchLinux下安装和配置LaTex编译环境"><a href="#在ArchLinux下安装和配置LaTex编译环境" class="headerlink" title="在ArchLinux下安装和配置LaTex编译环境"></a>在ArchLinux下安装和配置LaTex编译环境</h2><p>之前写文档的时候一直用的是Markdown内置Latex，但这样不如直接编译<code>.tex</code>文件来的灵活，而在安装texlive的时候又遇到了很多坑，因此在这里总结一下安装与配置过程。</p>
-<h3 id="安装xeLatex"><a href="#安装xeLatex" class="headerlink" title="安装xeLatex"></a>安装xeLatex</h3><p>用pacman可以安装texlive的许多组件，它们的统一格式是<code>texlive-</code>后跟一个具体的扩展。要安装基本组件只需要其中的<code>bin</code>，<code>core</code>和<code>lang</code>扩展，有特殊需求可以按照文档去安装其他的扩展。</p>
-<p>这里我是如下安装：</p>
-<p><code>sudo pacman -S texlive-{core,bin,langchinese,latexextra,fontsextra}</code></p>
-<h3 id="扩展包的配置"><a href="#扩展包的配置" class="headerlink" title="扩展包的配置"></a>扩展包的配置</h3><h4 id="配置fontawesome"><a href="#配置fontawesome" class="headerlink" title="配置fontawesome"></a>配置fontawesome</h4><p>Fontawesome组件本身是在fontsextra扩展中的，但是由于扩展名问题无法被正常识别，需要在使用了这个组件的tex文件开头加上一句<code>\defaultfontfeatures{Extension = .otf}</code>。</p>
-<h4 id="中文字体的问题"><a href="#中文字体的问题" class="headerlink" title="中文字体的问题"></a>中文字体的问题</h4><p>如果系统中没有安装<code>poppler-data</code>包，编译出的pdf文件将会无法显示中文。这个包可以直接使用<code>pacman</code>来安装。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/02/24/MIT_6.828/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2019/02/24/MIT_6.828/" itemprop="url">MIT 6.828 Labs 实验记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-24T20:10:08+08:00">
-                2019-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2019/02/24/MIT_6.828/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/24/MIT_6.828/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MIT-6-828-Labs-实验记录"><a href="#MIT-6-828-Labs-实验记录" class="headerlink" title="MIT 6.828 Labs 实验记录"></a>MIT 6.828 Labs 实验记录</h2><h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><ul>
-<li>6.828自带了一个打分系统，在Lab文件夹下执行<code>make grade</code>即可运行这个系统来检验自己的解答。</li>
-</ul>
-<h3 id="Build-up-the-environment"><a href="#Build-up-the-environment" class="headerlink" title="Build up the environment"></a>Build up the environment</h3><h4 id="Compiler-Toolchain"><a href="#Compiler-Toolchain" class="headerlink" title="Compiler Toolchain"></a>Compiler Toolchain</h4><p>由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。</p>
-<h4 id="QEMU-emulator"><a href="#QEMU-emulator" class="headerlink" title="QEMU emulator"></a>QEMU emulator</h4><p>建议follow一下MIT官网上最新版的6.828课程页面。老的课程页面上的链接可能不可用。此处根据<a href="https://pdos.csail.mit.edu/6.828/2018/tools.html" target="_blank" rel="noopener">Fall 2018的课程页面</a>进行配置。</p>
-<p>由于QEMU的调试系统不完善，课程组准备了改进过的QEMU，使它可以与系统中的GDB调试器绑定，并使用GDB来调试。执行以下步骤安装打好补丁的QEMU:</p>
-<ol>
-<li>执行<code>git clone https://github.com/mit-pdos/6.828-qemu.git qemu</code>拉取源代码</li>
-<li>安装各种依赖。在Archlinux下的安装方式如下：<ul>
-<li>libdtc：<code>yay DTC</code>，任选一项安装。</li>
-<li>python：坑爹的是都8102年了这门课还不支持python3.不过Arch一般自带python2,问题不大</li>
-</ul>
-</li>
-<li>进入源代码文件夹，Configure the source code<ul>
-<li>执行<code>./configure --disable-kvm --disable-werror --python= &lt;pathToPython2&gt;</code></li>
-</ul>
-</li>
-<li>执行<code>make &amp;&amp; make install</code>进行安装</li>
-</ol>
-<p>安装到一半，报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">qga/commands-posix.c: 在函数‘dev_major_minor’中:</span><br><span class="line">qga/commands-posix.c:634:21: 警告：implicit declaration of function ‘major’; did you mean ‘_m_por’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devmajor = major(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     _m_por</span><br><span class="line">qga/commands-posix.c:634:21: 警告：对‘major’的嵌套的外部声明 [-Wnested-externs]</span><br><span class="line">qga/commands-posix.c:635:21: 警告：implicit declaration of function ‘minor’; did you mean ‘mknod’? [-Wimplicit-function-declaration]</span><br><span class="line">         *devminor = minor(st.st_rdev);</span><br><span class="line">                     ^~~~~</span><br><span class="line">                     mknod</span><br><span class="line">qga/commands-posix.c:635:21: 警告：对‘minor’的嵌套的外部声明 [-Wnested-externs]</span><br></pre></td></tr></table></figure>
-<p>很显然是有两个函数major和minor在使用之前并未声明。这是两个库函数，在linux下的<code>&lt;sys/sysmacros.h&gt;</code>头文件中有定义，然而MIT给的代码里并没有包含这个头文件。根据报错信息打开<code>qga/commands-posix.c</code>，添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存。</p>
-<p>再次安装，装到一半又报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `stat_to_v9stat&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor&apos;</span><br><span class="line">/usr/bin/ld: /home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev&apos;</span><br><span class="line">collect2: 错误：ld 返回 1</span><br></pre></td></tr></table></figure>
-<p>差不多的理由，还是缺少库函数。也不管重复包含dirty不dirty了，向<code>hw/9pfs/virtio-9p.c</code>中添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存后再次编译。</p>
-<p>因为类似的理由，还需要添加这个头文件的源文件有<code>linux-user/strace.c</code>。</p>
-<h3 id="Lab-1-Booting-a-PC"><a href="#Lab-1-Booting-a-PC" class="headerlink" title="Lab 1 Booting a PC"></a>Lab 1 Booting a PC</h3><p>Lab1的源码可以从<code>https://pdos.csail.mit.edu/6.828/2018/jos.git</code>处clone到。</p>
-<h4 id="Part-1-PC-bootstrap"><a href="#Part-1-PC-bootstrap" class="headerlink" title="Part 1 PC bootstrap"></a>Part 1 PC bootstrap</h4><p>这一部分的目的是让我们熟悉x86汇编语言和PC bootstrap过程，并熟悉QEMU和gdb的操作。</p>
-<p>首先在lab目录下执行<code>make</code>命令来编译内核和启动器。编译完成的内核与启动器位于<code>obj/kern/kernal.img</code>镜像文件中，这个镜像文件是一个用于模拟真实硬盘的虚拟磁盘。</p>
-<p>执行<code>make qemu</code>可以正式在qemu中运行编译好的操作系统，此时命令行终端会创建一个新的窗口，同时在终端中显示与窗口中同样的内容(并接受同样的输入)。方便起见，这里我们用终端进行接下来的操作。</p>
-<p>一开始这个shell只有两条简单的指令：<code>help</code>和<code>kerninfo</code>。后者会打印出目前的内核状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Special kernel symbols:</span><br><span class="line">  _start                  0010000c (phys)</span><br><span class="line">  entry  f010000c (virt)  0010000c (phys)</span><br><span class="line">  etext  f01019df (virt)  001019df (phys)</span><br><span class="line">  edata  f0113060 (virt)  00113060 (phys)</span><br><span class="line">  end    f01136a0 (virt)  001136a0 (phys)</span><br><span class="line">Kernel executable memory footprint: 78KB</span><br></pre></td></tr></table></figure>
-<p>要退出qemu可以打出<code>Ctrl+a x</code>。</p>
-<h5 id="Layout-of-the-physical-address-space"><a href="#Layout-of-the-physical-address-space" class="headerlink" title="Layout of the physical address space"></a>Layout of the physical address space</h5><table>
-<thead>
-<tr>
-<th>—————–</th>
-<th>&lt;- 0xFFFFFFFF(4GB)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内存映射的虚拟地址</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 取决于RAM的数量</td>
-</tr>
-<tr>
-<td>扩展内存</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 0x00100000 (1MB)</td>
-</tr>
-<tr>
-<td>BIOS所在的ROM</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 0x000F0000 (960KB)</td>
-</tr>
-<tr>
-<td>16位机使用的扩展ROM</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 0x000C0000 (768KB)</td>
-</tr>
-<tr>
-<td>VGA Display</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 0x000A0000 (640KB)</td>
-</tr>
-<tr>
-<td>Low Memory</td>
-<td></td>
-</tr>
-<tr>
-<td>—————–</td>
-<td>&lt;- 0x00000000</td>
-</tr>
-</tbody>
-</table>
-<p>对于一开始的16位机来说，它们只能使用一共最下面那1MB的物理存储，而可用的内存只有标识为Low Memory的640KB。VGA区是硬件保留区，用于当作视频播放缓冲区等。</p>
-<p>就算是在Intel突破了“1MB的瓶颈”之后，PC设计师也仍然对于最低的1MB地址空间使用原始的架构，这是为了软件的向后兼容性。这样就在LowMemory和扩展内存之间留下了一个 <strong>空洞</strong> ，为那些16位的软硬件所使用。</p>
-<p>在计算机从32位升级为64位时，BIOS在地址空间的最顶段因为类似的理由留下了第二个空洞。</p>
-<h5 id="The-ROM-BIOS"><a href="#The-ROM-BIOS" class="headerlink" title="The ROM BIOS"></a>The ROM BIOS</h5><p>为了单步调试计算机的启动过程，我们需要两个终端，一个用<code>make qemu-gdb</code>来启动qemu虚拟机，一个用<code>make gdb</code>来将gdb调试环境连接到虚拟机上。</p>
-<p><code>make qemu-gdb</code>会将处理器暂停在即将执行第一条指令之前并等待gdb的连接，这时在另一个终端中使用<code>make gdb</code>就可以通过gdb来调试操作系统内核。</p>
-<p>gdb终端会显示一段结尾如下的信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The target architecture is assumed to be i8086</span><br><span class="line">[f000:fff0]    0xffff0: ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
-<p>其中的第二行代表着目前将要执行的指令，也就是虚拟机开启过程的第一条指令。</p>
-<p>这条指令的含义是：</p>
-<ul>
-<li><code>0xffff0:</code>：指令位于的虚拟存储系统地址，对应于上面的架构，这个位置是属于BIOS的ROM区域的最上面，也就是BIOS程序的起始位置。</li>
-<li><code>[f000:fff0]</code>：指示当前CS和IP寄存器的值。CS寄存器指示代码所在的数据段，IP则是偏移量。</li>
-<li><code>ljmp</code>：跳转指令，跳转到CS和IP为<code>[f000:e05b]</code>的位置，转换成存储地址就是<code>0xfe05b</code>。<ul>
-<li>CS和IP寄存器与物理地址的转换规则为<code>ADDR = CS&lt;&lt;4 + IP</code>。</li>
-</ul>
-</li>
-</ul>
-<p>保证启动时优先执行BIOS代码是很重要的，因为一开始内存中根本不会有其他可以执行的代码。BIOS会初始化所有启动所需要的重要设备，检查内存和磁盘的挂载情况。最后，就像操作系统课程中所学的那样，它找到磁盘上的boot loader并将控制权转移给它。</p>
-<ul>
-<li>对GDB使用<code>si</code>命令可以继续单步调试之后的汇编代码，观察BIOS所做的工作。</li>
-</ul>
-<h4 id="Part-2-The-boot-loader"><a href="#Part-2-The-boot-loader" class="headerlink" title="Part 2 The boot loader"></a>Part 2 The boot loader</h4><p>众所周知，软盘和硬盘都被分成大小为<code>512字节</code>的段，而这些段是系统级IO的最小单位。如果一个磁盘是启动盘，那么它的第一个段就被称为 <strong>boot sector</strong> ，并被存放boot loader的代码。当BIOS找到一个boot sector后，它就会将其加载到内存中，并将控制权转交给boot loader代码段。</p>
-<p>(对于CD-ROM来说，它的前2M都属于boot sector，因此可以存放更大的启动镜像)</p>
-<p>在6.828文件夹中，boot loader的代码存放于<code>boot/boot.S</code>与<code>boot/main.c</code>中。这些代码主要完成两件事：</p>
-<ol>
-<li>将处理器模式切换到<code>32位保护模式</code>，这样软件才可以访问大于1MB的物理地址空间。这个工作由<code>boot.S</code>完成。除此之外，<code>boot.S</code>还要建立一个程序栈，让C程序得以运行。</li>
-<li>将内核代码从硬盘中加载到内存，并将控制转交给内核代码的入口函数。这个工作由<code>main.c</code>完成。</li>
-</ol>
-<p>阅读<code>main.c</code>的代码可以发现很多 <del>非常dirty的</del> 细节(<del>包括但不限于：使用goto，while(1)代替sleep，写的很乱的函数指针</del>)，如果对于这个过程的细节感兴趣可以直接阅读源码，注释写的很详细明白。</p>
-<p>bootloader的代码会被BIOS加载到<code>0x7c00</code>，这是由<code>boot/Makefrag</code>文件所决定的。修改这个文件中<code>-Ttext</code>参数后面的地址可以让BIOS从其他地址来加载，执行<code>make clean &amp;&amp; make</code>重新编译可以查看这样做会引发什么样的系统错误(事实上系统会停机并进入一个无限循环等待用户的操作)；在GDB调试时可以在这个位置设置断点，以精确地进入bootloader代码段。</p>
-<p><code>obj/boot/boot.asm</code>和<code>obj/kern/kernel.asm</code>分别包含着bootloader和kernel的反汇编结果以及注释，可以用于调试和分析。下面就来分析一下BootLoader的代码逻辑。</p>
-<ul>
-<li>BootLoader代码逻辑研究<ul>
-<li>第一阶段：<strong>初始化</strong><ul>
-<li><strong>宏常量的设定</strong>：<code>.set CR0_PE_ON 0x1</code> 这个常量是控制32位保护模式开关的指标。</li>
-<li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序</li>
-<li><strong>寄存器初始化</strong>：用xor和mov指令将几个关键寄存器清零<ul>
-<li><code>ds</code>：数据段寄存器，存放全局变量区域的头指针</li>
-<li><code>ss</code>：栈段寄存器，存放堆栈段的首地址(<code>esp</code>寄存器存储的是偏移量)</li>
-<li><code>es</code>：扩展段寄存器</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>第二阶段：<strong>打开32位保护模式</strong><ul>
-<li><strong>开启A20地址线</strong>：在16位模式下，用于寻址的地址总线只有20根，这种情况下大于1MB的地址空间是全部被置为0的。只有开启20～23号四条地址线，才能对1MB以上的地址空间进行寻址，从而进入32位模式。<ul>
-<li>通过一个循环来等待A20设备准备完毕：用<code>in</code>指令从<code>0x64</code>端口接受信息，如果不是代表准备完毕的信息则继续循环。</li>
-<li>向<code>0x64</code>和<code>0x60</code>端口发送信号，打开A20地址线。</li>
-</ul>
-</li>
-<li><strong>建立32位段虚拟内存与物理存储器的映射关系表</strong>：<code>lgdt gdtdesc</code>指令。</li>
-<li><strong>启动32位保护模式</strong>：用<code>CR0_PE_ON</code>与<code>cr0</code>寄存器的值做或运算，打开32位保护模式。<code>cr0</code>到<code>cr3</code>四个寄存器是系统控制寄存器，它们的值直接决定系统的运行状态。<code>cr0</code>控制的是处理器，因此可以通过修改其值来进入其他运行模式。</li>
-<li><strong>跳转到32位代码区的下一条指令</strong>。</li>
-</ul>
-</li>
-<li>第三阶段：修改段寄存器的值为32位区地址，初始化<code>esp</code>寄存器的值，建立C程序栈</li>
-<li>第四阶段：进入<code>main.c</code>的bootmain函数，开始读取内核代码。</li>
-<li>第五阶段：跳转到内核代码区，交还控制权。</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<h5 id="习题解答"><a href="#习题解答" class="headerlink" title="习题解答"></a>习题解答</h5><p>Q: 处理器什么时候开始执行32位代码？哪条指令切换了处理器模式？</p>
-<p>A：<code>0x7c2a:  mov    %eax,%cr0</code>指令切换了处理器模式，从随后的跳转指令开始，处理器开始执行32位代码。</p>
-<p>Q：Bootloader执行的最后一条指令是什么？Kernal执行的第一条指令又是什么?</p>
-<p>A：Bootloader执行的最后一条指令是向内核代码段跳转的指令<code>0x7d71:      call   *0x10018</code>，kernel执行的第一条指令是<code>0x10000c:    movw   $0x1234,0x472</code>。</p>
-<p>Q：Bootloader是如何决定它要读取多少数据的？它从哪里获取的kernal大小信息？</p>
-<p>A：Bootloader首先从内核代码区读取了长度固定的ELF头部，再从头部中获取了这个区域是否为ELF文件、数据段数量、每段的长度、起始地址等信息。</p>
-</blockquote>
-<p>(课程网页在这一部分讲了一大堆ELF头和指针的知识，如果已经学过CSAPP第7章的话完全可以跳过。需要注意的是，6.828所采用的可执行目标文件代码 <strong>并非是位置无关代码</strong> ，因而 <strong>链接器会将程序将加载到的内存位置写在文件中</strong> 。利用这一点，我们可以执行<code>objdump -f &lt;filename&gt;</code>命令，获取程序在内存中的入口位置。)</p>
-<h4 id="Part-3-The-kernel"><a href="#Part-3-The-kernel" class="headerlink" title="Part 3 The kernel"></a>Part 3 The kernel</h4><p>在内核被授予控制权后，它要做如下几件事：</p>
-<h5 id="Virtual-memory-address-mapping"><a href="#Virtual-memory-address-mapping" class="headerlink" title="Virtual memory address mapping"></a>Virtual memory address mapping</h5><p>当我们观察bootloader程序的时候，我们可以发现它的 <strong>链接地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>LMA</code>，linked memory address) 和 <strong>虚拟地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>VMA</code>，virtual memory address) 是完全一致的；然而对于kernel，这两个地址却有着不小的差距。</p>
-<p>操作系统内核常常会在非常高的虚拟地址空间(例如0xf0100000)运行，这是为了把比较低的虚拟地址空间留给用户进程使用。然而大部分机器没有这么多的内存，于是它们将虚拟地址0xf0100000映射到物理地址0x00100000。这样一来虽然内核所在的加载地址很高，它的实际加载地址却是位于RAM区域的最底端，挨着BIOS所在的ROM地址区域。</p>
-<p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。</p>
-<p>kernal被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
-<h5 id="Formatted-printing-to-the-console"><a href="#Formatted-printing-to-the-console" class="headerlink" title="Formatted printing to the console"></a>Formatted printing to the console</h5><p>在完成虚拟地址映射之后，下一步是对终端进行格式化输入输出以创建交互式操作界面。</p>
-<p><code>lib/printfmt.c</code>中提供了输出函数的原型，<code>kern/printf.c</code>和<code>kern/console.c</code>则提供了有关内核输出和交互的函数。</p>
-<blockquote>
-<p><strong>Answer to Exercise 8</strong></p>
-<p>本题要求补全printfmt函数对于<code>%o</code>(8进制输出)的处理机制，只需要仿照下面十六进制的机制即可。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'o'</span>:</span><br><span class="line">  num = getuint(&amp;ap, lflag);</span><br><span class="line">  base = <span class="number">8</span>;</span><br><span class="line">  <span class="keyword">goto</span> number;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>习题解答</strong></p>
-<p>Q：解释printf.c和console.c之间的接口，尤其是console.c中的哪个函数被如何用于printf.c。</p>
-<p>A：console.c向printf.c提供了cputchar函数,它希望在调用printf.c中的输出函数时可以利用cputchar函数来输出每一个字符。printf.c遵守这个约定,以包含cputchar的外壳函数调用printfmt.c中的输出函数,保证了所有输出都按照console.c所规定的标准来输出。</p>
-<p>Q：解释console.c中的这一段代码:</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * <span class="keyword">sizeof</span>(<span class="keyword">uint16_t</span>));</span><br><span class="line">  <span class="keyword">for</span> (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">    crt_buf[i] = <span class="number">0x0700</span> | <span class="string">' '</span>;</span><br><span class="line">    crt_pos -= CRT_COLS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>A：</p>
-<p>这段代码来自cga_putc函数,这个函数是在CGA显示屏图形卡上打印字符的函数。crt_pos是一个整形全局变量,它的含义是目前光标在屏幕上的位置。阅读<code>console.h</code>的内容可以发现CRT_SIZE被定义为屏幕上能够容纳的字符个数,而CRT_COLS则是屏幕的宽度。</p>
-<p>条件判断是为了确认当前光标的位置是否已经超出了屏幕底端。如果超出了，就把屏幕上第二行到最后一行的内容全部上移一行，并将空出来的位置用<code>0x0700 | &#39; &#39;</code>填满。</p>
-<p>总而言之，这段代码是为了实现屏幕满了之后向上滚动的功能。</p>
-<p>Q：单步调试如下代码：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">3</span>, z = <span class="number">4</span>;</span><br><span class="line">cprintf(<span class="string">"x %d, y %x, z %d\n"</span>, x, y, z);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>在对cprintf的调用中，fmt对应的实参是什么？ap呢？</li>
-<li>列出对<code>cons_putc</code>, <code>va_arg</code>和<code>vcprintf</code>的每一次调用，以及<code>cons_putc</code>的参数,<code>va_arg</code>中ap的指向和<code>vcprintf</code>的参数值。</li>
-</ol>
-<p>A：</p>
-<ol>
-<li>fmt对应的实参是<code>&quot;x %d, y %x, z %d\n&quot;</code>，ap指向带有x，y和z的参数数组。</li>
-<li>甚至不需要单步调试，自己阅读<code>lib/printfmt.c</code>就足够了。</li>
-</ol>
-<p>Q：运行如下代码：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0x00646c72</span>;</span><br><span class="line">cprintf(<span class="string">"H%x Wo%s"</span>, <span class="number">57616</span>, &amp;i);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>解释输出结果。如果这段代码运行在大端序机器上而非小端序机器上，你会如何修改它来得到同样的结果？</p>
-<p>A：输出结果是<code>He110 World</code>。前面的e110是57616在十六进制下的表示(因为使用了<code>%x</code>)，后面的rld是字符串输出的结果。int占4个字节而每个字符占一个字节，因而i所占的内存空间与一个长度为4的字符数组是相同的。这样一来，如果用i的地址去输出字符串，就会从i的地址开始按字符去读取内存中的数据，直到读到0为止。由于运行在小端序机器，0x72排在最前面一个字节，被解析成ASCII码值为0x72的<code>r</code>；接下来0x6c和0x64分别被解释为<code>l</code>和<code>d</code>。最后一个字节是0x00,正好是字符串终结符。</p>
-<p>如果机器是大端序，只需要将i修改为<code>0x726c6400</code>即可，57616不需要改变。</p>
-<p>Q：被<code>cprintf(&quot;x=%d y=%d&quot;, 3);</code>打印出的y值会是多少？为什么？</p>
-<p>A：会是一个随机的整形数。因为cprintf解析到了两个<code>%d</code>符号，但<code>ap</code>的长度只有1,这导致第二个<code>%d</code>读到了一片未赋值的内存地址，其值自然是随机的。</p>
-</blockquote>
-<h5 id="The-Stack"><a href="#The-Stack" class="headerlink" title="The Stack"></a>The Stack</h5><p>(仔细读过CSAPP第三章的话汇编语言和程序栈这一块应该没问题了，就不说了)</p>
-<blockquote>
-<p><strong>Answer to Exercise 9</strong></p>
-<p>Q：确定内核在什么时候初始化程序栈及程序栈的初始位置。内核是如何为栈保存空间的？</p>
-<p>A：<code>f010034: mov $0xf0110000, %esp</code>：这一条指令初始化了栈指针，将程序栈建立于虚拟地址<code>0xf0110000</code>位置。从这个地址开始，程序栈随着程序运行向下增长。</p>
-</blockquote>
-<p><code>ebp</code>指针被称为“基指针”，它的作用是追踪每个函数的栈帧位置。每个被调用的C函数都要进行如下操作：将ebp寄存器的值压栈、将当前esp指针值拷贝到ebp寄存器。在返回之前，这个函数从栈中取出并恢复ebp寄存器的值。通过这种机制，<strong>任何时候ebp寄存器的值都指向正在执行的函数的栈帧头部，而栈帧头部的前一个数据节的值指向该函数调用者的栈帧头部</strong>，于是可以通过ebp链来还原函数调用链。</p>
-<blockquote>
-<p><strong>Answer to Exercise 10</strong></p>
-<p>这个Exercise的目的是让学生熟悉backtrace的操作和C的程序栈结构。在kernel中有一个自我递归的<code>test_backtrace</code>函数,通过对这个函数打上断点可以使用<code>p $ebp</code>获取每次调用的栈帧起始位置.</p>
-<p>第一次调用:栈帧的起始位置为<code>0xf010ffd8</code><br>第二次调用:栈帧的起始位置为<code>0xf010ffb8</code></p>
-<p>可以看出这个函数的每个栈帧大小都是<code>0x20</code>,也就是32个字节，对于32位系统来说是八个数据。</p>
-<p>使用<code>x/xw</code>命令查看从<code>0xf010ffe0</code>开始整个栈帧的结构。(因为32位系统每个数据是四个字节，所以使用<code>x/xw</code>来查看)</p>
-<p><code>x/xw 0xf010ffe0</code>：<code>0x00000005</code> 按照栈帧的结构，这个位置应该是调用者压入栈内的参数。第一次对<code>test_backtrace</code>的调用的确只有一个实参5。</p>
-<p><code>x/xw 0xf010ffdc</code>：<code>0xf01000f4</code> 由于栈帧是向下的，这条指令其实查看的是上一个栈帧的最后一部分，也就是函数的返回地址，经验证的确指向调用者的下一条指令。</p>
-<p><code>x/xw 0xf010ffd8</code>：<code>0xf010fff8</code> 当前函数栈帧的第一部分，保存着上一个函数的基指针值(<code>%ebp</code>的值)，由于上一个函数已经是整个程序栈底部的函数了，这个地址向上就没有数据了，上个函数的基指针指向的是物理内存区的函数。</p>
-<p><code>x/xw 0xf010ffd4</code>：<code>0x000100b4</code> 被调用者保存的<code>%esi</code>寄存器的值 </p>
-<p><code>x/xw 0xf010ffd0</code>：<code>0xf011304c</code> 被调用者保存的<code>%ebx</code>寄存器的值</p>
-<p><code>x/xw 0xf010ffcc</code>：<code>0xf010004a</code> 是<code>test_backtrace</code>中一行代码的地址</p>
-<p><code>x/xw 0xf010ffc8</code>：<code>0x00000000</code> 空的，没有数据</p>
-<p><code>x/xw 0xf010ffc4</code>：<code>0x00000005</code> 局部变量5</p>
-<p><code>x/xw 0xf010ffc0</code>：<code>0x00000004</code> 即将进行下一次递归调用，这是压入的参数4</p>
-<p>再往下就是返回地址，然后就是下一个栈帧。总的来说，<code>test_backtrace</code>函数的栈帧结构就是这样。</p>
-</blockquote>
-<p>完成了对栈帧结构的观察后，就可以利用观察结果去做一下任务了。Exercise 11要求我们实现一个<code>mon_backtrace</code>函数，它记录并打印出栈帧信息。<code>inc/x86.h</code>中提供了<code>read_ebp()</code>函数可以直接返回ebp寄存器的值。</p>
-<p>输出格式规定如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f0109e58  eip f0100a62  args 00000001 f0109e80 f0109e98 f0100ed2 00000031</span><br><span class="line">  ebp f0109ed8  eip f01000d6  args 00000000 00000000 f0100058 f0109f28 00000061</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>Answer to Exercise 11</strong></p>
-<p>本题要求是按上面的要求修改<code>kern/monitor.c</code>中的<code>mon_backtrace</code>函数，并将其添加到指令集中。</p>
-<p>对代码的修改如下：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一处修改</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Command</span> <span class="title">commands</span>[] = &#123;</span></span><br><span class="line">        &#123; <span class="string">"help"</span>, <span class="string">"Display this list of commands"</span>, mon_help &#125;,</span><br><span class="line">        &#123; <span class="string">"kerninfo"</span>, <span class="string">"Display information about the kernel"</span>, mon_kerninfo &#125;,</span><br><span class="line">        &#123; <span class="string">"backtrace"</span>, <span class="string">"Display the structure of the stack"</span>, mon_backtrace &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 第二处修改</span></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">mon_backtrace(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line">        cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">        <span class="keyword">int</span> ebp = read_ebp();</span><br><span class="line">        <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                ebp = *(<span class="keyword">int</span> *)ebp;</span><br><span class="line">                <span class="keyword">if</span> (!ebp) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp+<span class="number">4</span>);</span><br><span class="line">                <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                        args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Exercise 12要求我们升级这个函数，使其支持如下的输出格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stack backtrace:</span><br><span class="line">  ebp f010ff78  eip f01008ae  args 00000001 f010ff8c 00000000 f0110580 00000000</span><br><span class="line">         kern/monitor.c:143: monitor+106</span><br><span class="line">  ebp f010ffd8  eip f0100193  args 00000000 00001aac 00000660 00000000 00000000</span><br><span class="line">         kern/init.c:49: i386_init+59</span><br><span class="line">  ebp f010fff8  eip f010003d  args 00000000 00000000 0000ffff 10cf9a00 0000ffff</span><br><span class="line">         kern/entry.S:70: &lt;unknown&gt;+0</span><br></pre></td></tr></table></figure>
-<p>为了根据eip找到函数名，行数和文件名等一系列信息，<code>kern/kdebug.c</code>中提供了<code>debuginfo_eip()</code>函数，我们需要完整地实现<code>debuginfo_eip()</code>函数，并在<code>mon_backtrace</code>中调用这个函数来获得信息。</p>
-<blockquote>
-<p><strong>Answer to Exercise 12</strong></p>
-<p>在<code>debuginfo_eip</code>函数中有一些以<code>__STAB_</code>开头的宏常量,它们所代表的是ELF文件中<code>.stab</code>(在CSAPP中是<code>.symtab</code>)区的开头和结尾位置,以及<code>.stabstr</code>(在CSAPP中是<code>.strtab</code>)区的开头和结尾位置,它们是在链接过程中由<code>kernal.ld</code>定义的。</p>
-<p>以下是修改内容：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kern/monitor.c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">mon_backtrace(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">        cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">        <span class="comment">// Parse the structure of the stack</span></span><br><span class="line">        <span class="keyword">int</span> ebp = read_ebp();</span><br><span class="line">        <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Print some information in restricted format.</span></span><br><span class="line">        cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">        <span class="comment">// Exercise 12, get the debuginfo by eip</span></span><br><span class="line">        debuginfo_eip(eip, &amp;info);</span><br><span class="line">        cprintf(<span class="string">"         %s:%d: "</span>,info.eip_file, info.eip_line);</span><br><span class="line">        <span class="comment">// info.eip_fn_name is a non-null-terminated string</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;info.eip_fn_namelen;i++) cprintf(<span class="string">"%c"</span>,*(info.eip_fn_name+i));</span><br><span class="line">        cprintf(<span class="string">"+%d\n"</span>,eip - info.eip_fn_addr);</span><br><span class="line">        <span class="comment">// Backtracing</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                ebp = *(<span class="keyword">int</span> *)ebp;</span><br><span class="line">                <span class="keyword">if</span> (!ebp) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">int</span> eip = *(<span class="keyword">int</span> *)(ebp+<span class="number">4</span>);</span><br><span class="line">                <span class="keyword">int</span> args[<span class="number">5</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">                        args[i] = *(<span class="keyword">int</span> *)(ebp + <span class="number">4</span>*i + <span class="number">8</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                cprintf(<span class="string">"  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n"</span>,ebp,eip,args[<span class="number">0</span>],args[<span class="number">1</span>],args[<span class="number">2</span>],args[<span class="number">3</span>],args[<span class="number">4</span>]);</span><br><span class="line">                debuginfo_eip(eip, &amp;info);</span><br><span class="line">                cprintf(<span class="string">"         %s:%d: "</span>,info.eip_file, info.eip_line);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;info.eip_fn_namelen;i++) cprintf(<span class="string">"%c"</span>,*(info.eip_fn_name+i));</span><br><span class="line">                cprintf(<span class="string">"+%d\n"</span>,eip - info.eip_fn_addr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// kern/kdebug.c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">debuginfo_eip(<span class="keyword">uintptr_t</span> addr, struct Eipdebuginfo *info)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// Your code here.</span></span><br><span class="line">    stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line">    <span class="keyword">if</span> (lline &lt;= rline) info-&gt;eip_line = stabs[lline].n_desc;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>至此Lab1结束。运行<code>make grade</code>，<code>50/50</code>大成功。</p>
-<h3 id="Lab2-Memory-Management"><a href="#Lab2-Memory-Management" class="headerlink" title="Lab2 Memory Management"></a>Lab2 Memory Management</h3><p>在这个Lab中，我们需要实现操作系统的内存管理系统。内存管理系统包括两个部分：</p>
-<ul>
-<li>物理内存调度：我们要实现一个以4096个字节大小的页为单位的内存分配器，它将空闲的内存分配给内核和用户，并释放使用完的内存。</li>
-<li>虚拟内存映射</li>
-</ul>
-<p>执行<code>git checkout -b lab2 origin/lab2</code>命令切换到lab2分支，执行<code>git merge lab1</code>合并在lab1所做的更改。</p>
-<p>Lab2增加的文件有：</p>
-<ul>
-<li><code>inc/memlayout.h</code>：定义描述虚拟内存空间的布局的函数，定义PageInfo结构体</li>
-<li><code>kern/pmap.c</code>和<code>kern/pmap.h</code>：实现<code>inc/memlayout.h</code>中定义的函数</li>
-<li><code>kern/kclock.c</code>和<code>kern/kclock.h</code>：与CMOS硬件沟通，读取PC的硬件信息</li>
-</ul>
-<p><code>inc/mmu.h</code>同样可能对这个lab有所帮助。</p>
-<h4 id="Part-1-Physical-page-management"><a href="#Part-1-Physical-page-management" class="headerlink" title="Part 1 Physical page management"></a>Part 1 Physical page management</h4><p>在这个部分我们需要实现物理内存管理器。这个函数追踪一个由<code>PageInfo</code>结构体组成的链表(这个链表的节点代表着一页未分配的内存)，并负责物理内存的分配和回收。</p>
-<p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
-<ul>
-<li><code>K</code>和<code>P</code>:带K的标识符往往指<code>kernel</code>,与内核虚拟内存有关；而带P的标识符指<code>physical</code>,与物理存储有关</li>
-<li><code>kva</code>:<code>kernel virtual address</code>的简写</li>
-<li><code>pa</code>:<code>physical address</code>的简写</li>
-<li><code>la</code>:<code>linear address</code>,</li>
-</ul>
-<p>为了实现目标功能的代码，我们需要调用许多定义好的函数或者宏，为了方便查看和使用将所有可能需要使用的函数和宏列举如下：</p>
-<ul>
-<li><code>pmap.h</code>:<ul>
-<li><code>PADDR(addr)</code>:将虚拟地址addr转换为物理地址返回</li>
-<li><code>KADDR(addr)</code>:将物理地址addr转换为虚拟地址返回</li>
-<li><code>page2pa(PageInfo*)</code>:将PageInfo结构体转换为对应Page的物理地址</li>
-<li><code>pa2page(addr)</code>:将物理地址转换为pages数组中的PageInfo</li>
-<li><code>page2kva(PageInfo*)</code>:将PageInfo结构体转换为对应Page的虚拟地址</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/" itemprop="url">用自己建造的DockerImage创建k8s容器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T14:40:37+08:00">
-                2018-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
-                    <span itemprop="name">Cluster</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/11/24/用自己建造的DockerImage创建k8s容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/24/用自己建造的DockerImage创建k8s容器/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="用自己建造的DockerImage创建k8s容器"><a href="#用自己建造的DockerImage创建k8s容器" class="headerlink" title="用自己建造的DockerImage创建k8s容器"></a>用自己建造的DockerImage创建k8s容器</h2><p>本篇文章记载了定制k8s容器以满足实验需要的具体方法，以供参考。</p>
-<h3 id="构建需要的DockerFile"><a href="#构建需要的DockerFile" class="headerlink" title="构建需要的DockerFile"></a>构建需要的DockerFile</h3><p>kubernetes的Pod是以docker容器为基础的，因此每个pod在创建时都需要提供一个基础的容器镜像。因此，要定制一个符合我们需求的Pod，就需要先定制容器镜像。</p>
-<p>Docker提供的定制镜像的方式是 <strong>Dockerfile</strong> 。关于Dockerfile的具体写法参见<a href="https://docs.docker.com/v17.09/engine/reference/builder/" target="_blank" rel="noopener">Reference</a></p>
-<p>「示例」这是一个简单的CounterImage的DockerFile：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu                     # 每个DockerFile必须在开头用FROM语句指明其母镜像</span><br><span class="line">COPY counter.sh /etc/           # COPY指令可以将目标文件拷贝到镜像内的目标目录中</span><br><span class="line">RUN chmod +x /etc/counter.sh    # RUN指令让目标镜像执行指定指令</span><br></pre></td></tr></table></figure>
-<h3 id="用DockerFile建造DockerImage"><a href="#用DockerFile建造DockerImage" class="headerlink" title="用DockerFile建造DockerImage"></a>用DockerFile建造DockerImage</h3><p>写好DockerFile之后，执行<code>docker build</code>指令来构建镜像。</p>
-<ul>
-<li>关于<code>docker build</code>的参数问题<ul>
-<li><code>-f &lt;filepath&gt;</code> 指定DokcerFile的位置，默认在当前目录下寻找DockerFile</li>
-<li><code>-t &lt;tag&gt;</code> 为创建的镜像指定tag，tag格式一般是<code>&lt;repo&gt;/&lt;imagename&gt;:&lt;version&gt;</code></li>
-</ul>
-</li>
-</ul>
-<p>执行完毕之后，构建好的DockerImage可以用<code>docker images</code>查看到。</p>
-<h3 id="用kubectl创建pod"><a href="#用kubectl创建pod" class="headerlink" title="用kubectl创建pod"></a>用kubectl创建pod</h3><p>用kubectl构建pod需要用yaml或json文件指定pod的属性。</p>
-<p>「示例」这是用于运行CounterImage实例的Pod配置文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span> <span class="comment"># 指定k8s版本，一般是v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>      <span class="comment"># 指定要创建的对象的类型，这里是Pod</span></span><br><span class="line"><span class="attr">metadata:</span>      <span class="comment"># 元数据，指定Pod信息</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">testpod</span>   <span class="comment"># 指定Pod的名称</span></span><br><span class="line"><span class="attr">  annotations:</span>    <span class="comment"># 一些必要的注释，可以用于传递信息</span></span><br><span class="line"><span class="attr">spec:</span>          <span class="comment"># 一些其他信息</span></span><br><span class="line"><span class="attr">  containers:</span>     <span class="comment"># 指定Pod使用的基础镜像</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">testcontainer</span>               <span class="comment"># 指定将要创建的容器名称，这个不重要</span></span><br><span class="line"><span class="attr">      image:</span> <span class="string">drac/counter:v1</span>            <span class="comment"># 指定使用的镜像名称，这里使用刚刚创建的镜像名</span></span><br><span class="line"><span class="attr">      imagePullPolicy:</span> <span class="string">"IfNotPresent"</span>   </span><br><span class="line">      <span class="comment"># 由于刚刚的镜像并没有上传到远程仓库中，这里需要指定镜像拉取策略为优先使用本地镜像</span></span><br><span class="line"><span class="attr">      command:</span>                          <span class="comment"># 指定容器要运行的指令</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">"etc/counter.sh"</span></span><br><span class="line"><span class="attr">      ports:</span>                            <span class="comment"># 指定容器对外开放的端口</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">          hostPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">  tolerations:</span>    </span><br><span class="line">  <span class="comment"># 这个属性与node的taints有关，由于master节点默认不能调度pods，这里要设置一些tolerations</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node.kubernetes.io/not-ready"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node-role.kubernetes.io/master"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br></pre></td></tr></table></figure>
-<p>写好配置文件之后，就可以用<code>kubectl create -f &lt;配置文件名&gt;</code>来创建pod了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/04/在archlinux上单机搭建kubernetes/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/11/04/在archlinux上单机搭建kubernetes/" itemprop="url">在archlinux上单机搭建kubernetes</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T21:38:22+08:00">
-                2018-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
-                    <span itemprop="name">Cluster</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/11/04/在archlinux上单机搭建kubernetes/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/04/在archlinux上单机搭建kubernetes/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="kubernetes单机搭建流程"><a href="#kubernetes单机搭建流程" class="headerlink" title="kubernetes单机搭建流程"></a>kubernetes单机搭建流程</h2><p>由于工作需要，今天试着在archlinux主机上搭建了k8s。网上完全没有针对archlinux系统的配置教程，因此踩了很多坑，现将archlinux下的搭建流程记录如下。</p>
-<h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><h5 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h5><ul>
-<li><code>docker</code>：k8s中担任container职责的依赖，必须安装</li>
-<li><code>sudo swapoff -a</code>：k8s的运行不支持内存交换，所以要关掉swap分区</li>
-<li><code>ss</code>和<code>privoxy</code>：提供代理环境(k8s的镜像源多是google，而google相关网站大部分被GFW墙掉了)<ul>
-<li><strong>注意：</strong>privoxy的监听端口应配置为8008(kubeadm的默认端口)</li>
-</ul>
-</li>
-</ul>
-<h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><p>手动编译kubernetes对内存要求过高，<del>OOM了3次</del>，只好另寻他途。</p>
-<p>幸运的是，<code>kubeadm</code>,<code>kubectl</code>,<code>kubelet</code>,<code>kubernetes-cni</code>四项依赖的bin文件都有AUR包，可以用<code>yaourt</code>或者<code>yay</code>来下载。在下载时注意选择二进制文件(即<code>&lt;name&gt;-bin</code>)并提前打开privoxy代理映射。</p>
-<p>(注意：这几个包的镜像源服务器都不支持axel，所以请将yay的下载工具换为wget)</p>
-<h5 id="初始化集群"><a href="#初始化集群" class="headerlink" title="初始化集群"></a>初始化集群</h5><p>首先要设置docker的代理(这里的代理端口设置与privoxy的设置保持一致)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建conf文件</span></span><br><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="comment"># 在新建的conf文件中加入如下内容</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTP_PROXY=http://127.0.0.1:8008/"</span></span><br><span class="line"><span class="comment"># 创建conf文件</span></span><br><span class="line">sudo vim /etc/systemd/system/docker.service.d/https-proxy.conf</span><br><span class="line"><span class="comment"># 在新建的conf文件中加入如下内容</span></span><br><span class="line">[Service]</span><br><span class="line">Environment=<span class="string">"HTTPS_PROXY=http://127.0.0.1:8008/"</span></span><br><span class="line"><span class="comment"># 重启service</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-<p>执行<code>sudo kubeadm init --pod-network-cidr=10.244.0.0/16</code>，根据显示的提示信息补全依赖，启动service后再次执行。</p>
-<p>在init成功后根据显示的提示信息创建config文件。</p>
-<p>执行<code>kubectl get pods --all-namespaces</code>，如果正常显示pods信息则说明正常。</p>
-<p>接下来安装网络模块(这里使用的是<code>flannel</code>，当然其他模块也可以，只是要在init的时候指定相应的<code>pod-network-cidr</code>)，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
-<p>安装好flannel模块之后，如果<code>/etc/cni</code>文件夹没有被创建，coredns无法正常创建容器，可以在root身份下执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"cbr0"</span>,<span class="string">"type"</span>:<span class="string">"flannel"</span>,<span class="string">"delegate"</span>: &#123;<span class="string">"isDefaultGateway"</span>: <span class="literal">true</span>&#125;&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>来进行配置。</p>
-<p>这里如果出现问题可以参考<a href="https://blog.csdn.net/qq_34857250/article/details/82562514" target="_blank" rel="noopener">这篇博客</a></p>
-<p>执行<code>watch kubectl get pods --all-namespaces</code>，等待一到两分钟，所有pods状态都为running则说明安装成功。(期间各种crash都是有可能的，耐心等待它自己重启即可)</p>
-<h5 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h5><p>搭建大成功，接下来只要部署具体的service就可以了。</p>
-<h4 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a>常见问题及解决方案</h4><ul>
-<li><p>非root用户使用kubectl时出现错误</p>
-<ul>
-<li><p>错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to connect to the server: net/http: TLS handshake timeout</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>状态：暂未解决</p>
-</li>
-<li>折中方案：将config文件放在root目录的<code>.kube</code>目录下，用sudo运行kubectl</li>
-</ul>
-</li>
-<li><p>flannel网络模块安装之后coredns无法正常创建容器</p>
-<ul>
-<li><p>错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container &quot;dd087d2655e98a25040f7b041e23dffa59aa52206b921e481ad20781d1de4320&quot; network for pod &quot;coredns-86c58d9df4-gtrt4&quot;: NetworkPlugin cni failed to set up pod &quot;coredns-86c58d9df4-gtrt4_kube-system&quot; network: failed to find plugin &quot;portmap&quot; in path [/opt/cni/bin], failed to clean up sandbox container &quot;dd087d2655e98a25040f7b041e23dffa59aa52206b921e481ad20781d1de4320&quot; network for pod &quot;coredns-86c58d9df4-gtrt4&quot;: NetworkPlugin cni failed to teardown pod &quot;coredns-86c58d9df4-gtrt4_kube-system&quot; network: failed to find plugin &quot;portmap&quot; in path [/opt/cni/bin]]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解决方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">mkdir -p /etc/cni/net.d/</span><br><span class="line">cat &lt;&lt;EOF&gt; /etc/cni/net.d/10-flannel.conf</span><br><span class="line">&#123;&quot;name&quot;:&quot;cbr0&quot;,&quot;type&quot;:&quot;flannel&quot;,&quot;delegate&quot;: &#123;&quot;isDefaultGateway&quot;: true&#125;&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Pod无法正常创建Container，出现netplugin error</p>
-<ul>
-<li><p>错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed create pod sandbox: rpc error: code = Unknown desc = failed to set up sandbox container &quot;81e89630eeb39a5c7b24e330082af265d3cd4480c83664316df3bd92fcfaaa91&quot; network for pod &quot;testpod&quot;: NetworkPlugin cni failed to set up pod &quot;testpod_default&quot; network: &quot;cni0&quot; already has an IP address different from 10.244.0.1/24</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解决方案：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kubeadm reset 过程</span></span><br><span class="line">systemctl stop kubelet</span><br><span class="line">systemctl stop docker</span><br><span class="line">rm -rf /var/lib/cni/</span><br><span class="line">rm -rf /var/lib/kubelet/*</span><br><span class="line">rm -rf /etc/cni/</span><br><span class="line">ifconfig cni0 down</span><br><span class="line">ifconfig flannel.1 down</span><br><span class="line">ifconfig docker0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ip link delete flannel.1</span><br><span class="line">systemctl start kubelet</span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># kubeadm init 过程</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/07/11/ArchLinux下的软件安装/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/07/11/ArchLinux下的软件安装/" itemprop="url">ArchLinux下的软件安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T09:39:48+08:00">
-                2018-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Archlinux/" itemprop="url" rel="index">
-                    <span itemprop="name">Archlinux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/07/11/ArchLinux下的软件安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/11/ArchLinux下的软件安装/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Archlinux下的软件安装方式总结"><a href="#Archlinux下的软件安装方式总结" class="headerlink" title="Archlinux下的软件安装方式总结"></a>Archlinux下的软件安装方式总结</h2><p>虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。</p>
-<h3 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h3><p><code>pacman</code>是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。</p>
-<h4 id="找到需要的软件包"><a href="#找到需要的软件包" class="headerlink" title="找到需要的软件包"></a>找到需要的软件包</h4><p>有些时候我们会发现有的软件依赖的二进制文件并没有被安装，导致软件无法运行。想要查找一个二进制文件所在的pacman软件包，可以使用<code>pkgfile</code>工具。使用方法是<code>pkgfile &lt;文件名&gt;</code>。它会输出这个文件所在的软件包名。</p>
-<h4 id="pacman的使用方式"><a href="#pacman的使用方式" class="headerlink" title="pacman的使用方式"></a>pacman的使用方式</h4><ul>
-<li>常用参数<ul>
-<li><code>-S</code> 后面跟软件包名，与镜像源同步，一般使用这个参数安装新的软件包或升级旧的软件包。</li>
-<li><code>-U</code> 后面跟一个文件名，通过下载到本地的安装包安装软件</li>
-<li><code>-R</code> 后面跟软件包名，卸载这个软件并删除软件包</li>
-<li><code>-Syu</code> 俗称 <em>滚Arch</em> ，进行全面的系统更新</li>
-</ul>
-</li>
-</ul>
-<h4 id="定制pacman下载工具"><a href="#定制pacman下载工具" class="headerlink" title="定制pacman下载工具"></a>定制pacman下载工具</h4><p><code>pacman</code>的配置文件是<code>/etc/pacman.conf</code>。在这个文件中我们可以对<code>pacman</code>的行为进行自定义。</p>
-<ul>
-<li>常用的自定义项<ul>
-<li>改变<code>pacman</code>的镜像源：修改<code>/etc/pacman.d/mirrorlist</code>文件内容</li>
-<li>改变<code>pacman</code>使用的下载工具：修改<code>XferCommand</code>变量的值<ul>
-<li><code>/usr/bin/curl -C - -f %u &gt; %o</code> pacman默认使用<code>curl</code>作为下载工具</li>
-<li><code>/usr/bin/wget --passive-ftp -c -O %o %u</code> <code>wget</code>是一款非常优秀的单线程下载工具，功能比<code>curl</code>更为强大</li>
-<li><code>/usr/bin/axel -o %o %u</code> <code>axel</code>是一款多线程下载工具，速度比前两者要快，推荐设置它为<code>pacman</code>的默认工具。</li>
-<li><strong>注意</strong>：<code>wget</code>和<code>axel</code>需要提前用pacman安装。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="yaourt-yay"><a href="#yaourt-yay" class="headerlink" title="yaourt/yay"></a>yaourt/yay</h3><p>官方支持的软件毕竟是有限的，很多我们需要的第三方软件并没有官方提供的支持。在这种时候，Archlinux丰富而强大的aur社区就体现出其威力了——我们可以很方便地从aur社区下载别人制作好的应用软件包或二进制文件，还可以将自己制作的软件包发布在这个社区上(关于发布方式的细节不在这里讨论)。</p>
-<p>从aur社区下载软件包所需要的工具是<code>yaourt</code>(现在yaourt已经停止更新了，取而代之的是<code>yay</code>)。使用<code>pacman</code>可以安装<code>yaourt</code>，使用<code>yaourt</code>可以安装<code>yay</code>。</p>
-<h4 id="yaourt-yay的使用方式"><a href="#yaourt-yay的使用方式" class="headerlink" title="yaourt/yay的使用方式"></a>yaourt/yay的使用方式</h4><p>与<code>pacman</code>类似，yaourt可以用<code>-S</code>参数来下载并安装软件包。如果不加参数，yaourt会在aur库中搜索所有名字与给出的名字相近的软件包或二进制文件，并以表的形式列出，供用户选择。下载到的二进制文件会默认保存在当前目录中。</p>
-<h4 id="定制yaourt-yay下载工具"><a href="#定制yaourt-yay下载工具" class="headerlink" title="定制yaourt/yay下载工具"></a>定制yaourt/yay下载工具</h4><p><code>yaourt</code>和<code>yay</code>的配置文件都是<code>/etc/makepkg.conf</code>。</p>
-<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;http::/usr/bin/wget --passive-ftp -c -O %o %u&#39;,&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
-<h3 id="通过下载好的软件包安装"><a href="#通过下载好的软件包安装" class="headerlink" title="通过下载好的软件包安装"></a>通过下载好的软件包安装</h3><p>如果一个软件既无法通过<code>pacman</code>下载又无法通过aur库得到，那就只能手动安装了。首先我们要通过各种渠道获取软件的安装包(<code>GitHub</code>/<code>wget</code>/软件官网/其他)，随后的操作要视软件包而定。</p>
-<h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
-<h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
-<h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
-<h3 id="downgrade"><a href="#downgrade" class="headerlink" title="downgrade"></a>downgrade</h3><p>和前面几种方式不同，downgrade是一种给软件包<strong>降级</strong>的方式。使用这个工具可以很方便地回滚软件包等级，从而解决一些可能存在的依赖问题。</p>
-<p>执行<code>yay downgrade</code>命令可以直接从aur仓库安装downgrade工具。</p>
-<p>使用downgrade工具需要root权限。使用方式：<code>sudo downgrade &lt;软件包&gt;</code></p>
 
           
         
