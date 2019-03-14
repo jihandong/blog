@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  INDEX[TOC]  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。  C语言缘起：  C语言是贝尔实验室的研究员在1969-1973年间">
+<meta name="description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。 Unix-like系统下有两个重要概念：  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。   有关C语言 C语言是贝尔实验室的研究员在196">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gensokyo">
 <meta property="og:url" content="https://dracit7.github.io/blog/2019/03/14/Note of CSAPP/index.html">
 <meta property="og:site_name" content="Gensokyo">
-<meta property="og:description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  INDEX[TOC]  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。  C语言缘起：  C语言是贝尔实验室的研究员在1969-1973年间">
+<meta property="og:description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。 Unix-like系统下有两个重要概念：  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。   有关C语言 C语言是贝尔实验室的研究员在196">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/03/14/Note%20of%20CSAPP/images/Chapter_8/stack.png">
-<meta property="og:updated_time" content="2019-03-14T09:24:08.377Z">
+<meta property="og:updated_time" content="2019-03-14T10:12:47.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gensokyo">
-<meta name="twitter:description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  INDEX[TOC]  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。  C语言缘起：  C语言是贝尔实验室的研究员在1969-1973年间">
+<meta name="twitter:description" content="CSAPP Note Taking 这是阅读《深入理解计算机系统》一书时所做的学习笔记。  Chapter 1 计算机系统漫游首先从“hello.c”文件开始讲起。 Unix-like系统下有两个重要概念：  只由ASCII字符构成的文件为文本文件，其余皆为二进制文件 系统中所有信息都是由一串bits构成的。区分它们的不同方式在于它们的上下文。   有关C语言 C语言是贝尔实验室的研究员在196">
 <meta name="twitter:image" content="https://dracit7.github.io/blog/2019/03/14/Note%20of%20CSAPP/images/Chapter_8/stack.png">
 
 
@@ -293,7 +293,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T17:24:08+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T18:12:47+08:00">
                 2019-03-14
               </time>
             
@@ -345,95 +345,76 @@
 <h1 id="CSAPP-Note-Taking"><a href="#CSAPP-Note-Taking" class="headerlink" title="CSAPP Note Taking"></a>CSAPP Note Taking</h1></blockquote>
 <p>这是阅读《深入理解计算机系统》一书时所做的学习笔记。</p>
 <hr>
-<h2 id="INDEX"><a href="#INDEX" class="headerlink" title="INDEX"></a>INDEX</h2><p>[TOC]</p>
-<hr>
 <h1 id="Chapter-1-计算机系统漫游"><a href="#Chapter-1-计算机系统漫游" class="headerlink" title="Chapter 1 计算机系统漫游"></a>Chapter 1 计算机系统漫游</h1><p>首先从“hello.c”文件开始讲起。</p>
+<p>Unix-like系统下有两个重要概念：</p>
 <ul>
 <li>只由ASCII字符构成的文件为文本文件，其余皆为二进制文件</li>
-<li><p>系统中所有信息都是由一串bits构成的。<br>区分它们的不同方式在于它们的上下文。</p>
+<li>系统中所有信息都是由一串bits构成的。<br>区分它们的不同方式在于它们的上下文。</li>
+</ul>
 <ul>
-<li><p>C语言缘起：</p>
-<ol>
-<li>C语言是贝尔实验室的研究员在1969-1973年间创建的。<br>ASCI标准在1989年由美国国家标准学会颁布。</li>
-<li>C语言是为了开发UNIX而设计的，由是，它是系统级编程的首选。<br>但它缺乏对一些抽象的显式实现（如异常，类，对象），因此在应用级编程方面弱于C++与JAVA等语言。</li>
+<li>有关C语言<ol>
+<li>C语言是贝尔实验室的研究员在1969-1973年间创建的。</li>
+<li>ASCI标准在1989年由美国国家标准学会颁布。</li>
+<li>C语言是为了开发UNIX而设计的，由是，它是系统级编程的首选。但它缺乏对一些抽象的显式实现（如异常，类，对象），因此在应用级编程方面弱于C++与JAVA等语言。</li>
 </ol>
 </li>
 </ul>
-</li>
-</ul>
-<h2 id="hello-c-gt-hello可执行程序-的历程-编译系统"><a href="#hello-c-gt-hello可执行程序-的历程-编译系统" class="headerlink" title="hello.c -&gt; hello可执行程序 的历程  -编译系统"></a>hello.c -&gt; hello可执行程序 的历程  -编译系统</h2><p>hello.c -&gt; hello.i -&gt; hello.s -&gt; hello.o -&gt; hello</p>
-<pre><code>预处理      编译        汇编        链接
-</code></pre><ul>
-<li><p>执行这四个阶段的程序（预处理器，编译器，汇编器，连接器）共同构成了 <strong>编译系统</strong> 。</p>
+<h2 id="编译系统"><a href="#编译系统" class="headerlink" title="编译系统"></a>编译系统</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello.c -预处理-&gt; hello.i -编译-&gt; hello.s -汇编-&gt; hello.o -链接-&gt; hello</span><br></pre></td></tr></table></figure>
 <ul>
+<li>执行这四个阶段的程序（预处理器，编译器，汇编器，连接器）共同构成了 <strong>编译系统</strong> 。<ul>
 <li>预处理 ：对源程序中所有 <em>#</em> 打头的语句进行处理</li>
 <li>编译 ： 将处理过的源程序翻译为汇编程序</li>
 <li>汇编 ： 将汇编程序翻译为机器语言，并打包成为 <em>可重定位目标程序</em></li>
-<li><p>链接 ： 将标准库函数所在的 <em>.o文件</em> 链接到hello.o并生成 <em>可执行目标文件</em></p>
+<li>链接 ： 将标准库函数所在的 <em>.o文件</em> 链接到hello.o并生成 <em>可执行目标文件</em></li>
+</ul>
 </li>
-<li><p>GNU项目：</p>
-<ol>
+</ul>
+<h3 id="有关GNU项目"><a href="#有关GNU项目" class="headerlink" title="有关GNU项目"></a>有关GNU项目</h3><ol>
 <li>GNU（GNU‘s not UNIX）是一个免税慈善项目，它的目标是开发一个完整的开源系统。</li>
-<li>GNU环境包括 <em>EMACS</em>,<em>GCC</em>,<em>GDB</em>,编器，链接器，处理二进制文件的一些工具以及其他部件<br> （<del>然而不包括内核，内核是LINUX独立发展的</del>）</li>
+<li>GNU环境包括 <em>EMACS</em>,<em>GCC</em>,<em>GDB</em>,编器，链接器，处理二进制文件的一些工具以及其他部件<pre><code>（~~然而不包括内核，内核是LINUX独立发展的~~）
+</code></pre></li>
 <li>它是现代 <strong>开放源码运动</strong> 的思想起源。</li>
 </ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="hello可执行程序-在执行后发生了什么？-计算机系统的硬件组成"><a href="#hello可执行程序-在执行后发生了什么？-计算机系统的硬件组成" class="headerlink" title="hello可执行程序 在执行后发生了什么？  -计算机系统的硬件组成"></a>hello可执行程序 在执行后发生了什么？  -计算机系统的硬件组成</h2><p>首先，要了解系统的硬件组成。</p>
-<h3 id="1-总线"><a href="#1-总线" class="headerlink" title="1. 总线"></a>1. 总线</h3><p>总线是在系统的各个部件之间传递信息的渠道，通常被设计为传送定长的字节块，也就是字。</p>
+<h2 id="计算机系统的硬件组成"><a href="#计算机系统的硬件组成" class="headerlink" title="计算机系统的硬件组成"></a>计算机系统的硬件组成</h2><h3 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h3><p>总线是在系统的各个部件之间传递信息的渠道，通常被设计为传送定长的字节块。</p>
 <ul>
-<li>××位系统的含义:<br>  ××代表的是这个系统的基本属性：<em>字长</em>,即总线一次传送信息的最小单位。<br>  64位代表字长是64个位，也就是8个字节。</li>
+<li>xx位系统的含义:<ul>
+<li>xx代表的是这个系统的基本属性：<strong>字长</strong> ,即总线一次传送信息的最小单位。比如，64位系统代表字长是64个位，也就是8个字节。</li>
+<li>字长不仅是总线传送信息的最小单位，还是内存中数据单元的一种单位。</li>
 </ul>
-<h3 id="2-I-O-设备"><a href="#2-I-O-设备" class="headerlink" title="2. I/O 设备"></a>2. I/O 设备</h3><p>I/O设备通过适配器或控制器与I/O总线相连。</p>
+</li>
+</ul>
+<h3 id="I-O-设备"><a href="#I-O-设备" class="headerlink" title="I/O 设备"></a>I/O 设备</h3><p>I/O设备通过适配器或控制器与I/O总线相连。</p>
 <ul>
-<li>控制器与适配器的区别：<br>  控制器是设备本身或者系统主板上的芯片组;<br>  适配器是插在主板插槽上的卡。</li>
+<li>控制器与适配器的区别<ul>
+<li>控制器是设备本身或者系统主板上的芯片组;</li>
+<li>适配器是插在主板插槽上的卡。</li>
 </ul>
-<h3 id="3-主存"><a href="#3-主存" class="headerlink" title="3. 主存"></a>3. 主存</h3><p>主存由一组 <strong><em>动态随机存取存储器</em></strong> 芯片组成。</p>
-<h3 id="4-处理器"><a href="#4-处理器" class="headerlink" title="4. 处理器"></a>4. 处理器</h3><p>中央处理单元，简称处理器，是解释执行储存在主存中指令的引擎。</p>
-<ul>
-<li><p>处理器的核心是一个大小为一个字的存储设备 - <strong>程序计数器</strong>。</p>
-<p>  -&gt; 程序计数器保存主存中某条指令的地址。</p>
-<p>处理器读出主存中的指令，执行指令，再更新程序计数器使其指向下一个指令。</p>
-</li>
-<li><p>算数逻辑单元（ALU）用于计算数据和地址值。</p>
-</li>
-<li><p>CPU的一些简单操作示例：</p>
-<ol>
-<li>加载： 主存 – 一个字节或一个字 –&gt; 寄存器</li>
-<li>存储： 寄存器 – 一个字节或一个字 –&gt; 主存</li>
-<li>操作： 寄存器1 –\<pre><code>          》ALU -- 算数运算 -&gt; 寄存器3
-寄存器2 --/
-</code></pre></li>
-<li>跳转： 从指令中抽取一个字复制到程序计数器并覆盖原来的值。</li>
-</ol>
 </li>
 </ul>
-<h3 id="hello文件执行过程中存在的问题"><a href="#hello文件执行过程中存在的问题" class="headerlink" title="hello文件执行过程中存在的问题"></a>hello文件执行过程中存在的问题</h3><p>系统将信息在磁盘，I/O，主存，处理器间来回移动的时间开销过大。<br>-&gt; 解决方式：高速缓存</p>
+<h3 id="主存"><a href="#主存" class="headerlink" title="主存"></a>主存</h3><p>主存由一组 <strong><em>动态随机存取存储器</em></strong> 芯片组成。</p>
+<h3 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h3><p>中央处理单元，简称处理器，是解释执行储存在主存中指令的引擎。</p>
+<h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>处理器的核心是一个大小为一个字的存储设备 - <strong>程序计数器</strong>，它保存主存中某条指令的地址。处理器读出主存中的指令，执行指令，再更新程序计数器使其指向下一个指令。</p>
+<h4 id="算数逻辑单元"><a href="#算数逻辑单元" class="headerlink" title="算数逻辑单元"></a>算数逻辑单元</h4><p>算数逻辑单元（ALU）用于计算数据和地址值。</p>
+<h3 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h3><p>系统将信息在磁盘，I/O，主存，处理器间来回移动的时间开销过大，一种解决方式是高速缓存。</p>
 <p>高速缓存：作为暂时的集结区域，存放处理器近期可能需要的信息。</p>
 <p>高速缓存的分级：</p>
 <pre><code>* 一级高速缓存：访问速度与大小和寄存器相当
 * 二级高速缓存：大小要大很多，但是速度也要慢一些
 * ...以此类推
-</code></pre><h2 id="操作系统如何管理硬件-操作系统及其提供的抽象"><a href="#操作系统如何管理硬件-操作系统及其提供的抽象" class="headerlink" title="操作系统如何管理硬件  -操作系统及其提供的抽象"></a>操作系统如何管理硬件  -操作系统及其提供的抽象</h2><h3 id="操作系统的基本功能："><a href="#操作系统的基本功能：" class="headerlink" title="操作系统的基本功能："></a>操作系统的基本功能：</h3><ol>
+</code></pre><h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="操作系统的基本功能："><a href="#操作系统的基本功能：" class="headerlink" title="操作系统的基本功能："></a>操作系统的基本功能：</h3><ol>
 <li>防止硬件被失控的应用程序滥用</li>
 <li>向应用程序提供简单一致的机制来控制复杂的硬件设备</li>
 </ol>
+<h4 id="有关Unix"><a href="#有关Unix" class="headerlink" title="有关Unix"></a>有关Unix</h4><p>20世纪60年代末，由于当时开发的Multics操作系统过于复杂，贝尔实验室的研究员用 <strong>机器语言</strong> 写了一个简单易用的操作系统，并在1970年将其命名为“UNIX”。</p>
 <ul>
-<li><p>Unix缘起：</p>
-<ul>
-<li>20世纪60年代末，由于当时开发的Multics操作系统过于复杂，贝尔实验室的研究员用机器语言<br>写了一个简单易用的操作系统，并在1970年将其命名为“UNIX”。</li>
 <li>1973年，UNIX内核被用C重新构建</li>
 <li>1974年，UNIX正式对外发布</li>
 <li>80年代中期，为了防止Unix厂商所加入的新特性导致的不兼容问题，IEEE研发了 <em>POSIX标准</em>。</li>
 </ul>
-</li>
-</ul>
-<h3 id="操作系统提供的抽象表示"><a href="#操作系统提供的抽象表示" class="headerlink" title="操作系统提供的抽象表示"></a>操作系统提供的抽象表示</h3><h4 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h4><p><strong>进程</strong>是操作系统对一个正在运行的程序的一种抽象。<br>而 <strong>并发运行</strong> 则是指两个不同进程的指令是交错执行的。<br>无论是在单核还是多核系统，操作系统看起来并发地执行多个进程，是通过在进程间切换实现的。<br>这种切换称为 <strong>上下文切换</strong> 。</p>
+<h3 id="操作系统提供的抽象表示"><a href="#操作系统提供的抽象表示" class="headerlink" title="操作系统提供的抽象表示"></a>操作系统提供的抽象表示</h3><h4 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h4><p><strong>进程</strong>是操作系统对一个正在运行的程序的一种抽象。</p>
+<p>无论是在单核还是多核系统，操作系统看起来并发地执行多个进程，是通过在进程间切换实现的。<br>这种切换称为 <strong>上下文切换</strong> 。</p>
 <ul>
-<li><p>关于 <em>上下文切换</em> ：</p>
-<ul>
+<li>关于 <em>上下文切换</em> ：<ul>
 <li>操作系统保持跟踪进程运行所需的所有状态信息。这种信息称为 <strong>上下文</strong> 。</li>
 <li>上下文包括程序计数器（PC）和寄存器的当前值，以及主存的内容。</li>
 <li>上下文切换就是保存当前进程的上下文并恢复新进程的上下文，然后递交控制权。</li>
@@ -447,77 +428,54 @@
 </ol>
 <h4 id="2-线程"><a href="#2-线程" class="headerlink" title="2.线程"></a>2.线程</h4><p>每个 _进程_ 由许多个更小的执行单元 <strong>线程</strong> 组成，它们共享进程代码和全局数据。</p>
 <ul>
-<li><p>多线程的优势所在：</p>
-<ol>
+<li>多线程的优势所在：<ol>
 <li>多线程比多进程更容易共享数据</li>
 <li>线程一般比进程更为高效（开销更小）        </li>
 </ol>
 </li>
 </ul>
 <h4 id="3-虚拟内存"><a href="#3-虚拟内存" class="headerlink" title="3.虚拟内存"></a>3.虚拟内存</h4><p>虚拟内存提供了一个假象：每个进程都在独立地使用主存。<br>对每个进程来说，它们所看到的主存是一样的，它们所看到的主存称为 <strong>虚拟地址空间</strong> 。</p>
-<ul>
-<li><p>虚拟地址空间的结构：（地址由高到低）</p>
-<ul>
-<li>内核所用的虚拟内存</li>
-<li>用户栈（向下增长）</li>
-<li></li>
-<li>「预留区域」</li>
-<li></li>
-<li>动态链接库映射到内存中的区域（向上增长）</li>
-<li></li>
-<li>「预留区域」</li>
-<li></li>
-<li>malloc申请的堆内存（向上增长）</li>
-<li>读/写数据</li>
-<li>只读数据和代码</li>
-</ul>
-</li>
-</ul>
+<p>虚拟地址空间的结构：（<strong>地址由高到低</strong>）</p>
+<table>
+<thead>
+<tr>
+<th>内核所用的虚拟内存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户栈（向下增长）</td>
+</tr>
+<tr>
+<td>「预留区域」</td>
+</tr>
+<tr>
+<td>动态链接库映射到内存中的区域（向上增长）</td>
+</tr>
+<tr>
+<td>「预留区域」</td>
+</tr>
+<tr>
+<td>malloc申请的堆内存（向上增长）</td>
+</tr>
+<tr>
+<td>读/写数据</td>
+</tr>
+<tr>
+<td>只读数据和代码</td>
+</tr>
+</tbody>
+</table>
 <h4 id="4-文件"><a href="#4-文件" class="headerlink" title="4.文件"></a>4.文件</h4><p><strong>文件</strong> 就是字节序列。在UNIX系统中万物皆文件，包括各种I/O设备。</p>
-<ul>
-<li>Linux缘起：<ul>
-<li>1991年，Linus 发布了一个新的类UNIX系统内核。</li>
-<li>随后，Linux逐渐发展成为一个完整的，符合POSIX标准的Unix系统版本</li>
-</ul>
-</li>
-</ul>
-<h2 id="计算机网络：不同系统间的通信-计算机网络"><a href="#计算机网络：不同系统间的通信-计算机网络" class="headerlink" title="计算机网络：不同系统间的通信  -计算机网络"></a>计算机网络：不同系统间的通信  -计算机网络</h2><p>从一个单独的系统来看，网络可以视为一个I/O设备。</p>
-<h2 id="几个重要的概念"><a href="#几个重要的概念" class="headerlink" title="几个重要的概念"></a>几个重要的概念</h2><ul>
-<li><p>Amdahl定律</p>
-<ul>
-<li>当我们对系统的某个部分加速时，其对整个系统的影响取决于该部分的重要性与加速程度。</li>
-<li>要想显著加速整个系统，必须提升整个系统中大多部分的速度。</li>
-<li>（GPA的计算也是一个道理，某一门课考好了并不能把你的加权拉高多少）</li>
-<li>（<del>但是一门课砸了就能拉低很多</del>）</li>
-</ul>
-</li>
-<li><p>并发和并行</p>
-<ul>
-<li><strong>并行</strong>，即使用 <strong>并发</strong> 来加速系统的运行速度。</li>
-<li><p>并行的抽象运用可以分为三个层次：</p>
-<ol>
-<li><p>线程级并发</p>
-<ul>
-<li>传统意义上这种并发只是模拟出来的（对于单处理器系统来讲），它允许多个用户同时与系统进行交互，也允许单个用户同时在系统中进行多项工作。</li>
-<li><strong>多处理器系统</strong> ：由单操作系统内核控制多个处理器，不同处理器通过第三级高速缓存交流数据与分配任务。</li>
-<li><strong>超线程</strong> ：超线程处理器可以在单个时钟周期内切换线程，而普通处理器需要约20000个。</li>
-</ul>
-</li>
-<li><p>指令级并发<br> <strong>流水线</strong> 将一条指令的执行划分为不同阶段并行执行，从而加快指令执行速率。<br> 如果一个处理器可以达到每个时钟周期执行超过一条指令的速度，那么它就是一个 <strong>超标量</strong> 处理器。</p>
-</li>
-<li><p>数据级并发<br> 即一条指令产生多个并行的操作</p>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><p>从一个单独的系统来看，网络可以视为一个I/O设备。</p>
 <h1 id="Chapter-2-信息的表示与处理"><a href="#Chapter-2-信息的表示与处理" class="headerlink" title="Chapter 2 信息的表示与处理"></a>Chapter 2 信息的表示与处理</h1><p>数字革命的基础之一就是 <strong>二进制表示法</strong> 。当我们把位组合在一起，我们就可以表示任何一个有限集内的元素。</p>
-<p>对于二进制表示数字来讲，三种表示最为重要。</p>
-<pre><code>1. Unsigned code ：传统的二进制表示法，表示大于等于零的数字
-2. two&apos;s-complement code ：补码，可以表示有符号的整数
-3. floating-point code ：浮点数编码，可以（近似地）表示所有实数
-</code></pre><p>由于编码的位数有限，当结果超出表示范围时就会发生 <strong>溢出</strong> 。</p>
+<p>对于二进制表示数字来讲，三种表示最为重要:</p>
+<ol>
+<li>Unsigned code ：传统的二进制表示法，表示大于等于零的数字</li>
+<li>two’s-complement code ：补码，可以表示有符号的整数</li>
+<li>floating-point code ：浮点数编码，可以（近似地）表示所有实数</li>
+</ol>
+<p>由于编码的位数有限，当结果超出表示范围时就会发生 <strong>溢出</strong> 。</p>
 <ul>
 <li>对于整数来说，溢出并不影响运算的性质。<ul>
 <li>举个例子：以不同的先后顺序计算200×300×400×500,溢出结果是一样的。</li>
@@ -549,10 +507,10 @@
 </ul>
 </li>
 </ul>
-<h3 id="字数据大小"><a href="#字数据大小" class="headerlink" title="字数据大小"></a><strong>字数据大小</strong></h3><p> 之前讲到过 <strong>虚拟地址空间</strong> ，每个程序运行时都会从主存分配一个地址从零开始的虚拟地址空间，这个空间（一般来说）就是它们能够使用的最大主存。</p>
-<p> 之前还讲到过 <strong>字长</strong> ，它的含义是 <strong>ALU</strong>（CPU中的算数逻辑单元） 一次运算能够处理的最大位数，所以也是总线一次能够传递的最大位数。</p>
-<p> 那么由于操作系统一般是用指针去进行虚拟地址空间中的寻址的， <strong>一个指针的最大大小</strong> 也就决定了 <strong>虚拟地址空间的最大大小</strong> 。而指针身为数据类型的一种，它的大小是受ALU算力的限制的。</p>
-<p> 也就是说， <strong>计算机字长</strong> 决定 <strong>指针数据的标称大小</strong> ，从而决定 <strong>虚拟地址空间的最大大小</strong> 。由于每一个指针值都对应着虚拟地址空间中的一个字节，一个 <strong>w位</strong> 的机器的虚拟地址空间最大为 <strong>2^w-1</strong> 。</p>
+<h3 id="字数据大小"><a href="#字数据大小" class="headerlink" title="字数据大小"></a><strong>字数据大小</strong></h3><p>之前讲到过 <strong>虚拟地址空间</strong> ，每个程序运行时都会从主存分配一个地址从零开始的虚拟地址空间，这个空间（一般来说）就是它们能够使用的最大主存。</p>
+<p>之前还讲到过 <strong>字长</strong> ，它的含义是 <strong>ALU</strong>（CPU中的算数逻辑单元） 一次运算能够处理的最大位数，所以也是总线一次能够传递的最大位数。</p>
+<p>那么由于操作系统一般是用指针去进行虚拟地址空间中的寻址的， <strong>一个指针的最大大小</strong> 也就决定了 <strong>虚拟地址空间的最大大小</strong> 。而指针身为数据类型的一种，它的大小是受ALU算力的限制的。</p>
+<p>也就是说， <strong>计算机字长</strong> 决定 <strong>指针数据的标称大小</strong> ，从而决定 <strong>虚拟地址空间的最大大小</strong> 。由于每一个指针值都对应着虚拟地址空间中的一个字节，一个 <strong>w位</strong> 的机器的虚拟地址空间最大为 <strong>2^w-1</strong> 。</p>
 <ul>
 <li>为避免程序在不同位系统间切换时数据类型默认大小不同带来的问题，C99标准加入了固定大小的数据类型，比如 _int32_t_ 和 _int64_t_ 。</li>
 </ul>
@@ -580,47 +538,19 @@
 </ul>
 </li>
 </ul>
-<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><ul>
-<li><p>对异或交换算法的证明</p>
-<ol>
-<li>基本运算律：x^0=x , x^x=0 , 0^0=0 , a^(b^c)=(a^b)^c , a^b=b^a</li>
-<li><del>之后就简单了</del></li>
-</ol>
-</li>
-<li><p>位运算的运用： <strong>掩码</strong> （逻辑尺）</p>
-</li>
-<li><p>坑爹的是，C标准并没有规定在位右移时是采用 <strong>算术右移</strong> （也就是高位补有效位）还是 <strong>逻辑右移</strong> （也就是高位一律补0），所以导致了一系列可移植性问题（不过一般来说，编译器一律采用算术右移）；但是java用&gt;&gt;和&gt;&gt;&gt;的区别很好地区分了两种移位的判定。</p>
-</li>
-</ul>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><p>C标准并没有规定在位右移时是采用 <strong>算术右移</strong> （也就是高位补有效位）还是 <strong>逻辑右移</strong> （也就是高位一律补0），所以导致了一系列可移植性问题（不过一般来说，编译器一律采用算术右移）；但是java用&gt;&gt;和&gt;&gt;&gt;的区别很好地区分了两种移位的判定。</p>
 <h2 id="整数表示"><a href="#整数表示" class="headerlink" title="整数表示"></a>整数表示</h2><p>无非就是两种主要表示形式：signed和unsigned，signed又一般用补码表示。</p>
-<ul>
-<li><p>补码的计算原理：</p>
-<ul>
-<li>补码的最左边一位是负权位，如果该整数占w位，那么它的值是-2^(w-1);</li>
-<li>补码的计算就是非补码位表示的正值加上补码位负权表示的负值。</li>
-</ul>
-</li>
-<li><p>补码的符号扩展：</p>
-<p>  为了保持补码表示的数值不变，补码在扩展时在左边补’1’，原码则是补’0’。<br>  因此，一个补码在左边加任意x个1,正如十进制数左边加零一样，其值不变。</p>
-</li>
-<li><p>补码的截断：</p>
-<p>  和原码一样，都是去高位留低位，然后根据低位表示的值求出截断后的值。</p>
-</li>
-<li><p>signed和unsigned间隐式类型转换可能带来的漏洞：</p>
-<p>  举个栗子：</p>
+<h3 id="补码的计算原理"><a href="#补码的计算原理" class="headerlink" title="补码的计算原理"></a>补码的计算原理</h3><p>补码的最左边一位是负权位，如果该整数占w位，那么它的值是-2^(w-1)。补码的计算就是非补码位表示的正值加上补码位负权表示的负值。</p>
+<h3 id="补码的符号扩展"><a href="#补码的符号扩展" class="headerlink" title="补码的符号扩展"></a>补码的符号扩展</h3><p>为了保持补码表示的数值不变，补码在扩展时在左边补’1’，原码则是补’0’。因此，一个补码在左边加任意x个1,正如十进制数左边加零一样，其值不变。</p>
+<h3 id="补码的截断"><a href="#补码的截断" class="headerlink" title="补码的截断"></a>补码的截断</h3><p>和原码一样，都是去高位留低位，然后根据低位表示的值求出截断后的值。</p>
+<h3 id="非补码的数据表示"><a href="#非补码的数据表示" class="headerlink" title="非补码的数据表示"></a>非补码的数据表示</h3><p>在系统级编程和网络编程当中，经常会需要用一个变量代表一串没有数学意义的位。这种时候，补码特殊的负权位会带来一些不必要的麻烦，于是我们可以使用unsigned值来代替。</p>
+<p>这里介绍signed和unsigned间隐式类型转换可能带来的漏洞：</p>
 <ul>
 <li>现在有一个读出缓冲区中信息的函数，这个缓冲区中有些信息是隐私信息，不允许阅读。</li>
 <li>为防止这个函数被用来读出不该读的东西，该函数被设置为从可读信息的开始处开始阅读，阅读长度为一个int参数，函数会实现判定其大小是否超出了可读范围。</li>
 <li>然而，这个函数调用的用来复制缓冲区中一段信息的系统函数中长度参数的类型为size_t(它被定义为unsigned int)</li>
 <li>那么如果有人心怀不轨，将-1作为参数传入，作为int它能通过函数的检验，但在这个函数调用系统函数来复制缓冲区中的信息时，-1就会被隐式类型转换换为unsigned int类型，由于-1的二进制位最左边为1,此时它的值就会变成一个特别大的整数。</li>
 <li>这样，这个人就成功读到了本来不应该被他读到的信息。</li>
-</ul>
-</li>
-<li><p>unsigned的主要应用：</p>
-<ul>
-<li>在系统级编程和网络编程当中，经常会需要用一个变量代表一串没有数学意义的位。这种时候，补码特殊的负权位会带来一些不必要的麻烦。</li>
-</ul>
-</li>
 </ul>
 <h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><p>整数运算所产生的大部分漏洞都是溢出所导致的。<br>因此，要格外注意可能引发溢出的情形。</p>
 <h3 id="unsigned-int的运算"><a href="#unsigned-int的运算" class="headerlink" title="unsigned int的运算"></a>unsigned int的运算</h3><ul>
@@ -667,40 +597,26 @@
 </ol>
 </li>
 </ul>
-<p>举个例子：</p>
-<ul>
-<li>计算a×14：<ul>
-<li>14 = 2^3 + 2^2 + 2^1</li>
-<li>a = (a&lt;&lt;3) + (a&lt;&lt;2) + (a&lt;&lt;1)</li>
-<li>或：</li>
-<li>14 = 2^4 - 2^1</li>
-<li>a = (a&lt;&lt;4) - (a&lt;&lt;1)</li>
-</ul>
-</li>
-</ul>
-<h3 id="对于整数除法的优化"><a href="#对于整数除法的优化" class="headerlink" title="对于整数除法的优化"></a>对于整数除法的优化</h3><p>在大多数机器上，整数除法比乘法还要慢，大概需要30多个时钟周期。<br>因此，采用与乘法的优化相似的思路来进行优化。<br>但与乘法不同的是， <strong>移位优化</strong> 只能适用于 <strong>x/(2^k)</strong> 的情形。</p>
-<ul>
-<li><p>整数除法的舍入问题</p>
-<p>  我们知道，整数的除法结果应该是 <strong>向零取整</strong> 的（无论正数还是负数），然而直接采用移位法进行除法运算会导致 <strong>向下取整</strong> 的舍入结果。这个问题需要得到解决。</p>
-<p>  为了解决这个问题，需要引入 <strong>偏置数</strong> 作为修正。</p>
+<h3 id="对于整数除法的优化"><a href="#对于整数除法的优化" class="headerlink" title="对于整数除法的优化"></a>对于整数除法的优化</h3><p>在大多数机器上，整数除法比乘法还要慢，大概需要30多个时钟周期。<br>因此，采用与乘法的优化相似的思路来进行优化。</p>
+<p>但与乘法不同的是， <strong>移位优化</strong> 只能适用于 $x|(2^k)$ 的情形。(<code>|</code>是离散数学中的符号，意思是能够整除)</p>
+<h4 id="整数除法的舍入问题"><a href="#整数除法的舍入问题" class="headerlink" title="整数除法的舍入问题"></a>整数除法的舍入问题</h4><p>我们知道，整数的除法结果应该是 <strong>向零取整</strong> 的（无论正数还是负数），然而直接采用移位法进行除法运算会导致 <strong>向下取整</strong> 的舍入结果。这个问题需要得到解决。</p>
+<p>为了解决这个问题，需要引入 <strong>偏置数</strong> 作为修正。</p>
 <ul>
 <li>对于正数的除法，直接移位即可</li>
-<li><p>对于负数的除法，先进行偏置，再移位。</p>
-<p>偏置的方式：<strong>将原来的数加上  <em>(1&lt;&lt;k)-1</em> 后再移位，k是将要移动的位数。</strong></p>
-</li>
-<li><p>解析：以除以16来说明。</p>
+<li>对于负数的除法，先进行偏置，再移位。</li>
+</ul>
+<p>偏置的方式：<strong>将原来的数加上</strong> $(1&lt;&lt;k)-1$ <strong>后再移位，k是将要移动的位数。</strong></p>
 <ul>
+<li>解析：以除以16来说明。<ul>
 <li>当除以16时，应该右移4位，因此k=4</li>
-<li><em>(1&lt;&lt;k)-1</em> = 0b1111</li>
+<li>$(1&lt;&lt;k)-1$ = 0b1111</li>
 <li>如果将要右移的四位全为0,说明可以整除，则加上0b1111后不进位，移位后结果不变</li>
 <li>如果将要右移的四位不全为0,说明有小数部分，则一旦加上0b1111一定会进位，于是结果比向下取整大1,也就实现了向零取整的效果。</li>
 </ul>
-<p>因此，采用如下表达式来计算 <strong>x/(2^k)</strong> :</p>
-<p><strong>( x &lt; 0 ? <em>x + (1 &lt;&lt; k) - 1</em> : x) &gt;&gt; k</strong></p>
 </li>
 </ul>
-</li>
-</ul>
+<p>因此，采用如下表达式来计算 $\frac x {(2^k)}$ :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">( x &lt; <span class="number">0</span> ? x + (<span class="number">1</span> &lt;&lt; k) - <span class="number">1</span> : x) &gt;&gt; k</span><br></pre></td></tr></table></figure>
 <h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><p>现在被普遍采用的一种浮点数表示方式为 <strong>IEEE浮点格式</strong> 。<br>它在1985年前后由IEEE（电气和电子工程师协会）推出。</p>
 <h3 id="IEEE小数的结构"><a href="#IEEE小数的结构" class="headerlink" title="IEEE小数的结构"></a>IEEE小数的结构</h3><p>IEEE标准表示的小数由以下几部分组成：</p>
 <ol>
@@ -2089,7 +2005,7 @@ E_icode in {IIRMOVQ,IRRMOVQ} : 0;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSAPP-Note-Taking"><span class="nav-number">1.</span> <span class="nav-text">CSAPP Note Taking</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INDEX"><span class="nav-number">1.1.</span> <span class="nav-text">INDEX</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1-计算机系统漫游"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 计算机系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-c-gt-hello可执行程序-的历程-编译系统"><span class="nav-number">2.1.</span> <span class="nav-text">hello.c -&gt; hello可执行程序 的历程  -编译系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello可执行程序-在执行后发生了什么？-计算机系统的硬件组成"><span class="nav-number">2.2.</span> <span class="nav-text">hello可执行程序 在执行后发生了什么？  -计算机系统的硬件组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-总线"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-I-O-设备"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. I/O 设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-主存"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 主存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-处理器"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello文件执行过程中存在的问题"><span class="nav-number">2.2.5.</span> <span class="nav-text">hello文件执行过程中存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统如何管理硬件-操作系统及其提供的抽象"><span class="nav-number">2.3.</span> <span class="nav-text">操作系统如何管理硬件  -操作系统及其提供的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的基本功能："><span class="nav-number">2.3.1.</span> <span class="nav-text">操作系统的基本功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统提供的抽象表示"><span class="nav-number">2.3.2.</span> <span class="nav-text">操作系统提供的抽象表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进程"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">1.进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-线程"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">2.线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-虚拟内存"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">3.虚拟内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-文件"><span class="nav-number">2.3.2.4.</span> <span class="nav-text">4.文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络：不同系统间的通信-计算机网络"><span class="nav-number">2.4.</span> <span class="nav-text">计算机网络：不同系统间的通信  -计算机网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重要的概念"><span class="nav-number">2.5.</span> <span class="nav-text">几个重要的概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2-信息的表示与处理"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 信息的表示与处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#信息存储"><span class="nav-number">3.1.</span> <span class="nav-text">信息存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#十六进制表示法"><span class="nav-number">3.1.1.</span> <span class="nav-text">十六进制表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字数据大小"><span class="nav-number">3.1.2.</span> <span class="nav-text">字数据大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻址和字节序"><span class="nav-number">3.1.3.</span> <span class="nav-text">寻址和字节序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示字符串"><span class="nav-number">3.1.4.</span> <span class="nav-text">表示字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">3.1.5.</span> <span class="nav-text">位运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数表示"><span class="nav-number">3.2.</span> <span class="nav-text">整数表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数运算"><span class="nav-number">3.3.</span> <span class="nav-text">整数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unsigned-int的运算"><span class="nav-number">3.3.1.</span> <span class="nav-text">unsigned int的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的运算"><span class="nav-number">3.3.2.</span> <span class="nav-text">补码的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于整数乘法的优化"><span class="nav-number">3.3.3.</span> <span class="nav-text">对于整数乘法的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于整数除法的优化"><span class="nav-number">3.3.4.</span> <span class="nav-text">对于整数除法的优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数"><span class="nav-number">3.4.</span> <span class="nav-text">浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE小数的结构"><span class="nav-number">3.4.1.</span> <span class="nav-text">IEEE小数的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的运算"><span class="nav-number">3.4.2.</span> <span class="nav-text">浮点数的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数与其他数据类型的转换"><span class="nav-number">3.4.3.</span> <span class="nav-text">浮点数与其他数据类型的转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-程序的机器级表示"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3 程序的机器级表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#x86-64缘起"><span class="nav-number">4.1.</span> <span class="nav-text">x86-64缘起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究汇编程序编码"><span class="nav-number">4.2.</span> <span class="nav-text">研究汇编程序编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需要用到的调试工具"><span class="nav-number">4.2.1.</span> <span class="nav-text">需要用到的调试工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x86-64机器代码的特性"><span class="nav-number">4.2.2.</span> <span class="nav-text">x86-64机器代码的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码格式"><span class="nav-number">4.2.3.</span> <span class="nav-text">代码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据格式"><span class="nav-number">4.2.4.</span> <span class="nav-text">数据格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问信息操作"><span class="nav-number">4.3.</span> <span class="nav-text">访问信息操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数指示符"><span class="nav-number">4.3.1.</span> <span class="nav-text">操作数指示符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送指令"><span class="nav-number">4.3.2.</span> <span class="nav-text">数据传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#入栈出栈指令"><span class="nav-number">4.3.3.</span> <span class="nav-text">入栈出栈指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术和逻辑操作"><span class="nav-number">4.4.</span> <span class="nav-text">算术和逻辑操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载有效地址"><span class="nav-number">4.4.1.</span> <span class="nav-text">加载有效地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一元算术运算"><span class="nav-number">4.4.2.</span> <span class="nav-text">一元算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二元算术运算"><span class="nav-number">4.4.3.</span> <span class="nav-text">二元算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">4.4.4.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊算术操作"><span class="nav-number">4.4.5.</span> <span class="nav-text">特殊算术操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制操作"><span class="nav-number">4.5.</span> <span class="nav-text">控制操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件操作"><span class="nav-number">4.5.1.</span> <span class="nav-text">条件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环操作"><span class="nav-number">4.5.2.</span> <span class="nav-text">循环操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch操作"><span class="nav-number">4.5.3.</span> <span class="nav-text">switch操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">4.6.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时栈"><span class="nav-number">4.6.1.</span> <span class="nav-text">运行时栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转移控制"><span class="nav-number">4.6.2.</span> <span class="nav-text">转移控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送"><span class="nav-number">4.6.3.</span> <span class="nav-text">数据传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配内存"><span class="nav-number">4.6.4.</span> <span class="nav-text">分配内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器使用"><span class="nav-number">4.6.5.</span> <span class="nav-text">寄存器使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归实现"><span class="nav-number">4.6.6.</span> <span class="nav-text">递归实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">4.7.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">4.8.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GDB调试器"><span class="nav-number">4.9.</span> <span class="nav-text">使用GDB调试器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存越界引用和缓冲区溢出"><span class="nav-number">4.10.</span> <span class="nav-text">内存越界引用和缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数操作"><span class="nav-number">4.11.</span> <span class="nav-text">浮点数操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数使用的寄存器"><span class="nav-number">4.11.1.</span> <span class="nav-text">浮点数使用的寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的操作命令"><span class="nav-number">4.11.2.</span> <span class="nav-text">浮点数的操作命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程中的浮点数"><span class="nav-number">4.11.3.</span> <span class="nav-text">过程中的浮点数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-处理器体系结构"><span class="nav-number">5.</span> <span class="nav-text">Chapter 4 处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Y86-64-ISA"><span class="nav-number">5.1.</span> <span class="nav-text">Y86-64 ISA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序员可见的状态"><span class="nav-number">5.1.1.</span> <span class="nav-text">程序员可见的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Y86-64指令集"><span class="nav-number">5.1.2.</span> <span class="nav-text">Y86-64指令集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令集编码"><span class="nav-number">5.1.3.</span> <span class="nav-text">指令集编码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#由于HCL语言不像HDL那样有着对硬件本身的封装，这里使用一些类似于类的语法来表示硬件"><span class="nav-number">6.</span> <span class="nav-text">由于HCL语言不像HDL那样有着对硬件本身的封装，这里使用一些类似于类的语法来表示硬件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序开始运行"><span class="nav-number">7.</span> <span class="nav-text">程序开始运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取指令"><span class="nav-number">8.</span> <span class="nav-text">取指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译码"><span class="nav-number">9.</span> <span class="nav-text">译码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从寄存器文件中读出对应的值并保存为valA和valB"><span class="nav-number">10.</span> <span class="nav-text">从寄存器文件中读出对应的值并保存为valA和valB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行"><span class="nav-number">11.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果指令是IOPQ，还要设置条件码"><span class="nav-number">12.</span> <span class="nav-text">如果指令是IOPQ，还要设置条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ALU进行运算并返回条件码"><span class="nav-number">13.</span> <span class="nav-text">ALU进行运算并返回条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成Cnd信号，传输给写回阶段"><span class="nav-number">14.</span> <span class="nav-text">生成Cnd信号，传输给写回阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访存"><span class="nav-number">15.</span> <span class="nav-text">访存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确定指令要求的访存方式是读还是写"><span class="nav-number">16.</span> <span class="nav-text">确定指令要求的访存方式是读还是写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断程序运行状态并更新状态码"><span class="nav-number">17.</span> <span class="nav-text">判断程序运行状态并更新状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写回"><span class="nav-number">18.</span> <span class="nav-text">写回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进行写回"><span class="nav-number">19.</span> <span class="nav-text">进行写回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新PC"><span class="nav-number">20.</span> <span class="nav-text">更新PC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新PC-1"><span class="nav-number">21.</span> <span class="nav-text">更新PC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令执行完毕，回到开头，开始执行下一条指令…"><span class="nav-number">22.</span> <span class="nav-text">指令执行完毕，回到开头，开始执行下一条指令…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可以发现PIPE的实现与SEQ是大部分一致的，只是在信号前加入了前缀"><span class="nav-number">23.</span> <span class="nav-text">可以发现PIPE的实现与SEQ是大部分一致的，只是在信号前加入了前缀</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大写的前缀代表寄存器中的值，小写的前缀代表产生的信号"><span class="nav-number">24.</span> <span class="nav-text">大写的前缀代表寄存器中的值，小写的前缀代表产生的信号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，对于F阶段只有Stall的可能"><span class="nav-number">25.</span> <span class="nav-text">控制逻辑，对于F阶段只有Stall的可能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解析阶段，与SEQ基本没有区别"><span class="nav-number">26.</span> <span class="nav-text">解析阶段，与SEQ基本没有区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对于PC值的运算"><span class="nav-number">27.</span> <span class="nav-text">对于PC值的运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号的传递"><span class="nav-number">28.</span> <span class="nav-text">信号的传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，这里可能会发生Stall或Bubble"><span class="nav-number">29.</span> <span class="nav-text">控制逻辑，这里可能会发生Stall或Bubble</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译码部分与SEQ大部分一致"><span class="nav-number">30.</span> <span class="nav-text">译码部分与SEQ大部分一致</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#由于PIPE对valA和valP有个合并机制，这里读出的并不是最终的valA"><span class="nav-number">31.</span> <span class="nav-text">由于PIPE对valA和valP有个合并机制，这里读出的并不是最终的valA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并信号valA和valP的依据是，只有call和跳转指令需要valP的值，而它们都不会需要valA"><span class="nav-number">32.</span> <span class="nav-text">合并信号valA和valP的依据是，只有call和跳转指令需要valP的值，而它们都不会需要valA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在这个阶段要处理数据转发，转发源有五个，需要分情况讨论"><span class="nav-number">33.</span> <span class="nav-text">在这个阶段要处理数据转发，转发源有五个，需要分情况讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传递"><span class="nav-number">34.</span> <span class="nav-text">信号传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，只会出现Bubble"><span class="nav-number">35.</span> <span class="nav-text">控制逻辑，只会出现Bubble</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这部分实现基本与SEQ无异"><span class="nav-number">36.</span> <span class="nav-text">这部分实现基本与SEQ无异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置条件码，这里要小心异常触发的情况"><span class="nav-number">37.</span> <span class="nav-text">设置条件码，这里要小心异常触发的情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果memory和writeback阶段的指令触发了异常，任何对条件码的修改都应该中止。"><span class="nav-number">38.</span> <span class="nav-text">如果memory和writeback阶段的指令触发了异常，任何对条件码的修改都应该中止。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进行计算，设置条件码"><span class="nav-number">39.</span> <span class="nav-text">进行计算，设置条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传输"><span class="nav-number">40.</span> <span class="nav-text">信号传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，这部分需要处理异常"><span class="nav-number">41.</span> <span class="nav-text">控制逻辑，这部分需要处理异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这一部分与SEQ相同"><span class="nav-number">42.</span> <span class="nav-text">这一部分与SEQ相同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确定读写数据的步骤被省略了，因为之前已经将valA和valP进行了merge操作"><span class="nav-number">43.</span> <span class="nav-text">确定读写数据的步骤被省略了，因为之前已经将valA和valP进行了merge操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传输-1"><span class="nav-number">44.</span> <span class="nav-text">信号传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在下一个时钟周期开始之前，handle一下异常"><span class="nav-number">45.</span> <span class="nav-text">在下一个时钟周期开始之前，handle一下异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接时打桩"><span class="nav-number">45.0.1.</span> <span class="nav-text">链接时打桩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时打桩"><span class="nav-number">45.0.2.</span> <span class="nav-text">运行时打桩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具总结"><span class="nav-number">45.1.</span> <span class="nav-text">工具总结</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8-异常控制流"><span class="nav-number">46.</span> <span class="nav-text">Chapter 8 异常控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">46.1.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常的类别"><span class="nav-number">46.1.1.</span> <span class="nav-text">异常的类别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Interrupt"><span class="nav-number">46.1.1.1.</span> <span class="nav-text">Interrupt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Trap"><span class="nav-number">46.1.1.2.</span> <span class="nav-text">Trap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fault"><span class="nav-number">46.1.1.3.</span> <span class="nav-text">Fault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Abort"><span class="nav-number">46.1.1.4.</span> <span class="nav-text">Abort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的异常"><span class="nav-number">46.1.2.</span> <span class="nav-text">常见的异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的系统调用"><span class="nav-number">46.1.3.</span> <span class="nav-text">Linux的系统调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">46.2.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑控制流"><span class="nav-number">46.2.1.</span> <span class="nav-text">逻辑控制流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有地址空间"><span class="nav-number">46.2.2.</span> <span class="nav-text">私有地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统态和用户态"><span class="nav-number">46.2.3.</span> <span class="nav-text">系统态和用户态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用的错误处理"><span class="nav-number">46.3.</span> <span class="nav-text">系统调用的错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">46.4.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fork指令"><span class="nav-number">46.4.1.</span> <span class="nav-text">fork指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子进程的回收"><span class="nav-number">46.4.2.</span> <span class="nav-text">子进程的回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载和运行程序"><span class="nav-number">46.4.3.</span> <span class="nav-text">加载和运行程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号"><span class="nav-number">46.5.</span> <span class="nav-text">信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程组"><span class="nav-number">46.5.1.</span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的发送"><span class="nav-number">46.5.2.</span> <span class="nav-text">信号的发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的接受"><span class="nav-number">46.5.3.</span> <span class="nav-text">信号的接受</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的阻塞"><span class="nav-number">46.5.4.</span> <span class="nav-text">信号的阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理程序的编写"><span class="nav-number">46.5.5.</span> <span class="nav-text">信号处理程序的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理的兼容性"><span class="nav-number">46.5.6.</span> <span class="nav-text">信号处理的兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理的常见问题及解决方案"><span class="nav-number">46.5.7.</span> <span class="nav-text">信号处理的常见问题及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任务列表管理中的race-condition问题"><span class="nav-number">46.5.7.1.</span> <span class="nav-text">任务列表管理中的race condition问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式地等待信号"><span class="nav-number">46.5.8.</span> <span class="nav-text">显式地等待信号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非本地跳转"><span class="nav-number">46.6.</span> <span class="nav-text">非本地跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作进程的工具"><span class="nav-number">46.7.</span> <span class="nav-text">操作进程的工具</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSAPP-Note-Taking"><span class="nav-number">1.</span> <span class="nav-text">CSAPP Note Taking</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1-计算机系统漫游"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 计算机系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译系统"><span class="nav-number">2.1.</span> <span class="nav-text">编译系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有关GNU项目"><span class="nav-number">2.1.1.</span> <span class="nav-text">有关GNU项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统的硬件组成"><span class="nav-number">2.2.</span> <span class="nav-text">计算机系统的硬件组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总线"><span class="nav-number">2.2.1.</span> <span class="nav-text">总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O-设备"><span class="nav-number">2.2.2.</span> <span class="nav-text">I/O 设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主存"><span class="nav-number">2.2.3.</span> <span class="nav-text">主存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器"><span class="nav-number">2.2.4.</span> <span class="nav-text">处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序计数器"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算数逻辑单元"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">算数逻辑单元</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高速缓存"><span class="nav-number">2.2.5.</span> <span class="nav-text">高速缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">2.3.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的基本功能："><span class="nav-number">2.3.1.</span> <span class="nav-text">操作系统的基本功能：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有关Unix"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">有关Unix</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统提供的抽象表示"><span class="nav-number">2.3.2.</span> <span class="nav-text">操作系统提供的抽象表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进程"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">1.进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-线程"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">2.线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-虚拟内存"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">3.虚拟内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-文件"><span class="nav-number">2.3.2.4.</span> <span class="nav-text">4.文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络"><span class="nav-number">2.4.</span> <span class="nav-text">计算机网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2-信息的表示与处理"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 信息的表示与处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#信息存储"><span class="nav-number">3.1.</span> <span class="nav-text">信息存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#十六进制表示法"><span class="nav-number">3.1.1.</span> <span class="nav-text">十六进制表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字数据大小"><span class="nav-number">3.1.2.</span> <span class="nav-text">字数据大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻址和字节序"><span class="nav-number">3.1.3.</span> <span class="nav-text">寻址和字节序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示字符串"><span class="nav-number">3.1.4.</span> <span class="nav-text">表示字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">3.1.5.</span> <span class="nav-text">位运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数表示"><span class="nav-number">3.2.</span> <span class="nav-text">整数表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的计算原理"><span class="nav-number">3.2.1.</span> <span class="nav-text">补码的计算原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的符号扩展"><span class="nav-number">3.2.2.</span> <span class="nav-text">补码的符号扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的截断"><span class="nav-number">3.2.3.</span> <span class="nav-text">补码的截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非补码的数据表示"><span class="nav-number">3.2.4.</span> <span class="nav-text">非补码的数据表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数运算"><span class="nav-number">3.3.</span> <span class="nav-text">整数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unsigned-int的运算"><span class="nav-number">3.3.1.</span> <span class="nav-text">unsigned int的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的运算"><span class="nav-number">3.3.2.</span> <span class="nav-text">补码的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于整数乘法的优化"><span class="nav-number">3.3.3.</span> <span class="nav-text">对于整数乘法的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于整数除法的优化"><span class="nav-number">3.3.4.</span> <span class="nav-text">对于整数除法的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数除法的舍入问题"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">整数除法的舍入问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数"><span class="nav-number">3.4.</span> <span class="nav-text">浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE小数的结构"><span class="nav-number">3.4.1.</span> <span class="nav-text">IEEE小数的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的运算"><span class="nav-number">3.4.2.</span> <span class="nav-text">浮点数的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数与其他数据类型的转换"><span class="nav-number">3.4.3.</span> <span class="nav-text">浮点数与其他数据类型的转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-程序的机器级表示"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3 程序的机器级表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#x86-64缘起"><span class="nav-number">4.1.</span> <span class="nav-text">x86-64缘起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究汇编程序编码"><span class="nav-number">4.2.</span> <span class="nav-text">研究汇编程序编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需要用到的调试工具"><span class="nav-number">4.2.1.</span> <span class="nav-text">需要用到的调试工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x86-64机器代码的特性"><span class="nav-number">4.2.2.</span> <span class="nav-text">x86-64机器代码的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码格式"><span class="nav-number">4.2.3.</span> <span class="nav-text">代码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据格式"><span class="nav-number">4.2.4.</span> <span class="nav-text">数据格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问信息操作"><span class="nav-number">4.3.</span> <span class="nav-text">访问信息操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数指示符"><span class="nav-number">4.3.1.</span> <span class="nav-text">操作数指示符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送指令"><span class="nav-number">4.3.2.</span> <span class="nav-text">数据传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#入栈出栈指令"><span class="nav-number">4.3.3.</span> <span class="nav-text">入栈出栈指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术和逻辑操作"><span class="nav-number">4.4.</span> <span class="nav-text">算术和逻辑操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载有效地址"><span class="nav-number">4.4.1.</span> <span class="nav-text">加载有效地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一元算术运算"><span class="nav-number">4.4.2.</span> <span class="nav-text">一元算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二元算术运算"><span class="nav-number">4.4.3.</span> <span class="nav-text">二元算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">4.4.4.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊算术操作"><span class="nav-number">4.4.5.</span> <span class="nav-text">特殊算术操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制操作"><span class="nav-number">4.5.</span> <span class="nav-text">控制操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件操作"><span class="nav-number">4.5.1.</span> <span class="nav-text">条件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环操作"><span class="nav-number">4.5.2.</span> <span class="nav-text">循环操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch操作"><span class="nav-number">4.5.3.</span> <span class="nav-text">switch操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">4.6.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时栈"><span class="nav-number">4.6.1.</span> <span class="nav-text">运行时栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转移控制"><span class="nav-number">4.6.2.</span> <span class="nav-text">转移控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传送"><span class="nav-number">4.6.3.</span> <span class="nav-text">数据传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配内存"><span class="nav-number">4.6.4.</span> <span class="nav-text">分配内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器使用"><span class="nav-number">4.6.5.</span> <span class="nav-text">寄存器使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归实现"><span class="nav-number">4.6.6.</span> <span class="nav-text">递归实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">4.7.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">4.8.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GDB调试器"><span class="nav-number">4.9.</span> <span class="nav-text">使用GDB调试器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存越界引用和缓冲区溢出"><span class="nav-number">4.10.</span> <span class="nav-text">内存越界引用和缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数操作"><span class="nav-number">4.11.</span> <span class="nav-text">浮点数操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数使用的寄存器"><span class="nav-number">4.11.1.</span> <span class="nav-text">浮点数使用的寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点数的操作命令"><span class="nav-number">4.11.2.</span> <span class="nav-text">浮点数的操作命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过程中的浮点数"><span class="nav-number">4.11.3.</span> <span class="nav-text">过程中的浮点数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-处理器体系结构"><span class="nav-number">5.</span> <span class="nav-text">Chapter 4 处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Y86-64-ISA"><span class="nav-number">5.1.</span> <span class="nav-text">Y86-64 ISA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序员可见的状态"><span class="nav-number">5.1.1.</span> <span class="nav-text">程序员可见的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Y86-64指令集"><span class="nav-number">5.1.2.</span> <span class="nav-text">Y86-64指令集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令集编码"><span class="nav-number">5.1.3.</span> <span class="nav-text">指令集编码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#由于HCL语言不像HDL那样有着对硬件本身的封装，这里使用一些类似于类的语法来表示硬件"><span class="nav-number">6.</span> <span class="nav-text">由于HCL语言不像HDL那样有着对硬件本身的封装，这里使用一些类似于类的语法来表示硬件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序开始运行"><span class="nav-number">7.</span> <span class="nav-text">程序开始运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取指令"><span class="nav-number">8.</span> <span class="nav-text">取指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译码"><span class="nav-number">9.</span> <span class="nav-text">译码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从寄存器文件中读出对应的值并保存为valA和valB"><span class="nav-number">10.</span> <span class="nav-text">从寄存器文件中读出对应的值并保存为valA和valB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行"><span class="nav-number">11.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果指令是IOPQ，还要设置条件码"><span class="nav-number">12.</span> <span class="nav-text">如果指令是IOPQ，还要设置条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ALU进行运算并返回条件码"><span class="nav-number">13.</span> <span class="nav-text">ALU进行运算并返回条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成Cnd信号，传输给写回阶段"><span class="nav-number">14.</span> <span class="nav-text">生成Cnd信号，传输给写回阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访存"><span class="nav-number">15.</span> <span class="nav-text">访存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确定指令要求的访存方式是读还是写"><span class="nav-number">16.</span> <span class="nav-text">确定指令要求的访存方式是读还是写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断程序运行状态并更新状态码"><span class="nav-number">17.</span> <span class="nav-text">判断程序运行状态并更新状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写回"><span class="nav-number">18.</span> <span class="nav-text">写回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进行写回"><span class="nav-number">19.</span> <span class="nav-text">进行写回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新PC"><span class="nav-number">20.</span> <span class="nav-text">更新PC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新PC-1"><span class="nav-number">21.</span> <span class="nav-text">更新PC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令执行完毕，回到开头，开始执行下一条指令…"><span class="nav-number">22.</span> <span class="nav-text">指令执行完毕，回到开头，开始执行下一条指令…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可以发现PIPE的实现与SEQ是大部分一致的，只是在信号前加入了前缀"><span class="nav-number">23.</span> <span class="nav-text">可以发现PIPE的实现与SEQ是大部分一致的，只是在信号前加入了前缀</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大写的前缀代表寄存器中的值，小写的前缀代表产生的信号"><span class="nav-number">24.</span> <span class="nav-text">大写的前缀代表寄存器中的值，小写的前缀代表产生的信号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，对于F阶段只有Stall的可能"><span class="nav-number">25.</span> <span class="nav-text">控制逻辑，对于F阶段只有Stall的可能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解析阶段，与SEQ基本没有区别"><span class="nav-number">26.</span> <span class="nav-text">解析阶段，与SEQ基本没有区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对于PC值的运算"><span class="nav-number">27.</span> <span class="nav-text">对于PC值的运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号的传递"><span class="nav-number">28.</span> <span class="nav-text">信号的传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，这里可能会发生Stall或Bubble"><span class="nav-number">29.</span> <span class="nav-text">控制逻辑，这里可能会发生Stall或Bubble</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译码部分与SEQ大部分一致"><span class="nav-number">30.</span> <span class="nav-text">译码部分与SEQ大部分一致</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#由于PIPE对valA和valP有个合并机制，这里读出的并不是最终的valA"><span class="nav-number">31.</span> <span class="nav-text">由于PIPE对valA和valP有个合并机制，这里读出的并不是最终的valA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并信号valA和valP的依据是，只有call和跳转指令需要valP的值，而它们都不会需要valA"><span class="nav-number">32.</span> <span class="nav-text">合并信号valA和valP的依据是，只有call和跳转指令需要valP的值，而它们都不会需要valA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在这个阶段要处理数据转发，转发源有五个，需要分情况讨论"><span class="nav-number">33.</span> <span class="nav-text">在这个阶段要处理数据转发，转发源有五个，需要分情况讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传递"><span class="nav-number">34.</span> <span class="nav-text">信号传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，只会出现Bubble"><span class="nav-number">35.</span> <span class="nav-text">控制逻辑，只会出现Bubble</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这部分实现基本与SEQ无异"><span class="nav-number">36.</span> <span class="nav-text">这部分实现基本与SEQ无异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置条件码，这里要小心异常触发的情况"><span class="nav-number">37.</span> <span class="nav-text">设置条件码，这里要小心异常触发的情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果memory和writeback阶段的指令触发了异常，任何对条件码的修改都应该中止。"><span class="nav-number">38.</span> <span class="nav-text">如果memory和writeback阶段的指令触发了异常，任何对条件码的修改都应该中止。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进行计算，设置条件码"><span class="nav-number">39.</span> <span class="nav-text">进行计算，设置条件码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传输"><span class="nav-number">40.</span> <span class="nav-text">信号传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制逻辑，这部分需要处理异常"><span class="nav-number">41.</span> <span class="nav-text">控制逻辑，这部分需要处理异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这一部分与SEQ相同"><span class="nav-number">42.</span> <span class="nav-text">这一部分与SEQ相同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确定读写数据的步骤被省略了，因为之前已经将valA和valP进行了merge操作"><span class="nav-number">43.</span> <span class="nav-text">确定读写数据的步骤被省略了，因为之前已经将valA和valP进行了merge操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号传输-1"><span class="nav-number">44.</span> <span class="nav-text">信号传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在下一个时钟周期开始之前，handle一下异常"><span class="nav-number">45.</span> <span class="nav-text">在下一个时钟周期开始之前，handle一下异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接时打桩"><span class="nav-number">45.0.1.</span> <span class="nav-text">链接时打桩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时打桩"><span class="nav-number">45.0.2.</span> <span class="nav-text">运行时打桩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具总结"><span class="nav-number">45.1.</span> <span class="nav-text">工具总结</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8-异常控制流"><span class="nav-number">46.</span> <span class="nav-text">Chapter 8 异常控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">46.1.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常的类别"><span class="nav-number">46.1.1.</span> <span class="nav-text">异常的类别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Interrupt"><span class="nav-number">46.1.1.1.</span> <span class="nav-text">Interrupt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Trap"><span class="nav-number">46.1.1.2.</span> <span class="nav-text">Trap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fault"><span class="nav-number">46.1.1.3.</span> <span class="nav-text">Fault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Abort"><span class="nav-number">46.1.1.4.</span> <span class="nav-text">Abort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的异常"><span class="nav-number">46.1.2.</span> <span class="nav-text">常见的异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的系统调用"><span class="nav-number">46.1.3.</span> <span class="nav-text">Linux的系统调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">46.2.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑控制流"><span class="nav-number">46.2.1.</span> <span class="nav-text">逻辑控制流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有地址空间"><span class="nav-number">46.2.2.</span> <span class="nav-text">私有地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统态和用户态"><span class="nav-number">46.2.3.</span> <span class="nav-text">系统态和用户态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用的错误处理"><span class="nav-number">46.3.</span> <span class="nav-text">系统调用的错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">46.4.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fork指令"><span class="nav-number">46.4.1.</span> <span class="nav-text">fork指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子进程的回收"><span class="nav-number">46.4.2.</span> <span class="nav-text">子进程的回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载和运行程序"><span class="nav-number">46.4.3.</span> <span class="nav-text">加载和运行程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号"><span class="nav-number">46.5.</span> <span class="nav-text">信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程组"><span class="nav-number">46.5.1.</span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的发送"><span class="nav-number">46.5.2.</span> <span class="nav-text">信号的发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的接受"><span class="nav-number">46.5.3.</span> <span class="nav-text">信号的接受</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号的阻塞"><span class="nav-number">46.5.4.</span> <span class="nav-text">信号的阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理程序的编写"><span class="nav-number">46.5.5.</span> <span class="nav-text">信号处理程序的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理的兼容性"><span class="nav-number">46.5.6.</span> <span class="nav-text">信号处理的兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号处理的常见问题及解决方案"><span class="nav-number">46.5.7.</span> <span class="nav-text">信号处理的常见问题及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任务列表管理中的race-condition问题"><span class="nav-number">46.5.7.1.</span> <span class="nav-text">任务列表管理中的race condition问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式地等待信号"><span class="nav-number">46.5.8.</span> <span class="nav-text">显式地等待信号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非本地跳转"><span class="nav-number">46.6.</span> <span class="nav-text">非本地跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作进程的工具"><span class="nav-number">46.7.</span> <span class="nav-text">操作进程的工具</span></a></li></ol></li></div>
             
 
           </div>
