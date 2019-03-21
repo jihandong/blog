@@ -259,6 +259,245 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/03/21/头条暑期实习面经/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/03/21/头条暑期实习面经/" itemprop="url">字节跳动架构部门暑实面经</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T12:10:09+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Experience/" itemprop="url" rel="index">
+                    <span itemprop="name">Experience</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2019/03/21/头条暑期实习面经/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/21/头条暑期实习面经/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="字节跳动架构部门laaS暑期实习生面经"><a href="#字节跳动架构部门laaS暑期实习生面经" class="headerlink" title="字节跳动架构部门laaS暑期实习生面经"></a>字节跳动架构部门laaS暑期实习生面经</h2><h3 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h3><p>面试官很nice，温和好说话，也会给提示。</p>
+<h4 id="开始部分"><a href="#开始部分" class="headerlink" title="开始部分"></a>开始部分</h4><p>首先是介绍一些自己做过的项目(自己做的或者跟导师做的)。</p>
+<p>我的话就是讲一些简历上写了的项目：</p>
+<ul>
+<li>视频抓取器Spatium和实现细节</li>
+<li>课设C_formatter</li>
+<li>跟导师改的一些kubernetes源码</li>
+</ul>
+<p>说到k8s这部分的时候，面试官很自然地把话题引入计算虚拟化部分。</p>
+<h4 id="计算虚拟化部分"><a href="#计算虚拟化部分" class="headerlink" title="计算虚拟化部分"></a>计算虚拟化部分</h4><blockquote>
+<p><strong>有关k8s</strong></p>
+</blockquote>
+<ol>
+<li>你知道kubernetes有哪几个主要的模块吗？</li>
+</ol>
+<p>答：大概有kubelet，kubectl，kubeadm还有coredns等模块。</p>
+<ol start="2">
+<li>那你知道这些模块里面哪些是功能模块而哪些是工具模块吗？</li>
+</ol>
+<p>答：主要的功能模块就是kubelet，解释了一下kubelet的各种作用。</p>
+<ol start="3">
+<li>kubelet在网络中是跟哪个身份的节点相连的？跟哪个进程相连的？</li>
+</ol>
+<p>答：细节不是很清楚</p>
+<blockquote>
+<p><strong>对虚拟化的了解</strong></p>
+</blockquote>
+<ol start="4">
+<li>我们岗位就是做虚拟化的，说一下你对虚拟化的认识</li>
+</ol>
+<p>答：主要答了一些主流虚拟化技术和虚拟机种类，并进行了一些解释</p>
+<ul>
+<li>三种虚拟化形式：<ul>
+<li>虚拟机</li>
+<li>容器</li>
+<li>库操作系统</li>
+</ul>
+</li>
+<li>三种虚拟机形式：<ul>
+<li>运行在裸机上的全虚拟化(最早的虚拟化，讲了原理和劣势)</li>
+<li>半虚拟化(修改操作系统内核，讲了原理和劣势，举例Xen)</li>
+<li>基于硬件辅助的虚拟化(举了一些例子)</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>Intel的处理器有哪些特性支持了第三种虚拟机？</li>
+</ol>
+<p>答：细节部分没有了解</p>
+<ol start="6">
+<li>CPU分了哪几个特权级，虚拟机是如何利用它们的？</li>
+</ol>
+<p>答：一开始口误，把4个特权级说成了0-4，经面试官提醒改为0-3。讲了一下全虚拟化和硬件辅助虚拟化对特权级的利用。</p>
+<h4 id="计算机网络部分"><a href="#计算机网络部分" class="headerlink" title="计算机网络部分"></a>计算机网络部分</h4><ol start="7">
+<li>假如要写一个基于TCP的Server-Client程序，在S端和C端分别要做哪些工作？从代码的角度讲。</li>
+</ol>
+<p>答：用python举例，讲了S端的<code>socket</code>，<code>bind</code>，<code>listen</code>，<code>accept</code>的调用时机、参数和一些特性；C端的<code>socket</code>，<code>connect</code>的调用时机、参数；<code>send</code>和<code>recv</code>方法的使用。</p>
+<ol start="8">
+<li>假设我在<code>bind</code>函数调用时不设定特定IP地址，要用什么端口？</li>
+</ol>
+<p>答：这个不大清楚</p>
+<ol start="9">
+<li><code>accept</code>函数返回的<code>fd</code>你是如何处理的？比如是直接处理还是开新线程？</li>
+</ol>
+<p>答：如果有需求的话一般是给每个accept开一个新线程来处理，以实现高并发性。</p>
+<h4 id="算法和编程部分"><a href="#算法和编程部分" class="headerlink" title="算法和编程部分"></a>算法和编程部分</h4><ol start="10">
+<li>假设我有一个袋子，里面装着黑白两色的球；每次从袋子里取出两个球并丢掉，如果两个球颜色相同就往袋子里放一个白球，否则放一个黑球，问最终剩下的球和袋子里原本白球和黑球个数的关系。</li>
+</ol>
+<p>答：智力捉急，一开始没想出来。考官提示跟奇偶有关系，于是试着从简单的状态开始推了一下：</p>
+<ul>
+<li>初态1：袋子里还剩两白一黑<ul>
+<li>这种情况下，穷举法能发现无论怎么取最后都是剩黑球</li>
+<li>向这种情况下加入一个白球，发现情况并没有变化</li>
+<li>继续加入白球，可以发现规律，似乎白球的初始个数对最后的结果并没有影响</li>
+</ul>
+</li>
+<li>初态2：袋子里还剩两黑一白<ul>
+<li>仍然用穷举法，可以发现最后剩下的一定是白球</li>
+<li>加入一个黑球，发现剩下的变成了黑球</li>
+<li>多举几种情况可以发现，黑球的奇偶决定着最后球的颜色</li>
+</ul>
+</li>
+</ul>
+<p>总结规律，就是：白球的数量对结果没有影响，黑球为奇数时剩下的是黑球，否则是白球。</p>
+<ol start="11">
+<li>给定一个由<code>{}[]()</code>三对括号组成的字符串，写一个函数判断它是否是匹配的。例如，<code>{[()]}</code>是匹配的，<code>{([)]}</code>就是不匹配的。</li>
+</ol>
+<p>答：算法太菜，想了半天，两种思路都发现有问题。考官看我一直想不出来，提示要用到栈，我才反应过来。大体就是遍历字符串，遇到左括号压栈，遇到右括号就判断是否与栈顶的左括号匹配；如果匹配就将栈顶弹出，不匹配就说明整个字符串不匹配。</p>
+<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/03/10/在ArchLinux下安装和配置LaTex编译环境/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -300,6 +539,39 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -448,8 +720,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
                   </a>
                 </span>
 
@@ -523,6 +806,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `stat_to_v9stat&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor&apos;</span><br><span class="line">/usr/bin/ld: /home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev&apos;</span><br><span class="line">collect2: 错误：ld 返回 1</span><br></pre></td></tr></table></figure>
 <p>差不多的理由，还是缺少库函数。也不管重复包含dirty不dirty了，向<code>hw/9pfs/virtio-9p.c</code>中添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存后再次编译。</p>
 <p>因为类似的理由，还需要添加这个头文件的源文件有<code>linux-user/strace.c</code>。</p>
+<h4 id="Other-problems"><a href="#Other-problems" class="headerlink" title="Other problems"></a>Other problems</h4><p>这里是其他各种各样可能会出现的玄学错误。</p>
+<h5 id="Dependencies-upgraded"><a href="#Dependencies-upgraded" class="headerlink" title="Dependencies upgraded"></a>Dependencies upgraded</h5><p>在我完成这个lab的过程中，<code>libnfs</code>库在我滚arch的时候升级了，结果一运行<code>make</code>就会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error <span class="keyword">while</span> loading shared libraries: libnfs.so.12: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>执行<code>whereis libnfs.so.12</code>，发现系统的库中只有<code>libnfs.so.13</code>，原来是这个库在升级的时候名字变掉了……</p>
+<p>没办法，只好用<code>downgrade</code>命令手动降级到<code>4.0.0-2</code>版本，再执行<code>make</code>的时候就没事了。</p>
 <h3 id="Lab-1-Booting-a-PC"><a href="#Lab-1-Booting-a-PC" class="headerlink" title="Lab 1 Booting a PC"></a>Lab 1 Booting a PC</h3><p>Lab1的源码可以从<code>https://pdos.csail.mit.edu/6.828/2018/jos.git</code>处clone到。</p>
 <h4 id="Part-1-PC-bootstrap"><a href="#Part-1-PC-bootstrap" class="headerlink" title="Part 1 PC bootstrap"></a>Part 1 PC bootstrap</h4><p>这一部分的目的是让我们熟悉x86汇编语言和PC bootstrap过程，并熟悉QEMU和gdb的操作。</p>
 <p>首先在lab目录下执行<code>make</code>命令来编译内核和启动器。编译完成的内核与启动器位于<code>obj/kern/kernal.img</code>镜像文件中，这个镜像文件是一个用于模拟真实硬盘的虚拟磁盘。</p>
@@ -818,7 +1106,24 @@
 </ul>
 </li>
 </ul>
-<h5 id="Solution-of-exercise"><a href="#Solution-of-exercise" class="headerlink" title="Solution of exercise"></a>Solution of exercise</h5>
+<h5 id="Solution-of-exercise"><a href="#Solution-of-exercise" class="headerlink" title="Solution of exercise"></a>Solution of exercise</h5><blockquote>
+<p><strong>boot_alloc</strong></p>
+</blockquote>
+<p>这个函数是在建立虚拟内存系统过程中用来为数据结构分配内存空间的，在虚拟内存系统建立之后就会废弃。因而，其功能比较简单。</p>
+<p>值得注意的是，这个函数首次调用的时候，会从内核区bss段的结束处开始分配内存块，具体的位置是通过<code>extern</code>从链接器那里得知的。首次调用情况下的代码已经被完成了，我们只需要照葫芦画瓢地完成之后调用时的代码即可。</p>
+<p>这里所谓“内核区bss段的结束处”是指内核区中没有分配代码段和数据段的第一个位置，它在虚拟地址空间中的位置在<code>0xf0000000</code>以上的部分，也就是物理内存的映射区。从这里开始，我们开始建立用于管理虚拟内存的内核数据结构。</p>
+<ul>
+<li><em>panic函数可以被当作printf的一个能够引发中断的版本。灵活利用它可以方便地调试系统。</em></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!n) <span class="keyword">return</span> nextfree;</span><br><span class="line">result = nextfree;</span><br><span class="line">nextfree = ROUNDUP((<span class="keyword">char</span> *) nextfree, PGSIZE);</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>mem_init</strong></p>
+</blockquote>
+<p>这个函数首先用之前实现好的<code>boot_alloc</code>函数分配了 <strong>一页</strong> 空闲内存，初始化之，并用一个<code>kern_pgdir</code>指针指向了这片内存的起始位置。这一片区域用来存放<code>page directory</code>。</p>
+<p>接下来是我们的工作：为一个页数组<code>pages</code>分配内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pages = (struct PageInfo *) boot_alloc(<span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br><span class="line"><span class="built_in">memset</span>(pages, <span class="number">0</span>, <span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br></pre></td></tr></table></figure>
+<p>这样我们就已经为内存分配相关的内核数据结构分配好了空间。接下来，<code>mem_init</code>函数调用<code>page_init</code>函数</p>
+
           
         
       
@@ -920,8 +1225,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
                   </a>
                 </span>
 
@@ -931,8 +1236,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
-                    <span itemprop="name">Cluster</span>
+                  <a href="/blog/categories/Academic-or-Technical/Computation-Virtualization/" itemprop="url" rel="index">
+                    <span itemprop="name">Computation Virtualization</span>
                   </a>
                 </span>
 
@@ -1100,8 +1405,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
                   </a>
                 </span>
 
@@ -1111,8 +1416,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Cluster/" itemprop="url" rel="index">
-                    <span itemprop="name">Cluster</span>
+                  <a href="/blog/categories/Academic-or-Technical/Computation-Virtualization/" itemprop="url" rel="index">
+                    <span itemprop="name">Computation Virtualization</span>
                   </a>
                 </span>
 
@@ -1319,8 +1624,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
                   </a>
                 </span>
 
@@ -1330,8 +1635,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Archlinux/" itemprop="url" rel="index">
-                    <span itemprop="name">Archlinux</span>
+                  <a href="/blog/categories/Academic-or-Technical/ArchLinux-and-Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">ArchLinux and Shell</span>
                   </a>
                 </span>
 
@@ -1506,6 +1811,39 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -3550,6 +3888,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -3699,8 +4070,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
                   </a>
                 </span>
 
@@ -3710,8 +4081,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Other/" itemprop="url" rel="index">
-                    <span itemprop="name">Other</span>
+                  <a href="/blog/categories/Academic-or-Technical/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
                   </a>
                 </span>
 
@@ -3876,8 +4247,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
                   </a>
                 </span>
 
@@ -3887,8 +4258,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Others/" itemprop="url" rel="index">
-                    <span itemprop="name">Others</span>
+                  <a href="/blog/categories/Academic-or-Technical/ArchLinux-and-Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">ArchLinux and Shell</span>
                   </a>
                 </span>
 
@@ -4027,300 +4398,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/" itemprop="url">在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-04T13:27:02+08:00">
-                2017-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/Archlinux/" itemprop="url" rel="index">
-                    <span itemprop="name">Archlinux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="在安装了Windows10系统的基础上安装ArchLinux-KDE桌面环境"><a href="#在安装了Windows10系统的基础上安装ArchLinux-KDE桌面环境" class="headerlink" title="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境"></a>在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境</h2><h3 id="安装前在Windows下要做的准备"><a href="#安装前在Windows下要做的准备" class="headerlink" title="安装前在Windows下要做的准备"></a>安装前在Windows下要做的准备</h3><h4 id="为Arch的安装腾出空间"><a href="#为Arch的安装腾出空间" class="headerlink" title="为Arch的安装腾出空间"></a>为Arch的安装腾出空间</h4><p>按<code>win+x</code>组合键后选择<code>磁盘管理</code>，可以浏览目前的磁盘使用状况。通过<code>右键某个分卷-压缩卷</code>的方式可以释放一个分区中未被使用的部分，成为“未使用”的磁盘。</p>
-<p>如果在试图压缩卷的时候报错“磁盘剩余的空间不足”，就格式化这个空磁盘，再重新尝试。</p>
-<h4 id="关闭Windows的快速启动"><a href="#关闭Windows的快速启动" class="headerlink" title="关闭Windows的快速启动"></a>关闭Windows的快速启动</h4><p>为了能够顺利进入BIOS界面，我们需要关闭windows的快速启动功能。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 登陆系统，点击左下角开始菜单。</span><br><span class="line">2. 点击设置按钮，进入Windows设置界面。</span><br><span class="line">3. 点击系统按钮，进入系统设置界面。</span><br><span class="line">4. 点击电源和按钮，进入电源和睡眠设置界面。</span><br><span class="line">5. 点击其他电源设置，进入电源选项界面。</span><br><span class="line">6. 点击选择电源按钮的功能，进入电源选项下的系统设置界面。</span><br><span class="line">7. 点击更改当前不可用的设置，使能关机设置的选项。</span><br><span class="line">8. 将启用快速启动前面的勾取消，点击保存修改即可。</span><br></pre></td></tr></table></figure>
-<h4 id="下载ArchLinux镜像并制作启动盘"><a href="#下载ArchLinux镜像并制作启动盘" class="headerlink" title="下载ArchLinux镜像并制作启动盘"></a>下载ArchLinux镜像并制作启动盘</h4><p>可以在<a href="https://www.archlinux.org/download/" target="_blank" rel="noopener">ArchLinux</a>的官网下载ArchLinux的最新镜像。下载完成之后，格式化一个空的USB，并将镜像文件解压到USB中即可。</p>
-<p><strong>注意</strong>：这里如果使用<code>UltraISO</code>制作启动盘可能会在装机时出现玄学错误，不推荐。</p>
-<h3 id="设置BIOS选项"><a href="#设置BIOS选项" class="headerlink" title="设置BIOS选项"></a>设置BIOS选项</h3><p>根据自己的电脑机型进入BIOS界面，进入<code>Boot</code>选项，关掉<code>Secure Boot</code>并将<code>USB Device</code>的启动优先级调到最高。</p>
-<h3 id="磁盘分区及挂载"><a href="#磁盘分区及挂载" class="headerlink" title="磁盘分区及挂载"></a>磁盘分区及挂载</h3><p>重启之后选择出现的第一个选项，进入启动盘提供的shell。</p>
-<h4 id="检查网络"><a href="#检查网络" class="headerlink" title="检查网络"></a>检查网络</h4><p>此处需要网络链接，连接网络之后执行<code>dhcpcd</code>，看看能否ping通百度。</p>
-<h4 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h4><p>先使用<code>lsblk</code>命令查看设备名，一般来说是<code>/dev/sda</code>，因此接下来都将以其作为示范。</p>
-<p>执行<code>cgdisk /dev/sda</code>，进入交互式图形界面，在这里可以看到之前腾出来的未使用磁盘。</p>
-<ul>
-<li>cgdisk使用方法<ul>
-<li><code>NEW</code> 划分一个新分区，会依次询问几个关于分区的选项，除了分区大小一概默认即可。<ul>
-<li>分区大小格式：<code>xxKiB/MiB/GiB</code></li>
-</ul>
-</li>
-<li><code>WRITE</code> 写入更改到磁盘</li>
-<li><code>QUIT</code> 退出</li>
-</ul>
-</li>
-</ul>
-<p>在这里我们需要分出一个128MiB的<code>EFI分区</code>和一个大小根据需求决定的<code>根分区</code>。在分好分区之后记住两个分区的设备序号(在分区名左边)，它们对应的device名称就是<code>sda&lt;序号&gt;</code>。<strong>为了方便，在这里我们用<code>sda9</code>代指UEFI分区，用<code>sda8</code>代指根分区。</strong></p>
-<p>退出cgdisk之后，执行<code>fdisk /dev/sda</code>进入fdisk交互式命令行。</p>
-<ul>
-<li>fdisk使用方法<ul>
-<li>m：打印所有指令</li>
-<li>p：显示目前的所有分区</li>
-<li>t：更改分区类型</li>
-<li>w：写入更改并退出</li>
-<li>q：不保存退出</li>
-</ul>
-</li>
-</ul>
-<p>执行 <code>t /dev/sda</code>，输入UEFI分区序号(这里是9)，输入L列出所有分区种类对应的序号，可以发现1对应<code>EFI system</code>。于是输入1,将sda9的分区类型改为EFI分区。可以使用p看一下类型是否成功更改，如果成功就输入w写入更改并退出。</p>
-<h4 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h4><p>执行<code>mkfs.vfat -F32 /dev/sda9</code>格式化UEFI分区，执行<code>mkfs.ext4 /dev/sda8</code>格式化根分区。</p>
-<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>依次输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda8 /mnt</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mount /dev/sda9 /mnt/boot</span><br></pre></td></tr></table></figure>
-<h3 id="安装基本软件包"><a href="#安装基本软件包" class="headerlink" title="安装基本软件包"></a>安装基本软件包</h3><h4 id="更改镜像源"><a href="#更改镜像源" class="headerlink" title="更改镜像源"></a>更改镜像源</h4><p>编辑<code>/etc/pacman.d/mirrorlist</code>文件，将标有China的源移到前面以加快下载速度。</p>
-<p>保存后使用<code>pacman -Syy</code>刷新。</p>
-<h4 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h4><p>执行<code>pacstrap -i /mnt base</code>下载并安装基本软件包。</p>
-<h3 id="配置新系统"><a href="#配置新系统" class="headerlink" title="配置新系统"></a>配置新系统</h3><h4 id="生成fstab"><a href="#生成fstab" class="headerlink" title="生成fstab"></a>生成fstab</h4><p>执行<code>genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</code>生成fstab。</p>
-<h4 id="进入新系统"><a href="#进入新系统" class="headerlink" title="进入新系统"></a>进入新系统</h4><p>执行<code>arch-chroot /mnt /bin/bash</code>进入新系统。</p>
-<h4 id="设置Locale"><a href="#设置Locale" class="headerlink" title="设置Locale"></a>设置Locale</h4><p>修改<code>/etc/locale.gen</code>文件，去掉</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br><span class="line">zh_TW.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
-<p>三行的注释并保存。</p>
-<p>执行<code>locale-gen</code>生成locale文件，然后执行<code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf</code>将locale配置写入配置文件。</p>
-<h4 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h4><p>用<code>tzselect</code>设置时区，并执行<code>ln -s /usr/share/zoneinfo/&lt;时区&gt;/&lt;子时区&gt; /etc/localtime</code>建立软连接，执行<code>hwclock --systohc --utc</code>设置硬件时间。</p>
-<h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><p>执行<code>passwd</code>命令可以更改root密码。</p>
-<h4 id="安装bootloader"><a href="#安装bootloader" class="headerlink" title="安装bootloader"></a>安装bootloader</h4><p>执行<code>bootctl install</code>命令安装bootloader，并执行<code>cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/</code>复制配置文件到boot目录下。</p>
-<p>执行<code>blkid -s PARTUUID -o value /dev/sda8</code>生成根分区的<code>PARTUUID</code>，并修改<code>/boot/loader/entries/arch.conf</code>如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title          Arch Linux</span><br><span class="line">linux          /vmlinuz-linux</span><br><span class="line">initrd         /initramfs-linux.img</span><br><span class="line">options        root=PARTUUID= &lt;之前生成的PARTUUID&gt; rw</span><br></pre></td></tr></table></figure>
-<p>修改<code>/boot/loader/loader.conf</code>文件的内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timeout 3</span><br><span class="line">default arch</span><br></pre></td></tr></table></figure>
-<h4 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h4><p>执行<code>echo &lt;hostname&gt; &gt; /etc/hostname</code>将你喜欢的hostname写入配置文件。</p>
-<p>在<code>/etc/hosts</code>文件中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost.localdomain   localhost   &lt;hostname&gt;</span><br><span class="line">::1         localhost.localdomain   localhost   &lt;hostname&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>执行<code>wifi-menu</code>可以进入wifi连接图形界面。</p>
-<p>用pacman安装<code>iw</code>，执行<code>iw dev</code>可以查看设备的网络Interface，然后执行<code>systemctl enable dhcpcd@&lt;YourInterface&gt;.service</code>启动dhcpcd服务。</p>
-<h4 id="结束安装"><a href="#结束安装" class="headerlink" title="结束安装"></a>结束安装</h4><p><code>ctrl+D</code>退出chroot，执行<code>pacman -S linux</code>安装linux镜像文件，用<code>umount</code>命令取消挂载，<code>reboot now</code>重启。</p>
-<p>重启时注意先进入BIOS将linux boot manager优先级调到最高。(如果想进入windows系统需要将windows boot manager优先级调到最高)</p>
-<h3 id="安装KDE桌面环境"><a href="#安装KDE桌面环境" class="headerlink" title="安装KDE桌面环境"></a>安装KDE桌面环境</h3><p>重启后记得重新使用wifi-menu连接wifi。</p>
-<p>执行<code>useradd -m -k  /etc/skel/ -G users,wheel &lt;username&gt;</code>建立新用户，并执行<code>passwd &lt;username&gt;</code>设置密码。</p>
-<p>依次执行下列所有指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg xorg-xinit</span><br><span class="line">pacman -S xf86-input-synaptics</span><br><span class="line">pacman -S xorg-twm  <span class="comment"># 图形化窗口管理工具Tab Window Manager</span></span><br><span class="line">pacman -S xterm  <span class="comment"># 标准虚拟终端</span></span><br><span class="line">pacman -S ttf-dejavu wqy-microhei <span class="comment"># 字体包</span></span><br><span class="line">pacman -S kf5 kf5-aids</span><br><span class="line">pacman -S plasma kdebase  <span class="comment"># KDE Plasma 桌面环境及基础包</span></span><br><span class="line">pacman -S  gwenview <span class="comment"># KDE图片浏览工具</span></span><br><span class="line">pacman -S kdegraphics  <span class="comment"># 图像处理相关工具的软件包</span></span><br><span class="line">pacman -S plasma-mediacenter <span class="comment"># 媒体中心</span></span><br><span class="line">pacman -S sddm sddm-kcm <span class="comment"># 用于X11和wayland视窗系统的显示管理器（图形登录界面）</span></span><br></pre></td></tr></table></figure>
-<p>执行<code>systemctl enable sddm</code>开启sddm服务并编辑<code>/etc/sddm.conf</code>文件为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Theme]   </span><br><span class="line">Current=breeze      </span><br><span class="line">CursorTheme=breeze_cursors</span><br></pre></td></tr></table></figure>
-<p>执行下列命令安装gnome支持：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S gtk-engines gtk2 gtk3 <span class="comment"># 跨平台的图形工具包</span></span><br><span class="line">pacman -S gnome-themes-standard gnome-icon-theme <span class="comment"># 显示的主题及图标</span></span><br><span class="line">pacman -S gvfs gamin <span class="comment"># GNOME桌面系统的虚拟文件系统+文件和目录监控系统</span></span><br></pre></td></tr></table></figure>
-<p>安装解压缩软件和NTP：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pacman -S p7zip</span><br><span class="line">pacman -S zip</span><br><span class="line">pacman -S unzip</span><br><span class="line">pacman -S unrar</span><br><span class="line">pacman -S ntp</span><br><span class="line">systemctl <span class="built_in">enable</span> ntpd</span><br></pre></td></tr></table></figure>
-<p>安装网络管理软件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pacman -S networkmanager</span><br><span class="line">pacman -S net-tools</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure>
-<p>安装音频：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pacman -S alsa-utils pulseaudio <span class="comment"># 声卡测试和音频编辑的工具 + 通过网络工作的声音服务</span></span><br><span class="line">pacman -S pulseaudio-alsa</span><br><span class="line">pacman -S libcanberra-pulse</span><br><span class="line">pacman -S libcanberra-gstreamer</span><br><span class="line">pacman -S jack2-dbus</span><br></pre></td></tr></table></figure>
-<p>安装NTFS系统识别：<code>pacman -S ntfs-3g</code></p>
-<p>使用pacman安装<code>sudo</code>，并更改<code>/etc/sudoers</code>文件，去掉<code>%wheel ALL=(ALL) ALL</code>前面的注释。如果希望sudo不需要输入密码，可以改为<code>%wheel ALL=(ALL) NOPASSWD: ALL</code></p>
-<p>安装中文支持：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pacman -S kde-l10n-zh_cn</span><br><span class="line">pacman -S kde-applications</span><br><span class="line">pacman -S fcitx fcitx-rime <span class="comment"># 这里使用的是fcitx输入法</span></span><br><span class="line">pacman -S fcitx-im</span><br><span class="line">pacman -S kcm-fcitx</span><br><span class="line">vim /home/air/.xprofile</span><br><span class="line"><span class="built_in">export</span> LANG=zh_CN.UTF-8  </span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.UTF-8  </span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx  </span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx  </span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br></pre></td></tr></table></figure>
-<p>执行<code>reboot now</code>，进入桌面环境。</p>
-<h2 id="安装桌面环境之后"><a href="#安装桌面环境之后" class="headerlink" title="安装桌面环境之后"></a>安装桌面环境之后</h2><h3 id="配置系统设置"><a href="#配置系统设置" class="headerlink" title="配置系统设置"></a>配置系统设置</h3><h4 id="快捷键设置"><a href="#快捷键设置" class="headerlink" title="快捷键设置"></a>快捷键设置</h4><p>绝大部分快捷键可以在<code>系统设置-工作空间-快捷键</code>下设置，也有一部分是在其他地方设置。</p>
-<ul>
-<li><code>工作空间-桌面行为-虚拟桌面</code> 配置虚拟桌面数量和切换快捷键</li>
-<li><code>工作空间-桌面行为-锁屏</code> 配置屏保图片和锁屏快捷键</li>
-<li><code>工作空间-快捷键-全局快捷键-系统设置</code> 大部分关于窗口的快捷键</li>
-</ul>
-<p>当然，如果有特殊的需要，也可以自定义快捷键：</p>
-<p>在<code>工作空间-快捷键-自定义快捷键</code>中，使用<code>编辑-新建-全局快捷键-命令/url</code>可以建立一个新的快捷键，通过设置<code>触发器</code>和<code>动作</code>标签可以进行快捷键的定制。</p>
-<p>(例如，对于<code>打开终端</code>的快捷键，需要在<code>动作</code>中填入<code>konsole</code>)</p>
-<h4 id="界面风格设置"><a href="#界面风格设置" class="headerlink" title="界面风格设置"></a>界面风格设置</h4><p>KDE提供了很多强大的特效，这个按照个人爱好设置即可。</p>
-<h3 id="安装必要的应用软件"><a href="#安装必要的应用软件" class="headerlink" title="安装必要的应用软件"></a>安装必要的应用软件</h3><p>像是<code>vim</code>，<code>make</code>，<code>wget</code>这种不可或缺的工具，是一定要事先安装好的。</p>
-<h4 id="代码管理工具-git"><a href="#代码管理工具-git" class="headerlink" title="代码管理工具-git"></a>代码管理工具-git</h4><p><code>git</code>可以直接使用pacman安装。重点在于将git与github上的账户建立联系。</p>
-<p>用pacman安装<code>openssh</code>软件，执行<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;YourComment&gt;&quot;</code>生成一组ssh公私钥，路径选择自己喜欢的路径，密码可以不设置。复制保存位置下的<code>id_rsa.pub</code>文件内容并粘贴到GitHub要求的位置即可。</p>
-<h4 id="包管理工具-yay"><a href="#包管理工具-yay" class="headerlink" title="包管理工具-yay"></a>包管理工具-yay</h4><p>执行<code>git clone https://aur.archlinux.org/yay.git</code>，拉取yay的repo。进入<code>yay</code>的目录后执行<code>makepkg -si</code>命令，开始安装yay。</p>
-<p>中间如果出现依赖软件未安装的问题，就用<code>pacman</code>安装对应的软件即可。</p>
-<p>安装结束之后，顺便修改一下yay和pacman的下载工具。</p>
-<h4 id="美化终端"><a href="#美化终端" class="headerlink" title="美化终端"></a>美化终端</h4><h5 id="终端自定义"><a href="#终端自定义" class="headerlink" title="终端自定义"></a>终端自定义</h5><p>打开终端菜单栏上的<code>设置-编辑当前方案</code>，即可设置终端风格。使用<code>外观-编辑</code>可以设置背景透明度。</p>
-<h5 id="安装和配置zsh"><a href="#安装和配置zsh" class="headerlink" title="安装和配置zsh"></a>安装和配置zsh</h5><p>用pacman安装zsh本体之后，下载<code>Oh-My-Zsh</code>配置文件并安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh</span><br><span class="line">chmod +x install.sh</span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
-<p>如果需要自定义zsh，可以编辑<code>~/.zshrc</code>文件。具体的配置可以参考<a href="https://blog.csdn.net/kingolie/article/details/53066679" target="_blank" rel="noopener">这篇博客</a></p>
-<p>如果需要将zsh设置为默认终端，可以打开终端菜单栏上的<code>设置-编辑当前方案</code>，将<code>命令</code>更改为<code>/bin/zsh</code>即可。</p>
-<h4 id="浏览器-Chromium"><a href="#浏览器-Chromium" class="headerlink" title="浏览器-Chromium"></a>浏览器-Chromium</h4><p>Arch官方有Chrome的软件包，所以直接使用pacman安装<code>Chromium</code>即可。</p>
-<p>可以安装<code>ttf-liberation</code>来防止字符输入出现问题。</p>
-<h4 id="文本编辑器-sublime"><a href="#文本编辑器-sublime" class="headerlink" title="文本编辑器-sublime"></a>文本编辑器-sublime</h4><p>可以使用<code>yay sublime</code>列出所有sublime的软件包，可以跟据爱好自行选择安装哪个版本。</p>
-<ul>
-<li>我的Sublime配置<ul>
-<li>Sublime版本：<code>sublime-text-3-imfix</code></li>
-<li>插件安装：<ul>
-<li>Markdown Editor</li>
-<li>Markdown Preview<ul>
-<li>快捷键设置(在<code>preferences-key bindings</code>下)：<code>{ &quot;keys&quot;: [&quot;alt+m&quot;], &quot;command&quot;: &quot;markdown_preview&quot;, &quot;args&quot;:   {&quot;target&quot;: &quot;browser&quot;, &quot;parser&quot;:&quot;markdown&quot;} }</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>字体：<code>Fira Code</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="代理服务"><a href="#代理服务" class="headerlink" title="代理服务"></a>代理服务</h4><p>使用pacman可以安装<code>shadowsocks</code>。具体的配置此处不详谈。</p>
-<p>同样使用pacman安装<code>privoxy</code>。安装完成之后，修改privoxy配置文件<code>/etc/privoxy/config</code>，其中的<code>listen-address</code>代表它监听的地址和端口。将<code>forward-socks5t</code>所在的行取消注释，并将后面的ip地址和端口改为<code>shadowsocks</code>的本地绑定地址和端口。</p>
-<p>执行export命令将以下变量加入当前环境：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ip地址和端口为privoxy监听的地址和端口</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:8118</span><br><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:8118</span><br></pre></td></tr></table></figure>
-<p>执行<code>systemctl start privoxy</code>，<code>curl ip.gs</code>测试当前ip位置，如果在VPS提供商的位置则说明配置成功。</p>
-<p>如果要取消代理设置的话，只需要使用<code>unset</code>将这两条全局变量删除即可。</p>
-<p>要配置 <strong>全局代理</strong> 可以打开代理设置，然后将127.0.0.1和1080填入IP地址和端口即可。</p>
-<h4 id="按个人喜好安装其他软件"><a href="#按个人喜好安装其他软件" class="headerlink" title="按个人喜好安装其他软件"></a>按个人喜好安装其他软件</h4><p>我安装的软件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. community/code</span><br><span class="line">    The Open Source build of Visual Studio Code (vscode) editor</span><br><span class="line">2. aur/netease-cloud-music</span><br><span class="line">    Netease Cloud Music, converted from .deb package</span><br></pre></td></tr></table></figure>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
-<li><a href="https://blog.csdn.net/java_xiaoer/article/details/51457259" target="_blank" rel="noopener">UEFI+GPT安装Win10+Archlinux双系统</a></li>
-<li><a href="https://blog.csdn.net/aemonair/article/details/60360526#%E4%B8%83%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener">UEFI安装Arch’s KDE桌面全过程</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4373,7 +4450,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4384,7 +4461,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Operating System,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -80,7 +80,6 @@
 
 
 <meta name="description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
-<meta name="keywords" content="Operating System">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT 6.828 Labs 实验记录">
 <meta property="og:url" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/index.html">
@@ -88,7 +87,7 @@
 <meta property="og:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/memlayout.png">
-<meta property="og:updated_time" content="2019-03-18T12:45:31.027Z">
+<meta property="og:updated_time" content="2019-03-21T07:05:17.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 实验记录">
 <meta name="twitter:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
@@ -317,8 +316,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Technical</span>
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
                   </a>
                 </span>
 
@@ -390,6 +400,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `stat_to_v9stat&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor&apos;</span><br><span class="line">/usr/bin/ld: /home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev&apos;</span><br><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create&apos;:</span><br><span class="line">/home/drac_zhang/Downloads/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev&apos;</span><br><span class="line">collect2: 错误：ld 返回 1</span><br></pre></td></tr></table></figure>
 <p>差不多的理由，还是缺少库函数。也不管重复包含dirty不dirty了，向<code>hw/9pfs/virtio-9p.c</code>中添加<code>#include &lt;sys/sysmacros.h&gt;</code>，保存后再次编译。</p>
 <p>因为类似的理由，还需要添加这个头文件的源文件有<code>linux-user/strace.c</code>。</p>
+<h4 id="Other-problems"><a href="#Other-problems" class="headerlink" title="Other problems"></a>Other problems</h4><p>这里是其他各种各样可能会出现的玄学错误。</p>
+<h5 id="Dependencies-upgraded"><a href="#Dependencies-upgraded" class="headerlink" title="Dependencies upgraded"></a>Dependencies upgraded</h5><p>在我完成这个lab的过程中，<code>libnfs</code>库在我滚arch的时候升级了，结果一运行<code>make</code>就会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error <span class="keyword">while</span> loading shared libraries: libnfs.so.12: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>执行<code>whereis libnfs.so.12</code>，发现系统的库中只有<code>libnfs.so.13</code>，原来是这个库在升级的时候名字变掉了……</p>
+<p>没办法，只好用<code>downgrade</code>命令手动降级到<code>4.0.0-2</code>版本，再执行<code>make</code>的时候就没事了。</p>
 <h3 id="Lab-1-Booting-a-PC"><a href="#Lab-1-Booting-a-PC" class="headerlink" title="Lab 1 Booting a PC"></a>Lab 1 Booting a PC</h3><p>Lab1的源码可以从<code>https://pdos.csail.mit.edu/6.828/2018/jos.git</code>处clone到。</p>
 <h4 id="Part-1-PC-bootstrap"><a href="#Part-1-PC-bootstrap" class="headerlink" title="Part 1 PC bootstrap"></a>Part 1 PC bootstrap</h4><p>这一部分的目的是让我们熟悉x86汇编语言和PC bootstrap过程，并熟悉QEMU和gdb的操作。</p>
 <p>首先在lab目录下执行<code>make</code>命令来编译内核和启动器。编译完成的内核与启动器位于<code>obj/kern/kernal.img</code>镜像文件中，这个镜像文件是一个用于模拟真实硬盘的虚拟磁盘。</p>
@@ -685,7 +700,24 @@
 </ul>
 </li>
 </ul>
-<h5 id="Solution-of-exercise"><a href="#Solution-of-exercise" class="headerlink" title="Solution of exercise"></a>Solution of exercise</h5>
+<h5 id="Solution-of-exercise"><a href="#Solution-of-exercise" class="headerlink" title="Solution of exercise"></a>Solution of exercise</h5><blockquote>
+<p><strong>boot_alloc</strong></p>
+</blockquote>
+<p>这个函数是在建立虚拟内存系统过程中用来为数据结构分配内存空间的，在虚拟内存系统建立之后就会废弃。因而，其功能比较简单。</p>
+<p>值得注意的是，这个函数首次调用的时候，会从内核区bss段的结束处开始分配内存块，具体的位置是通过<code>extern</code>从链接器那里得知的。首次调用情况下的代码已经被完成了，我们只需要照葫芦画瓢地完成之后调用时的代码即可。</p>
+<p>这里所谓“内核区bss段的结束处”是指内核区中没有分配代码段和数据段的第一个位置，它在虚拟地址空间中的位置在<code>0xf0000000</code>以上的部分，也就是物理内存的映射区。从这里开始，我们开始建立用于管理虚拟内存的内核数据结构。</p>
+<ul>
+<li><em>panic函数可以被当作printf的一个能够引发中断的版本。灵活利用它可以方便地调试系统。</em></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!n) <span class="keyword">return</span> nextfree;</span><br><span class="line">result = nextfree;</span><br><span class="line">nextfree = ROUNDUP((<span class="keyword">char</span> *) nextfree, PGSIZE);</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>mem_init</strong></p>
+</blockquote>
+<p>这个函数首先用之前实现好的<code>boot_alloc</code>函数分配了 <strong>一页</strong> 空闲内存，初始化之，并用一个<code>kern_pgdir</code>指针指向了这片内存的起始位置。这一片区域用来存放<code>page directory</code>。</p>
+<p>接下来是我们的工作：为一个页数组<code>pages</code>分配内存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pages = (struct PageInfo *) boot_alloc(<span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br><span class="line"><span class="built_in">memset</span>(pages, <span class="number">0</span>, <span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br></pre></td></tr></table></figure>
+<p>这样我们就已经为内存分配相关的内核数据结构分配好了空间。接下来，<code>mem_init</code>函数调用<code>page_init</code>函数</p>
+
       
     </div>
     
@@ -699,12 +731,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/blog/tags/Operating-System/" rel="tag"># Operating System</a>
-          
-        </div>
       
 
       
@@ -816,7 +842,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -827,7 +853,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -881,7 +907,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.1.</span> <span class="nav-text">Part 1 Physical page management</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Macro-definitions"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Macro definitions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Solution-of-exercise"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">Solution of exercise</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-problems"><span class="nav-number">1.2.3.</span> <span class="nav-text">Other problems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependencies-upgraded"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Dependencies upgraded</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.1.</span> <span class="nav-text">Part 1 Physical page management</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Macro-definitions"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">Macro definitions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Solution-of-exercise"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">Solution of exercise</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
