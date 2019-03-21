@@ -950,7 +950,7 @@
 <h5 id="Virtual-memory-address-mapping"><a href="#Virtual-memory-address-mapping" class="headerlink" title="Virtual memory address mapping"></a>Virtual memory address mapping</h5><p>当我们观察bootloader程序的时候，我们可以发现它的 <strong>链接地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>LMA</code>，linked memory address) 和 <strong>虚拟地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>VMA</code>，virtual memory address) 是完全一致的；然而对于kernel，这两个地址却有着不小的差距。</p>
 <p>操作系统内核常常会在非常高的虚拟地址空间(例如0xf0100000)运行，这是为了把比较低的虚拟地址空间留给用户进程使用。然而大部分机器没有这么多的内存，于是它们将虚拟地址0xf0100000映射到物理地址0x00100000。这样一来虽然内核所在的加载地址很高，它的实际加载地址却是位于RAM区域的最底端，挨着BIOS所在的ROM地址区域。</p>
 <p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。</p>
-<p>kernal被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
+<p>kernel被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
 <h5 id="Formatted-printing-to-the-console"><a href="#Formatted-printing-to-the-console" class="headerlink" title="Formatted printing to the console"></a>Formatted printing to the console</h5><p>在完成虚拟地址映射之后，下一步是对终端进行格式化输入输出以创建交互式操作界面。</p>
 <p><code>lib/printfmt.c</code>中提供了输出函数的原型，<code>kern/printf.c</code>和<code>kern/console.c</code>则提供了有关内核输出和交互的函数。</p>
 <blockquote>
@@ -1049,9 +1049,7 @@
 <li><code>kern/kclock.c</code>和<code>kern/kclock.h</code>：与CMOS硬件沟通，读取PC的硬件信息</li>
 </ul>
 <p><code>inc/mmu.h</code>中记录了应当烧录于MMU<br>单元中的逻辑代码，同样可能对这个lab有所帮助。</p>
-<h4 id="Part-1-Physical-page-management"><a href="#Part-1-Physical-page-management" class="headerlink" title="Part 1 Physical page management"></a>Part 1 Physical page management</h4><p>在这个部分我们需要实现物理内存管理器。这个函数追踪一个由<code>PageInfo</code>结构体组成的链表(这个链表的节点代表着一页未分配的内存)，并负责物理内存的分配和回收。</p>
-<p>要想完成这部分的任务，必须要提前了解虚拟内存系统的概念(可以参考操作系统专业教材或者计算机系统教材)，才能看懂并运用各种神奇的操作。</p>
-<h5 id="Background-knowledge"><a href="#Background-knowledge" class="headerlink" title="Background knowledge"></a>Background knowledge</h5><p>由于虚拟内存是将很小的物理内存映射到很大的虚拟内存空间，这个映射关系需要一个输入地址和一个输出地址才能作用。<strong>物理地址</strong>是物理内存中真实的地址，可以直接由硬件寻址得到；<strong>虚拟地址/线性地址</strong>是物理地址通过转换得到的，用于虚拟内存空间索引的地址。</p>
+<h4 id="Background-knowledge"><a href="#Background-knowledge" class="headerlink" title="Background knowledge"></a>Background knowledge</h4><p>由于虚拟内存是将很小的物理内存映射到很大的虚拟内存空间，这个映射关系需要一个输入地址和一个输出地址才能作用。<strong>物理地址</strong>是物理内存中真实的地址，可以直接由硬件寻址得到；<strong>虚拟地址/线性地址</strong>是物理地址通过转换得到的，用于虚拟内存空间索引的地址。</p>
 <p><code>mmu.h</code>中详细地介绍了线性地址的结构。大体上讲，线性地址分为三段：</p>
 <ul>
 <li><code>Page directory index</code>：页目录的序号(10位)</li>
@@ -1081,7 +1079,7 @@
 <li><code>0x00800000</code>以上：用户的堆区域和程序数据</li>
 <li>以下：用户的符号表区域和空内存</li>
 </ul>
-<h5 id="Macro-definitions"><a href="#Macro-definitions" class="headerlink" title="Macro definitions"></a>Macro definitions</h5><p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
+<h4 id="Macro-definitions"><a href="#Macro-definitions" class="headerlink" title="Macro definitions"></a>Macro definitions</h4><p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
 <ul>
 <li><code>K</code>和<code>P</code>:带K的标识符往往指<code>kernel</code>,与内核虚拟内存有关；而带P的标识符指<code>physical</code>,与物理存储有关<ul>
 <li><code>kva</code>:<code>kernel virtual address</code>的简写</li>
@@ -1106,7 +1104,9 @@
 </ul>
 </li>
 </ul>
-<h5 id="Solution-of-exercise"><a href="#Solution-of-exercise" class="headerlink" title="Solution of exercise"></a>Solution of exercise</h5><blockquote>
+<h4 id="Part-1-Physical-page-management"><a href="#Part-1-Physical-page-management" class="headerlink" title="Part 1 Physical page management"></a>Part 1 Physical page management</h4><p>在这个部分我们需要实现物理内存管理器。这个函数追踪一个由<code>PageInfo</code>结构体组成的链表(这个链表的节点代表着一页未分配的内存)，并负责物理内存的分配和回收。</p>
+<p>要想完成这部分的任务，必须要提前了解虚拟内存系统的概念(可以参考操作系统专业教材或者计算机系统教材)，才能看懂并运用各种神奇的操作。</p>
+<blockquote>
 <p><strong>boot_alloc</strong></p>
 </blockquote>
 <p>这个函数是在建立虚拟内存系统过程中用来为数据结构分配内存空间的，在虚拟内存系统建立之后就会废弃。因而，其功能比较简单。</p>
@@ -1115,15 +1115,41 @@
 <ul>
 <li><em>panic函数可以被当作printf的一个能够引发中断的版本。灵活利用它可以方便地调试系统。</em></li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!n) <span class="keyword">return</span> nextfree;</span><br><span class="line">result = nextfree;</span><br><span class="line">nextfree = ROUNDUP((<span class="keyword">char</span> *) nextfree, PGSIZE);</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!n) <span class="keyword">return</span> nextfree;</span><br><span class="line">result = nextfree;</span><br><span class="line">nextfree = ROUNDUP((<span class="keyword">char</span> *) (nextfree+n), PGSIZE);</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>mem_init</strong></p>
 </blockquote>
 <p>这个函数首先用之前实现好的<code>boot_alloc</code>函数分配了 <strong>一页</strong> 空闲内存，初始化之，并用一个<code>kern_pgdir</code>指针指向了这片内存的起始位置。这一片区域用来存放<code>page directory</code>。</p>
 <p>接下来是我们的工作：为一个页数组<code>pages</code>分配内存。</p>
+<p><code>pages</code>数组存储了每个分页的信息，其索引和页的物理地址可以用函数相互转换。可以说，<code>pages</code>的每一个元素都唯一对应着一个物理页面。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pages = (struct PageInfo *) boot_alloc(<span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br><span class="line"><span class="built_in">memset</span>(pages, <span class="number">0</span>, <span class="keyword">sizeof</span>(struct PageInfo) * npages);</span><br></pre></td></tr></table></figure>
-<p>这样我们就已经为内存分配相关的内核数据结构分配好了空间。接下来，<code>mem_init</code>函数调用<code>page_init</code>函数</p>
-
+<p>这样我们就已经为内存分配相关的内核数据结构分配好了空间。接下来，<code>mem_init</code>函数调用<code>page_init</code>函数，去初始化所有物理内存分页。这个步骤结束之后，所有内存相关操作都可以通过<code>page</code>开头的函数来完成。</p>
+<blockquote>
+<p><strong>page_init</strong></p>
+</blockquote>
+<p>Lab中已经给出了示例代码，但是这段代码是不严谨的(它将所有物理内存页都标记为是free的)，有几处问题没有考虑到：</p>
+<ul>
+<li><strong>物理页面0应该标记为used</strong>。这是因为这一部分保存着BIOS数据结构和IDT(中断描述符表)，我们以后可能会用到这些结构。</li>
+<li>之前讲到过的由于考虑到向后兼容性而留下的<code>IO hole</code>不应该被分配。</li>
+<li>在<code>IO hole</code>之后就是extended memory部分，这一部分中的有些位置存放了内核代码和内核数据结构，因而这些位置不能标记为free。</li>
+</ul>
+<p>我们的任务是修改代码，使其只将那些该标记为free的放进<code>page_free_list</code>。</p>
+<p>考察<code>memlayout.h</code>中的<code>PageInfo</code>结构体，可以发现其属性<code>pp_ref</code>用于指示引用这一页的进程数量,而<code>pp_link</code>指向空闲链表中下一项的地址。对于要放入<code>page_free_list</code>的pages，我们将其<code>pp_ref</code>设定为0，并利用<code>pp_link</code>将其插入空闲链表。</p>
+<p><strong>本任务的难点在于如何确定Extended Memory中的哪一部分已经被Kernel所占用</strong>。观察之前的代码可以发现，<code>boot_alloc</code>是从kernel代码和数据段的结束位置开始分配内存的，而kernel代码段的起始位置是<code>IO hole</code>的结束位置(<code>0x100000</code>,参考Lab 1)，这意味着从<code>IO hole</code>到<code>boot_alloc</code>分配的最后一块内存末尾之间的所有内存都是被占用的。</p>
+<p>而根据之前的两个函数，<code>boot_alloc</code>分配的最后一块内存应该就是页表的最后一块内存(也就是<code>pages</code>数组的末尾)，因此我们从<code>pages</code>的头地址开始向后应该就可以找到kernel占用内存区的末尾位置。</p>
+<p>根据这些信息，可以修改代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span> i;</span><br><span class="line">    <span class="comment">// 1) First page, ignore it</span></span><br><span class="line">    <span class="comment">// 2) Base memory</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; npages_basemem; i++) &#123;</span><br><span class="line">        pages[i].pp_ref = <span class="number">0</span>;</span><br><span class="line">        pages[i].pp_link = page_free_list;</span><br><span class="line">        page_free_list = &amp;pages[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3) IO hole</span></span><br><span class="line">    <span class="comment">// Mention that npages_basemem = IOPHYSMEM / PGSIZE</span></span><br><span class="line">    <span class="comment">// IOPHYSMEM and EXTPHYSMEM is represented by B instead of KB, so div it by PGSIZE.</span></span><br><span class="line">    <span class="comment">// (Here is no operation, because we do not need to deal with occupied pages.)</span></span><br><span class="line">    ;</span><br><span class="line">    <span class="comment">// 4) Extended memory</span></span><br><span class="line">    <span class="comment">// The question is where is the end of kernel segment.</span></span><br><span class="line">    <span class="keyword">char</span>* end_addr = (<span class="keyword">char</span> *)pages + <span class="keyword">sizeof</span>(struct PageInfo) * npages - KERNBASE;</span><br><span class="line">    <span class="keyword">int</span> end_index = (<span class="keyword">int</span>)(ROUNDUP(end_addr, PGSIZE)) / PGSIZE;</span><br><span class="line">    <span class="keyword">for</span> (i = end_index; i &lt; npages; i++) &#123;</span><br><span class="line">        pages[i].pp_ref = <span class="number">0</span>;</span><br><span class="line">        pages[i].pp_link = page_free_list;</span><br><span class="line">        page_free_list = &amp;pages[i];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>page_alloc</strong></p>
+</blockquote>
+<p>这个函数就是很简单的链表操作，仔细阅读注释的内容即可正确实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns NULL if out of free memory</span></span><br><span class="line">    <span class="keyword">if</span> (page_free_list == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// Get a free page from page_free_list</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">PageInfo</span>* <span class="title">free_page</span> = <span class="title">page_free_list</span>;</span></span><br><span class="line">    page_free_list = free_page-&gt;pp_link;</span><br><span class="line">    <span class="comment">// Init the free page</span></span><br><span class="line">    free_page-&gt;pp_link = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (alloc_flags &amp; ALLOC_ZERO)</span><br><span class="line">        <span class="built_in">memset</span>(page2kva(free_page), <span class="number">0</span>, PGSIZE);</span><br><span class="line">    <span class="comment">// Return the free page to caller</span></span><br><span class="line">    <span class="keyword">return</span> free_page;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>page_free</strong></p>
+</blockquote>
+<p>同样没有什么难度，直接贴出代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (pp-&gt;pp_ref) panic(<span class="string">"This page is still occupied by other processes."</span>);</span><br><span class="line"><span class="keyword">if</span> (pp-&gt;pp_link) panic(<span class="string">"You can't free a freed page."</span>);</span><br><span class="line">pp-&gt;pp_link = page_free_list;</span><br><span class="line">page_free_list = pp;</span><br></pre></td></tr></table></figure>
+<h4 id="Part-2-Virtual-Memory"><a href="#Part-2-Virtual-Memory" class="headerlink" title="Part 2 Virtual Memory"></a>Part 2 Virtual Memory</h4>
           
         
       
