@@ -259,6 +259,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/10/shellscript练习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/01/10/shellscript练习/" itemprop="url">本博客的Hexo配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T22:02:14+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/ArchLinux-and-Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">ArchLinux and Shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/10/shellscript练习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/10/shellscript练习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Shellscript学习总结"><a href="#Shellscript学习总结" class="headerlink" title="Shellscript学习总结"></a>Shellscript学习总结</h1><p>Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。</p>
+<h2 id="Shell的语法规范"><a href="#Shell的语法规范" class="headerlink" title="Shell的语法规范"></a>Shell的语法规范</h2><p>你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。</p>
+<h3 id="shellscript类别声明"><a href="#shellscript类别声明" class="headerlink" title="shellscript类别声明"></a>shellscript类别声明</h3><p>在一个Shell脚本的开头，编写者应当声明支持该脚本语法的shell程序位置。</p>
+<p><strong>格式</strong>：<code>#!&lt;path&gt;</code>，其中<code>&lt;path&gt;</code>是可执行文件的具体路径。</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>shell是弱类型语言，所有变量可以无需声明直接赋值。在需要引用变量的时候，需要在它前面加上<code>$</code>。</p>
+<p><strong>注意：变量声明时，在变量名和等号以及等号和表达式之间都不要加空格，否则变量名会被识别为命令</strong></p>
+<p>如果要将一段指令的输出结果赋给变量，可以用<code>$()</code>将指令括起来。</p>
+<h4 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h4><ul>
+<li><code>$&lt;n&gt;</code> 脚本的第<code>&lt;n&gt;</code>个命令行参数</li>
+<li><code>$#</code> 脚本的参数个数</li>
+<li><code>$?</code> 上一个指令的返回值</li>
+</ul>
+<h4 id="输入变量"><a href="#输入变量" class="headerlink" title="输入变量"></a>输入变量</h4><p><code>read var</code>从标准输入读入一个变量。</p>
+<h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><p>Shell中条件语句的基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if [ &lt;condition&gt; ]; then</span><br><span class="line">    &lt;command&gt;</span><br><span class="line">elif [ &lt;condition&gt; ]; then</span><br><span class="line">    &lt;command&gt;</span><br><span class="line">else</span><br><span class="line">    &lt;command&gt;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>elif</code>和<code>else</code>都是可以省略的。</li>
+<li>一对中括号可以换成<code>test</code>语句。</li>
+</ul>
+<p>需要注意的是，如果<code>&lt;condition&gt;</code>是数值判断，用<code>(( ))</code>会比<code>[ ]</code>更方便，因为双小括号中可以直接使用C中的数值比较操作符，且引用变量名的时候不需要加<code>$</code>。</p>
+<p><strong>注意：一定不要省略中括号两边的空格</strong></p>
+<p>接下来重点总结一下<code>&lt;condition&gt;</code>项的写法。</p>
+<h4 id="逻辑表达式"><a href="#逻辑表达式" class="headerlink" title="逻辑表达式"></a>逻辑表达式</h4><ul>
+<li><code>-a</code>：逻辑与，等价于<code>&amp;&amp;</code></li>
+<li><code>-o</code>：逻辑或，等价于<code>||</code></li>
+<li><code>!</code>：逻辑非</li>
+<li><code>=</code>：相当于C中的<code>==</code></li>
+<li><code>-gt</code>：相当于<code>&gt;</code></li>
+<li><code>-ge</code>：相当于<code>&gt;=</code></li>
+<li><code>-lt</code>：相当于<code>&lt;</code></li>
+<li><code>-le</code>：相当于<code>&lt;=</code></li>
+</ul>
+<h4 id="文件判断"><a href="#文件判断" class="headerlink" title="文件判断"></a>文件判断</h4><p>常用的文件类判断命令如下：</p>
+<ul>
+<li><code>-d &lt;DIR&gt;</code> 如果<code>&lt;DIR&gt;</code>是目录则为真</li>
+<li><code>-e &lt;FILE&gt;</code> 如果<code>&lt;FILE&gt;</code>存在则为真</li>
+<li><code>-s &lt;FILE&gt;</code> 如果<code>&lt;FILE&gt;</code>存在且大小不为0则为真</li>
+<li><code>-r/w/x &lt;FILE&gt;</code> 如果<code>&lt;FILE&gt;</code>存在且可读/可写/可执行则为真</li>
+<li><code>-L &lt;FILE&gt;</code> 如果<code>&lt;FILE&gt;</code>存在且为符号链接则为真</li>
+</ul>
+<p>更多的命令可以Google。</p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>for循环的标准语法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for &lt;var&gt; in &lt;arg1&gt; &lt;arg2&gt; ... &lt;argn&gt; do</span><br><span class="line">    &lt;command&gt;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>其中<code>&lt;var&gt;</code>会被分别赋予<code>&lt;arg1&gt;</code>到<code>&lt;argn&gt;</code>的值</p>
+<p>这里的<code>&lt;arg&gt;</code>们可以用一个arglist替换，如<code>for file in ./* do ...</code>可以遍历当前文件夹下的文件。</p>
+<h4 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h4><p>与C语言类似，不予详述。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -927,7 +1135,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

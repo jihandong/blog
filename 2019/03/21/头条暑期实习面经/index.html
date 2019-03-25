@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="字节跳动架构部门laaS暑期实习生面经一面面试官很nice，温和好说话，也会给提示。 开始部分首先是介绍一些自己做过的项目(自己做的或者跟导师做的)。 我的话就是讲一些简历上写了的项目：  视频抓取器Spatium和实现细节 课设C_formatter 跟导师改的一些kubernetes源码  说到k8s这部分的时候，面试官很自然地把话题引入计算虚拟化部分。 计算虚拟化部分 有关k8s   你知道">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-21T06:59:22.081Z">
+<meta property="og:updated_time" content="2019-03-25T12:00:24.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字节跳动架构部门暑实面经">
 <meta name="twitter:description" content="字节跳动架构部门laaS暑期实习生面经一面面试官很nice，温和好说话，也会给提示。 开始部分首先是介绍一些自己做过的项目(自己做的或者跟导师做的)。 我的话就是讲一些简历上写了的项目：  视频抓取器Spatium和实现细节 课设C_formatter 跟导师改的一些kubernetes源码  说到k8s这部分的时候，面试官很自然地把话题引入计算虚拟化部分。 计算虚拟化部分 有关k8s   你知道">
@@ -449,7 +449,116 @@
 <li>给定一个由<code>{}[]()</code>三对括号组成的字符串，写一个函数判断它是否是匹配的。例如，<code>{[()]}</code>是匹配的，<code>{([)]}</code>就是不匹配的。</li>
 </ol>
 <p>答：算法太菜，想了半天，两种思路都发现有问题。考官看我一直想不出来，提示要用到栈，我才反应过来。大体就是遍历字符串，遇到左括号压栈，遇到右括号就判断是否与栈顶的左括号匹配；如果匹配就将栈顶弹出，不匹配就说明整个字符串不匹配。</p>
-<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3>
+<h3 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h3><p>二面的面试官表情相对要严肃一点，不过也非常nice，语气很放松。</p>
+<h4 id="开始部分-1"><a href="#开始部分-1" class="headerlink" title="开始部分"></a>开始部分</h4><ol>
+<li>先自我介绍一下吧。</li>
+</ol>
+<p>答：照着简历说……</p>
+<ol start="2">
+<li>你跟导师都做过什么呀？</li>
+</ol>
+<p>答：主要是在阅读和修改一些k8s的源码</p>
+<h4 id="C语言部分"><a href="#C语言部分" class="headerlink" title="C语言部分"></a>C语言部分</h4><p>面试官似乎对我的C语言水平不很信任，出的题很简单。</p>
+<ol start="3">
+<li>关于数组指针的考察</li>
+</ol>
+<p>在开始做之前我问了一下机器是多少位，考官指定了64位。</p>
+<p>已知：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = “abcdefg”;</span><br><span class="line"><span class="keyword">char</span> a[] =“abcdefg”;</span><br></pre></td></tr></table></figure></p>
+<p>(1)填空：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sizeof(p) = ____，</span><br><span class="line"><span class="keyword">sizeof</span>(*p) = ____,</span><br><span class="line"><span class="keyword">sizeof</span>(p[<span class="number">0</span>]) = ____,</span><br><span class="line"><span class="keyword">sizeof</span>(a) = ____,</span><br><span class="line"><span class="keyword">sizeof</span>(a[<span class="number">0</span>]) = ____,</span><br><span class="line"><span class="keyword">sizeof</span>(&amp;a[<span class="number">0</span>]) = ____.</span><br></pre></td></tr></table></figure></p>
+<p>(2)回答问题</p>
+<ul>
+<li><p>执行<code>p[0] = ‘h’</code>; 会发生什么，为什么？</p>
+<p>  答：这个由于p是一个常量字符串指针，所处的内存区域是有读保护的，因而会引发中断（linux下是段错误）</p>
+</li>
+<li><p>执行<code>a[0] = ‘h’</code>; 会发生什么，为什么？</p>
+<p>  答：会将a数组的第一个元素值变成h</p>
+</li>
+</ul>
+<h4 id="编译器相关知识"><a href="#编译器相关知识" class="headerlink" title="编译器相关知识"></a>编译器相关知识</h4><ol start="4">
+<li><code>inline</code>的作用？对<code>inline</code>的处理发生在编译过程中的什么阶段？有什么限制条件吗？</li>
+</ol>
+<p>答：inline是指内联，带有inline的函数会优先使用寄存器而不是将所有的局部变量存放在程序栈中。由于<code>inline</code>涉及到生成的汇编代码对寄存器的使用和对栈的操作，应该是发生在生成汇编代码的阶段。对于限制条件不是很清楚。</p>
+<p>这个题是我理解有问题，考官想听到的回答是，inline和define都用于嵌入代码，只不过inline函数的嵌入发生在编译阶段，而define在预处理阶段。inline的限制条件就比较复杂了……我没有了解所以这一题没答好。</p>
+<ol start="5">
+<li>描述一下编译的基本过程吧。</li>
+</ol>
+<p>答：把编译器的那几个模块依次列了上去。</p>
+<ol start="6">
+<li>如果我要查看<code>gcc</code>预处理生成的代码，要怎么做？</li>
+</ol>
+<p>答：这个不太清楚。</p>
+<h4 id="算法部分"><a href="#算法部分" class="headerlink" title="算法部分"></a>算法部分</h4><p>说是算法……感觉这一部分面试官出的题都是离散数学题……</p>
+<ol start="7">
+<li>两个城市A和B，A城市有80W人，B城市有20W人。任何两个人之间电话对打的概率相同。1天之内，共产生了1000W个电话。那么跨城市对打的电话有多少个？</li>
+</ol>
+<p>答：用排列组合来做就是<code>C(1,800000)*C(1,200000)/C(2,1000000)*10000000</code>。</p>
+<p>考官说我想复杂了，这样算太麻烦。然后就下一题了。</p>
+<ol start="8">
+<li>6个人一起跑步，结果有多少种结果？A比B的成绩好，同时B比C的成绩好，有多少种结果？</li>
+</ol>
+<p>答：</p>
+<p>1) 第一问就是全排列，720种。<br>2) 第二问我用分类的方式列了一堆，最后算出来是120种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. DEF都在ABC左边，ABC排列的顺序是一定的，这样有P(3,3) = 6种</span><br><span class="line">2. DEF都在右边，同理有6种</span><br><span class="line">3. DEF在AB之间或在BC之间，有2*6=12种</span><br><span class="line">4. DEF中有两个人挨着，另一个被隔开，有P(4,2)*P(3,2) = 72种</span><br><span class="line">5. DEF三个人都被隔开，有P(4,3) = 24种</span><br><span class="line">综上所述，共有6*4+72+24 = 120种</span><br></pre></td></tr></table></figure>
+<p>结果考官表示，有更简单的方法，比如，如果只考虑A比B领先，有多少种？</p>
+<p>我才发现是我想复杂了，因为ABC三个人的先后次序一共才6种情况，而题中的情况是一种，所以只需要<code>720/6=120</code>即可。</p>
+<ol start="9">
+<li>上台阶，每次可以一个，也可以每次两个。那么n个台阶，有多少种可能上去呢？</li>
+</ol>
+<p>这一题要写代码，不过这个算法很简单。写了个带动规的递归函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> stepnum[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">steps</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> steps(n<span class="number">-1</span>) + steps(n<span class="number">-2</span>);</span><br><span class="line">&#125; <span class="comment">// 没有优化过的函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stepsNew</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">    stepnum[n] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</span><br><span class="line">    stepnum[n] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> steps1 = stepnum[n<span class="number">-1</span>] ? stepnum[n<span class="number">-1</span>] : steps(n<span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">int</span> steps2 = stepnum[n<span class="number">-2</span>] ? stepnum[n<span class="number">-2</span>] : steps(n<span class="number">-2</span>);</span><br><span class="line">  <span class="keyword">return</span> steps1 + steps2;</span><br><span class="line">&#125; <span class="comment">// 动态规划的函数</span></span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>你还有什么想问我的吗？</li>
+</ol>
+<p>问了一下这个岗位具体一点的工作内容，以及为了符合工作要求应该学习的方向之类的。</p>
+<p>面试官的回答：我是在做linux系统内核和KVM相关的。你按照自己的节奏好好学习就可以啦。答的还不错。</p>
+<h3 id="三面"><a href="#三面" class="headerlink" title="三面"></a>三面</h3><p>二面之后接着有人打电话来约了三面。奇怪的是面试官并没有问多少技术问题，反而面试搞得像hr面：</p>
+<ol>
+<li>你们学校对实习的态度如何？允不允许？鼓励你们去报什么样的公司？</li>
+<li>你最喜欢计算机的哪个方向呢？</li>
+<li>据我所知你们大学大二还没有相关课程，你的这些能力是如何积累的呢？</li>
+<li>你平时会用什么样的操作系统呢？</li>
+</ol>
+<h4 id="有关Linux的知识"><a href="#有关Linux的知识" class="headerlink" title="有关Linux的知识"></a>有关Linux的知识</h4><ol start="5">
+<li>在Linux下，你主要是用命令行多一些还是图形界面多一些呢？</li>
+</ol>
+<p>答：除了浏览网页等必须要图形界面的时候，都是命令行。</p>
+<ol start="6">
+<li>Linux下查看所有进程可以用什么命令？</li>
+</ol>
+<p>答：<code>ps</code>或者<code>top</code></p>
+<ol start="7">
+<li>我怎么才能知道某个进程跑在哪个CPU上呢？</li>
+</ol>
+<p>答：<code>man ps</code>或者<code>man top</code>来查一下</p>
+<h4 id="有关并发编程"><a href="#有关并发编程" class="headerlink" title="有关并发编程"></a>有关并发编程</h4><ol start="8">
+<li><code>fork</code>函数的返回值有什么意义呢？</li>
+</ol>
+<p>答：返回0说明是在子进程，返回正整数则代表在父进程，且这个数是子进程的pid。</p>
+<ol start="9">
+<li>在Go里面，把一些函数用<code>go</code>命令去跑的话，与直接调用有什么不一样的吗？</li>
+</ol>
+<p>答：讲了一下goroutine的概念和具体实现方式。</p>
+<ol start="10">
+<li>讲一下你对并发和并行的理解。</li>
+</ol>
+<p>答：老生常谈了，这里不再赘述。</p>
+<ol start="11">
+<li>你现在自己在用虚拟机吗？用过哪些？</li>
+</ol>
+<p>答：之前大一用过VMWARE，最近用了点qemu。</p>
+<h4 id="像是hr该问的一些问题"><a href="#像是hr该问的一些问题" class="headerlink" title="像是hr该问的一些问题"></a>像是hr该问的一些问题</h4><ol start="11">
+<li>能实习多久？能大概给个范围吗？</li>
+<li>你为什么要来头条实习呢？</li>
+<li>在就业方面有什么考虑吗？对公司或者工作地点有什么偏向吗？</li>
+<li>你有哪些问题想问我的？</li>
+<li>你对参与实习之后要做的工作有什么期待吗？</li>
+</ol>
+<p>这方面我主要是问了一下为了适应岗位我需要进一步学习的东西，以及说了一下我比较想去做虚拟化和内核向的一些工作。这之间面试官跟我讲了很多东西，大概如下：</p>
+<p>感觉你现在已经做的挺好了吧，我觉得没必要再给你做什么加法了，从理论上来讲你尽量去把学校的要求掌握的专业课学好就好了，像是数据结构啊，组成原理啊，高数啊概率啊，编译原理啊。在工程上呢去多做一些实践也是很必要的，比如你去使用ArchLinux这种比较典型的现代Linux系统，还有像编程方面，可以去了解一些与传统C控制逻辑不同的并发和并行，尤其是并行这种的领域，等等。理论联系实践地去做吧，毕竟你现在才大二嘛，对吧，已经很不错了。总之就是把知识学好，并多寻找一些实践的机会就挺不错的。</p>
+<p>你工作的话到时候可能是在北京的，你这边应该可以过来是吧。其实我们这边在武汉现在好像也有办公室，不过我不是很清楚哈，这些都是后话。</p>
+<p>我想跟你说的是，一般来说系统研究这方面是一个非常漫长的过程哈，基本上就像金庸小说一样，可能是说三年略有小成，几十年之后才可能有些成就，这个东西它还是需要很深的积累的。其实呢你几个月的实习时间，虽然你是希望去做一些内核相关的事情，但是从现实角度来看，你可能在这段时间之内只是能够通过一些实践去理解它基本的概念吧。</p>
+<p>比如说你要做虚拟化和内核，肯定是要需要很长的准备时间吧。我们这边就算我招一个有经验的工程师进来，也得要三个月到半年的准备才能开始去做一些简单的内核外围的东西的，深层次的可能半年都不止。所以你最好有个心理准备，做系统这方面可不是像解个算法题或者写个软件一样简单，这个要做大量的环境的准备，然后你才能大概知道具体问题在什么地方，找到之后还得然后进一步去了解每个问题的影响范围，再对每个影响范围去进行处理，这是一个非常非常复杂的过程。我建议你就是不要期待能写多少代码，而是在这个上面开始建立一个基本的概念性的东西。我认为你在两个到四个月之间能有个大概的认识，就是一个很不错的结果了哈。还是要有沉的住气的心态的，你了解我说的意思吧。</p>
+
       
     </div>
     
@@ -570,7 +679,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -635,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节跳动架构部门laaS暑期实习生面经"><span class="nav-number">1.</span> <span class="nav-text">字节跳动架构部门laaS暑期实习生面经</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一面"><span class="nav-number">1.1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始部分"><span class="nav-number">1.1.1.</span> <span class="nav-text">开始部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算虚拟化部分"><span class="nav-number">1.1.2.</span> <span class="nav-text">计算虚拟化部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机网络部分"><span class="nav-number">1.1.3.</span> <span class="nav-text">计算机网络部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法和编程部分"><span class="nav-number">1.1.4.</span> <span class="nav-text">算法和编程部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二面"><span class="nav-number">1.2.</span> <span class="nav-text">二面</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节跳动架构部门laaS暑期实习生面经"><span class="nav-number">1.</span> <span class="nav-text">字节跳动架构部门laaS暑期实习生面经</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一面"><span class="nav-number">1.1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始部分"><span class="nav-number">1.1.1.</span> <span class="nav-text">开始部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算虚拟化部分"><span class="nav-number">1.1.2.</span> <span class="nav-text">计算虚拟化部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算机网络部分"><span class="nav-number">1.1.3.</span> <span class="nav-text">计算机网络部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法和编程部分"><span class="nav-number">1.1.4.</span> <span class="nav-text">算法和编程部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二面"><span class="nav-number">1.2.</span> <span class="nav-text">二面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始部分-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">开始部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C语言部分"><span class="nav-number">1.2.2.</span> <span class="nav-text">C语言部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译器相关知识"><span class="nav-number">1.2.3.</span> <span class="nav-text">编译器相关知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法部分"><span class="nav-number">1.2.4.</span> <span class="nav-text">算法部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三面"><span class="nav-number">1.3.</span> <span class="nav-text">三面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有关Linux的知识"><span class="nav-number">1.3.1.</span> <span class="nav-text">有关Linux的知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有关并发编程"><span class="nav-number">1.3.2.</span> <span class="nav-text">有关并发编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#像是hr该问的一些问题"><span class="nav-number">1.3.3.</span> <span class="nav-text">像是hr该问的一些问题</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
