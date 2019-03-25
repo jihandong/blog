@@ -87,7 +87,8 @@
 <meta property="og:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/memlayout.png">
-<meta property="og:updated_time" content="2019-03-23T10:57:56.517Z">
+<meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/descriptor.png">
+<meta property="og:updated_time" content="2019-03-25T13:29:14.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 实验记录">
 <meta name="twitter:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
@@ -505,7 +506,10 @@
 <li>BootLoader代码逻辑研究<ul>
 <li>第一阶段：<strong>初始化</strong><ul>
 <li><strong>宏常量的设定</strong>：<code>.set CR0_PE_ON 0x1</code> 这个常量是控制32位保护模式开关的指标。</li>
-<li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序</li>
+<li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序<ul>
+<li>这两个指令其实是设置了<code>DF</code>和<code>IF</code>两个标志位的值</li>
+</ul>
+</li>
 <li><strong>寄存器初始化</strong>：用xor和mov指令将几个关键寄存器清零<ul>
 <li><code>ds</code>：数据段寄存器，存放全局变量区域的头指针</li>
 <li><code>ss</code>：栈段寄存器，存放堆栈段的首地址(<code>esp</code>寄存器存储的是偏移量)</li>
@@ -520,10 +524,7 @@
 <li>向<code>0x64</code>和<code>0x60</code>端口发送信号，打开A20地址线。</li>
 </ul>
 </li>
-<li><strong>建立32位段虚拟内存与物理存储器的映射关系表</strong>：<code>lgdt gdtdesc</code>指令。<ul>
-<li><code>GDT(global descriptor table)</code> 是</li>
-</ul>
-</li>
+<li><strong>建立32位段虚拟内存与物理存储器的映射关系表</strong>：<code>lgdt gdtdesc</code>指令。</li>
 <li><strong>启动32位保护模式</strong>：用<code>CR0_PE_ON</code>与<code>cr0</code>寄存器的值做或运算，打开32位保护模式。<code>cr0</code>到<code>cr3</code>四个寄存器是系统控制寄存器，它们的值直接决定系统的运行状态。<code>cr0</code>控制的是处理器，因此可以通过修改其值来进入其他运行模式。</li>
 <li><strong>跳转到32位代码区的下一条指令</strong>。</li>
 </ul>
@@ -746,7 +747,48 @@
 </blockquote>
 <p>同样没有什么难度，直接贴出代码。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (pp-&gt;pp_ref) panic(<span class="string">"This page is still occupied by other processes."</span>);</span><br><span class="line"><span class="keyword">if</span> (pp-&gt;pp_link) panic(<span class="string">"You can't free a freed page."</span>);</span><br><span class="line">pp-&gt;pp_link = page_free_list;</span><br><span class="line">page_free_list = pp;</span><br></pre></td></tr></table></figure>
-<h4 id="Part-2-Virtual-Memory"><a href="#Part-2-Virtual-Memory" class="headerlink" title="Part 2 Virtual Memory"></a>Part 2 Virtual Memory</h4><p>Selector             +————–+         +———–+<br>          ———-&gt;|              |         |           |<br>                     | Segmentation |         |  Paging   |<br>Software             |              |——–&gt;|           |———-&gt;  RAM<br>            Offset   |  Mechanism   |         | Mechanism |<br>          ———-&gt;|              |         |           |<br>                     +————–+         +———–+<br>            Virtual                   Linear                Physical</p>
+<h4 id="Part-2-Virtual-Memory"><a href="#Part-2-Virtual-Memory" class="headerlink" title="Part 2 Virtual Memory"></a>Part 2 Virtual Memory</h4><p>在开始这一部分之前，先要对几个地址之间的转换有一个大概的了解。</p>
+<h5 id="Segments"><a href="#Segments" class="headerlink" title="Segments"></a>Segments</h5><p>在保护模式下，有关段的信息是非常复杂的。对于一个段来说，除了段基地址之外，还有段的大小，特权级，类型，是否被执行过，读写权限等等多种信息要保存。用于描述这些信息的数据项称为 <strong>描述符(Descirptor)</strong> 。</p>
+<p>描述符一般用<code>4个字</code>来表述所有信息，具体的描述符结构如下图所示：</p>
+<p><img src="descriptor.png" alt="descriptor"></p>
+<p>其中各个部分的作用：</p>
+<ul>
+<li>第一个字：<strong>段的界限</strong>，也就是这个段的长度。需要注意的是一个段的长度是用20位来表示的，因此这个字表示的段界限是不完整的，需要和描述符中另一段数据拼接起来才是完整的段界限。</li>
+<li>第二个字：<strong>段的基址</strong>，段在虚拟地址空间内的起始位置。由于虚拟空间地址是32位的，这个字同样无法表示完整的段基址，需要与另外两段数据进行拼接。</li>
+<li>第三个字：<ul>
+<li>高字节分为如下几个字段：<ul>
+<li><code>P</code>：<strong>存在位</strong>，表示该描述符对应的段是否已经读入内存。</li>
+<li><code>DPL</code>：长度为两位，表示该段所属的特权级</li>
+<li><code>1</code>或<code>0</code>：记录段的类型是存储段还是系统段</li>
+<li><code>TYPE</code>：记录段的属性<ul>
+<li>如果是存储段，那么是代码段还是数据段</li>
+<li>段的读写权限如何</li>
+</ul>
+</li>
+<li><code>A</code>：访问位，记录段是否被访问过</li>
+</ul>
+</li>
+<li>低字节为段基址的16-23位。</li>
+</ul>
+</li>
+<li>第四个字：<ul>
+<li>高字节为段基址的24-31位。</li>
+<li>低字节分为如下几个字段：<ul>
+<li><code>G</code>：<strong>粒度位</strong>，G=0说明段长度的单位是<code>Byte</code>，而G=1说明单位是<code>page</code>。</li>
+<li><code>X</code>：用于区分32位和16位访问方式。</li>
+<li><code>O</code>和<code>AVL</code>：保留位和系统专用位</li>
+<li><code>LIMIT</code>：段界限的16-19位</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>所有的描述符都储存在 <strong>描述符表</strong> 中。描述符表分为以下三类：</p>
+<ul>
+<li><code>LDT</code>：局部描述符表。每个进程都有它自己的局部描述符表，存放在一个特定的系统段内。LDT中存放着对应进程的代码和数据段位置等信息。</li>
+<li><code>GDT</code>：全局描述符表。只有一个，存放着操作系统内核使用的描述符和所有系统段的描述符。通过GDT可以去索引所有的LDT。</li>
+<li><code>IDT</code>：中断描述符表。用于定位所有的中断处理程序。</li>
+</ul>
 
       
     </div>
@@ -937,7 +979,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-problems"><span class="nav-number">1.2.3.</span> <span class="nav-text">Other problems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependencies-upgraded"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Dependencies upgraded</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Macro-definitions"><span class="nav-number">1.4.2.</span> <span class="nav-text">Macro definitions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.3.</span> <span class="nav-text">Part 1 Physical page management</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-Virtual-Memory"><span class="nav-number">1.4.4.</span> <span class="nav-text">Part 2 Virtual Memory</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-problems"><span class="nav-number">1.2.3.</span> <span class="nav-text">Other problems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependencies-upgraded"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Dependencies upgraded</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Macro-definitions"><span class="nav-number">1.4.2.</span> <span class="nav-text">Macro definitions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.3.</span> <span class="nav-text">Part 1 Physical page management</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-Virtual-Memory"><span class="nav-number">1.4.4.</span> <span class="nav-text">Part 2 Virtual Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Segments"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">Segments</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
