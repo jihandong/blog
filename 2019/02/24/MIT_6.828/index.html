@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
+<meta name="description" content="MIT 6.828 Labs 实验记录本博客中所有代码所对应的github repo地址：6.828 Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT 6.828 Labs 实验记录">
 <meta property="og:url" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/index.html">
 <meta property="og:site_name" content="Gensokyo">
-<meta property="og:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
+<meta property="og:description" content="MIT 6.828 Labs 实验记录本博客中所有代码所对应的github repo地址：6.828 Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/memlayout.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/descriptor.png">
-<meta property="og:updated_time" content="2019-03-25T13:29:14.384Z">
+<meta property="og:updated_time" content="2019-04-03T13:28:10.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 实验记录">
-<meta name="twitter:description" content="MIT 6.828 Labs 实验记录Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。 QEMU emulator建议follow一下MIT官网上最">
+<meta name="twitter:description" content="MIT 6.828 Labs 实验记录本博客中所有代码所对应的github repo地址：6.828 Overall 6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。  Build up the environmentCompiler Toolchain由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境">
 <meta name="twitter:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/memlayout.png">
 
 
@@ -375,7 +375,8 @@
       
 
       
-        <h2 id="MIT-6-828-Labs-实验记录"><a href="#MIT-6-828-Labs-实验记录" class="headerlink" title="MIT 6.828 Labs 实验记录"></a>MIT 6.828 Labs 实验记录</h2><h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><ul>
+        <h2 id="MIT-6-828-Labs-实验记录"><a href="#MIT-6-828-Labs-实验记录" class="headerlink" title="MIT 6.828 Labs 实验记录"></a>MIT 6.828 Labs 实验记录</h2><p>本博客中所有代码所对应的github repo地址：<a href="https://github.com/dracit7/6.828" target="_blank" rel="noopener">6.828</a></p>
+<h3 id="Overall"><a href="#Overall" class="headerlink" title="Overall"></a>Overall</h3><ul>
 <li>6.828自带了一个打分系统，在Lab文件夹下执行<code>make grade</code>即可运行这个系统来检验自己的解答。</li>
 </ul>
 <h3 id="Build-up-the-environment"><a href="#Build-up-the-environment" class="headerlink" title="Build up the environment"></a>Build up the environment</h3><h4 id="Compiler-Toolchain"><a href="#Compiler-Toolchain" class="headerlink" title="Compiler Toolchain"></a>Compiler Toolchain</h4><p>由于Archlinux中的objdump和gcc均满足Lab的要求，不需要手动搭建编译环境。</p>
@@ -547,7 +548,7 @@
 <h4 id="Part-3-The-kernel"><a href="#Part-3-The-kernel" class="headerlink" title="Part 3 The kernel"></a>Part 3 The kernel</h4><p>在内核被授予控制权后，它要做如下几件事：</p>
 <h5 id="Virtual-memory-address-mapping"><a href="#Virtual-memory-address-mapping" class="headerlink" title="Virtual memory address mapping"></a>Virtual memory address mapping</h5><p>当我们观察bootloader程序的时候，我们可以发现它的 <strong>链接地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>LMA</code>，linked memory address) 和 <strong>虚拟地址</strong>(指用<code>objdump -h</code>打印出来的ELF节头部信息中的<code>VMA</code>，virtual memory address) 是完全一致的；然而对于kernel，这两个地址却有着不小的差距。</p>
 <p>操作系统内核常常会在非常高的虚拟地址空间(例如0xf0100000)运行，这是为了把比较低的虚拟地址空间留给用户进程使用。然而大部分机器没有这么多的内存，于是它们将虚拟地址0xf0100000映射到物理地址0x00100000。这样一来虽然内核所在的加载地址很高，它的实际加载地址却是位于RAM区域的最底端，挨着BIOS所在的ROM地址区域。</p>
-<p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。</p>
+<p>虚拟地址映射操作是由专门的硬件来完成的，要打开虚拟地址映射只需要对<code>cr0</code>寄存器设置<code>CR0_PG</code>标志，就像之前打开32位保护模式所做的那样。除此之外，为了能让虚拟地址映射正常工作，我们需要将页表的首地址装入<code>cr3</code>寄存器。</p>
 <p>kernel被加载的地址为0x100000,因此它从此处开始运行。它所做的第一项工作就是打开虚拟地址映射，然后跳转到虚拟地址<code>0xf010002f</code>的位置，恰好对应于物理地址中下一条指令所在的位置。这样，内核就自然地实现了从物理地址到虚拟地址的转换。</p>
 <h5 id="Formatted-printing-to-the-console"><a href="#Formatted-printing-to-the-console" class="headerlink" title="Formatted printing to the console"></a>Formatted printing to the console</h5><p>在完成虚拟地址映射之后，下一步是对终端进行格式化输入输出以创建交互式操作界面。</p>
 <p><code>lib/printfmt.c</code>中提供了输出函数的原型，<code>kern/printf.c</code>和<code>kern/console.c</code>则提供了有关内核输出和交互的函数。</p>
@@ -677,21 +678,27 @@
 <li><code>0x00800000</code>以上：用户的堆区域和程序数据</li>
 <li>以下：用户的符号表区域和空内存</li>
 </ul>
-<h4 id="Macro-definitions"><a href="#Macro-definitions" class="headerlink" title="Macro definitions"></a>Macro definitions</h4><p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
-<ul>
-<li><code>K</code>和<code>P</code>:带K的标识符往往指<code>kernel</code>,与内核虚拟内存有关；而带P的标识符指<code>physical</code>,与物理存储有关<ul>
+<h4 id="Definitions-guide"><a href="#Definitions-guide" class="headerlink" title="Definitions guide"></a>Definitions guide</h4><p>6.828的代码充满了缩写这种使人不明所以的命名,且有些地方码风诡异,因而将一些可能用到的概念和缩写列举如下:</p>
+<ol>
+<li><code>V</code>和<code>P</code>:带V的标识符指<code>virtual</code>,与内核虚拟内存有关；而带P的标识符往往指<code>physical</code>,与物理存储有关。如：<ul>
 <li><code>kva</code>:<code>kernel virtual address</code>的简写</li>
 <li><code>pa</code>:<code>physical address</code>的简写</li>
 <li><code>la</code>:<code>linear address</code>的简写</li>
 </ul>
 </li>
+<li><code>PT</code>和<code>PD</code>：分别指<code>page table</code>和<code>page directory</code>。</li>
+<li><code>U</code>和<code>K</code>:带U的标识符指<code>User</code>，而带K的标识符指<code>Kernel</code>。如：<ul>
 <li><code>UVPT</code>：<code>User virtual page table</code>的缩写，是用户页表的开始地址。</li>
+<li><code>UTOP</code>：用户地址空间的上限</li>
 </ul>
-<p>为了实现目标功能的代码，我们需要调用许多定义好的函数或者宏，为了方便查看和使用将所有可能需要使用的函数和宏列举如下：</p>
+</li>
+</ol>
+<p>为了实现目标功能的代码，我们需要调用许多定义好的函数或者宏，为了方便查看和使用将一些可能需要使用的函数和宏列举如下：</p>
 <ul>
 <li><code>pmap.h</code>:<ul>
 <li><code>PADDR(addr)</code>:将虚拟地址addr转换为物理地址返回</li>
 <li><code>KADDR(addr)</code>:将物理地址addr转换为虚拟地址返回</li>
+<li><code>PTE_ADDR(addr)</code>:将物理地址addr中的权限位去掉</li>
 <li><code>page2pa(PageInfo*)</code>:将PageInfo结构体转换为对应Page的物理地址</li>
 <li><code>pa2page(addr)</code>:将物理地址转换为pages数组中的PageInfo</li>
 <li><code>page2kva(PageInfo*)</code>:将PageInfo结构体转换为对应Page的虚拟地址</li>
@@ -789,6 +796,71 @@
 <li><code>GDT</code>：全局描述符表。只有一个，存放着操作系统内核使用的描述符和所有系统段的描述符。通过GDT可以去索引所有的LDT。</li>
 <li><code>IDT</code>：中断描述符表。用于定位所有的中断处理程序。</li>
 </ul>
+<p>在这个Lab中，我们暂时不涉及内存的分段机制，因而GDT中每个描述符的base为0而limit为0xffffffff。在kernel代码段中我们已经建立了一个简单的页表(能够映射4MB大小的内存),现在我们需要做的是拓展这个页表以映射整个虚拟内存。</p>
+<h5 id="Pages"><a href="#Pages" class="headerlink" title="Pages"></a>Pages</h5><p>在Background knowledge里面我们已经讲了线性地址的构成，现在为了能够完成下面的实验，需要进一步了解一些关于页目录和页表的知识。</p>
+<p>在MMU取到一个线性地址la时，它会首先取出la中的 <strong>页目录索引部分</strong> ，并用其与<code>cr3</code>中存放的页目录首地址结合去找到la所在的 <strong>页表首地址</strong> 。在此之后，MMU取出la中的 <strong>页表索引部分</strong> ，与之前找到的页表首地址结合来找到la所对应的具体 <strong>页表项</strong> 。</p>
+<p>在这个过程中，la所在的页目录表项被称为 <strong>DIR entry</strong> ，而它所在的页表表项被称为 <strong>Page table entry</strong>。Directory entry中存放的物理地址与la的页表索引部分的结合是Page table entry的地址，而page table entry中存放的物理地址与la的偏移部分的结合是la所对应物理页的地址。</p>
+<h5 id="Addresses"><a href="#Addresses" class="headerlink" title="Addresses"></a>Addresses</h5><blockquote>
+<p><strong>Exercise 3</strong></p>
+<p>你可以在<code>qemu-gdb</code>中键入<code>ctrl-a c</code>来进入qemu的monitor。在这里，你可以用<code>xp</code>命令来查询指定物理地址的数据(<code>xp</code>指令的用法与gdb的<code>x</code>指令类似)。与此同时，在<code>gdb</code>中用<code>x</code>指令可以查询指定虚拟地址的数据。将存在映射关系的虚拟地址与物理地址存放的内容作对比，看看是否是一致的。</p>
+</blockquote>
+<p>JOS的源代码定义了<code>uintptr_t</code>来存放虚拟地址，而<code>physaddr_t</code>用来存放物理地址。</p>
+<blockquote>
+<p><strong>Question</strong></p>
+<p>Q:如果下面的代码是正确的,变量x的类型应当是uintptr_t还是physaddr_t?</p>
+<p>A:uintptr_t,因为C中的指针都是指向虚拟地址的.</p>
+</blockquote>
+<p>JOS内核有时需要读取或修改只知道物理地址的内存。例如，向页表添加映射可能需要分配物理内存来存储页目录，然后初始化该内存。但是，内核不能绕过虚拟地址转换，因此不能直接修改物理地址。这就是为什么我们要把物理内存用一个线性函数映射到虚拟内存中<code>0xf0000000</code>以上的区域:这方便了内核直接操作物理内存。<code>PADDR</code>和<code>KADDR</code>两个宏定义让我们可以很方便地实现物理地址和虚拟地址之间的转换。</p>
+<h5 id="page-management"><a href="#page-management" class="headerlink" title="page management"></a>page management</h5><p>我们知道，同一个物理页面可能会被映射到数个不同虚拟空间的数个虚拟页面，我们通过修改<code>PageInfo</code>结构体中的<code>pp_ref</code>属性来反映这一点。每当我们分配一个UTOP以下的页面，我们让该物理页面的<code>pp_ref</code>属性+1。(UTOP以上的页面属于内核，它们永远不应该被free，因而无需更改这个属性)</p>
+<p>需要注意的是，我们在实现<code>page_alloc</code>函数时并没有让它去增加<code>pp_ref</code>属性值，因此调用<code>page_alloc</code>的函数需要 <strong>自行增加这个属性的值</strong> 。</p>
+<blockquote>
+<p><strong>pgdir_walk</strong></p>
+</blockquote>
+<p>这个函数接受一个线性地址和一个页目录，返回线性地址对应的页面所在页表的物理地址。为了达成这个目的，我们可以通过线性地址中的页目录索引部分去找到页目录中的对应页表地址。如果这个页表还没有被创建，且create参数为真，那就创建一个新的页表并返回它的物理地址。</p>
+<p>根据函数前面的注释，<strong>MMU会同时检查页目录表项和页表表项中的权限位</strong>，因而我们对于页目录中新页表物理地址的权限可以把要求放宽松一点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Find the page table where va locates.</span></span><br><span class="line"><span class="keyword">physaddr_t</span> pgtab = pgdir[PDX(va)];</span><br><span class="line"><span class="keyword">if</span> (!pgtab) &#123;</span><br><span class="line">    <span class="keyword">if</span> (create) &#123;</span><br><span class="line">        <span class="comment">// Allocate a new page table.</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">PageInfo</span>* <span class="title">new_pt</span> = <span class="title">page_alloc</span>(<span class="title">ALLOC_ZERO</span>);</span></span><br><span class="line">        <span class="keyword">if</span> (new_pt == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            new_pt-&gt;pp_ref++;</span><br><span class="line">            <span class="comment">// Leave permissions of pt more permissive</span></span><br><span class="line">            <span class="comment">// We allow users to read this page</span></span><br><span class="line">            pgdir[PDX(va)] = page2pa(new_pt) | PTE_P | PTE_U | PTE_W;</span><br><span class="line">            <span class="keyword">return</span> KADDR(PTE_ADDR(pgdir[PDX(va)])+PTX(va)*<span class="keyword">sizeof</span>(<span class="keyword">pte_t</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// We need to return the address of page table **entry**</span></span><br><span class="line">    <span class="comment">// PTE_ADDR: get rid of the permission bits in `pgtab`</span></span><br><span class="line">    <span class="comment">// PTX(va)*sizeof(pte_t): find the 'PTX(va)'th element in a `pte_t` array.</span></span><br><span class="line">    <span class="keyword">return</span> KADDR(PTE_ADDR(pgtab)+PTX(va)*<span class="keyword">sizeof</span>(<span class="keyword">pte_t</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>boot_map_region</strong></p>
+</blockquote>
+<p>这个函数将一段指定的虚拟地址映射到同样长度的指定的物理地址。因为映射以页为单位，我们可以依次映射这段地址中的每一页：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> page_num = size / PGSIZE;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; page_num; i++) &#123;</span><br><span class="line">    <span class="keyword">pte_t</span>* pgtab = pgdir_walk(pgdir,(<span class="keyword">void</span>*)(va+i*PGSIZE),<span class="number">1</span>);</span><br><span class="line">    *pgtab = (pa+i*PGSIZE) | perm | PTE_P;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>page_lookup</strong></p>
+</blockquote>
+<p>这个函数寻找va在pgdir中的页表地址和物理地址。依照注释完成,没有多大难度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pte_t</span>* pgtab = pgdir_walk(pgdir, va, <span class="number">0</span>); <span class="comment">// Page table address</span></span><br><span class="line"><span class="keyword">if</span> (pgtab == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (pte_store != <span class="literal">NULL</span>)</span><br><span class="line">        *pte_store = pgtab;</span><br><span class="line">    <span class="keyword">return</span> pa2page(PTE_ADDR(*pgtab));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>page_remove</strong></p>
+</blockquote>
+<p>这个函数移除va指定的页。基本上都是在调用函数，只要认真阅读了注释即很简单。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pte_t</span> *pg_pte;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PageInfo</span>* <span class="title">pgtab</span> = <span class="title">page_lookup</span>(<span class="title">pgdir</span>, <span class="title">va</span>, &amp;<span class="title">pg_pte</span>);</span></span><br><span class="line"><span class="keyword">if</span> (!pgtab) <span class="keyword">return</span>;</span><br><span class="line"><span class="comment">// This function frees the page automatically if refcount reaches 0.</span></span><br><span class="line">page_decref(pgtab);</span><br><span class="line">*pg_pte = <span class="number">0</span>;</span><br><span class="line">tlb_invalidate(pgdir, va);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>page_insert</strong></p>
+</blockquote>
+<p>这个函数将pp插入va所指定的位置。我在这里没做到注释要求的one-code way，但是功能是正常的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pte_t</span>* pgtab = pgdir_walk(pgdir, va, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">if</span> (pgtab == <span class="literal">NULL</span>) <span class="keyword">return</span> -E_NO_MEM;</span><br><span class="line">page_remove(pgdir, va);</span><br><span class="line"><span class="keyword">if</span> (page_free_list == pp)</span><br><span class="line">    page_free_list = pp-&gt;pp_link;</span><br><span class="line">pp-&gt;pp_ref++;</span><br><span class="line">*pgtab = page2pa(pp) | perm | PTE_P;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="Part-3-Kernel-address-space"><a href="#Part-3-Kernel-address-space" class="headerlink" title="Part 3 Kernel address space"></a>Part 3 Kernel address space</h4><p>JOS的地址空间被<code>ULIM</code>划分为两个部分：<strong>用户地址空间</strong> 和 <strong>内核地址空间</strong> 。后者大概拥有256MB的剩余空间可以使用。</p>
+<p>由于用户区和内核区同在一个地址空间内，我们需要使用页表管理中的 <strong>权限位</strong> 来保证用户只能访问用户区的页。</p>
+<ul>
+<li>常用的权限位：<ul>
+<li><code>PTE_P</code>: 页面存在(此时内核具有读权限)。如果这个权限位为0,其他任何权限位均无效。</li>
+<li><code>PTE_W</code>: 用户和内核都具有写权限</li>
+<li><code>PTE_U</code>: 用户具有读权限</li>
+</ul>
+</li>
+</ul>
+<p>用户不应有访问任何<code>ULIM</code>以上内存的权限,而内核应当能读写这一块区域。在<code>UTOP</code>和<code>ULIM</code>之间的区域是 <strong>只读区</strong>(对用户和内核都是) 。低于<code>UTOP</code>的内存区域权限由用户自行设置。</p>
+<h5 id="Initializing-the-Kernel-Address-Space"><a href="#Initializing-the-Kernel-Address-Space" class="headerlink" title="Initializing the Kernel Address Space"></a>Initializing the Kernel Address Space</h5><blockquote>
+<p><strong>Exercise 5</strong></p>
+</blockquote>
+<p>这个任务要求我们补全<code>mem_init</code>函数。</p>
+<p>第一段要求我们把整个<code>pages</code>数组映射到<code>UPAGE</code>地址以上。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Cautious: we map the phyaddr of pages instead of their content</span></span><br><span class="line"><span class="comment">// So we use PADDR here, not page2pa.</span></span><br><span class="line">boot_map_region(kern_pgdir, UPAGES, npages*<span class="keyword">sizeof</span>(struct PageInfo), PADDR(pages), PTE_U);</span><br></pre></td></tr></table></figure>
+<p>第二段要求我们把内核栈映射到<code>KSTACKTOP-KSTKSIZE</code>到<code>KSTACKTOP</code>区域。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boot_map_region(kern_pgdir, (KSTACKTOP-KSTKSIZE), KSTKSIZE, PADDR(&amp;bootstack), PTE_P | PTE_W);</span><br></pre></td></tr></table></figure>
+<p>第三段要求我们映射整个内核区域。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> kern_size = (<span class="keyword">unsigned</span>)~<span class="number">0</span> - KERNBASE;</span><br><span class="line">boot_map_region(kern_pgdir, KERNBASE, kern_size, <span class="number">0</span>, PTE_P | PTE_W);</span><br></pre></td></tr></table></figure>
+<p>三段都是看着注释调函数即可，没有很大难度。不得不说6.828的注释仔细研究可以省去很多精力。</p>
 
       
     </div>
@@ -970,7 +1042,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-problems"><span class="nav-number">1.2.3.</span> <span class="nav-text">Other problems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependencies-upgraded"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Dependencies upgraded</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Macro-definitions"><span class="nav-number">1.4.2.</span> <span class="nav-text">Macro definitions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.3.</span> <span class="nav-text">Part 1 Physical page management</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-Virtual-Memory"><span class="nav-number">1.4.4.</span> <span class="nav-text">Part 2 Virtual Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Segments"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">Segments</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-6-828-Labs-实验记录"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 实验记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overall"><span class="nav-number">1.1.</span> <span class="nav-text">Overall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-up-the-environment"><span class="nav-number">1.2.</span> <span class="nav-text">Build up the environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compiler-Toolchain"><span class="nav-number">1.2.1.</span> <span class="nav-text">Compiler Toolchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QEMU-emulator"><span class="nav-number">1.2.2.</span> <span class="nav-text">QEMU emulator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-problems"><span class="nav-number">1.2.3.</span> <span class="nav-text">Other problems</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Dependencies-upgraded"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Dependencies upgraded</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab-1-Booting-a-PC"><span class="nav-number">1.3.</span> <span class="nav-text">Lab 1 Booting a PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-PC-bootstrap"><span class="nav-number">1.3.1.</span> <span class="nav-text">Part 1 PC bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Layout-of-the-physical-address-space"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Layout of the physical address space</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-ROM-BIOS"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-The-boot-loader"><span class="nav-number">1.3.2.</span> <span class="nav-text">Part 2 The boot loader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#习题解答"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">习题解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-The-kernel"><span class="nav-number">1.3.3.</span> <span class="nav-text">Part 3 The kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Virtual-memory-address-mapping"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Virtual memory address mapping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatted-printing-to-the-console"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Formatted printing to the console</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-Stack"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lab2-Memory-Management"><span class="nav-number">1.4.</span> <span class="nav-text">Lab2 Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-knowledge"><span class="nav-number">1.4.1.</span> <span class="nav-text">Background knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Definitions-guide"><span class="nav-number">1.4.2.</span> <span class="nav-text">Definitions guide</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-1-Physical-page-management"><span class="nav-number">1.4.3.</span> <span class="nav-text">Part 1 Physical page management</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-2-Virtual-Memory"><span class="nav-number">1.4.4.</span> <span class="nav-text">Part 2 Virtual Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Segments"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">Segments</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pages"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">Pages</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Addresses"><span class="nav-number">1.4.4.3.</span> <span class="nav-text">Addresses</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#page-management"><span class="nav-number">1.4.4.4.</span> <span class="nav-text">page management</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Part-3-Kernel-address-space"><span class="nav-number">1.4.5.</span> <span class="nav-text">Part 3 Kernel address space</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Initializing-the-Kernel-Address-Space"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">Initializing the Kernel Address Space</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
