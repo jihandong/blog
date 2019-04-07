@@ -259,6 +259,224 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/18/GDB用法总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/01/18/GDB用法总结/" itemprop="url">GDB常见用法总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-18T09:24:31+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/18/GDB用法总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/18/GDB用法总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="GDB常见用法总结"><a href="#GDB常见用法总结" class="headerlink" title="GDB常见用法总结"></a>GDB常见用法总结</h2><p>GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
+<li><code>b &lt;breakpoint&gt;</code> 设置断点<ul>
+<li><code>&lt;breakpoint&gt;</code>可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个<code>*</code>标记。</li>
+<li><code>delete</code>命令可以删除断点</li>
+</ul>
+</li>
+<li><code>s</code> 让程序单步执行一条C指令，遇到函数调用则进入(需要编译时带-g参数)<ul>
+<li><code>si</code> 让程序单步执行一条asm指令，遇到函数调用则进入(不带-g也可以)</li>
+<li><code>si &lt;N&gt;</code> 让程序执行<code>&lt;N&gt;</code>条asm指令，包括函数内的和函数外的。</li>
+</ul>
+</li>
+<li><code>n</code> 让程序单步执行一条C指令，不进入函数调用<ul>
+<li><code>ni</code> 让程序单步执行一条asm指令，不进入函数调用</li>
+</ul>
+</li>
+<li><code>r</code> 运行程序<ul>
+<li>在<code>r</code>后面可以添加命令行参数，这样运行程序就相当于在shell中用同样的命令行参数来运行。</li>
+</ul>
+</li>
+<li><code>c</code> 让程序继续运行直到遇到下一个断点。</li>
+<li><code>p</code> 打印目标信息。</li>
+</ul>
+<h3 id="阅读内存系统内容"><a href="#阅读内存系统内容" class="headerlink" title="阅读内存系统内容"></a>阅读内存系统内容</h3><ul>
+<li><code>x/[num][opt][len] &lt;addr&gt;</code><ul>
+<li><code>[num]</code>：将要打印出的连续内存单元的数量</li>
+<li><code>[opt]</code>：打印出数据的格式<ul>
+<li><code>i</code> 指令</li>
+<li><code>x</code> 十六进制数据</li>
+<li><code>d</code> 十进制数据</li>
+<li><code>o</code> 八进制数据</li>
+<li><code>t</code> 二进制数据</li>
+<li><code>c</code> 字符数据</li>
+<li><code>f</code> 浮点数数据</li>
+</ul>
+</li>
+<li><code>[len]</code>：每个内存单元包含的字节数<ul>
+<li><code>b</code>：单字节</li>
+<li><code>h</code>：双字节</li>
+<li><code>w</code>：四字节</li>
+<li><code>g</code>：八字节</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>backtrace</code> 查看程序栈中每个栈帧的信息</li>
+</ul>
+<h3 id="设定输出格式"><a href="#设定输出格式" class="headerlink" title="设定输出格式"></a>设定输出格式</h3><ul>
+<li><code>set print pretty</code> 改善数组和结构体的输出格式</li>
+<li><code>layout asm</code> 改变输出格式为汇编窗口</li>
+</ul>
+<h3 id="info系命令"><a href="#info系命令" class="headerlink" title="info系命令"></a>info系命令</h3><ul>
+<li><code>info registers</code> 打印出寄存器信息</li>
+<li><code>info frame</code> 打印出当前栈帧的详细信息</li>
+<li><code>info local</code> 打印出当前栈帧中的局部变量</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/10/shellscript练习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1398,7 +1616,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

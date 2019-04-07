@@ -1452,6 +1452,101 @@
 <p>除此之外，内核还维护着一个<code>pages</code>数组。真正的page每个<strong>4KB</strong>，由整个物理地址空间平分；pages数组中的元素<code>PageInfo</code>大小<strong>8字节</strong>，记录着这个page的引用数和空闲链表中它的下一个元素的地址。<strong>pages数组中元素的索引可以线性地换算出对应page在物理内存中的首地址</strong>。</p>
 <p><code>page_free_list</code>指针是空闲链表的头指针。它指向pages数组中第一个空闲的元素。空闲链表中的其他元素可以由<code>PageInfo</code>中的指针来索引。</p>
 <h3 id="Lab-3-User-Environments"><a href="#Lab-3-User-Environments" class="headerlink" title="Lab 3 User Environments"></a>Lab 3 User Environments</h3><p>在前两个Lab中，我们成功加载并运行了JOS内核，还建立了整个内核虚拟地址空间的内存映射，但这些都只是对内核的操作。在这个Lab里，我们要开始建立一个用户环境。换句话说，我们要建立一个用户进程，并使其受内核的监管。内核应当接受并处理所有用户进程发起的系统调用和引发的异常。</p>
+<p>执行<code>git checkout -b lab3 origin/lab3</code>命令切换到lab3分支，执行<code>git merge lab2</code>合并在lab2所做的更改。这一步可能会出现conflict，解决之后重新commit即可。</p>
+<p>Lab3增加的文件有：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>文件名</th>
+<th>文件功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inc/</code></td>
+<td><code>env.h</code></td>
+<td>有关用户环境的一些声明和定义</td>
+</tr>
+<tr>
+<td></td>
+<td><code>trap.h</code></td>
+<td>关于trap类异常处理的声明和定义(有关四种异常可以参考CSAPP第八章)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.h</code></td>
+<td>关于系统调用处理的声明和定义</td>
+</tr>
+<tr>
+<td></td>
+<td><code>lib.h</code></td>
+<td>用户使用的系统库</td>
+</tr>
+<tr>
+<td><code>kern/</code></td>
+<td><code>env.h</code>/<code>env.c</code></td>
+<td>内核维持用户环境所需要的声明和定义</td>
+</tr>
+<tr>
+<td></td>
+<td><code>trap.h</code>/<code>trap.c</code></td>
+<td>内核对trap类异常的接受和处理</td>
+</tr>
+<tr>
+<td></td>
+<td><code>trapentry.S</code></td>
+<td>汇编语言编写的trap异常处理程序入口</td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.h</code>/<code>syscall.c</code></td>
+<td>内核对系统调用的接受和处理</td>
+</tr>
+<tr>
+<td><code>lib/</code></td>
+<td><code>Makefrag</code></td>
+<td>用来构建<code>obj/lib/libjos.a</code>的makefile</td>
+</tr>
+<tr>
+<td></td>
+<td><code>entry.S</code></td>
+<td>汇编语言编写的用户进程入口</td>
+</tr>
+<tr>
+<td></td>
+<td><code>libmain.c</code></td>
+<td><code>entry.S</code>调用的用于初始化用户环境的代码</td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.c</code></td>
+<td>用户环境的系统调用函数</td>
+</tr>
+<tr>
+<td></td>
+<td><code>console.c</code></td>
+<td>用户模式下的 <code>putchar</code> 和 <code>getchar</code>实现, 用于提供console的I/O</td>
+</tr>
+<tr>
+<td></td>
+<td><code>exit.c</code></td>
+<td>用户模式下的 <code>exit</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>panic.c</code></td>
+<td>用户模式下的<code>panic</code></td>
+</tr>
+<tr>
+<td><code>user/</code></td>
+<td><code>*</code></td>
+<td>测试程序</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，lab3更改了不少lab2中的文件。可以执行<code>git diff lab2</code>来查看具体的改动。</p>
+<p>在这个Lab中，GCC提供的<strong>内联汇编</strong>特性非常有帮助。内联汇编的格式可以参考<a href="http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html" target="_blank" rel="noopener">6.828提供的教程</a>，也可以参考<a href="https://www.cnblogs.com/byeyear/p/4675049.html" target="_blank" rel="noopener">中文的博客</a>。</p>
 
           
         
@@ -1633,6 +1728,168 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span> <span class="comment"># 指定k8s版本，一般是v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>      <span class="comment"># 指定要创建的对象的类型，这里是Pod</span></span><br><span class="line"><span class="attr">metadata:</span>      <span class="comment"># 元数据，指定Pod信息</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">testpod</span>   <span class="comment"># 指定Pod的名称</span></span><br><span class="line"><span class="attr">  annotations:</span>    <span class="comment"># 一些必要的注释，可以用于传递信息</span></span><br><span class="line"><span class="attr">spec:</span>          <span class="comment"># 一些其他信息</span></span><br><span class="line"><span class="attr">  containers:</span>     <span class="comment"># 指定Pod使用的基础镜像</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">testcontainer</span>               <span class="comment"># 指定将要创建的容器名称，这个不重要</span></span><br><span class="line"><span class="attr">      image:</span> <span class="string">drac/counter:v1</span>            <span class="comment"># 指定使用的镜像名称，这里使用刚刚创建的镜像名</span></span><br><span class="line"><span class="attr">      imagePullPolicy:</span> <span class="string">"IfNotPresent"</span>   </span><br><span class="line">      <span class="comment"># 由于刚刚的镜像并没有上传到远程仓库中，这里需要指定镜像拉取策略为优先使用本地镜像</span></span><br><span class="line"><span class="attr">      command:</span>                          <span class="comment"># 指定容器要运行的指令</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">"etc/counter.sh"</span></span><br><span class="line"><span class="attr">      ports:</span>                            <span class="comment"># 指定容器对外开放的端口</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">          hostPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">  tolerations:</span>    </span><br><span class="line">  <span class="comment"># 这个属性与node的taints有关，由于master节点默认不能调度pods，这里要设置一些tolerations</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node.kubernetes.io/not-ready"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node-role.kubernetes.io/master"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br></pre></td></tr></table></figure>
 <p>写好配置文件之后，就可以用<code>kubectl create -f &lt;配置文件名&gt;</code>来创建pod了。</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/23/内联汇编/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/11/23/内联汇编/" itemprop="url">用GCC的内联汇编特性在C语言代码中嵌入汇编语句</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-23T10:32:51+08:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/11/23/内联汇编/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/23/内联汇编/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="用GCC的内联汇编特性在C语言代码中嵌入汇编语句"><a href="#用GCC的内联汇编特性在C语言代码中嵌入汇编语句" class="headerlink" title="用GCC的内联汇编特性在C语言代码中嵌入汇编语句"></a>用GCC的内联汇编特性在C语言代码中嵌入汇编语句</h2>
           
         
       
@@ -4509,224 +4766,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/18/GDB用法总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/01/18/GDB用法总结/" itemprop="url">GDB常见用法总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-18T09:24:31+08:00">
-                2018-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Academic or Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Academic-or-Technical/Tools/" itemprop="url" rel="index">
-                    <span itemprop="name">Tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/01/18/GDB用法总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/18/GDB用法总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="GDB常见用法总结"><a href="#GDB常见用法总结" class="headerlink" title="GDB常见用法总结"></a>GDB常见用法总结</h2><p>GDB是Linux系统下一款非常强大的调试工具，熟练掌握的话其功能远远不限于调试。本文总结了一部分GDB的常见用法，以供参考。</p>
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
-<li><code>b &lt;breakpoint&gt;</code> 设置断点<ul>
-<li><code>&lt;breakpoint&gt;</code>可以是函数名，可以是行数，也可以是具体地址。使用地址的时候，要在十六进制地址前面加上一个<code>*</code>标记。</li>
-<li><code>delete</code>命令可以删除断点</li>
-</ul>
-</li>
-<li><code>s</code> 让程序单步执行一条C指令，遇到函数调用则进入(需要编译时带-g参数)<ul>
-<li><code>si</code> 让程序单步执行一条asm指令，遇到函数调用则进入(不带-g也可以)</li>
-<li><code>si &lt;N&gt;</code> 让程序执行<code>&lt;N&gt;</code>条asm指令，包括函数内的和函数外的。</li>
-</ul>
-</li>
-<li><code>n</code> 让程序单步执行一条C指令，不进入函数调用<ul>
-<li><code>ni</code> 让程序单步执行一条asm指令，不进入函数调用</li>
-</ul>
-</li>
-<li><code>r</code> 运行程序<ul>
-<li>在<code>r</code>后面可以添加命令行参数，这样运行程序就相当于在shell中用同样的命令行参数来运行。</li>
-</ul>
-</li>
-<li><code>c</code> 让程序继续运行直到遇到下一个断点。</li>
-<li><code>p</code> 打印目标信息。</li>
-</ul>
-<h3 id="阅读内存系统内容"><a href="#阅读内存系统内容" class="headerlink" title="阅读内存系统内容"></a>阅读内存系统内容</h3><ul>
-<li><code>x/[num][opt][len] &lt;addr&gt;</code><ul>
-<li><code>[num]</code>：将要打印出的连续内存单元的数量</li>
-<li><code>[opt]</code>：打印出数据的格式<ul>
-<li><code>i</code> 指令</li>
-<li><code>x</code> 十六进制数据</li>
-<li><code>d</code> 十进制数据</li>
-<li><code>o</code> 八进制数据</li>
-<li><code>t</code> 二进制数据</li>
-<li><code>c</code> 字符数据</li>
-<li><code>f</code> 浮点数数据</li>
-</ul>
-</li>
-<li><code>[len]</code>：每个内存单元包含的字节数<ul>
-<li><code>b</code>：单字节</li>
-<li><code>h</code>：双字节</li>
-<li><code>w</code>：四字节</li>
-<li><code>g</code>：八字节</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>backtrace</code> 查看程序栈中每个栈帧的信息</li>
-</ul>
-<h3 id="设定输出格式"><a href="#设定输出格式" class="headerlink" title="设定输出格式"></a>设定输出格式</h3><ul>
-<li><code>set print pretty</code> 改善数组和结构体的输出格式</li>
-<li><code>layout asm</code> 改变输出格式为汇编窗口</li>
-</ul>
-<h3 id="info系命令"><a href="#info系命令" class="headerlink" title="info系命令"></a>info系命令</h3><ul>
-<li><code>info registers</code> 打印出寄存器信息</li>
-<li><code>info frame</code> 打印出当前栈帧的详细信息</li>
-<li><code>info local</code> 打印出当前栈帧中的局部变量</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4779,7 +4818,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
