@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用dot语言和doxygen提高绘图效率作为关山口某报告大学的学子，本人一直以来深受各种报告的荼毒。实验报告要画流程图，课设报告要画函数调用图和关系图……如果用一般的画图工具去一个个画实在是太累人了。为了从繁重的制图工作中解脱出来，dot语言被提上了学习日程。 dot语言dot语言是一种类似于TeX的用代码生成图形的脚本语言。它可以非常方便地生成有向图或无向图，并定制各个节点/边的属性。 dot语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用dot语言和Doxygen提高绘图效率">
+<meta property="og:url" content="https://dracit7.github.io/blog/2018/01/10/代码绘图/index.html">
+<meta property="og:site_name" content="Gensokyo">
+<meta property="og:description" content="用dot语言和doxygen提高绘图效率作为关山口某报告大学的学子，本人一直以来深受各种报告的荼毒。实验报告要画流程图，课设报告要画函数调用图和关系图……如果用一般的画图工具去一个个画实在是太累人了。为了从繁重的制图工作中解脱出来，dot语言被提上了学习日程。 dot语言dot语言是一种类似于TeX的用代码生成图形的脚本语言。它可以非常方便地生成有向图或无向图，并定制各个节点/边的属性。 dot语">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-07T08:06:02.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用dot语言和Doxygen提高绘图效率">
+<meta name="twitter:description" content="用dot语言和doxygen提高绘图效率作为关山口某报告大学的学子，本人一直以来深受各种报告的荼毒。实验报告要画流程图，课设报告要画函数调用图和关系图……如果用一般的画图工具去一个个画实在是太累人了。为了从繁重的制图工作中解脱出来，dot语言被提上了学习日程。 dot语言dot语言是一种类似于TeX的用代码生成图形的脚本语言。它可以非常方便地生成有向图或无向图，并定制各个节点/边的属性。 dot语">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dracit7.github.io/blog/2018/01/10/代码绘图/">
+
+
+
+
+
+  <title>用dot语言和Doxygen提高绘图效率 | Gensokyo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gensokyo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Youkai's Mountain</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/01/10/代码绘图/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用dot语言和Doxygen提高绘图效率</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-10T22:02:14+08:00">
+                2018-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/01/10/代码绘图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/10/代码绘图/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="用dot语言和doxygen提高绘图效率"><a href="#用dot语言和doxygen提高绘图效率" class="headerlink" title="用dot语言和doxygen提高绘图效率"></a>用dot语言和doxygen提高绘图效率</h1><p>作为关山口某报告大学的学子，本人一直以来深受各种报告的荼毒。实验报告要画流程图，课设报告要画函数调用图和关系图……如果用一般的画图工具去一个个画实在是太累人了。为了从繁重的制图工作中解脱出来，dot语言被提上了学习日程。</p>
+<h2 id="dot语言"><a href="#dot语言" class="headerlink" title="dot语言"></a>dot语言</h2><p>dot语言是一种类似于TeX的用代码生成图形的脚本语言。它可以非常方便地生成有向图或无向图，并定制各个节点/边的属性。</p>
+<h3 id="dot语言环境的配置"><a href="#dot语言环境的配置" class="headerlink" title="dot语言环境的配置"></a>dot语言环境的配置</h3><p>要想将dot脚本渲染成图片或pdf，必须安装<code>graphviz</code>。Arch的aur仓库中就有这个工具包，直接执行<code>yay graphviz</code>即可安装。</p>
+<p>为了更好的编码体验，建议在VSCode中安装两个插件 - <code>Graphviz Preview</code>和<code>Graphviz (dot) language support for Visual Studio Code</code>。这样我们就可以不再使用笨拙的graphviz原生GUI而改用VSCode来编写dot脚本了。</p>
+<h3 id="dot的语法"><a href="#dot的语法" class="headerlink" title="dot的语法"></a>dot的语法</h3><h4 id="图的声明"><a href="#图的声明" class="headerlink" title="图的声明"></a>图的声明</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt; &lt;name&gt; &#123;</span><br><span class="line">    &lt;stmt_list&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dot中的图声明类似于C中的结构。<code>&lt;type&gt;</code>可以是<code>graph</code>(无向图)或者<code>digraph</code>(有向图)，<code>&lt;name&gt;</code>代表图形的名字，命名规则与C语言一致。<code>&lt;stmt_list&gt;</code>由各种声明和设定语句构成。</p>
+<h4 id="属性声明"><a href="#属性声明" class="headerlink" title="属性声明"></a>属性声明</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;object&gt; [ &lt;attr_list&gt; ] &lt;name_list&gt;</span><br></pre></td></tr></table></figure>
+<p>属性声明可以设置一种<code>&lt;object&gt;</code>(<code>graph</code>|<code>edge</code>|<code>node</code>)的属性。<code>&lt;attr_list&gt;</code>决定了具体的属性，由数条由空格隔开的<code>&lt;attr&gt;</code>组成，每条<code>&lt;attr&gt;</code>都是一个赋值表达式，每个属性的可能取值可以参考<a href="https://graphviz.gitlab.io/_pages/doc/" target="_blank" rel="noopener">DOT documentation</a>。</p>
+<p>如果缺省<code>&lt;name_list&gt;</code>的话，这条属性会施加在所有这一类objects上；否则，就会施加在<code>&lt;name_list&gt;</code>所指定的几个object上。</p>
+<p><strong>位置越靠后的属性声明优先级越高。</strong></p>
+<p>示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node [shape = <span class="string">"doublecircle"</span> fixedsize=<span class="literal">true</span> width = <span class="number">0.5</span>] <span class="keyword">int</span> <span class="keyword">float</span> ident <span class="keyword">char</span></span><br></pre></td></tr></table></figure>
+<h4 id="点声明"><a href="#点声明" class="headerlink" title="点声明"></a>点声明</h4><p>由于dot语言的点可以不加声明直接使用，点声明通常可以缺省。点声明的格式与属性声明类似，只不过把object换成了点的名称。</p>
+<h4 id="边声明"><a href="#边声明" class="headerlink" title="边声明"></a>边声明</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有向图：</span></span><br><span class="line">&lt;node1&gt; -&gt; &lt;node2&gt; &lt;attr_list&gt;</span><br><span class="line"><span class="comment">// 无向图：</span></span><br><span class="line">&lt;node1&gt; -- &lt;node2&gt; &lt;attr_list&gt;</span><br></pre></td></tr></table></figure>
+<p>可以在<code>&lt;node1&gt;</code>和<code>&lt;node2&gt;</code>的后面加上<code>:&lt;dir&gt;</code>，其中<code>&lt;dir&gt;</code>决定边的起点或终点在node上的位置，其值为8个方向缩写之一，如<code>n</code>或<code>sw</code>。</p>
+<p>示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>:n -&gt; <span class="number">0</span>:s [label = <span class="string">"test"</span> ]</span><br></pre></td></tr></table></figure>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>dot的注释与C语言格式相同。</p>
+<h2 id="doxygen文档系统"><a href="#doxygen文档系统" class="headerlink" title="doxygen文档系统"></a>doxygen文档系统</h2><p>Doxygen是一种开源跨平台的，以类似JavaDoc风格描述的文档系统，完全支持C、C++、Java、Objective-C和IDL语言，部分支持PHP、C#。注释的语法与Qt-Doc、KDoc和JavaDoc兼容。Doxygen可以从一套归档源文件开始，生成HTML格式的在线类浏览器，或离线的LATEX、RTF参考手册。</p>
+<p>简而言之，Doxygen是一种项目文档生成器：它通过对项目源代码和注释的解析去生成一份这个项目的帮助文档。Doxygen的主要功能有二：</p>
+<ul>
+<li>生成一个源代码中带有指定格式注释的项目的帮助文档</li>
+<li>解析一个没有注释的项目的代码结构，并可以以图形化的形式表示</li>
+</ul>
+<p>关于doxygen的使用细节可以参考<a href="http://www.doxygen.nl/manual/index.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<h3 id="doxygen的安装"><a href="#doxygen的安装" class="headerlink" title="doxygen的安装"></a>doxygen的安装</h3><p>由于在之前已经安装过<code>graphviz</code>，这边只需要执行<code>yay doxygen</code>安装doxygen即可正常使用。</p>
+<h3 id="doxygen的使用"><a href="#doxygen的使用" class="headerlink" title="doxygen的使用"></a>doxygen的使用</h3><h4 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h4><p>在工作目录下执行<code>doxygen -g</code>可以生成一个文档系统配置文件。doxygen根据这个配置文件的设置来决定如何去生成帮助文档。参数<code>-s</code>可以让生成的配置文件不带有帮助性的注释，在<code>-g</code>后可以跟一个参数来决定配置文件的名字。</p>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>现在列出配置文件中一些常用的属性：</p>
+<h5 id="项目全局属性"><a href="#项目全局属性" class="headerlink" title="项目全局属性"></a>项目全局属性</h5><ul>
+<li><code>DOXYFILE_ENCODING</code>：将要生成的文档的编码方式，一般为默认的UTF-8</li>
+<li><code>PROJECT_NAME</code>：项目名，将会显示在生成的文档的左上角</li>
+<li><code>PROJECT_NUMBER</code>： 项目的版本号，会显示在项目名旁边</li>
+<li><code>PROJECT_BREIF</code>：项目的简介，会显示在项目名下面</li>
+<li><code>PROJECT_LOGO</code>：项目logo文件的路径，空则没有logo</li>
+<li><code>OUTPUT_DIRECTORY</code>：输出文件存放的路径</li>
+<li><code>ALLOW_UNICODE_NAMES</code>：设定为YES则支持所有Unicode字符，否则只支持ASCII码。默认为NO</li>
+<li><code>OUTPUT_LANGUAGE</code>：输出文件使用的语言</li>
+<li><code>TAB_SIZE</code>：tab键的长度</li>
+</ul>
+<h5 id="语言支持"><a href="#语言支持" class="headerlink" title="语言支持"></a>语言支持</h5><p>所有以<code>OPTIMIZE_OUTPUT_FOR_</code>打头的属性都是与项目语言有关的，一般你的项目是由什么语言编写的就将什么语言对应的属性设置为YES。</p>
+<p>Doxygen原生地支持Markdown语法，在注释中以markdown语法写出的代码会被自动渲染。如果想要关掉这一功能，可以将<code>MARKDOWN_SUPPORT</code>设置为NO。</p>
+<h5 id="文档生成"><a href="#文档生成" class="headerlink" title="文档生成"></a>文档生成</h5><ul>
+<li><code>EXTRACT_ALL</code>：如果设置为YES，所有对象(函数，类，结构等)都会被解析并加入到文档，尽管有的对象可能并没有可以被识别的注释。这个选项对于没有按规则注释的项目很有作用。</li>
+<li><code>EXTRACT_PRIVATE</code>：如果设置为YES，所有private属性也会被解析，否则不会</li>
+<li><code>EXTRACT_PACKAGE</code>：如果设置为YES，所有package中的对象也会被加入文档</li>
+<li><code>EXTRACT_STATIC</code>：如果设置为YES，所有static对象也会被解析，否则不会</li>
+</ul>
+<p>其余几条以EXTRACT打头的属性的作用类似。</p>
+<h5 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h5><p><code>INPUT</code>属性应当设置为输入文件所在的具体路径。通过修改<code>FILE_PATTERNS</code>可以使Doxygen只识别那些特定后缀的文件。如果设置<code>RECURSIVE</code>为YES，INPUT路径对应的同文件夹下和深层文件夹中的所有文件都会被加入文档。</p>
+<p>如果不想解析特定的几个文件，可以通过设置<code>EXCLUDE</code>或<code>EXCLUDE_SYMBOL</code>等属性将他们排除在外。</p>
+<p><code>IMAGE_PATH</code>用于告诉Doxygen在哪里找到你在文档中引用的图片。</p>
+<h5 id="函数调用关系图生成"><a href="#函数调用关系图生成" class="headerlink" title="函数调用关系图生成"></a>函数调用关系图生成</h5><p>Doxygen使用dot语言来生成关系图，因而需要将<code>HAVE_DOT</code>选项设置为YES，并将<code>DOT_PATH</code>属性的值设置为Graphviz的二进制文件所在文件夹路径。最后，将<code>CALL_GRAPH</code>和<code>CALLER_GRAPH</code>选项设置为YES即可在最终的文档中生成关系图。</p>
+<h4 id="编写源代码的注释"><a href="#编写源代码的注释" class="headerlink" title="编写源代码的注释"></a>编写源代码的注释</h4><h5 id="三种注释类型"><a href="#三种注释类型" class="headerlink" title="三种注释类型"></a>三种注释类型</h5><p>Doxygen只能识别特定格式的注释块，并将其内容加入到文档中。每个代码中的对象都可以有两种可选的注释：<strong>brief</strong>注释和<strong>detailed</strong>注释。对于函数和方法，还有第三种<strong>in-body</strong>注释。</p>
+<p>对象对应的<strong>detailed</strong>注释必须写在对象的<strong>正上方</strong>，并与对象的第一行之间没有空行。</p>
+<p>下面列出一些可以被Doxygen识别的<strong>detailed</strong>注释格式(这边以C风格为例)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JavaDoc Style，重点是第一行最后的星号</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment"> * Qt Style，与前一种不同的是星号换成了！</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// 这种情况下，第一行的三个/是必需的，之后每多一行都要以///开头，直到遇到空行。</span></span><br><span class="line"><span class="comment">/// 第三个/也可以换成！</span></span><br></pre></td></tr></table></figure>
+<p>如果要使用<strong>brief</strong>注释，有这样几种方式：</p>
+<ul>
+<li>在<strong>detailed</strong>注释块中使用<code>\brief</code>声明，在声明之后的注释直到空行(或以*开头的行)为止都是<strong>brief</strong>注释。</li>
+<li>如果<code>JAVADOC_AUTOBRIEF</code>属性开着，每个<strong>detailed</strong>注释块的第一句注释都会自动称为<strong>brief</strong>注释。</li>
+<li>只占有一行的以<code>///</code>开头的注释会成为<strong>brief</strong>注释。</li>
+</ul>
+<p>如果要对一个<strong>单独的变量</strong>或其他成员进行注释，可以在变量声明后跟一个注释，并在这个注释的开始处增加一个<code>&lt;</code>字符。如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sample; <span class="comment">///&lt; Brief description after member</span></span><br></pre></td></tr></table></figure>
+<h5 id="注释块中的声明"><a href="#注释块中的声明" class="headerlink" title="注释块中的声明"></a>注释块中的声明</h5><p>我们可以在注释块中使用各种声明来实现更强大的功能：</p>
+<ul>
+<li><p><code>\param</code>: 为对象的参数提供注释</p>
+</li>
+<li><p><code>\return</code>: 为对象的返回值提供注释</p>
+</li>
+<li><p><code>\sa</code>: 即see also, 一般包含与该对象相关联的对象名</p>
+</li>
+</ul>
+<p>如果不想将注释块直接放在要注释的对象上方，也可以将其放在其他地方，同时在注释中用声明来指定这个注释的归属对象。这种声明包括：</p>
+<ul>
+<li><p><code>\struct</code> to document a C-struct.</p>
+</li>
+<li><p><code>\union</code> to document a union.</p>
+</li>
+<li><p><code>\enum</code> to document an enumeration type.</p>
+</li>
+<li><p><code>\fn</code> to document a function.</p>
+</li>
+<li><p><code>\var</code> to document a variable or typedef or enum value.</p>
+</li>
+<li><p><code>\def</code> to document a #define.</p>
+</li>
+<li><p><code>\typedef</code> to document a type definition.</p>
+</li>
+<li><p><code>\file</code> to document a file.</p>
+</li>
+<li><p><code>\namespace</code> to document a namespace.</p>
+</li>
+<li><p><code>\package</code> to document a Java package.</p>
+</li>
+<li><p><code>\interface</code> to document an IDL interface.</p>
+</li>
+</ul>
+<p>对于其他语言的注释格式，可以继续参考<a href="http://www.doxygen.nl/manual/docblocks.html" target="_blank" rel="noopener">官方文档</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/12/04/在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境/" rel="next" title="在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境">
+                <i class="fa fa-chevron-left"></i> 在安装了Windows10系统的基础上安装ArchLinux+KDE桌面环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/01/10/shellscript练习/" rel="prev" title="本博客的Hexo配置">
+                本博客的Hexo配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/lyrica.png" alt="Drac Zhang">
+            
+              <p class="site-author-name" itemprop="name">Drac Zhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dracit7" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用dot语言和doxygen提高绘图效率"><span class="nav-number">1.</span> <span class="nav-text">用dot语言和doxygen提高绘图效率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dot语言"><span class="nav-number">1.1.</span> <span class="nav-text">dot语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dot语言环境的配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">dot语言环境的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dot的语法"><span class="nav-number">1.1.2.</span> <span class="nav-text">dot的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图的声明"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">图的声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性声明"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">属性声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#点声明"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">点声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边声明"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">边声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">注释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#doxygen文档系统"><span class="nav-number">1.2.</span> <span class="nav-text">doxygen文档系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#doxygen的安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">doxygen的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doxygen的使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">doxygen的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成配置文件"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">生成配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改配置文件"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#项目全局属性"><span class="nav-number">1.2.2.2.1.</span> <span class="nav-text">项目全局属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#语言支持"><span class="nav-number">1.2.2.2.2.</span> <span class="nav-text">语言支持</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文档生成"><span class="nav-number">1.2.2.2.3.</span> <span class="nav-text">文档生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入"><span class="nav-number">1.2.2.2.4.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数调用关系图生成"><span class="nav-number">1.2.2.2.5.</span> <span class="nav-text">函数调用关系图生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写源代码的注释"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">编写源代码的注释</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三种注释类型"><span class="nav-number">1.2.2.3.1.</span> <span class="nav-text">三种注释类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注释块中的声明"><span class="nav-number">1.2.2.3.2.</span> <span class="nav-text">注释块中的声明</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Drac Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Drac_zhang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dracit7.github.io/blog/2018/01/10/代码绘图/';
+          this.page.identifier = '2018/01/10/代码绘图/';
+          this.page.title = '用dot语言和Doxygen提高绘图效率';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Drac_zhang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
