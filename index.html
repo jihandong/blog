@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/04/25/ML笔记/">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/04/25/Backed/ML笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Drac Zhang">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/04/25/ML笔记/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/blog/2019/04/25/Backed/ML笔记/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -309,8 +309,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2019/04/25/ML笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/25/ML笔记/" itemprop="commentCount"></span>
+                <a href="/blog/2019/04/25/Backed/ML笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/25/Backed/ML笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,7 +397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/04/24/vim技巧统计/">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/04/24/Backed/vim技巧统计/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Drac Zhang">
@@ -416,7 +416,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2019/04/24/vim技巧统计/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/blog/2019/04/24/Backed/vim技巧统计/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -447,8 +447,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2019/04/24/vim技巧统计/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/24/vim技巧统计/" itemprop="commentCount"></span>
+                <a href="/blog/2019/04/24/Backed/vim技巧统计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/24/Backed/vim技巧统计/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2336,7 +2336,9 @@
 <p>在<code>kern/trap.c</code>中的<code>trap_init_percpu()</code>函数为<strong>BSP</strong>初始化了TSS和TSS描述符。它能在Lab3中正常工作，但在其他CPU上运行时会出错。用每个CPU的tss去取代这个函数中的全局变量<code>ts</code>，以使其能够正常工作。</p>
 </blockquote>
 <p>需要改变的也就只有几个量：首先是ts要换成<code>thiscpu-&gt;cpu_ts</code>，然后就是TSS的selector要加一个<code>cpuId&lt;&lt;3</code>，还有就是CPU的栈地址需要改成新的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">trap_init_percpu(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// LAB 4: Your code here:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> cpuId = thiscpu-&gt;cpu_id;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Taskstate</span> <span class="title">curts</span> = <span class="title">thiscpu</span>-&gt;<span class="title">cpu_ts</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Setup a TSS so that we get the right stack</span></span><br><span class="line">	<span class="comment">// when we trap to the kernel.</span></span><br><span class="line">	curts.ts_esp0 = KSTACKTOP - cpuId * (KSTKSIZE+KSTKGAP);</span><br><span class="line">	curts.ts_ss0 = GD_KD;</span><br><span class="line">	curts.ts_iomb = <span class="keyword">sizeof</span>(struct Taskstate);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Initialize the TSS slot of the gdt.</span></span><br><span class="line">	gdt[(GD_TSS0 &gt;&gt; <span class="number">3</span>) + cpuId] = SEG16(STS_T32A, (<span class="keyword">uint32_t</span>) (&amp;curts),</span><br><span class="line">		<span class="keyword">sizeof</span>(struct Taskstate) - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	gdt[(GD_TSS0 &gt;&gt; <span class="number">3</span>) + cpuId].sd_s = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Load the TSS selector (like other segment selectors, the</span></span><br><span class="line">	<span class="comment">// bottom three bicurts are special; we leave them 0)</span></span><br><span class="line">	ltr(GD_TSS0 + (cpuId &lt;&lt; <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Load the IDT</span></span><br><span class="line">	lidt(&amp;idt_pd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">trap_init_percpu(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// LAB 4: Your code here:</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> cpuId = thiscpu-&gt;cpu_id;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Taskstate</span>* <span class="title">curts</span> = &amp;<span class="title">thiscpu</span>-&gt;<span class="title">cpu_ts</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Setup a TSS so that we get the right stack</span></span><br><span class="line">	<span class="comment">// when we trap to the kernel.</span></span><br><span class="line">	curts-&gt;ts_esp0 = KSTACKTOP - cpuId * (KSTKSIZE+KSTKGAP);</span><br><span class="line">	curts-&gt;ts_ss0 = GD_KD;</span><br><span class="line">	curts-&gt;ts_iomb = <span class="keyword">sizeof</span>(struct Taskstate);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Initialize the TSS slot of the gdt.</span></span><br><span class="line">	gdt[(GD_TSS0 &gt;&gt; <span class="number">3</span>) + cpuId] = SEG16(STS_T32A, (<span class="keyword">uint32_t</span>) (curts),</span><br><span class="line">		<span class="keyword">sizeof</span>(struct Taskstate) - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	gdt[(GD_TSS0 &gt;&gt; <span class="number">3</span>) + cpuId].sd_s = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Load the TSS selector (like other segment selectors, the</span></span><br><span class="line">	<span class="comment">// bottom three bicurts are special; we leave them 0)</span></span><br><span class="line">	ltr(GD_TSS0 + (cpuId &lt;&lt; <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Load the IDT</span></span><br><span class="line">	lidt(&amp;idt_pd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在做这个任务的时候一开始犯了一个很低级的错误：在声明<code>curts</code>的时候，直接将其声明为了一个新的<code>Taskstate</code>结构而非结构指针，这直接导致之后的所有操作都没有真正地改变<code>thiscpu-&gt;cpu_ts</code>的值。更致命的是这个Exercise的检查机制并没有查出这个错误，导致这个错误直到Exercise 6才引发了原因不明的<code>Triple fault</code>，给debug工作带来了极大的困难。</p>
+<p><del>这个故事告诉我们，写码需谨慎，三思而后行，不要过了测试就以为没事了</del></p>
 <p>在完成这个任务之后，以<code>CPUS=4</code>的命令行参数运行<code>make qemu</code>，可以得到这样的输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">check_page_alloc() succeeded!</span><br><span class="line">check_page() succeeded!</span><br><span class="line">check_kern_pgdir() succeeded!</span><br><span class="line">check_page_installed_pgdir() succeeded!</span><br><span class="line">SMP: CPU 0 found 4 CPU(s)</span><br><span class="line">enabled interrupts: 1 2</span><br><span class="line">SMP: CPU 1 starting</span><br><span class="line">SMP: CPU 2 starting</span><br><span class="line">SMP: CPU 3 starting</span><br></pre></td></tr></table></figure>
 <h5 id="Locking"><a href="#Locking" class="headerlink" title="Locking"></a>Locking</h5><p>在现在的代码中，AP在完成自己的初始化之后会进行一个无限循环(什么也不做)。在让它们进一步做出动作之前，我们需要先解决各个CPU在同时运行内核代码时会出现的<strong>竞争条件</strong>。说到竞争条件，我们首先想到的肯定是加锁——事实上，这里最简单的解决方法就是为内核加一个锁。</p>
@@ -2352,14 +2354,30 @@
 <p><strong>Exercise 5</strong></p>
 <p>按照上面的要求给内核在适当的位置加锁。</p>
 </blockquote>
+<p>需要加锁的地方有四处：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">i386_init(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// Lab 4 multitasking initialization functions</span></span><br><span class="line">	pic_init();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Acquire the big kernel lock before waking up APs</span></span><br><span class="line">	<span class="comment">// Your code here:</span></span><br><span class="line"></span><br><span class="line">	lock_kernel();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Starting non-boot CPUs</span></span><br><span class="line">	boot_aps();</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">mp_main(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// Your code here:</span></span><br><span class="line"></span><br><span class="line">	lock_kernel();</span><br><span class="line">	sched_yield();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Remove this after you finish Exercise 6</span></span><br><span class="line">	<span class="comment">// for (;;);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">trap(struct Trapframe *tf)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">if</span> ((tf-&gt;tf_cs &amp; <span class="number">3</span>) == <span class="number">3</span>) &#123;</span><br><span class="line">		<span class="comment">// Trapped from user mode.</span></span><br><span class="line">		<span class="comment">// Acquire the big kernel lock before doing any</span></span><br><span class="line">		<span class="comment">// serious kernel work.</span></span><br><span class="line">		<span class="comment">// LAB 4: Your code here.</span></span><br><span class="line">		assert(curenv);</span><br><span class="line">    lock_kernel();</span><br><span class="line">  	...</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">env_run(struct Env *e)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// Step 2</span></span><br><span class="line">	unlock_kernel();</span><br><span class="line">	env_pop_tf(&amp;e-&gt;env_tf);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在完成Exercise 6之前，我们暂时还无法我们的解答是否正确。</p>
 <blockquote>
 <p><strong>Question</strong></p>
 <p>看上去大内核锁保证了同时只能有一个CPU在内核态运行，为什么我们还是需要将不同CPU的内核栈分开？描述一个不分开内核栈所可能导致的错误场景。</p>
 </blockquote>
+<p>我们研究一下每个CPU开始跑用户环境时的代码：</p>
+<p>在<code>mpentry.S</code>中，AP在打开分页机制之后切换了内核栈。如果在这里没有切换到一个独立的内核栈，可以看到接下来就是对<code>mp_main</code>的间接调用(和bootloader中的间接调用原理一致，这里的间接调用是因为刚刚打开分页机制，只有使用绝对地址跳转才能到达<code>0xf0000000</code>以上的高地址，如果直接调用则是相对寻址，仍留在低地址区)，<strong>这个调用会有压栈操作</strong>，且这个压栈操作发生在<code>mp_main()</code>中上内核锁之前。如果多个AP使用同一个内核栈，并行的压栈操作会引起race。</p>
 <blockquote>
 <p><strong>Challenge</strong></p>
+<p>大内核锁虽然方便，但完全限制了内核代码并行的可能性。现代的操作系统更多地使用<strong>细粒度锁</strong>(fine-grained locking)，也就是用不同的锁去保护不同的共享区域。请尝试用细粒度锁取代大内核锁，以实现JOS内核的并行化。</p>
+<p>你可以使用自旋锁来保护以下共享区域：</p>
+<ul>
+<li>页管理器</li>
+<li>控制台驱动</li>
+<li>调度器</li>
+<li>你将在Part C中实现的IPC状态</li>
+</ul>
 </blockquote>
+<p>鉴于现在实现细粒度锁可能会为之后的实验埋下潜在的bug，我决定在完成整个6.828之后再来做这个Challenge。</p>
 <h5 id="Round-Robin-Scheduling"><a href="#Round-Robin-Scheduling" class="headerlink" title="Round-Robin Scheduling"></a>Round-Robin Scheduling</h5><p>你的下一个任务是实现对用户环境的轮询调度。</p>
 <ul>
 <li><code>kern/sched.c</code>中的<code>sched_yield()</code>函数负责从用户环境中选一个运行。它从当前在运行的环境开始在<code>envs</code>数组中循环寻找，找到第一个状态为<code>ENV_RUNNABLE</code>的环境并调用<code>env_run()</code>去运行它。</li>
@@ -2370,6 +2388,49 @@
 <p><strong>Exercise 6</strong></p>
 <p>在<code>sched_yield()</code>中实现上面描述的机制。别忘了修改<code>syscall()</code>函数来处理新的系统调用<code>sys_yield()</code>。</p>
 <p>修改<code>kern/init.c</code>来让三个(或以上)的用户环境同时运行<code>user/yield.c</code>，然后分别以不同的CPU数目运行<code>make qemu</code>，观察结果。在所有进程结束退出之后，kernel monitor应当被唤醒。</p>
+</blockquote>
+<p>由于最开始调用<code>sched_yield</code>的是<code>i386_init()</code>函数，<code>curenv</code>在第一次调用时为0，我们需要额外处理这种情况。其他部分基本照着上面的描述做就没什么问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">sched_yield(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">idle</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// LAB 4: Your code here.</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">envid_t</span> curid, i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Switch the environment</span></span><br><span class="line">	<span class="keyword">if</span> (curenv) &#123;</span><br><span class="line">		curid = ENVX(curenv-&gt;env_id);</span><br><span class="line">		i = (curid+<span class="number">1</span>) % NENV;</span><br><span class="line">		<span class="keyword">while</span> (i != curid) &#123;</span><br><span class="line">			<span class="keyword">if</span> (envs[i].env_status == ENV_RUNNABLE)</span><br><span class="line">				env_run(&amp;envs[i]);</span><br><span class="line">			i = (i+<span class="number">1</span>) % NENV;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (curenv-&gt;env_status == ENV_RUNNING)</span><br><span class="line">			env_run(&amp;envs[i]);</span><br><span class="line">	<span class="comment">// Find a environment to run</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; NENV; i++)</span><br><span class="line">			<span class="keyword">if</span> (envs[i].env_status == ENV_RUNNABLE) &#123;</span><br><span class="line">				env_run(&amp;envs[i]);</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// sched_halt never returns</span></span><br><span class="line">	sched_halt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改<code>syscall()</code>函数的时候最好去看一下新的调用对应的调用号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int32_t</span></span><br><span class="line">syscall(<span class="keyword">uint32_t</span> syscallno, <span class="keyword">uint32_t</span> a1, <span class="keyword">uint32_t</span> a2, <span class="keyword">uint32_t</span> a3, <span class="keyword">uint32_t</span> a4, <span class="keyword">uint32_t</span> a5)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Call the function corresponding to the 'syscallno' parameter.</span></span><br><span class="line">	<span class="comment">// Return any appropriate return value.</span></span><br><span class="line">	<span class="comment">// LAB 3: Your code here.</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// panic("syscall not implemented");</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span> (syscallno) &#123;</span><br><span class="line">		<span class="keyword">case</span> SYS_cgetc:</span><br><span class="line">			<span class="keyword">return</span> sys_cgetc();</span><br><span class="line">		<span class="keyword">case</span> SYS_cputs:</span><br><span class="line">			sys_cputs((<span class="keyword">const</span> <span class="keyword">char</span> *)a1, a2);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">case</span> SYS_getenvid:</span><br><span class="line">			<span class="keyword">return</span> sys_getenvid();</span><br><span class="line">		<span class="keyword">case</span> SYS_env_destroy:</span><br><span class="line">			<span class="keyword">return</span> sys_env_destroy(a1);</span><br><span class="line">		<span class="keyword">case</span> SYS_yield:</span><br><span class="line">			sys_yield();</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">return</span> -E_INVAL;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后是修改<code>kern/init.c</code>，为了让它运行<code>user/yield.c</code>三次，我们需要连续以<code>user_yield</code>(而非一开始默认的<code>user_primes</code>)调用<code>ENV_CREATE</code>函数三次：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(TEST)</span></span><br><span class="line">	<span class="comment">// Don't touch -- used by grading script!</span></span><br><span class="line">	ENV_CREATE(TEST, ENV_TYPE_USER);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	<span class="comment">// Touch all you want.</span></span><br><span class="line">	ENV_CREATE(user_yield, ENV_TYPE_USER);</span><br><span class="line">	ENV_CREATE(user_yield, ENV_TYPE_USER);</span><br><span class="line">	ENV_CREATE(user_yield, ENV_TYPE_USER);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TEST*</span></span></span><br></pre></td></tr></table></figure>
+<p>全部完成后，我们以<code>make qemu</code>打开qemu，可以看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Hello, I am environment 00001000.</span><br><span class="line">Hello, I am environment 00001001.</span><br><span class="line">Hello, I am environment 00001002.</span><br><span class="line">Back in environment 00001000, iteration 0.</span><br><span class="line">Back in environment 00001001, iteration 0.</span><br><span class="line">Back in environment 00001002, iteration 0.</span><br><span class="line">Back in environment 00001000, iteration 1.</span><br><span class="line">Back in environment 00001001, iteration 1.</span><br><span class="line">Back in environment 00001002, iteration 1.</span><br><span class="line">Back in environment 00001000, iteration 2.</span><br><span class="line">Back in environment 00001001, iteration 2.</span><br><span class="line">Back in environment 00001002, iteration 2.</span><br><span class="line">Back in environment 00001000, iteration 3.</span><br><span class="line">Back in environment 00001001, iteration 3.</span><br><span class="line">Back in environment 00001002, iteration 3.</span><br><span class="line">Back in environment 00001000, iteration 4.</span><br><span class="line">All done in environment 00001000.</span><br><span class="line">[00001000] exiting gracefully</span><br><span class="line">[00001000] free env 00001000</span><br><span class="line">Back in environment 00001001, iteration 4.</span><br><span class="line">All done in environment 00001001.</span><br><span class="line">[00001001] exiting gracefully</span><br><span class="line">[00001001] free env 00001001</span><br><span class="line">Back in environment 00001002, iteration 4.</span><br><span class="line">All done in environment 00001002.</span><br><span class="line">[00001002] exiting gracefully</span><br><span class="line">[00001002] free env 00001002</span><br></pre></td></tr></table></figure>
+<p>可以看到，单核模式下，各个用户环境是以轮询的方式依次被调度的。</p>
+<p>以<code>make qemu CPUS=2</code>再次运行<code>qemu</code>，可以发现iteration的顺序被稍微打乱了。继续增加<code>CPUS</code>的个数到3，运行结果显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Hello, I am environment 00001000.</span><br><span class="line">Hello, I am environment 00001001.</span><br><span class="line">Hello, I am environment 00001002.</span><br><span class="line">Back in environment 00001000, iteration 0.</span><br><span class="line">Back in environment 00001001, iteration 0.</span><br><span class="line">Back in environment 00001002, iteration 0.</span><br><span class="line">Back in environment 00001000, iteration 1.</span><br><span class="line">Back in environment 00001001, iteration 1.</span><br><span class="line">Back in environment 00001002, iteration 1.</span><br><span class="line">Back in environment 00001000, iteration 2.</span><br><span class="line">Back in environment 00001001, iteration 2.</span><br><span class="line">Back in environment 00001002, iteration 2.</span><br><span class="line">Back in environment 00001000, iteration 3.</span><br><span class="line">Back in environment 00001001, iteration 3.</span><br><span class="line">Back in environment 00001002, iteration 3.</span><br><span class="line">Back in environment 00001001, iteration 4.</span><br><span class="line">Back in environment 00001002, iteration 4.</span><br><span class="line">Back in environment 00001000, iteration 4.</span><br><span class="line">All done in environment 00001001.</span><br><span class="line">All done in environment 00001002.</span><br><span class="line">All done in environment 00001000.</span><br><span class="line">[00001001] exiting gracefully</span><br><span class="line">[00001001] free env 00001001</span><br><span class="line">[00001002] exiting gracefully</span><br><span class="line">[00001002] free env 00001002</span><br><span class="line">[00001000] exiting gracefully</span><br><span class="line">[00001000] free env 00001000</span><br></pre></td></tr></table></figure>
+<p>可以发现，三个用户环境在三个AP上可以完全并行运行。继续增加<code>CPUS</code>也不会改变这个结果。</p>
+<blockquote>
+<p><strong>Questions</strong></p>
+<p>Q：在<code>env_run</code>函数的实现中你应该调用过<code>lcr3()</code>函数。在这个调用的之前和之后，你的代码都对函数的参数<code>e</code>进行了引用。为什么在系统的页目录改变过的情况下，我们仍能安全地对<code>e</code>解引用？</p>
+<p>A：<code>e</code>是一个指向<code>Env</code>结构的指针，而所有的<code>Env</code>结构在虚拟内存空间中的映射地址都是<code>UENVS</code>-<code>UPAGES</code>的那片区域，这个区域在所有的用户环境中都是相同的，就算页目录切换了，<code>e</code>也只会指向相同的内容。</p>
+<p>Q：在内核进行用户环境切换的时候，它必须保证旧用户环境的寄存器被妥善保存以便之后的恢复。这个过程是什么时候进行的？</p>
+<p>A：用户环境申请环境切换是通过系统调用进行的，这就一定会触发中断从而进入<code>trapentry.S</code>中，系统会在那里在栈上构建出一个<code>Trapframe</code>并赋给用户环境的<code>env_tf</code>属性，从而保存用户环境的寄存器。如果是内核自己唤醒一个用户环境，<code>curenv</code>应该是<code>NULL</code>，也就没什么好保存的了。</p>
+</blockquote>
+<blockquote>
+<p><strong>Challenge</strong></p>
+<ol>
+<li>用一个不那么简单的调度策略取代我们现在使用的轮询调度，比如UNIX风格的<strong>可调整的优先调度</strong>，或者更复杂的<strong>彩票调度</strong>(给每个进程发一定数量的彩票，每次调度都开票并切换到中彩的那个进程)或<strong>步幅调度</strong>。</li>
+<li>改进<code>Env</code>结构以使其能够保存处理器的浮点数相关状态，并更改相关代码以使这些状态能够正确地被保存和复原，以使JOS支持浮点操作。<code>FXSAVE</code>和<code>FXRSTOR</code>操作也许会有帮助。</li>
+</ol>
+</blockquote>
+<p>同理，这种改进型的挑战留到整个6.828完成之后再做。</p>
+<h5 id="System-Calls-for-Environment-Creation"><a href="#System-Calls-for-Environment-Creation" class="headerlink" title="System Calls for Environment Creation"></a>System Calls for Environment Creation</h5><p>虽然现在你的内核已经可以在不同用户环境之下自由切换，但所有的进程仍然是在<code>i386_init()</code>函数中由内核一次创建的。我们应当实现能让用户环境自行创建新进程的系统调用。</p>
+<p>UNIX系统提供了<code>fork()</code>调用作为进程创建工具。它会将父进程的整个地址空间完整地拷贝给子进程，因而创建之初两个进程唯一的区别是<code>pid</code>和<code>ppid</code>。在之后，由于两个进程的地址空间不共享，它们的地址空间会逐渐出现差别。</p>
+<p>我们在这里需要实现一个不同的(更加原始的)系统调用集：</p>
+<ul>
+<li><code>sys_exofork()</code>：这个调用创建一个近乎空白的进程——它的用户部分地址空间是空的，而且它不能运行。两个环境在一开始会享有相同的寄存器状态。在父进程中，这个调用会返回子进程的<code>pid</code>(或一个负数错误码)；在子进程它会返回0。(<del>由于子进程的状态是不可运行，其实这个调用不会在子进程中返回，除非父进程手动改变它的状态</del>)</li>
+<li><code>sys_env_set_status()</code>：用于设置一个进程的状态为<code>RUNNABLE</code>或者<code>NOT_RUNNABLE</code>。这个调用用于在子进程的初始化完成之后将其标记为可以运行。</li>
+<li><code>sys_page_alloc()</code>：分配一块物理内存并将其映射到指定进程的指定地址。</li>
+<li><code>sys_page_map()</code>：将一个进程的一块内存映射拷贝给另一个进程，从而实现两个进程之间的共享内存</li>
+<li><code>sys_page_unmap()</code>：取消一个进程中某个地址的内存映射</li>
+</ul>
+<p>在以上所有函数中，进程号<code>0</code>代表着当前进程。<code>kern/env.c</code>中的<code>envid2env()</code>函数包含了这种转换机制。</p>
+<blockquote>
+<p><strong>Exercise 7</strong></p>
+<p>实现之前描述的五个系统调用，并确保<code>syscall()</code>函数会调用它们。</p>
+<p>现在，在你使用<code>envid2env()</code>的时候，可以直接将<code>checkperm</code>参数置为1。如果你发现有的系统调用参数无效，应当返回<code>-E_INVAL</code>。</p>
 </blockquote>
 
           
@@ -2552,168 +2613,6 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span> <span class="comment"># 指定k8s版本，一般是v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>      <span class="comment"># 指定要创建的对象的类型，这里是Pod</span></span><br><span class="line"><span class="attr">metadata:</span>      <span class="comment"># 元数据，指定Pod信息</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">testpod</span>   <span class="comment"># 指定Pod的名称</span></span><br><span class="line"><span class="attr">  annotations:</span>    <span class="comment"># 一些必要的注释，可以用于传递信息</span></span><br><span class="line"><span class="attr">spec:</span>          <span class="comment"># 一些其他信息</span></span><br><span class="line"><span class="attr">  containers:</span>     <span class="comment"># 指定Pod使用的基础镜像</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">testcontainer</span>               <span class="comment"># 指定将要创建的容器名称，这个不重要</span></span><br><span class="line"><span class="attr">      image:</span> <span class="string">drac/counter:v1</span>            <span class="comment"># 指定使用的镜像名称，这里使用刚刚创建的镜像名</span></span><br><span class="line"><span class="attr">      imagePullPolicy:</span> <span class="string">"IfNotPresent"</span>   </span><br><span class="line">      <span class="comment"># 由于刚刚的镜像并没有上传到远程仓库中，这里需要指定镜像拉取策略为优先使用本地镜像</span></span><br><span class="line"><span class="attr">      command:</span>                          <span class="comment"># 指定容器要运行的指令</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">"etc/counter.sh"</span></span><br><span class="line"><span class="attr">      ports:</span>                            <span class="comment"># 指定容器对外开放的端口</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">          hostPort:</span> <span class="number">8086</span></span><br><span class="line"><span class="attr">  tolerations:</span>    </span><br><span class="line">  <span class="comment"># 这个属性与node的taints有关，由于master节点默认不能调度pods，这里要设置一些tolerations</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node.kubernetes.io/not-ready"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br><span class="line"><span class="attr">    - key:</span> <span class="string">"node-role.kubernetes.io/master"</span></span><br><span class="line"><span class="attr">      operator:</span> <span class="string">"Exists"</span></span><br><span class="line"><span class="attr">      effect:</span> <span class="string">"NoSchedule"</span></span><br></pre></td></tr></table></figure>
 <p>写好配置文件之后，就可以用<code>kubectl create -f &lt;配置文件名&gt;</code>来创建pod了。</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/11/23/内联汇编/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/11/23/内联汇编/" itemprop="url">用GCC的内联汇编特性在C语言代码中嵌入汇编语句</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-23T10:32:51+08:00">
-                2018-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
-                    <span itemprop="name">Academic or Technical</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
-                    <span itemprop="name">Operating System</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2018/11/23/内联汇编/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/23/内联汇编/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="用GCC的内联汇编特性在C语言代码中嵌入汇编语句"><a href="#用GCC的内联汇编特性在C语言代码中嵌入汇编语句" class="headerlink" title="用GCC的内联汇编特性在C语言代码中嵌入汇编语句"></a>用GCC的内联汇编特性在C语言代码中嵌入汇编语句</h2>
           
         
       
@@ -3307,11 +3206,213 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/07/11/ArchLinux下的软件安装/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/07/11/ArchLinux下的软件安装/" itemprop="url">ArchLinux下的软件安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T09:39:48+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/ArchLinux-and-Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">ArchLinux and Shell</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/07/11/ArchLinux下的软件安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/11/ArchLinux下的软件安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Archlinux下的软件安装方式总结"><a href="#Archlinux下的软件安装方式总结" class="headerlink" title="Archlinux下的软件安装方式总结"></a>Archlinux下的软件安装方式总结</h2><p>虽然Archlinux既有稳定的官方镜像源又有完善的aur社区，仍然有一些软件是我们通过这两种方式无法安装的。今天就来总结一下Archlinux下所有的安装方式，让我们能方便舒适地使用所有软件。</p>
+<h3 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h3><p><code>pacman</code>是Arch官方的包管理工具。这里能下载到的都是Arch官方支持的软件，因此很多软件是无法从这种途径获取的。</p>
+<h4 id="找到需要的软件包"><a href="#找到需要的软件包" class="headerlink" title="找到需要的软件包"></a>找到需要的软件包</h4><p>有些时候我们会发现有的软件依赖的二进制文件并没有被安装，导致软件无法运行。想要查找一个二进制文件所在的pacman软件包，可以使用<code>pkgfile</code>工具。使用方法是<code>pkgfile &lt;文件名&gt;</code>。它会输出这个文件所在的软件包名。</p>
+<h4 id="pacman的使用方式"><a href="#pacman的使用方式" class="headerlink" title="pacman的使用方式"></a>pacman的使用方式</h4><ul>
+<li>常用参数<ul>
+<li><code>-S</code> 后面跟软件包名，与镜像源同步，一般使用这个参数安装新的软件包或升级旧的软件包。</li>
+<li><code>-U</code> 后面跟一个文件名，通过下载到本地的安装包安装软件</li>
+<li><code>-R</code> 后面跟软件包名，卸载这个软件并删除软件包</li>
+<li><code>-Syu</code> 俗称 <em>滚Arch</em> ，进行全面的系统更新</li>
+</ul>
+</li>
+</ul>
+<h4 id="定制pacman下载工具"><a href="#定制pacman下载工具" class="headerlink" title="定制pacman下载工具"></a>定制pacman下载工具</h4><p><code>pacman</code>的配置文件是<code>/etc/pacman.conf</code>。在这个文件中我们可以对<code>pacman</code>的行为进行自定义。</p>
+<ul>
+<li>常用的自定义项<ul>
+<li>改变<code>pacman</code>的镜像源：修改<code>/etc/pacman.d/mirrorlist</code>文件内容</li>
+<li>改变<code>pacman</code>使用的下载工具：修改<code>XferCommand</code>变量的值<ul>
+<li><code>/usr/bin/curl -C - -f %u &gt; %o</code> pacman默认使用<code>curl</code>作为下载工具</li>
+<li><code>/usr/bin/wget --passive-ftp -c -O %o %u</code> <code>wget</code>是一款非常优秀的单线程下载工具，功能比<code>curl</code>更为强大</li>
+<li><code>/usr/bin/axel -o %o %u</code> <code>axel</code>是一款多线程下载工具，速度比前两者要快，推荐设置它为<code>pacman</code>的默认工具。</li>
+<li><strong>注意</strong>：<code>wget</code>和<code>axel</code>需要提前用pacman安装。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="yaourt-yay"><a href="#yaourt-yay" class="headerlink" title="yaourt/yay"></a>yaourt/yay</h3><p>官方支持的软件毕竟是有限的，很多我们需要的第三方软件并没有官方提供的支持。在这种时候，Archlinux丰富而强大的aur社区就体现出其威力了——我们可以很方便地从aur社区下载别人制作好的应用软件包或二进制文件，还可以将自己制作的软件包发布在这个社区上(关于发布方式的细节不在这里讨论)。</p>
+<p>从aur社区下载软件包所需要的工具是<code>yaourt</code>(现在yaourt已经停止更新了，取而代之的是<code>yay</code>)。使用<code>pacman</code>可以安装<code>yaourt</code>，使用<code>yaourt</code>可以安装<code>yay</code>。</p>
+<h4 id="yaourt-yay的使用方式"><a href="#yaourt-yay的使用方式" class="headerlink" title="yaourt/yay的使用方式"></a>yaourt/yay的使用方式</h4><p>与<code>pacman</code>类似，yaourt可以用<code>-S</code>参数来下载并安装软件包。如果不加参数，yaourt会在aur库中搜索所有名字与给出的名字相近的软件包或二进制文件，并以表的形式列出，供用户选择。下载到的二进制文件会默认保存在当前目录中。</p>
+<h4 id="定制yaourt-yay下载工具"><a href="#定制yaourt-yay下载工具" class="headerlink" title="定制yaourt/yay下载工具"></a>定制yaourt/yay下载工具</h4><p><code>yaourt</code>和<code>yay</code>的配置文件都是<code>/etc/makepkg.conf</code>。</p>
+<p>修改下载工具的方式与pacman类似，只不过修改的是DLAGENTS变量。修改时可以直接删除这个变量原来的所有值，改为<code>DLAGENTS = (&#39;http::/usr/bin/wget --passive-ftp -c -O %o %u&#39;,&#39;https::/usr/bin/wget --passive-ftp -c -O %o %u&#39;)</code></p>
+<h4 id="AUR的其他使用方式"><a href="#AUR的其他使用方式" class="headerlink" title="AUR的其他使用方式"></a>AUR的其他使用方式</h4><p>有些时候yay会出现玄学问题，即明明远端的aur包是存在的，在试图拉取的时候却报404。这种时候，我们可以在<a href="https://aur.archlinux.org/packages/" target="_blank" rel="noopener">AUR仓库</a>中搜索这个包的名字，找到其git地址，并使用<code>git clone</code>直接将其拉取到本地。</p>
+<p>拉取完成之后，可以在PKGBUILD文件所在的位置执行<code>makepkg</code>命令来安装这个包。如果仍然出现下载错误，就复制PKGBUILD中source变量指明的下载地址并用wget去手动下载，并在下载完成之后修改source变量的值为这个包在本地的路径，再次执行<code>makepkg</code>就可以了。</p>
+<h3 id="通过下载好的软件包安装"><a href="#通过下载好的软件包安装" class="headerlink" title="通过下载好的软件包安装"></a>通过下载好的软件包安装</h3><p>如果一个软件既无法通过<code>pacman</code>下载又无法通过aur库得到，那就只能手动安装了。首先我们要通过各种渠道获取软件的安装包(<code>GitHub</code>/<code>wget</code>/软件官网/其他)，随后的操作要视软件包而定。</p>
+<h4 id="软件是单文件-二进制文件"><a href="#软件是单文件-二进制文件" class="headerlink" title="软件是单文件(二进制文件)"></a>软件是单文件(二进制文件)</h4><p>这种情况最简单，没有软件包，直接把二进制文件移动到<code>/usr/bin</code>文件夹下即可(注意要加<code>sudo</code>)。</p>
+<h4 id="软件包中有安装脚本"><a href="#软件包中有安装脚本" class="headerlink" title="软件包中有安装脚本"></a>软件包中有安装脚本</h4><p>大多软件会在软件包中放一个命名为<code>install.sh</code>(或其他名字)的安装脚本。在这种情况下，可以直接执行<code>sh install.sh</code>或<code>./install.sh</code>来安装软件。(最好结合软件的READ.ME或官方说明安装)</p>
+<h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h4><p>如果安装脚本不能在Arch下正常运行，那就只好手动拆包安装了。这种时候可以搜索一下各种后缀的软件包的格式，然后手动将二进制文件，lib文件和其他配置文件cp到需要的位置完成安装。</p>
+<h3 id="downgrade"><a href="#downgrade" class="headerlink" title="downgrade"></a>downgrade</h3><p>和前面几种方式不同，downgrade是一种给软件包<strong>降级</strong>的方式。使用这个工具可以很方便地回滚软件包等级，从而解决一些可能存在的依赖问题。</p>
+<p>执行<code>yay downgrade</code>命令可以直接从aur仓库安装downgrade工具。</p>
+<p>使用downgrade工具需要root权限。使用方式：<code>sudo downgrade &lt;软件包&gt;</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3359,7 +3460,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
