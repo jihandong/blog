@@ -86,17 +86,17 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="代码写谱 - LilyPond教程说到五线谱制作，大多数人最先想到的一定会是界面简洁，功能强大的Overture。然而，作为一个使用键盘的工作效率大于鼠标的人，我更希望使用一款以写码的方式制谱的软件，而lilyPond完美地满足了我的要求。它的功能之强大比起Overture更胜一筹，制谱效率也让人十分满意。 为了方便自己日后查阅并向更多人推广这个工具，特此将我的学习过程整理成教程留存。教程大部分的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/ottava.png">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/time.png">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/timeplus.png">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/Staff.png">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/StaffGroup.png">
-<meta property="og:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/GrandStaff.png">
-<meta property="og:updated_time" content="2019-04-17T10:23:23.384Z">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/ottava.png">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/time.png">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/timeplus.png">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/Staff.png">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/StaffGroup.png">
+<meta property="og:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/GrandStaff.png">
+<meta property="og:updated_time" content="2019-06-04T04:57:50.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LilyPond制谱教程">
 <meta name="twitter:description" content="代码写谱 - LilyPond教程说到五线谱制作，大多数人最先想到的一定会是界面简洁，功能强大的Overture。然而，作为一个使用键盘的工作效率大于鼠标的人，我更希望使用一款以写码的方式制谱的软件，而lilyPond完美地满足了我的要求。它的功能之强大比起Overture更胜一筹，制谱效率也让人十分满意。 为了方便自己日后查阅并向更多人推广这个工具，特此将我的学习过程整理成教程留存。教程大部分的">
-<meta name="twitter:image" content="https://dracit7.github.io/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/ottava.png">
+<meta name="twitter:image" content="https://dracit7.github.io/blog/2018/10/01/LilyPond/ottava.png">
 
 
 
@@ -421,7 +421,7 @@
 <p>下面是一个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\relative c&apos; &#123;</span><br><span class="line">  \key d \minor</span><br><span class="line">  d4 a&apos; g2</span><br><span class="line">  \ottava #1</span><br><span class="line">  f&apos;4 g a c8 a</span><br><span class="line">  \ottava #0</span><br><span class="line">  g,4 f e2 ~</span><br><span class="line">  e4 f2 ~ f4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>渲染出的谱面是这样的：</p>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/ottava.png" alt="谱面"></p>
+<p><img src="ottava.png" alt="谱面"></p>
 <h3 id="节奏"><a href="#节奏" class="headerlink" title="节奏"></a>节奏</h3><h4 id="音符时值"><a href="#音符时值" class="headerlink" title="音符时值"></a>音符时值</h4><p>正如之前说过的，在音符声明后加数字可以声明一个对应时值的音符，如<code>b4</code>声明四分音符，<code>g32</code>声明三十二分音符等等。在数字后面加<code>.</code>可以在音符后加<strong>浮点</strong>，其时值增加规则和乐理知识中相同。</p>
 <p>如果未加声明，后面的音符会自动继承前面音符的时值。如，<code>c4 d e f</code>会渲染出四个连续的四分音符。</p>
 <p><code>\autoBeamOn</code>和<code>\autoBeamOff</code>可以打开或关闭切分音之间的自动连线。自动连线机制默认是打开的。</p>
@@ -431,10 +431,10 @@
 <p><code>\defaultTimeSignature</code>和<code>\numericTimeSignature</code>可以用于两种拍号表示方式的切换。</p>
 <p>如果我们声明了一个比较奇怪的节奏型(比如《哈德曼的妖怪少女》的<code>7/8</code>拍)，lilypond默认的符尾连接方式会失效，需要我们手动设置，否则所有时值小于等于八分音符的音符符尾全都不会相连，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\relative c&apos; &#123;</span><br><span class="line">  \time 7/8</span><br><span class="line">  a&apos;8 f d \tuplet 3/2 &#123;c&apos;4 bes c&#125;</span><br><span class="line">  a8 f d gis e cis gis&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/time.png" alt="koishi"></p>
+<p><img src="time.png" alt="koishi"></p>
 <p>手动设置的方式是在<code>\time</code>后面加一个<code>#&#39;(&lt;pattern&gt;)</code>记号。<code>&lt;pattern&gt;</code>是一连串数字，这些数字将每个小节中的音符依次分为大小等于每个数字的组，同组间的音符会有符尾连接，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\relative c&apos; &#123;</span><br><span class="line">  \time #&apos;(3 4) 7/8</span><br><span class="line">  a&apos;8 f d \tuplet 3/2 &#123;c&apos;4 bes c&#125;</span><br><span class="line">  a8 f d gis e cis gis&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/timeplus.png" alt="koishi_plus"></p>
+<p><img src="timeplus.png" alt="koishi_plus"></p>
 <h4 id="隐式地改变音符的时值"><a href="#隐式地改变音符的时值" class="headerlink" title="隐式地改变音符的时值"></a>隐式地改变音符的时值</h4><p>有些时候我们希望在改变音符时值的同时不影响乐谱的外观，这时我们可以在一个音符声明的后面加一个<code>*x/y</code>后缀，其中<code>x/y</code>是一个分数，代表改变后的时值(<code>/y</code>部分可以缺省)。</p>
 <h4 id="连音线"><a href="#连音线" class="headerlink" title="连音线"></a>连音线</h4><p><strong>连音线只能连接两个相同音高的音符</strong>。在两个这样的音符之间加一个<code>~</code>即可为它们加上连音线。</p>
 <p>如果需要给被小节线分隔的两个音打上连音线，我们可以利用lilypond的<strong>自动切割功能</strong>，即在第一个音符处声明一个时值等于两个音符时值之和的音符，lilypond会自动将其切割为两个被连音线连接的跨小节音符。</p>
@@ -470,15 +470,15 @@
 <h4 id="乐谱组"><a href="#乐谱组" class="headerlink" title="乐谱组"></a>乐谱组</h4><p>绝大部分器乐乐谱都需要乐谱的分组，比如钢琴谱的左右手，交响乐谱的各种乐器。用之前提到过的复调记号就可以实现乐谱的分组：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;</span><br><span class="line">\new Staff &#123;...&#125;</span><br><span class="line">\new Staff &#123;...&#125;</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p>效果如图：</p>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/Staff.png" alt=""></p>
+<p><img src="Staff.png" alt=""></p>
 <p>可以在复调记号之前使用乐谱组声明来改变乐谱的外观：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\new StaffGroup &lt;&lt;</span><br><span class="line">  \new Staff &#123;...&#125;</span><br><span class="line">  \new Staff &#123;...&#125;</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p>效果如图：</p>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/StaffGroup.png" alt=""></p>
+<p><img src="StaffGroup.png" alt=""></p>
 <p>也可以使用钢琴谱声明：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\new GrandStaff &lt;&lt;</span><br><span class="line">  \new Staff &#123;...&#125;</span><br><span class="line">  \new Staff &#123;...&#125;</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p>效果如图：</p>
-<p><img src="/home/drac_zhang/Workplace/PersonalWebsite/Blog/source/_posts/LilyPond/GrandStaff.png" alt=""></p>
+<p><img src="GrandStaff.png" alt=""></p>
 <h4 id="乐器属性"><a href="#乐器属性" class="headerlink" title="乐器属性"></a>乐器属性</h4><p>可以在<code>\new Staff</code>声明之后紧跟一个<code>\with {}</code>声明块来描述这个乐器的属性。例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\new Staff\with &#123;</span><br><span class="line">  instrumentName = #&quot;Piano &quot;</span><br><span class="line">&#125; &#123; c d e f &#125;</span><br></pre></td></tr></table></figure>
 <p>可以在乐谱前显示Piano字样。</p>
@@ -682,7 +682,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
