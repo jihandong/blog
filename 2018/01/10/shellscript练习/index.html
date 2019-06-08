@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shell的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shellscrip">
+<meta name="description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shellscript的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shellscript学习总结">
 <meta property="og:url" content="https://dracit7.github.io/blog/2018/01/10/shellscript练习/index.html">
 <meta property="og:site_name" content="Gensokyo">
-<meta property="og:description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shell的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shellscrip">
+<meta property="og:description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shellscript的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shel">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-08T07:30:20.163Z">
+<meta property="og:updated_time" content="2019-06-08T07:07:55.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shellscript学习总结">
-<meta name="twitter:description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shell的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shellscrip">
+<meta name="twitter:description" content="Shellscript学习总结Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。 Shellscript的语法规范你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。 shel">
 
 
 
@@ -373,7 +373,7 @@
 
       
         <h1 id="Shellscript学习总结"><a href="#Shellscript学习总结" class="headerlink" title="Shellscript学习总结"></a>Shellscript学习总结</h1><p>Shell是Linux下重要的工具语言，活用shell可以有效地提高我们在Linux下的工作效率。本文将总结Shellscript的学习过程，以供复习和参考。</p>
-<h2 id="Shell的语法规范"><a href="#Shell的语法规范" class="headerlink" title="Shell的语法规范"></a>Shell的语法规范</h2><p>你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。</p>
+<h2 id="Shellscript的语法规范"><a href="#Shellscript的语法规范" class="headerlink" title="Shellscript的语法规范"></a>Shellscript的语法规范</h2><p>你可以在Shellscript脚本中执行任意可以在LinuxShell下执行的指令。除了这些指令以外，Shellscript还提供一些额外的语法来实现一些高级语言特性。</p>
 <h3 id="shellscript类别声明"><a href="#shellscript类别声明" class="headerlink" title="shellscript类别声明"></a>shellscript类别声明</h3><p>在一个Shell脚本的开头，编写者应当声明支持该脚本语法的shell程序位置。</p>
 <p><strong>格式</strong>：<code>#!&lt;path&gt;</code>，其中<code>&lt;path&gt;</code>是可执行文件的具体路径。</p>
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>shell是弱类型语言，所有变量可以无需声明直接赋值。在需要引用变量的时候，需要在它前面加上<code>$</code>。</p>
@@ -413,11 +413,17 @@
 <li><code>-L &lt;FILE&gt;</code> 如果<code>&lt;FILE&gt;</code>存在且为符号链接则为真</li>
 </ul>
 <p>更多的命令可以Google。</p>
+<h4 id="指令语句"><a href="#指令语句" class="headerlink" title="指令语句"></a>指令语句</h4><p>如果<code>if</code>后面是一条指令的话，shell会判断这个指令进程的返回值，如果为0(未发生错误)则控制流进入<code>then</code>，否则进入<code>else</code>。</p>
 <h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>for循环的标准语法为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for &lt;var&gt; in &lt;arg1&gt; &lt;arg2&gt; ... &lt;argn&gt; do</span><br><span class="line">    &lt;command&gt;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>其中<code>&lt;var&gt;</code>会被分别赋予<code>&lt;arg1&gt;</code>到<code>&lt;argn&gt;</code>的值</p>
 <p>这里的<code>&lt;arg&gt;</code>们可以用一个arglist替换，如<code>for file in ./* do ...</code>可以遍历当前文件夹下的文件。</p>
 <h4 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a>break和continue</h4><p>与C语言类似，不予详述。</p>
+<h2 id="Shell的功能使用"><a href="#Shell的功能使用" class="headerlink" title="Shell的功能使用"></a>Shell的功能使用</h2><h3 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h3><p>在Unixshell中，我们用<code>0</code>代指<code>stdin</code>，<code>1</code>代指<code>stdout</code>，<code>2</code>代指<code>stderr</code>。重定向符其实就是对这三个设备进行操作，将本应该输入/输出到这三个设备的数据重定向到其他文件。</p>
+<p>重定向符事实上可以算是<strong>双目算符</strong>，但有的操作数可以缺省。比如，<code>&gt;</code>的默认左操作数是<code>stdout</code>(1)，那么在一条指令后加上<code>&gt;file</code>则相当于将要输出到<code>stdout</code>的数据重定向到了<code>file</code>文件中。为了区分<code>stdout</code>的<code>1</code>和名字为<code>1</code>的文件，在重定向符使用标准输入输出文件作为操作数时，要在其前面加上<code>&amp;</code>。</p>
+<p>比如，<code>2&gt;&amp;1</code>意为将<code>stderr</code>重定向到<code>stdout</code>，<code>1&gt;&amp;2</code>就是反过来。</p>
+<p>在输出重定向时，一个特殊的文件是<code>/dev/null</code>，它是一个<strong>只写</strong>文件，这意味着将输入重定向到<code>/dev/null</code>就相当于丢弃了所有输出。</p>
+<h3 id="退出进程"><a href="#退出进程" class="headerlink" title="退出进程"></a>退出进程</h3><p><code>exit</code>命令用于退出当前进程。<code>exit 0</code>为正常退出，<code>exit 1</code>为非正常退出。</p>
 
       
     </div>
@@ -543,7 +549,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -599,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shellscript学习总结"><span class="nav-number">1.</span> <span class="nav-text">Shellscript学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell的语法规范"><span class="nav-number">1.1.</span> <span class="nav-text">Shell的语法规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shellscript类别声明"><span class="nav-number">1.1.1.</span> <span class="nav-text">shellscript类别声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统变量"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">系统变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入变量"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">输入变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件判断"><span class="nav-number">1.1.3.</span> <span class="nav-text">条件判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑表达式"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">逻辑表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件判断"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">文件判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">1.1.4.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#for循环"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#break和continue"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">break和continue</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shellscript学习总结"><span class="nav-number">1.</span> <span class="nav-text">Shellscript学习总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shellscript的语法规范"><span class="nav-number">1.1.</span> <span class="nav-text">Shellscript的语法规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shellscript类别声明"><span class="nav-number">1.1.1.</span> <span class="nav-text">shellscript类别声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统变量"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">系统变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入变量"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">输入变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件判断"><span class="nav-number">1.1.3.</span> <span class="nav-text">条件判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑表达式"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">逻辑表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件判断"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">文件判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令语句"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">指令语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">1.1.4.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#for循环"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#break和continue"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">break和continue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell的功能使用"><span class="nav-number">1.2.</span> <span class="nav-text">Shell的功能使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出重定向"><span class="nav-number">1.2.1.</span> <span class="nav-text">输入输出重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#退出进程"><span class="nav-number">1.2.2.</span> <span class="nav-text">退出进程</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

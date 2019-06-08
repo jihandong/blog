@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MIT 6.828 Labs 源码分析MakeFile PartGNUmakefile在6.828的lab根目录下有一个GNUmakefile，这是整个JOS内核的makefile，它会包含各个子目录下的Makefrag文件，负责提供各种编译指令接口。 verbose commands123456789101112131415# Run &apos;make V=1&apos; to turn on verbose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT 6.828 Labs 源码分析">
+<meta property="og:url" content="https://dracit7.github.io/blog/2019/06/06/MIT_6.828_code/index.html">
+<meta property="og:site_name" content="Gensokyo">
+<meta property="og:description" content="MIT 6.828 Labs 源码分析MakeFile PartGNUmakefile在6.828的lab根目录下有一个GNUmakefile，这是整个JOS内核的makefile，它会包含各个子目录下的Makefrag文件，负责提供各种编译指令接口。 verbose commands123456789101112131415# Run &apos;make V=1&apos; to turn on verbose">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-08T16:17:38.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT 6.828 Labs 源码分析">
+<meta name="twitter:description" content="MIT 6.828 Labs 源码分析MakeFile PartGNUmakefile在6.828的lab根目录下有一个GNUmakefile，这是整个JOS内核的makefile，它会包含各个子目录下的Makefrag文件，负责提供各种编译指令接口。 verbose commands123456789101112131415# Run &apos;make V=1&apos; to turn on verbose">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dracit7.github.io/blog/2019/06/06/MIT_6.828_code/">
+
+
+
+
+
+  <title>MIT 6.828 Labs 源码分析 | Gensokyo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gensokyo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Youkai's Mountain</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2019/06/06/MIT_6.828_code/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MIT 6.828 Labs 源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-06T18:59:12+08:00">
+                2019-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2019/06/06/MIT_6.828_code/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/06/MIT_6.828_code/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MIT-6-828-Labs-源码分析"><a href="#MIT-6-828-Labs-源码分析" class="headerlink" title="MIT 6.828 Labs 源码分析"></a>MIT 6.828 Labs 源码分析</h1><h2 id="MakeFile-Part"><a href="#MakeFile-Part" class="headerlink" title="MakeFile Part"></a>MakeFile Part</h2><h4 id="GNUmakefile"><a href="#GNUmakefile" class="headerlink" title="GNUmakefile"></a>GNUmakefile</h4><p>在6.828的lab根目录下有一个<code>GNUmakefile</code>，这是整个JOS内核的makefile，它会包含各个子目录下的<code>Makefrag</code>文件，负责提供各种编译指令接口。</p>
+<h5 id="verbose-commands"><a href="#verbose-commands" class="headerlink" title="verbose commands"></a>verbose commands</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run 'make V=1' to turn on verbose commands, or 'make V=0' to turn them off.</span></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(V)</span>,1)</span><br><span class="line"><span class="keyword">override</span> V =</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(V)</span>,0)</span><br><span class="line"><span class="keyword">override</span> V = @</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">-include</span> conf/lab.mk</span><br><span class="line"></span><br><span class="line"><span class="keyword">-include</span> conf/env.mk</span><br><span class="line"></span><br><span class="line">LABSETUP ?= ./</span><br><span class="line"></span><br><span class="line">TOP = .</span><br></pre></td></tr></table></figure>
+<p><code>V</code>是<code>conf/env.mk</code>中定义的一个变量，我们可以在这个文件中找到对它的描述：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># '$(V)' controls whether the lab makefiles print verbose commands (the</span></span><br><span class="line"><span class="comment"># actual shell commands run by Make), as well as the "overview" commands</span></span><br><span class="line"><span class="comment"># (such as '+ cc lib/readline.c').</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For overview commands only, the line should read 'V = @'.</span></span><br><span class="line"><span class="comment"># For overview and verbose commands, the line should read 'V ='.</span></span><br><span class="line">V = @</span><br></pre></td></tr></table></figure>
+<p>从注释中可以看出，<code>V</code>变量控制了<code>make</code>是否打印出详细的指令(也就是每一条shell指令)。默认情况下，<code>make</code>只会打印出简略的指令信息来告知我们目前在处理哪个指令。</p>
+<h5 id="Compiler-Tool-chain-configure"><a href="#Compiler-Tool-chain-configure" class="headerlink" title="Compiler Tool-chain configure"></a>Compiler Tool-chain configure</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cross-compiler jos toolchain</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This Makefile will automatically use the cross-compiler toolchain</span></span><br><span class="line"><span class="comment"># installed as 'i386-jos-elf-*', if one exists.  If the host tools ('gcc',</span></span><br><span class="line"><span class="comment"># 'objdump', and so forth) compile for a 32-bit x86 ELF target, that will</span></span><br><span class="line"><span class="comment"># be detected as well.  If you have the right compiler toolchain installed</span></span><br><span class="line"><span class="comment"># using a different name, set GCCPREFIX explicitly in conf/env.mk</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># try to infer the correct GCCPREFIX</span></span><br><span class="line"><span class="keyword">ifndef</span> GCCPREFIX</span><br><span class="line">GCCPREFIX := <span class="variable">$(<span class="built_in">shell</span> \</span></span><br><span class="line"><span class="variable">	<span class="built_in">if</span> i386-jos-elf-objdump -i 2&gt;&amp;1 | grep '^elf32-i386$$' &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">	then echo 'i386-jos-elf-'; \</span></span><br><span class="line"><span class="variable">	elif objdump -i 2&gt;&amp;1 | grep 'elf32-i386' &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">	then echo ''; \</span></span><br><span class="line"><span class="variable">	else echo "***" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** Error: Couldn't find an i386-*-elf version of GCC/binutils." 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** Is the directory with i386-jos-elf-gcc in your PATH?" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** If your i386-*-elf toolchain is installed with a command" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** prefix other than 'i386-jos-elf-', set your GCCPREFIX" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** environment variable to that prefix <span class="built_in">and</span> run 'make' again." 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** To turn off this <span class="built_in">error</span>, run 'gmake GCCPREFIX= ...'." 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "***" 1&gt;&amp;2; exit 1; fi)</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># try to infer the correct QEMU</span></span><br><span class="line"><span class="keyword">ifndef</span> QEMU</span><br><span class="line">QEMU := <span class="variable">$(<span class="built_in">shell</span> \</span></span><br><span class="line"><span class="variable">	<span class="built_in">if</span> which qemu &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">	then echo qemu; exit; \</span></span><br><span class="line"><span class="variable">        elif which qemu-system-i386 &gt;/dev/null 2&gt;&amp;1; \</span></span><br><span class="line"><span class="variable">        then echo qemu-system-i386; exit; \</span></span><br><span class="line"><span class="variable">	else \</span></span><br><span class="line"><span class="variable">	qemu=/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu; \</span></span><br><span class="line"><span class="variable">	<span class="built_in">if</span> test -x $$qemu; then echo $$qemu; exit; fi; fi; \</span></span><br><span class="line"><span class="variable">	echo "***" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** Error: Couldn't find a working QEMU executable." 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** Is the directory containing the qemu binary in your PATH" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "*** <span class="built_in">or</span> have you tried setting the QEMU variable in conf/env.mk?" 1&gt;&amp;2; \</span></span><br><span class="line"><span class="variable">	echo "***" 1&gt;&amp;2; exit 1)</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+<p>这一段代码是用来设定编译使用的工具链的。6.828的代码主要会使用两个工具：<code>GCC</code>以及其下属的GNU工具链，以及<code>qemu</code>。6.828官方提供的工具链是以<code>i386-jos-elf</code>之类的前缀打头的，而Linux自带的工具链是没有这些前缀的，makefile接受这两种工具链。</p>
+<p>两段Shell语句根据系统中安装的工具链种类分别设定了<code>GCCPREFIX</code>和<code>QEMU</code>两个变量，具体的语句逻辑为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> $(GCCPREFIX)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> objdump -i : List all architectures supported</span></span><br><span class="line">if i386-jos-elf-objdump -i 2&gt;&amp;1 | grep '^elf32-i386$$' &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 1. 这里如果没有安装6.828官方工具链，会报找不到该命令到stderr，这里2&gt;&amp;1将stderr重定向到了stdout</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">    接下来一个管道导向到grep，grep负责看objdump是否支持这种架构，如果不支持，grep进程返回1,</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">    <span class="keyword">if</span>判断为假控制流转到<span class="keyword">elif</span>；否则控制流到<span class="keyword">then</span>，设置$(GCCPREFIX)为i386-jos-elf。</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 2. 这里由于我们是将shellscript产生的输出设定为$(GCCPREFIX)的值，不希望产生任何额外的输出，</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">    需要将stdout和stderr重定向到/dev/null以丢弃这些输出。</span></span><br><span class="line">	echo 'i386-jos-elf-';</span><br><span class="line">elif objdump -i 2&gt;&amp;1 | grep 'elf32-i386' &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 如果没有安装6.828官方提供的工具链，使用Linux默认的GNU系列工具也是可以的。</span></span><br><span class="line">	echo '';</span><br><span class="line">else </span><br><span class="line"><span class="meta">	#</span><span class="bash"> 如果两个工具链都没有/工具链不支持i386-elf架构，报错并退出。</span></span><br><span class="line">	echo "***" 1&gt;&amp;2;</span><br><span class="line">  echo "*** Error: Couldn't find an i386-*-elf version of GCC/binutils." 1&gt;&amp;2;</span><br><span class="line">  echo "*** Is the directory with i386-jos-elf-gcc in your PATH?" 1&gt;&amp;2;</span><br><span class="line">  echo "*** If your i386-*-elf toolchain is installed with a command" 1&gt;&amp;2;</span><br><span class="line">  echo "*** prefix other than 'i386-jos-elf-', set your GCCPREFIX" 1&gt;&amp;2;</span><br><span class="line">  echo "*** environment variable to that prefix and run 'make' again." 1&gt;&amp;2;</span><br><span class="line">  echo "*** To turn off this error, run 'gmake GCCPREFIX= ...'." 1&gt;&amp;2;</span><br><span class="line">  echo "***" 1&gt;&amp;2;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 这里的报错信息是说明如果你安装了自己的工具链，可以通过设置`GCCPREFIX`变量来让make能够找到它们。</span></span><br><span class="line">  exit 1;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> $(QEMU)是能打开qemu的文件名。</span></span><br><span class="line">if which qemu &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 如果已经安装qemu，<span class="built_in">which</span>能够找到它，则直接设置</span></span><br><span class="line"><span class="meta">	#</span><span class="bash"> 同理，这里我们不要输出</span></span><br><span class="line">	echo qemu;</span><br><span class="line">	exit;</span><br><span class="line">elif which qemu-system-i386 &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line"><span class="meta">  #</span><span class="bash"> qemu可能的另外一种名字</span></span><br><span class="line">	echo qemu-system-i386;</span><br><span class="line">	exit;</span><br><span class="line">else</span><br><span class="line"><span class="meta">	#</span><span class="bash"> 高贵的mac用户可能会需要这个情况</span></span><br><span class="line">	qemu=/Applications/Q.app/Contents/MacOS/i386-softmmu.app/Contents/MacOS/i386-softmmu;</span><br><span class="line">	if test -x $$qemu; then</span><br><span class="line">		echo $$qemu;</span><br><span class="line">		exit;</span><br><span class="line">	fi;</span><br><span class="line">fi;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果三种情况都不符合，则报错退出</span></span><br><span class="line">echo "***" 1&gt;&amp;2; </span><br><span class="line">echo "*** Error: Couldn't find a working QEMU executable." 1&gt;&amp;2;</span><br><span class="line">echo "*** Is the directory containing the qemu binary in your PATH" 1&gt;&amp;2;</span><br><span class="line">echo "*** or have you tried setting the QEMU variable in conf/env.mk?" 1&gt;&amp;2;</span><br><span class="line">echo "***" 1&gt;&amp;2;</span><br><span class="line">exit 1</span><br></pre></td></tr></table></figure>
+<h5 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># try to generate a unique GDB port</span></span><br><span class="line">GDBPORT	:= <span class="variable">$(<span class="built_in">shell</span> expr `id -u` % 5000 + 25000)</span></span><br><span class="line"></span><br><span class="line">CC	:= <span class="variable">$(GCCPREFIX)</span>gcc -pipe</span><br><span class="line">GDB	:= <span class="variable">$(GCCPREFIX)</span>gdb</span><br><span class="line">AS	:= <span class="variable">$(GCCPREFIX)</span>as</span><br><span class="line">AR	:= <span class="variable">$(GCCPREFIX)</span>ar</span><br><span class="line">LD	:= <span class="variable">$(GCCPREFIX)</span>ld</span><br><span class="line">OBJCOPY	:= <span class="variable">$(GCCPREFIX)</span>objcopy</span><br><span class="line">OBJDUMP	:= <span class="variable">$(GCCPREFIX)</span>objdump</span><br><span class="line">NM	:= <span class="variable">$(GCCPREFIX)</span>nm</span><br><span class="line"></span><br><span class="line"><span class="comment"># Native commands</span></span><br><span class="line">NCC	:= gcc <span class="variable">$(CC_VER)</span> -pipe</span><br><span class="line">NATIVE_CFLAGS := <span class="variable">$(CFLAGS)</span> <span class="variable">$(DEFS)</span> <span class="variable">$(LABDEFS)</span> -I<span class="variable">$(TOP)</span> -MD -Wall</span><br><span class="line">TAR	:= gtar</span><br><span class="line">PERL	:= perl</span><br></pre></td></tr></table></figure>
+<p>根据之前设定的<code>$(GCCPREFIX)</code>来设置各个工具的名称变量。之后就可以直接使用这些工具。</p>
+<h5 id="Flags"><a href="#Flags" class="headerlink" title="Flags"></a>Flags</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compiler flags</span></span><br><span class="line"><span class="comment"># -fno-builtin is required to avoid refs to undefined functions in the kernel.</span></span><br><span class="line"><span class="comment"># Only optimize to -O1 to discourage inlining, which complicates backtraces.</span></span><br><span class="line">CFLAGS := <span class="variable">$(CFLAGS)</span> <span class="variable">$(DEFS)</span> <span class="variable">$(LABDEFS)</span> -O1 -fno-builtin -I<span class="variable">$(TOP)</span> -MD</span><br><span class="line">CFLAGS += -fno-omit-frame-pointer</span><br><span class="line">CFLAGS += -std=gnu99</span><br><span class="line">CFLAGS += -static</span><br><span class="line">CFLAGS += -fno-pie</span><br><span class="line">CFLAGS += -Wall -Wno-format -Wno-unused -Werror -gstabs -m32</span><br><span class="line"><span class="comment"># -fno-tree-ch prevented gcc from sometimes reordering read_ebp() before</span></span><br><span class="line"><span class="comment"># mon_backtrace()'s function prologue on gcc version: (Debian 4.7.2-5) 4.7.2</span></span><br><span class="line">CFLAGS += -fno-tree-ch</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add -fno-stack-protector if the option exists.</span></span><br><span class="line">CFLAGS += <span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(CC)</span> -fno-stack-protector -E -x c /dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo -fno-stack-protector)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Common linker flags</span></span><br><span class="line">LDFLAGS := -m elf_i386</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linker flags for JOS user programs</span></span><br><span class="line">ULDFLAGS := -T user/user.ld</span><br><span class="line"></span><br><span class="line">GCC_LIB := <span class="variable">$(<span class="built_in">shell</span> <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -print-libgcc-<span class="built_in">file</span>-name)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Lists that the */Makefrag makefile fragments will add to</span></span><br><span class="line">OBJDIRS :=</span><br></pre></td></tr></table></figure>
+<p>对编译器和链接器设定的一些参数。</p>
+<ul>
+<li><code>CFLAGS</code>：gcc使用的各个参数(<strong>重要</strong>)。<ul>
+<li><code>-O1</code>：<strong>JOS内核使用<code>O1</code>优化等级编译</strong>，这是为了减少显式的inline声明，让debug变得更简单。</li>
+<li><code>-fno-builtin</code>：<strong>不使用任何C语言的内建函数</strong>，防止JOS自己定义和实现的函数与原有的C标准库函数发生命名冲突。这里如果想单独屏蔽几个函数的话也可以<code>-fno-builtin-&lt;functionname&gt;</code>。</li>
+<li><code>-I$(TOP)</code>：之前设置了<code>TOP=.</code>所以这个参数其实是<code>-I.</code>。这个参数会让<strong>GCC优先在<code>.</code>目录下查找头文件</strong>，以让JOS在使用<code>&lt;&gt;</code>的情况下也可以优先使用<code>inc</code>目录下的头文件。类似的参数有<code>-L</code>，用来使GCC优先在指定目录下寻找库文件。</li>
+<li><code>-MD</code>：将目标文件所需要的全部依赖信息输出到一个<code>.d</code>文件中。这里如果是<code>-M</code>就是输出到<code>stdout</code>，如果是<code>-MM</code>就不输出由头文件包含所引起的依赖。</li>
+<li><code>-fno-omit-frame-pointer</code>：<strong>在优化代码时不省略对<code>ebp</code>寄存器的压栈操作</strong>，也就是保持栈帧的完整结构。默认情况下这个选项应该是开启的，这里可能是以防万一。如果这个选项不开启，在函数调用时就不会先压入<code>ebp</code>，从而为<code>backtrace</code>带来困难。</li>
+<li><code>-static</code>：优先使用静态库</li>
+<li><code>-std=gnu99</code>：使用GNU扩展的<code>C99</code>标准</li>
+<li><code>-fno-pie</code>：<strong>不生成位置无关代码</strong>，关系到一些6.828中的思考题</li>
+<li><code>-Wall</code>：显示所有警告。这一行主要是关于调试信息生成的。</li>
+<li><code>-Werror</code>：<strong>把所有警告当作错误</strong>。<del>与上一行结合起来可以发现设计实验的人是魔鬼(不是)</del></li>
+<li><code>-gstabs</code>：生成<code>stab</code>格式的调试信息，在Lab1中设计<code>monitor</code>的时候会用到。</li>
+<li><code>-m32</code>：<strong>生成32位汇编代码</strong>。</li>
+</ul>
+</li>
+<li><code>LDFLAGS</code>：链接器使用的参数，这里的<code>-m elf_i386</code>是指定模型。</li>
+<li><code>ULDFLAGS = -T user/user.ld</code>：指定链接器使用的用户脚本<ul>
+<li><code>info ld</code>可以查看<code>.ld</code>文件的格式介绍</li>
+<li>具体的脚本内容在之后研究</li>
+</ul>
+</li>
+<li><code>GCC_LIB</code>：gcc使用的库文件路径</li>
+</ul>
+<h5 id="Suffixs"><a href="#Suffixs" class="headerlink" title="Suffixs"></a>Suffixs</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Make sure that 'all' is the first target</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Eliminate default suffix rules</span></span><br><span class="line"><span class="section">.SUFFIXES:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete target files if there is an error (or make is interrupted)</span></span><br><span class="line"><span class="section">.DELETE_ON_ERROR:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># make it so that no intermediate .o files are ever deleted</span></span><br><span class="line"><span class="section">.PRECIOUS: %.o <span class="variable">$(OBJDIR)</span>/boot/%.o <span class="variable">$(OBJDIR)</span>/kern/%.o \</span></span><br><span class="line">	   <span class="variable">$(OBJDIR)</span>/lib/%.o <span class="variable">$(OBJDIR)</span>/fs/%.o <span class="variable">$(OBJDIR)</span>/net/%.o \</span><br><span class="line">	   <span class="variable">$(OBJDIR)</span>/user/%.o</span><br><span class="line"></span><br><span class="line">KERN_CFLAGS := <span class="variable">$(CFLAGS)</span> -DJOS_KERNEL -gstabs</span><br><span class="line">USER_CFLAGS := <span class="variable">$(CFLAGS)</span> -DJOS_USER -gstabs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update .vars.X if variable X has changed since the last make run.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Rules that use variable X should depend on $(OBJDIR)/.vars.X.  If</span></span><br><span class="line"><span class="comment"># the variable's value has changed, this will update the vars file and</span></span><br><span class="line"><span class="comment"># force a rebuild of the rule that depends on it.</span></span><br><span class="line"><span class="variable">$(OBJDIR)</span>/.vars.%: FORCE</span><br><span class="line">	<span class="variable">$(V)</span>echo <span class="string">"$(<span class="variable">$*</span>)"</span> | cmp -s <span class="variable">$@</span> || echo <span class="string">"$(<span class="variable">$*</span>)"</span> &gt; <span class="variable">$@</span></span><br><span class="line"><span class="section">.PRECIOUS: <span class="variable">$(OBJDIR)</span>/.vars.%</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: FORCE</span></span><br></pre></td></tr></table></figure>
+<p>这一部分主要是一些内置的makefile目标名，用于进行一些设置。</p>
+<ul>
+<li><code>all</code>：放在最前面，无条件编译全部代码</li>
+<li><code>.SUFFIXS</code>：这个目标后的前置条件是将要用于检查后缀规则的后缀们，在这里是空的代表我们不使用后缀规则。</li>
+<li><code>.DELETE_ON_ERROR</code>：如果设置了这个目标，make会<strong>在一个规则的<code>recipe</code>进程返回1时删除掉改变了的目标文件</strong>。</li>
+<li><code>.PRECIOUS</code>：<strong>这个目标的所有前置条件不会在相应的<code>recipe</code>进程返回1后被删除</strong>。这个目标与刚才的<code>.DELETE_ON_ERROR</code>相结合，可以<strong>对不想在出错时删除的目标们进行保护</strong>。在这里保护的目标是根目录下和<code>obj</code>目录下的所有<code>.o</code>文件。</li>
+<li><code>KERN_CFLAGS</code>/<code>USER_CFLAGS</code>：<strong>在编译时带上不同的宏定义</strong>。gcc的编译选项<code>-D</code>后面可以接一个宏定义的名字，<code>-DJOS_KERNEL</code>表示在编译时带一个宏定义<code>JOS_KERNEL</code>，<code>-DJOS_UER</code>同理。<strong>这两个变量主要用来进行内核/用户的权限管理</strong>。</li>
+</ul>
+<h5 id="Includes-and-QEMU-configure"><a href="#Includes-and-QEMU-configure" class="headerlink" title="Includes and QEMU configure"></a>Includes and QEMU configure</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Include Makefrags for subdirectories</span></span><br><span class="line"><span class="keyword">include</span> boot/Makefrag</span><br><span class="line"><span class="keyword">include</span> kern/Makefrag</span><br><span class="line"><span class="keyword">include</span> lib/Makefrag</span><br><span class="line"><span class="keyword">include</span> user/Makefrag</span><br><span class="line"><span class="keyword">include</span> fs/Makefrag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CPUS ?= 1</span><br><span class="line"></span><br><span class="line">QEMUOPTS = -drive file=<span class="variable">$(OBJDIR)</span>/kern/kernel.img,index=0,media=disk,format=raw -serial mon:stdio -gdb tcp::<span class="variable">$(GDBPORT)</span></span><br><span class="line">QEMUOPTS += <span class="variable">$(<span class="built_in">shell</span> <span class="built_in">if</span> <span class="variable">$(QEMU)</span> -nographic -help | grep -q '^-D '; then echo '-D qemu.log'; fi)</span></span><br><span class="line">IMAGES = <span class="variable">$(OBJDIR)</span>/kern/kernel.img</span><br><span class="line">QEMUOPTS += -smp <span class="variable">$(CPUS)</span></span><br><span class="line">QEMUOPTS += -drive file=<span class="variable">$(OBJDIR)</span>/fs/fs.img,index=1,media=disk,format=raw</span><br><span class="line">IMAGES += <span class="variable">$(OBJDIR)</span>/fs/fs.img</span><br><span class="line">QEMUOPTS += <span class="variable">$(QEMUEXTRA)</span></span><br></pre></td></tr></table></figure>
+<p>包含选项包含了各个子目录下的Makefrag。</p>
+<p><code>CPUS ?= 1</code>将默认的CPU数目置为1。在做lab的过程中我们经常通过设置<code>CPUS = x</code>来增加核数。</p>
+<p>对<code>qemu</code>的参数设置主要是与<code>qemu</code>本身规范有关：</p>
+<ul>
+<li><code>QEMUOPTS</code>：下面用来运行<code>qemu</code>的各种参数<ul>
+<li><code>file</code>：将要运行的镜像</li>
+<li><code>index</code>：跟在file后，指定这个镜像的序号</li>
+</ul>
+</li>
+<li><code>IMAGES</code>：使用的镜像列表</li>
+</ul>
+<h5 id="Rules"><a href="#Rules" class="headerlink" title="Rules"></a>Rules</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">.gdbinit: .gdbinit.tmpl</span></span><br><span class="line">	sed <span class="string">"s/localhost:1234/localhost:<span class="variable">$(GDBPORT)</span>/"</span> &lt; <span class="variable">$^</span> &gt; <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">gdb:</span></span><br><span class="line">	<span class="variable">$(GDB)</span> -n -x .gdbinit</span><br><span class="line"></span><br><span class="line"><span class="section">pre-qemu: .gdbinit</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu: <span class="variable">$(IMAGES)</span> pre-qemu</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-nox: <span class="variable">$(IMAGES)</span> pre-qemu</span></span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	@echo <span class="string">"*** Use Ctrl-a x to exit qemu"</span></span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="section">qemu-gdb: <span class="variable">$(IMAGES)</span> pre-qemu</span></span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	@echo <span class="string">"*** Now run 'make gdb'."</span> 1&gt;&amp;2</span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> <span class="variable">$(QEMUOPTS)</span> -S</span><br><span class="line"></span><br><span class="line"><span class="section">qemu-nox-gdb: <span class="variable">$(IMAGES)</span> pre-qemu</span></span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	@echo <span class="string">"*** Now run 'make gdb'."</span> 1&gt;&amp;2</span><br><span class="line">	@echo <span class="string">"***"</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span> -S</span><br><span class="line"></span><br><span class="line"><span class="section">print-qemu:</span></span><br><span class="line">	@echo <span class="variable">$(QEMU)</span></span><br><span class="line"></span><br><span class="line"><span class="section">print-gdbport:</span></span><br><span class="line">	@echo <span class="variable">$(GDBPORT)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For deleting the build</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -rf <span class="variable">$(OBJDIR)</span> .gdbinit jos.in qemu.log</span><br><span class="line"></span><br><span class="line"><span class="section">realclean: clean</span></span><br><span class="line">	rm -rf lab<span class="variable">$(LAB)</span>.tar.gz \</span><br><span class="line">		jos.out <span class="variable">$(<span class="built_in">wildcard</span> jos.out.*)</span> \</span><br><span class="line">		qemu.pcap <span class="variable">$(<span class="built_in">wildcard</span> qemu.pcap.*)</span> \</span><br><span class="line">		myapi.key</span><br><span class="line"></span><br><span class="line"><span class="section">distclean: realclean</span></span><br><span class="line">	rm -rf conf/gcc.mk</span><br><span class="line"></span><br><span class="line"><span class="keyword">ifneq</span> (<span class="variable">$(V)</span>,@)</span><br><span class="line">GRADEFLAGS += -v</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="section">grade:</span></span><br><span class="line">	@echo <span class="variable">$(MAKE)</span> clean</span><br><span class="line">	@<span class="variable">$(MAKE)</span> clean || \</span><br><span class="line">	  (echo <span class="string">"'make clean' failed.  HINT: Do you have another running instance of JOS?"</span> &amp;&amp; exit 1)</span><br><span class="line">	./grade-lab<span class="variable">$(LAB)</span> <span class="variable">$(GRADEFLAGS)</span></span><br><span class="line"></span><br><span class="line"><span class="section">git-handin: handin-check</span></span><br><span class="line">	@if test -n <span class="string">"`git config remote.handin.url`"</span>; then \</span><br><span class="line">		echo <span class="string">"Hand in to remote repository using 'git push handin HEAD' ..."</span>; \</span><br><span class="line">		if ! git push -f handin HEAD; then \</span><br><span class="line">            echo ; \</span><br><span class="line">			echo <span class="string">"Hand in failed."</span>; \</span><br><span class="line">			echo <span class="string">"As an alternative, please run 'make tarball'"</span>; \</span><br><span class="line">			echo <span class="string">"and visit http://pdos.csail.mit.edu/6.828/submit/"</span>; \</span><br><span class="line">			echo <span class="string">"to upload lab<span class="variable">$(LAB)</span>-handin.tar.gz.  Thanks!"</span>; \</span><br><span class="line">			false; \</span><br><span class="line">		fi; \</span><br><span class="line">    <span class="keyword">else</span> \</span><br><span class="line">		echo <span class="string">"Hand-in repository is not configured."</span>; \</span><br><span class="line">		echo <span class="string">"Please run 'make handin-prep' first.  Thanks!"</span>; \</span><br><span class="line">		false; \</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">WEBSUB := https://6828.scripts.mit.edu/2018/handin.py</span><br><span class="line"></span><br><span class="line"><span class="section">handin: tarball-pref myapi.key</span></span><br><span class="line">	@SUF=<span class="variable">$(LAB)</span>; \</span><br><span class="line">	test -f .suf &amp;&amp; SUF=`cat .suf`; \</span><br><span class="line">	curl -f -F file=@lab$$SUF-handin.tar.gz -F key=\&lt;myapi.key <span class="variable">$(WEBSUB)</span>/upload \</span><br><span class="line">	    &gt; /dev/null || &#123; \</span><br><span class="line">		echo ; \</span><br><span class="line">		echo Submit seems to have failed.; \</span><br><span class="line">		echo Please go to <span class="variable">$(WEBSUB)</span>/ and upload the tarball manually.; &#125;</span><br><span class="line"></span><br><span class="line"><span class="section">handin-check:</span></span><br><span class="line">	@if ! test -d .git; then \</span><br><span class="line">		echo No .git directory, is this a git repository?; \</span><br><span class="line">		false; \</span><br><span class="line">	fi</span><br><span class="line">	@if test <span class="string">"$$(git symbolic-ref HEAD)"</span> != refs/heads/lab<span class="variable">$(LAB)</span>; then \</span><br><span class="line">		git branch; \</span><br><span class="line">		read -p <span class="string">"You are not on the lab<span class="variable">$(LAB)</span> branch.  Hand-in the current branch? [y/N] "</span> r; \</span><br><span class="line">		test <span class="string">"$$r"</span> = y; \</span><br><span class="line">	fi</span><br><span class="line">	@if ! git diff-files --quiet || ! git diff-index --quiet --cached HEAD; then \</span><br><span class="line">		git status -s; \</span><br><span class="line">		echo; \</span><br><span class="line">		echo <span class="string">"You have uncomitted changes.  Please commit or stash them."</span>; \</span><br><span class="line">		false; \</span><br><span class="line">	fi</span><br><span class="line">	@if test -n <span class="string">"`git status -s`"</span>; then \</span><br><span class="line">		git status -s; \</span><br><span class="line">		read -p <span class="string">"Untracked files will not be handed in.  Continue? [y/N] "</span> r; \</span><br><span class="line">		test <span class="string">"$$r"</span> = y; \</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">UPSTREAM := <span class="variable">$(<span class="built_in">shell</span> git remote -v | grep "pdos.csail.mit.edu/6.828/2018/jos.git (fetch)</span><span class="string">" | awk '&#123;split($$0,a,"</span> <span class="string">"); print a[1]&#125;')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">tarball-pref: handin-check</span></span><br><span class="line"><span class="string">	@SUF=<span class="variable">$(LAB)</span>; \</span></span><br><span class="line"><span class="string">	if test <span class="variable">$(LAB)</span> -eq 3 -o <span class="variable">$(LAB)</span> -eq 4; then \</span></span><br><span class="line"><span class="string">		read -p "</span>Which part would you like to submit? [a, b, c (c for lab 4 only)]<span class="string">" p; \</span></span><br><span class="line"><span class="string">		if test "</span>$$p<span class="string">" != a -a "</span>$$p<span class="string">" != b; then \</span></span><br><span class="line"><span class="string">			if test ! <span class="variable">$(LAB)</span> -eq 4 -o ! "</span>$$p<span class="string">" = c; then \</span></span><br><span class="line"><span class="string">				echo "</span>Bad part \<span class="string">"$$p\""</span>; \</span><br><span class="line">				exit 1; \</span><br><span class="line">			fi; \</span><br><span class="line">		fi; \</span><br><span class="line">		SUF=<span class="string">"<span class="variable">$(LAB)</span>$$p"</span>; \</span><br><span class="line">		echo $$SUF &gt; .suf; \</span><br><span class="line">	<span class="keyword">else</span> \</span><br><span class="line">		rm -f .suf; \</span><br><span class="line">	fi; \</span><br><span class="line">	git archive --format=tar HEAD &gt; lab$$SUF-handin.tar; \</span><br><span class="line">	git diff <span class="variable">$(UPSTREAM)</span>/lab<span class="variable">$(LAB)</span> &gt; /tmp/lab$$SUF-diff.patch; \</span><br><span class="line">	tar -rf lab$$SUF-handin.tar /tmp/lab$$SUF-diff.patch; \</span><br><span class="line">	gzip -c lab$$SUF-handin.tar &gt; lab$$SUF-handin.tar.gz; \</span><br><span class="line">	rm lab$$SUF-handin.tar; \</span><br><span class="line">	rm /tmp/lab$$SUF-diff.patch; \</span><br><span class="line"></span><br><span class="line"><span class="section">myapi.key:</span></span><br><span class="line">	@echo Get an API key for yourself by visiting <span class="variable">$(WEBSUB)</span>/</span><br><span class="line">	@read -p <span class="string">"Please enter your API key: "</span> k; \</span><br><span class="line">	if test `echo <span class="string">"$$k"</span> |tr -d '\n' |wc -c` = 32 ; then \</span><br><span class="line">		TF=`mktemp -t tmp.XXXXXX`; \</span><br><span class="line">		if test <span class="string">"x$$TF"</span> != <span class="string">"x"</span> ; then \</span><br><span class="line">			echo <span class="string">"$$k"</span> |tr -d '\n' &gt; $$TF; \</span><br><span class="line">			mv -f $$TF <span class="variable">$@</span>; \</span><br><span class="line">		<span class="keyword">else</span> \</span><br><span class="line">			echo mktemp failed; \</span><br><span class="line">			false; \</span><br><span class="line">		fi; \</span><br><span class="line">	<span class="keyword">else</span> \</span><br><span class="line">		echo Bad API key: $$k; \</span><br><span class="line">		echo An API key should be 32 characters long.; \</span><br><span class="line">		false; \</span><br><span class="line">	fi;</span><br><span class="line"></span><br><span class="line"><span class="comment">#handin-prep:</span></span><br><span class="line"><span class="comment">#	@./handin-prep</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For test runs</span></span><br><span class="line"></span><br><span class="line"><span class="section">prep-%:</span></span><br><span class="line">	<span class="variable">$(V)</span><span class="variable">$(MAKE)</span> <span class="string">"INIT_CFLAGS=$&#123;INIT_CFLAGS&#125; -DTEST=`case <span class="variable">$*</span> in *_*) echo <span class="variable">$*</span>;; *) echo user_<span class="variable">$*</span>;; esac`"</span> <span class="variable">$(IMAGES)</span></span><br><span class="line"></span><br><span class="line"><span class="section">run-%-nox-gdb: prep-% pre-qemu</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span> -S</span><br><span class="line"></span><br><span class="line"><span class="section">run-%-gdb: prep-% pre-qemu</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> <span class="variable">$(QEMUOPTS)</span> -S</span><br><span class="line"></span><br><span class="line"><span class="section">run-%-nox: prep-% pre-qemu</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> -nographic <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="section">run-%: prep-% pre-qemu</span></span><br><span class="line">	<span class="variable">$(QEMU)</span> <span class="variable">$(QEMUOPTS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This magic automatically generates makefile dependencies</span></span><br><span class="line"><span class="comment"># for header files included from C source files we compile,</span></span><br><span class="line"><span class="comment"># and keeps those dependencies up-to-date every time we recompile.</span></span><br><span class="line"><span class="comment"># See 'mergedep.pl' for more information.</span></span><br><span class="line"><span class="variable">$(OBJDIR)</span>/.deps: <span class="variable">$(<span class="built_in">foreach</span> <span class="built_in">dir</span>, <span class="variable">$(OBJDIRS)</span>, $(<span class="built_in">wildcard</span> <span class="variable">$(OBJDIR)</span>/<span class="variable">$(dir)</span>/*.d)</span>)</span><br><span class="line">	@mkdir -p $(@D)</span><br><span class="line">	@<span class="variable">$(PERL)</span> mergedep.pl <span class="variable">$@</span> <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">-include</span> <span class="variable">$(OBJDIR)</span>/.deps</span><br><span class="line"></span><br><span class="line"><span class="section">always:</span></span><br><span class="line">	@:</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: all always \</span></span><br><span class="line">	handin git-handin tarball tarball-pref clean realclean distclean grade handin-prep handin-check</span><br></pre></td></tr></table></figure>
+<p>在进行了冗长的配置之后，终于到了规则部分。接下来逐条分析这些规则：</p>
+<ul>
+<li><h2 id="Tester-Part"><a href="#Tester-Part" class="headerlink" title="Tester Part"></a>Tester Part</h2></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/04/11/Verilog/" rel="next" title="Verilog语言学习笔记">
+                <i class="fa fa-chevron-left"></i> Verilog语言学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/lyrica.png" alt="Drac Zhang">
+            
+              <p class="site-author-name" itemprop="name">Drac Zhang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dracit7" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MIT-6-828-Labs-源码分析"><span class="nav-number">1.</span> <span class="nav-text">MIT 6.828 Labs 源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MakeFile-Part"><span class="nav-number">1.1.</span> <span class="nav-text">MakeFile Part</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GNUmakefile"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">GNUmakefile</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#verbose-commands"><span class="nav-number">1.1.0.1.1.</span> <span class="nav-text">verbose commands</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Compiler-Tool-chain-configure"><span class="nav-number">1.1.0.1.2.</span> <span class="nav-text">Compiler Tool-chain configure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tools"><span class="nav-number">1.1.0.1.3.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flags"><span class="nav-number">1.1.0.1.4.</span> <span class="nav-text">Flags</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Suffixs"><span class="nav-number">1.1.0.1.5.</span> <span class="nav-text">Suffixs</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Includes-and-QEMU-configure"><span class="nav-number">1.1.0.1.6.</span> <span class="nav-text">Includes and QEMU configure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Rules"><span class="nav-number">1.1.0.1.7.</span> <span class="nav-text">Rules</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tester-Part"><span class="nav-number">1.2.</span> <span class="nav-text">Tester Part</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Drac Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Drac_zhang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dracit7.github.io/blog/2019/06/06/MIT_6.828_code/';
+          this.page.identifier = '2019/06/06/MIT_6.828_code/';
+          this.page.title = 'MIT 6.828 Labs 源码分析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Drac_zhang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
