@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="MakeFile学习笔记学习资料：GNU make官方文档 BasisRulesMakeFile最重要的元素是rule，也就是构造规则。一条规则有这样的形式： 1234&amp;lt;target&amp;gt;:&amp;lt;prerequisites&amp;gt;	&amp;lt;recipe&amp;gt;	&amp;lt;recipe&amp;gt;	... Target一个目标可以是：  一个文件的名字 一个标识符，且标识符的名字不应与MakeF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-08T11:22:22.259Z">
+<meta property="og:updated_time" content="2019-06-08T18:48:23.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MakeFile学习笔记">
 <meta name="twitter:description" content="MakeFile学习笔记学习资料：GNU make官方文档 BasisRulesMakeFile最重要的元素是rule，也就是构造规则。一条规则有这样的形式： 1234&amp;lt;target&amp;gt;:&amp;lt;prerequisites&amp;gt;	&amp;lt;recipe&amp;gt;	&amp;lt;recipe&amp;gt;	... Target一个目标可以是：  一个文件的名字 一个标识符，且标识符的名字不应与MakeF">
@@ -426,6 +426,7 @@
 <p>另外，当我们需要将一个长行分割为几行的时候，可以用<code>\</code>去连接它们。</p>
 <h4 id="Processing-Rules"><a href="#Processing-Rules" class="headerlink" title="Processing Rules"></a>Processing Rules</h4><p>一个MakeFile中优先被执行的规则是<strong>第一条不以<code>.</code>开头的规则</strong>。</p>
 <p>当make执行一条规则的时候，如果它的<strong>前置条件有着属于自己的规则</strong>，那么它会先去执行这个前置条件所依赖的规则。如果一条非默认规则不被任何规则所依赖，它就无法被单纯的<code>make</code>指令执行。</p>
+<p>一种巧妙的用法，如果前置条件是一个非文件<code>target</code>，那么执行这条规则时就会顺带无条件执行这个前置条件对应的规则。</p>
 <h4 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h4><p>我们可以使用<code>&lt;ident&gt; = &lt;content&gt;</code>来声明一个变量。不过说是变量其实这更像一个宏。</p>
 <p>要引用一个变量，我们需要使用这样的格式：<code>$(&lt;ident&gt;)</code></p>
 <p>我们可以在执行<code>make</code>的时候以<code>&lt;ident&gt;=&lt;value&gt;</code>(注意中间不能带空格)的形式预先声明变量的值，以这种方式声明的参数值会覆盖在makefile中的变量赋值。</p>
