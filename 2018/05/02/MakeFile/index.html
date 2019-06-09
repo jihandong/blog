@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Gensokyo">
 <meta property="og:description" content="MakeFile学习笔记学习资料：GNU make官方文档 BasisRulesMakeFile最重要的元素是rule，也就是构造规则。一条规则有这样的形式： 1234&amp;lt;target&amp;gt;:&amp;lt;prerequisites&amp;gt;	&amp;lt;recipe&amp;gt;	&amp;lt;recipe&amp;gt;	... Target一个目标可以是：  一个文件的名字 一个标识符，且标识符的名字不应与MakeF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-08T18:48:23.211Z">
+<meta property="og:updated_time" content="2019-06-09T03:55:22.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MakeFile学习笔记">
 <meta name="twitter:description" content="MakeFile学习笔记学习资料：GNU make官方文档 BasisRulesMakeFile最重要的元素是rule，也就是构造规则。一条规则有这样的形式： 1234&amp;lt;target&amp;gt;:&amp;lt;prerequisites&amp;gt;	&amp;lt;recipe&amp;gt;	&amp;lt;recipe&amp;gt;	... Target一个目标可以是：  一个文件的名字 一个标识符，且标识符的名字不应与MakeF">
@@ -451,6 +451,7 @@
 <li><code>$?</code>：指代<strong>比目标更新的</strong>所有前置条件</li>
 <li><code>$^</code>：指代所有前置条件</li>
 <li><code>$*</code>：指代<code>%</code>匹配到的部分</li>
+<li><code>@D</code>：目标的目录部分</li>
 </ul>
 <h4 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h4><p>make使用与bash相似的语法完成条件判断和循环。</p>
 <p>比较常用的条件判断语句有：</p>
