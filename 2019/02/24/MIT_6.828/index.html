@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/descriptor.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/trapframe.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/RPC.png">
-<meta property="og:updated_time" content="2019-06-10T14:02:30.893Z">
+<meta property="og:updated_time" content="2019-06-11T08:26:02.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 实验记录">
 <meta name="twitter:description" content="MIT 6.828 Labs 实验记录本博客中所有代码所对应的github repo地址：6.828 Overall有一些测试技巧是适用于所有Lab的，放在这里以供参考：  6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。 make grade执行过程中JOS console的输出会保存在当前文件夹下的jos.out.xxx文件中。 make">
@@ -857,7 +857,7 @@
 <li><code>GDT</code>：全局描述符表。只有一个，存放着操作系统内核使用的描述符和所有系统段的描述符。通过GDT可以去索引所有的LDT。</li>
 <li><code>IDT</code>：中断描述符表。用于定位所有的中断处理程序。</li>
 </ul>
-<p>用于索引描述符表的字段称为<strong>Selector</strong>，<code>cs</code>等段寄存器所存放的就是Selector。它由三部分组成：</p>
+<p>用于索引描述符表的字段称为<span id="selector"><strong>Selector</strong></span>，<code>cs</code>等段寄存器所存放的就是Selector。它由三部分组成：</p>
 <ul>
 <li>最低2位：决定这个段的<strong>特权级</strong></li>
 <li>第三位：决定这个段的位置(0代表在<code>GDT</code>，1代表在<code>LDT</code>)</li>
@@ -1587,7 +1587,7 @@
 <li>检查错误号是否为<code>FEC_WR</code>(是否是写操作导致了中断)，并检查引发中断的页面的<code>PTE</code>是否是写时复制的。</li>
 <li>如果是，分配一个新页面并将原页面的内容拷贝过去，然后将新页面以可读可写权限映射到合适的位置，取代原来的映射。如果不是，panic。</li>
 </ul>
-<p>由于<code>fork</code>函数是用户进程执行的函数，它并没有使用<code>pgdir_walk</code>等内核函数的权限和途径。在用户的角度，无论是页目录还是页表都是不可见的。然而，我们又需要对页目录表项的权限位进行判断。JOS采用了一种巧妙的机制来让用户进程们也能访问到pte和pde，那就是<code>UVPT</code>机制。</p>
+<p>由于<code>fork</code>函数是用户进程执行的函数，它并没有使用<code>pgdir_walk</code>等内核函数的权限和途径。在用户的角度，无论是页目录还是页表都是不可见的。然而，我们又需要对页目录表项的权限位进行判断。JOS采用了一种巧妙的机制来让用户进程们也能访问到pte和pde，那就是<span id="uvpt"><code>UVPT</code>机制</span>。</p>
 <p>我们知道，每个4GB虚拟地址空间对应一个页目录，一个页目录包含1024个页表，每个页表有1024页，每页的大小是4KB，最终形成4GB地址空间。在解析一个线性地址时，MMU会跟据其PDX，PTX和OFFSET三个部分依次去在页目录和页表中进行索引。</p>
 <p><code>UVPT</code>是页目录中的一个特殊的表项，它指向的是页目录自身。假设<code>UVPT</code>的索引值是<code>V</code>，如果我们用一个PDX和PTX都是V的线性地址去进行解析，就会发现由于在页目录中对第V个表项的索引仍然是页目录本身的地址，这个地址最终解析出的就是页目录的物理地址。同理，如果PDX为V而PTX不为V，则会解析出各个页表的地址。通过这种方式，用户可以在<code>UVPT</code>内存区中访问到页目录和各个页表。</p>
 <blockquote>
@@ -1622,7 +1622,7 @@
 <p>另外，取消<code>sched_halt()</code>函数中<code>sti</code>的注释，这样空闲的CPU就不会屏蔽中断。</p>
 </blockquote>
 <p>由于之前已经写过对trap的处理，这里要写的也是异曲同工。代码难度不大又比较分散，这里就不贴了。</p>
-<p>在这个Exercise中一个需要注意的点是关于<code>SETGATE</code>的参数。由于我们要在进入内核时将<code>FL_IF</code>标志重置为0以关闭外部中断，<strong>所有能够进入内核的GATE(不管是trap还是interrupt)都要将<code>istrap</code>参数设置为0。</strong>这点与注释中对<code>istrap</code>的阐述有所区别，注释的意思似乎是这个参数用于区分是trap还是interrupt，但由于JOS采用了比较简单的外部中断使用策略，只要进入内核就应该关闭外部中断，而<code>istrap</code>参数的真正作用其实是开启和关闭<code>IF</code>标志位，所以我们应当将所有<code>SETGATE</code>函数的<code>istrap</code>参数设置为0。<strong>如果不这么做的话，代码无法通过<code>trap</code>函数中的<code>assert(!(read_eflags() &amp; FL_IF));</code>断言。</strong></p>
+<p>在这个Exercise中一个需要注意的点是<span id="setgate_istrap">关于<code>SETGATE</code>的参数</span>。由于我们要在进入内核时将<code>FL_IF</code>标志重置为0以关闭外部中断，<strong>所有能够进入内核的GATE(不管是trap还是interrupt)都要将<code>istrap</code>参数设置为0。</strong>这点与注释中对<code>istrap</code>的阐述有所区别，注释的意思似乎是这个参数用于区分是trap还是interrupt，但由于JOS采用了比较简单的外部中断使用策略，只要进入内核就应该关闭外部中断，而<code>istrap</code>参数的真正作用其实是开启和关闭<code>IF</code>标志位，所以我们应当将所有<code>SETGATE</code>函数的<code>istrap</code>参数设置为0。<strong>如果不这么做的话，代码无法通过<code>trap</code>函数中的<code>assert(!(read_eflags() &amp; FL_IF));</code>断言。</strong></p>
 <p>在完成这个Exercise之后，试着去运行一个包含硬件中断的test可以发现内核会打印出设备中断的Trapframe。</p>
 <h5 id="Handling-Clock-Interrupts"><a href="#Handling-Clock-Interrupts" class="headerlink" title="Handling Clock Interrupts"></a>Handling Clock Interrupts</h5><p>为了防止某一个用户进程一直霸占着CPU，我们应重新对硬件进行编程以使其周期性地产生<strong>时钟中断</strong>以使控制流回到内核，从而调度给另一个进程。</p>
 <p>6.828已经在<code>init.c</code>的<code>i386_init</code>函数中写好了对<code>lapic_init</code>和<code>pic_init</code>的调用，它们会设定好产生中断的时钟。我们只需要完成处理这些中断的代码即可。</p>
