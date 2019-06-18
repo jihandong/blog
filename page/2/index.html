@@ -291,6 +291,220 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/05/02/MakeFile/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Drac Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/lyrica.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gensokyo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/05/02/MakeFile/" itemprop="url">MakeFile学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T12:00:34+08:00">
+                2018-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/" itemprop="url" rel="index">
+                    <span itemprop="name">Academic or Technical</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Academic-or-Technical/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2018/05/02/MakeFile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/02/MakeFile/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MakeFile学习笔记"><a href="#MakeFile学习笔记" class="headerlink" title="MakeFile学习笔记"></a>MakeFile学习笔记</h2><p>学习资料：<a href="https://www.gnu.org/software/make/manual/make.html" target="_blank" rel="noopener">GNU make官方文档</a></p>
+<h3 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h3><h4 id="Rules"><a href="#Rules" class="headerlink" title="Rules"></a>Rules</h4><p>MakeFile最重要的元素是<code>rule</code>，也就是<strong>构造规则</strong>。一条规则有这样的形式：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;target&gt;:&lt;prerequisites&gt;</span></span><br><span class="line">	&lt;recipe&gt;</span><br><span class="line">	&lt;recipe&gt;</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<h5 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h5><p>一个<strong>目标</strong>可以是：</p>
+<ul>
+<li>一个文件的名字</li>
+<li>一个标识符，且标识符的名字不应与MakeFile所在文件夹下的文件名重合</li>
+</ul>
+<p>不加标注的话，MakeFile<strong>会优先将目标识别为文件名</strong>。如果要显式地将目标指定为标识符，需要在这一条规则前面加一条<code>.PHONY: &lt;ident&gt;</code>指令，其中<code>&lt;ident&gt;</code>是要指定的标识符。</p>
+<h5 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h5><p><strong>前置条件</strong>是创建目标所需要的文件列表。这个列表中的文件之间用<strong>空格</strong>隔开。</p>
+<p>只有在前置条件中的<strong>某一个(或多个)文件发生过改变</strong>后，这条规则才会执行<code>&lt;recipe&gt;</code>们，否则无事发生。</p>
+<p>当然，在<code>&lt;recipe&gt;</code>存在的情况下，前置条件是可以缺省的，这样只要执行这条规则就会执行<code>&lt;recipe&gt;</code>。</p>
+<h5 id="Recipes"><a href="#Recipes" class="headerlink" title="Recipes"></a>Recipes</h5><p>每一条<code>recipe</code>都是一条shell指令。这条规则在自身被执行的时候依次执行它们。</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>Make用以区分多条<code>recipe</code>的是<strong><code>tab</code>符</strong>。也就是说，只要在每条<code>recipe</code>前面加一个<code>tab</code>符就可以了。如果想改用其他符号来标志，也可以设置<code>.RECIPEPREFIX</code>变量。</li>
+<li>不同的<code>recipe</code>在不同的shell中执行，因此很多环境变量可能会不共享。</li>
+</ul>
+<p><code>recipe</code>是可以缺省的。<strong>当我们的<code>object</code>是<code>*.o</code>文件时，make会默认以<code>cc -c *.c</code>作为这条规则的<code>recipe</code>。</strong>与此同时，这个<code>*.c</code>文件还会自动被加入<strong>前置条件</strong>。</p>
+<p>另外，当我们需要将一个长行分割为几行的时候，可以用<code>\</code>去连接它们。</p>
+<h4 id="Processing-Rules"><a href="#Processing-Rules" class="headerlink" title="Processing Rules"></a>Processing Rules</h4><p>一个MakeFile中优先被执行的规则是<strong>第一条不以<code>.</code>开头的规则</strong>。</p>
+<p>当make执行一条规则的时候，如果它的<strong>前置条件有着属于自己的规则</strong>，那么它会先去执行这个前置条件所依赖的规则。如果一条非默认规则不被任何规则所依赖，它就无法被单纯的<code>make</code>指令执行。</p>
+<p>一种巧妙的用法，如果前置条件是一个非文件<code>target</code>，那么执行这条规则时就会顺带无条件执行这个前置条件对应的规则。</p>
+<h4 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h4><p>我们可以使用<code>&lt;ident&gt; = &lt;content&gt;</code>来声明一个变量。不过说是变量其实这更像一个宏。</p>
+<p>要引用一个变量，我们需要使用这样的格式：<code>$(&lt;ident&gt;)</code></p>
+<p>我们可以在执行<code>make</code>的时候以<code>&lt;ident&gt;=&lt;value&gt;</code>(注意中间不能带空格)的形式预先声明变量的值，以这种方式声明的参数值会覆盖在makefile中的变量赋值。</p>
+<p>如果使用了一个既没有在makefile中初始化又没有在命令行中赋值的变量，那么这个变量就会被忽略。</p>
+<h4 id="Including"><a href="#Including" class="headerlink" title="Including"></a>Including</h4><p>我们可以使用<code>include &lt;filenames&gt;</code>来将其他文件(通常是子文件夹下的makefile)包含进来。</p>
+<p>使用<code>include</code>时，如果make无法找到指定的文件或文件夹，就会报错并退出。<code>-include</code>命令可以让make直接忽略找不到的文件，不进行报错和退出。</p>
+<h3 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h3><h4 id="Echoing"><a href="#Echoing" class="headerlink" title="Echoing"></a>Echoing</h4><p>make默认会<strong>打印出</strong>每一条执行的<code>recipe</code>，这种行为称为回声。</p>
+<p>如果要让make只执行不打印，就需要在这条<code>recipe</code>前面加上<strong><code>@</code>符号</strong>。</p>
+<p>一般来说，我们只会在注释和<code>echo</code>指令前面加<code>@</code>。</p>
+<h4 id="Wildcard"><a href="#Wildcard" class="headerlink" title="Wildcard"></a>Wildcard</h4><p>make使用bash风格的通配符。如，<code>*.&lt;suffix&gt;</code>指代所有的<code>.&lt;suffix&gt;</code>文件。</p>
+<p>也可以用<code>%</code>来进行模式匹配，一条带有<code>%</code>的匹配表达式会被替换为所有符合这条表达式的规则。</p>
+<h4 id="Valuing"><a href="#Valuing" class="headerlink" title="Valuing"></a>Valuing</h4><p>为了避免引起歧义，变量的赋值有四种方式：</p>
+<ul>
+<li><code>=</code>：惰性赋值，用到被赋值的变量时再根据赋值者的当前值进行赋值，可以递归</li>
+<li><code>:=</code>：在运行前直接根据最近一次赋值进行展开，运行后不再改变</li>
+<li><code>?=</code>：只有被赋值者当前没有值时才会赋值</li>
+<li><code>+=</code>：相当于<code>append</code></li>
+</ul>
+<h4 id="Automatic-Variables"><a href="#Automatic-Variables" class="headerlink" title="Automatic Variables"></a>Automatic Variables</h4><ul>
+<li><code>$@</code>：指代当前构建的目标</li>
+<li><code>$&lt;</code>：指代第一个前置条件</li>
+<li><code>$?</code>：指代<strong>比目标更新的</strong>所有前置条件</li>
+<li><code>$^</code>：指代所有前置条件</li>
+<li><code>$*</code>：指代<code>%</code>匹配到的部分</li>
+<li><code>@D</code>：目标的目录部分</li>
+</ul>
+<h4 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h4><p>make使用与bash相似的语法完成条件判断和循环。</p>
+<p>比较常用的条件判断语句有：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Type 1</span></span><br><span class="line"><span class="keyword">ifeq</span> (&lt;var/imm&gt;, &lt;var/imm&gt;)</span><br><span class="line">	&lt;command&gt;</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="comment"># Type 2</span></span><br><span class="line"><span class="keyword">ifndef</span> &lt;var&gt;</span><br><span class="line">	&lt;command&gt;</span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2018/04/12/Note of CSAPP/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -4081,169 +4295,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://dracit7.github.io/blog/blog/2017/11/22/Overview/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Drac Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/lyrica.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gensokyo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2017/11/22/Overview/" itemprop="url">Overview</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T19:54:34+08:00">
-                2017-11-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Discussion/" itemprop="url" rel="index">
-                    <span itemprop="name">Discussion</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/11/22/Overview/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/22/Overview/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>After spending several precious hours, finally I built this blog up.</p>
-<p>It should be easy and quick(thanks to <code>Hexo</code>), but it took me a while to find a proper theme for my site. I’ve tried some cool stuff out, but it turned out that something simple fits me better. So I chose <code>NexT</code>, just like some of my fellows in <em>UniqueStudio</em>.</p>
-<p>I named here <em>Gensokyo</em>, which origins from Touhou project. Sounds naive, but I’d like to leave some fantasies here to make it not that stiff. I’m not an emotional guy in reality after all. :)</p>
-<p>The weather is great outside.</p>
-<p>Just the right time to test if this framework can show Chinese characters well.</p>
-<p>接下来的时间里应该会(看心情地)在这里发布一些文章，可能会包括技术或学术上的分享，音乐方面的一些见解和日常随笔(如果有时间写的话)。总的来说应该会是一个记录向的网站，嗯。</p>
-<p>So that’s it. Cheers~</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -4291,7 +4347,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4302,7 +4358,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

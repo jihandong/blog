@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/descriptor.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/trapframe.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/02/24/MIT_6.828/RPC.png">
-<meta property="og:updated_time" content="2019-06-11T08:26:02.475Z">
+<meta property="og:updated_time" content="2019-06-11T13:06:07.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 实验记录">
 <meta name="twitter:description" content="MIT 6.828 Labs 实验记录本博客中所有代码所对应的github repo地址：6.828 Overall有一些测试技巧是适用于所有Lab的，放在这里以供参考：  6.828自带了一个打分系统，在Lab文件夹下执行make grade即可运行这个系统来检验自己的解答。 make grade执行过程中JOS console的输出会保存在当前文件夹下的jos.out.xxx文件中。 make">
@@ -560,7 +560,7 @@
 <p>bootloader的代码会被BIOS加载到<code>0x7c00</code>，这是由<code>boot/Makefrag</code>文件所决定的。修改这个文件中<code>-Ttext</code>参数后面的地址可以让BIOS从其他地址来加载，执行<code>make clean &amp;&amp; make</code>重新编译可以查看这样做会引发什么样的系统错误(事实上系统会停机并进入一个无限循环等待用户的操作)；在GDB调试时可以在这个位置设置断点，以精确地进入bootloader代码段。</p>
 <p><code>obj/boot/boot.asm</code>和<code>obj/kern/kernel.asm</code>分别包含着bootloader和kernel的反汇编结果以及注释，可以用于调试和分析。下面就来分析一下BootLoader的代码逻辑。</p>
 <ul>
-<li>BootLoader代码逻辑研究<ul>
+<li><span id="bootloader">BootLoader代码逻辑研究</span><ul>
 <li>第一阶段：<strong>初始化</strong><ul>
 <li><strong>宏常量的设定</strong>：<code>.set CR0_PE_ON 0x1</code> 这个常量是控制32位保护模式开关的指标。</li>
 <li><strong>全局设置</strong>：<code>cli</code>指令关闭中断处理，<code>cld</code>指令将串操作的内存地址访问模式设为增序<ul>
@@ -1981,7 +1981,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1992,7 +1992,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
