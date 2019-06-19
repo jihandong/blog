@@ -88,7 +88,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/06/06/MIT_6.828_code/PTE.png">
 <meta property="og:image" content="https://dracit7.github.io/blog/2019/06/06/MIT_6.828_code/memlayout.png">
-<meta property="og:updated_time" content="2019-06-17T05:17:13.581Z">
+<meta property="og:updated_time" content="2019-06-18T05:24:45.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Labs 源码分析">
 <meta name="twitter:description" content="MIT 6.828 Labs 源码分析MakeFile Part/GNUmakefile在6.828的lab根目录下有一个GNUmakefile，这是整个JOS内核的makefile，它会包含各个子目录下的Makefrag文件，负责提供各种编译指令接口。 verbose commands123456789101112131415# Run &apos;make V=1&apos; to turn on verbose">
@@ -706,7 +706,14 @@
 <p>所有设置结束之后，控制流跳转到C代码区，而且不需要返回。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Bootstrap GDT</span><br><span class="line">.p2align 2                                # force 4 byte alignment</span><br><span class="line">gdt:</span><br><span class="line">  SEG_NULL				# null seg</span><br><span class="line">  SEG(STA_X|STA_R, 0x0, 0xffffffff)	# code seg</span><br><span class="line">  SEG(STA_W, 0x0, 0xffffffff)	        # data seg</span><br><span class="line"></span><br><span class="line">gdtdesc:</span><br><span class="line">  .word   0x17                            # sizeof(gdt) - 1</span><br><span class="line">  .long   gdt                             # address gdt</span><br></pre></td></tr></table></figure>
 <p>最后一段代码建立起了一个很简陋的<code>GDT</code>，它只包括<code>GDT[0-2]</code>三个段，并且代码段和数据段的范围都是<code>0-0xffffffff</code>。在建立好<code>GDT</code>之后，它紧接着声明了一个包含<code>GDT</code>大小信息和起始地址的<code>gdtdesc</code>结构，我们之前看到的装载<code>GDT</code>的指令<code>lgdt gdtdesc</code>就是根据这个结构中的信息找到并装载<code>GDT</code>的。</p>
-<h3 id="boot-main-c"><a href="#boot-main-c" class="headerlink" title="/boot/main.c"></a>/boot/main.c</h3>
+<h3 id="boot-main-c"><a href="#boot-main-c" class="headerlink" title="/boot/main.c"></a>/boot/main.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inc/x86.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inc/elf.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><code>x86.h</code>帮助我们操作寄存器，<code>elf.h</code>帮助我们解析elf文件。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SECTSIZE	512</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ELFHDR		((struct Elf *) 0x10000) <span class="comment">// scratch space</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readsect</span><span class="params">(<span class="keyword">void</span>*, <span class="keyword">uint32_t</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readseg</span><span class="params">(<span class="keyword">uint32_t</span>, <span class="keyword">uint32_t</span>, <span class="keyword">uint32_t</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SECTSIZE</code>：硬盘上一个section的大小</li>
+<li><code>ELFHDR</code>：磁盘上<strong>约定的</strong>内核镜像<strong>elf头的位置</strong>(即第二个<code>sector</code>)</li>
+</ul>
+
       
     </div>
     
